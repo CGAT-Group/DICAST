@@ -48,7 +48,7 @@ RUN wget ${refantlink} -P /docker_main && ref_ant=$(find / -name "*Homo*.gtf*")&
 
 
 #Building the Genome-Index
-RUN /docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /docker_main/Genomedir --genomeFastaFiles $(find / -name "*Homo*.fa") --runThreadN 4 --sjdbGTFfile $(find / -name "*Homo*.gtf") --sjdbOverhang 100
+RUN /docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /docker_main/Genomedir --genomeFastaFiles $(find / -name "*Homo*.fa") --runThreadN 120 --sjdbGTFfile $(find / -name "*Homo*.gtf") --sjdbOverhang 100
 
 #Cleaning up
 RUN rm -rf /docker_main/${star_version}.tar.gz && \
@@ -57,5 +57,5 @@ RUN rm -rf /docker_main/${star_version}.tar.gz && \
     apt-get clean
 
 #ENTRYPOINT ["/bin/bash"]
-ENTRYPOINT ["/docker_main/Star-${star_version}/bin/Linux_x86_64/STAR --genomeDir /docker_main/Genomedir --outFileNamePrefix mapped_ --sjdbGTFfile $(find / -name "*Homo*.gtf*") --twopassMode Basic --runThreadN 40  --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS "]
-CMD ["--readFilesIn $(find /myvol1 -name "*.fastq""]
+ENTRYPOINT ["/docker_main/Star-${star_version}/bin/Linux_x86_64/STAR", "--genomeDir /docker_main/Genomedir" "--outFileNamePrefix mapped_" "--sjdbGTFfile $(find / -name "*Homo*.gtf*")" "--twopassMode Basic" "--runThreadN 40"  "--outSAMstrandField intronMotif" "--outSAMattributes NH HI AS nM NM XS "]
+CMD ["--readFilesIn $(find /myvol1 -name "*.fastq")"]
