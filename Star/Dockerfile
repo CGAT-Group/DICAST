@@ -56,6 +56,5 @@ RUN rm -rf /docker_main/${star_version}.tar.gz && \
     apt-get autoclean -y  && \
     apt-get clean
 
-#ENTRYPOINT ["/bin/bash"]
-ENTRYPOINT ["/docker_main/Star-${star_version}/bin/Linux_x86_64/STAR", "--genomeDir /docker_main/Genomedir" "--outFileNamePrefix mapped_" "--sjdbGTFfile $(find / -name "*Homo*.gtf*")" "--twopassMode Basic" "--runThreadN 40"  "--outSAMstrandField intronMotif" "--outSAMattributes NH HI AS nM NM XS "]
+ENTRYPOINT ["/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR", "--genomeDir /docker_main/Genomedir", "--outFileNamePrefix mapped_", "--sjdbGTFfile $(find / -name "*Homo*.gtf*")", "--twopassMode Basic", "--runThreadN 40",  "--outSAMstrandField intronMotif", "	--outSAMattributes NH HI AS nM NM XS "]
 CMD ["--readFilesIn $(find /myvol1 -name "*.fastq")"]
