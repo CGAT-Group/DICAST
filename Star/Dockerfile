@@ -54,7 +54,13 @@ RUN /docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGene
 RUN rm -rf /docker_main/${star_version}.tar.gz && \
     apt-get autoremove -y && \
     apt-get autoclean -y  && \
-    apt-get clean
+    apt-get clean && \
+    chown nobody:nogroup /docker_main/ -R
 
-ENTRYPOINT ["/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR", "--genomeDir /docker_main/Genomedir", "--outFileNamePrefix mapped_", "--sjdbGTFfile $(find / -name "*Homo*.gtf*")", "--twopassMode Basic", "--runThreadN 40",  "--outSAMstrandField intronMotif", "	--outSAMattributes NH HI AS nM NM XS "]
-CMD ["--readFilesIn $(find /myvol1 -name "*.fastq")"]
+RUN PATH=$PATH:/docker_main/STAR-2.7.3a/bin/Linux_x86_64/
+
+ENTRYPOINT exec find /myvol1/ -name "*.fastq"| xargs -n 1 -P 12 /docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /docker_main/Genomedir --outFileNamePrefix mapped_ --sjdbGTFfile /docker_main/Homo_sapiens.GRCh38.99.gtf  --twopassMode Basic --runThreadN 40 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn 
+
+#ENTRYPOINT ["STAR", "--genomeDir /docker_main/Genomedir --outFileNamePrefix mapped_ --sjdbGTFfile /docker_main/Homo_sapiens.GRCh38.99.gtf --twopassMode Basic --runThreadN 40 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn $( find /myvol1/ -name "*.fastq")"]
+
+#CMD  ["--genomeDir /docker_main/Genomedir --outFileNamePrefix mapped_ --sjdbGTFfile /docker_main/Homo_sapiens.GRCh38.99.gtf --twopassMode Basic --runThreadN 40 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn $( find /myvol1/ -name "*.fastq")"]
