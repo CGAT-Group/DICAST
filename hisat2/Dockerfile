@@ -1,41 +1,63 @@
-# copyright 2017-2018 Regents of the University of California and the Broad Institute. All rights reserved.
 FROM ubuntu:xenial
+LABEL description="Image for hisat2" 
+LABEL maintainer="Amit Fenn"
 
-RUN apt-get update && \
-  apt-get --no-install-recommends --fix-broken install -y build-essential\
- software-properties-common \
- autoconf automake byobu bzip2 curl gfortran git htop lzma man sudo unzip vim wget libbz2-dev libcurl4-openssl-dev libgsl0-dev liblzma-dev libncurses5-dev libpcre3-dev \
-    libreadline6-dev libssl-dev python-dev python-pip zlib1g-dev && \
-  rm -rf /var/lib/apt/lists/* && \
-  cd /tmp && \
-  wget http://ftp-trace.ncbi.nlm.nih.gov/sra/ngs/1.3.0/ngs-sdk.1.3.0-linux.tar.gz && \
-  tar xzvf ngs-sdk.1.3.0-linux.tar.gz && \ 
-  git clone https://github.com/infphilo/hisat2.git
 
-WORKDIR /tmp/hisat2
-RUN git checkout master && \
-    make USE_SRA=1 NCBI_NGS_DIR=/tmp/ngs-sdk.1.3.0-linux NCBI_VDB_DIR=/tmp/ngs-sdk.1.3.0-linux
+# Needed for smooth OS Install
+ARG DEBIAN_FRONTEND=noninteractive
 
-COPY common/container_scripts/* /usr/local/bin/
-COPY *.sh *.py  /usr/local/bin/
 
-RUN  cp -p hisat2 hisat2-* /usr/local/bin  && \
-    pip install awscli && \
-    apt-get update && \
-    apt-get -y install samtools=0.1.19-1  && \ 
-    apt-get install zip --yes && \
-    apt-get clean && \
-    cp -p /tmp/hisat2/hisat2_* /usr/local/bin && \
-    cp -p /tmp/hisat2/extract*.py /usr/local/bin && \
-    chmod ugo+x /usr/local/bin/*.sh && \ 
-    cd / && \
-    wget http://ftp-trace.ncbi.nlm.nih.gov/sra/ngs/1.3.0/ngs-sdk.1.3.0-linux.tar.gz && \
-    tar xzvf ngs-sdk.1.3.0-linux.tar.gz && \
-    export LD_LIBRARY_PATH=/ngs-sdk.1.3.0-linux/lib64:$LD_LIBRARY_PATH    
+#link to ref genome
+ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
+#link to ref annotation
+ARG refantlink=ftp://ftp.ensembl.org/pub/release-99/gtf/homo_sapiens/Homo_sapiens.GRCh38.99.gtf.gz 
+
+# Binding the folder where the fastq files are.
+VOLUME /myvol1
+
+
+# Base OS install.
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+build-essential \ 
+    bzip2 \
+    cmake \
+    default-jdk \
+    git \
+    libnss-sss \
+    libtbb2 \
+    libtbb-dev \
+    ncurses-dev \
+    python-dev \
+    python-pip \
+    tzdata \
+    unzip \
+    wget \
+    zlib1g \
+    zlib1g-dev\
+    unar \
+    && mkdir -p /docker_main/Genomedir /myvol1/Star-Output 
     
-ENV HISAT2_HOME /hisat2-2.1.0
+WORKDIR /docker_main
+
+# Installing hisat2 
+RUN wget http://ccb.jhu.edu/software/hisat2/downloads/hisat2-2.0.0-beta-source.zip  && unar hisat2-2.0.0-beta-source.zip && cd /docker_main/hisat2-2.0.0-beta/ && make && PATH=$PATH:/docker_main/hisat2-2.0.0-beta/
 
 
-CMD ["/usr/local/bin/runS3OnBatch.sh" ]
+ENV PATH=$PATH:/docker_main/hisat2-2.0.0-beta/
+
+CMD hisat2
+#Downloading References
+#RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} \
+ #&& wget ${refantlink} -P /docker_main && ref_ant=$(find / -name "*Homo*.gtf*")&& zcat -d ${ref_ant}>    $(echo "${ref_ant}" |sed s/.gz//)&& rm ${ref_ant} 
+
+
+
+
+
+
+
+CMD ["/bin/bash" ]
+
+
 
 
