@@ -47,5 +47,9 @@ RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") &
 
 RUN hisat2-build /docker_main/Homo_sapiens.GRCh38.dna.primary_assembly.fa latest_human && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py /docker_main/Homo_sapiens.GRCh38.99.gtf > splicesites.txt
 
+#CMD ["hisat2 -q  -x /docker_main/latest_human -1 /myvol1/*1.fastq -2 /myvol1/*2.fastq -S /myvol1/test.sam --known-splicesite-infile /docker_main/splicesites.txt "]
 
-CMD ["/bin/bash" ]
+#CMD ["/bin/bash" ]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
