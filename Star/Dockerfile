@@ -33,8 +33,8 @@ build-essential \
     unzip \
     wget \
     zlib1g \
-    zlib1g-dev\
-    && mkdir -p /docker_main/Genomedir /myvol1/Star-Output 
+    zlib1g-dev
+
     
 WORKDIR /docker_main
 
@@ -44,17 +44,18 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 ENV PATH=$PATH:/docker_main/STAR-2.7.3a/bin/Linux_x86_64/
 
 #Downloading References
-RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} \
- && wget ${refantlink} -P /docker_main && ref_ant=$(find / -name "*Homo*.gtf*")&& zcat -d ${ref_ant}>    $(echo "${ref_ant}" |sed s/.gz//)&& rm ${ref_ant} 
+RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} 
+ 
 
 
 #Building the Genome-Index
-RUN /docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /docker_main/Genomedir --genomeFastaFiles $(find / -name "*Homo*.fa") --runThreadN 120 --sjdbGTFfile $(find / -name "*Homo*.gtf") --sjdbOverhang 100
+#RUN /docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /docker_main/Genomedir --genomeFastaFiles $(find / -name "*Homo*.fa") --runThreadN 120 --sjdbGTFfile $(find / -name "*Homo*.gtf") --sjdbOverhang 100
 
-USER afenn
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
 
-CMD cd /myvol1 && find /myvol1/ -name "*.fastq"| xargs -n 1 -P 12 /docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /docker_main/Genomedir --outFileNamePrefix /myvol1/Star-Output_mapped_ --sjdbGTFfile /docker_main/Homo_sapiens.GRCh38.99.gtf  --twopassMode Basic --runThreadN 40 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn 
 
 
 
-#CMD  ["--genomeDir /docker_main/Genomedir --outFileNamePrefix mapped_ --sjdbGTFfile /docker_main/Homo_sapiens.GRCh38.99.gtf --twopassMode Basic --runThreadN 40 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn $( find /myvol1/ -name "*.fastq")"]
+
