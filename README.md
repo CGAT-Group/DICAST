@@ -8,7 +8,7 @@ These dockers work on input files in a working directory.
 
 #### Mapping tools
 
-Input files: fastq files. 
+Input files: fastq files 
 Other required files:  fasta files, unzipped: "*.fa" and annotation files, unzipped: "*.gtf"
 
 ### Usage
