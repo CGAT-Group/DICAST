@@ -2,6 +2,14 @@
 
 This is a list of Dockers made for the Benchmarking pipeline that [exbio](https://www.baumbachlab.net/) will build for Sys_Ca_Re. These dockers would also be a valuable resource for all to use, in Bioinformatics. 
 
+### Prerequisites
+
+These dockers work on input files in a working directory. 
+
+#### Mapping tools
+
+Input files: fastq files. 
+Other required files:  fasta files, unzipped: "*.fa" and annotation files, unzipped: "*.gtf"
 
 ### Usage
 These images should all be usable by the command:
