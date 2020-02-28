@@ -15,7 +15,7 @@ mkdir -p /myvol1/hisat-output/temp
 #Build Genome index
 cd /myvol1/hisat-output/temp/
 
-hisat2-build /docker_main/Homo_sapiens.GRCh38.dna.primary_assembly.fa simulated_splice_data_ && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(find /myvol1/ -name "*.gtf") > splicesites.txt
+hisat2-build  $(find /myvol1/ -name "*.fa") simulated_splice_data_ && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(find /myvol1/ -name "*.gtf") > splicesites.txt
 
 cd /myvol1/hisat-output/
 

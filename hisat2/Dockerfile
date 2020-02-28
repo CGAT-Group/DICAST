@@ -6,9 +6,9 @@ LABEL maintainer="Amit Fenn"
 ARG DEBIAN_FRONTEND=noninteractive
 
 #link to ref genome
-ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
+# ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
 #link to ref annotation
-ARG refantlink=ftp://ftp.ensembl.org/pub/release-99/gtf/homo_sapiens/Homo_sapiens.GRCh38.99.gtf.gz 
+# ARG refantlink=ftp://ftp.ensembl.org/pub/release-99/gtf/homo_sapiens/Homo_sapiens.GRCh38.99.gtf.gz 
 
 # Binding the folder where the fastq files are.
 VOLUME /myvol1
@@ -39,10 +39,10 @@ WORKDIR /docker_main
 # Installing hisat2 
 RUN wget http://ccb.jhu.edu/software/hisat2/downloads/hisat2-2.0.0-beta-source.zip  && unar hisat2-2.0.0-beta-source.zip && cd /docker_main/hisat2-2.0.0-beta/ && make 
 
-ENV PATH=$PATH:/docker_main/hisat2-2.0.0-beta/
+
 
 #Downloading References
-RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} 
+# RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} 
 # && wget ${refantlink} -P /docker_main && ref_ant=$(find / -name "*Homo*.gtf*")&& zcat -d ${ref_ant}>    $(echo "${ref_ant}" |sed s/.gz//)&& rm ${ref_ant} 
 
 # Building genome index	

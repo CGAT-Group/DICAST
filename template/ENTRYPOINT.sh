@@ -16,7 +16,7 @@ find /myvol1/ -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | un
 mkdir -p /myvol1/"$tool"-output/temp/
 
 #Build Genome index
-# find gtf and da files with these  $(find /myvol1/ -name "*Homo*.fa")  $(find /myvol1/ -name "*.gtf")
+# find gtf and da files with these  $(find /myvol1/ -name "*.fa")  $(find /myvol1/ -name "*.gtf")
 
 
 #Iterate list with paired end map command first

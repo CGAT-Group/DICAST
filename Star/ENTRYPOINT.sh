@@ -11,7 +11,7 @@ find /myvol1/ -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | un
 mkdir -p /myvol1/star-output/temp/genomedir
 
 #Build Genome index
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /docker_main/ -name "*Homo*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/ -name "*.gtf") --sjdbOverhang 100
+/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/ -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/ -name "*.gtf") --sjdbOverhang 100
 
 
 #Iterate list with paired end map command first

@@ -22,7 +22,7 @@ mkdir -p /myvol1/"$tool"-output/temp/
 
 #Build Genome index
 # find gtf and da files with these  $(find /myvol1/ -name "*Homo*.fa")  $(find /myvol1/ -name "*.gtf")
-java -jar /home/biodocker/ContextMap_Source_v2.7.9/ContextMap_v2.7.9.jar indexer -fasta /home/biodocker/Homo_sapiens.GRCh38.dna.primary_assembly.fa -o /myvol1/contextmap2-output/temp/
+java -jar /home/biodocker/ContextMap_Source_v2.7.9/ContextMap_v2.7.9.jar indexer -fasta /myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa -o /myvol1/contextmap2-output/temp/
 
 #Iterate list with paired end map command first
 while read -r line; do

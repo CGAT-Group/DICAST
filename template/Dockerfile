@@ -6,11 +6,11 @@ LABEL maintainer="Amit Fenn"
 ARG DEBIAN_FRONTEND=noninteractive
 
 #link to ref genome
-ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
+# ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
 
-# Binding the folder where the fastq files are.
+# Binding the folder where the fastq files are. Also needed to restrict the host filesystem within this container in the docker filesystem.
 VOLUME /myvol1
-# I made a mistake, I need to find out what the previous line does, and what changes if I fix it. 
+
 
 # Base OS install.
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
@@ -35,12 +35,6 @@ WORKDIR /docker_main
 
 #Installing tool
 
-
-ENV PATH=$PATH:
-
-#Downloading References
-RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen} 
- 
 
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
