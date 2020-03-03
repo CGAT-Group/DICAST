@@ -29,7 +29,8 @@ build-essential \
     unzip \
     wget \
     zlib1g \
-    zlib1g-dev
+    zlib1g-dev\
+    unar
     
 WORKDIR /docker_main
 

@@ -6,6 +6,8 @@ hisat2 -q  -x /myvol1/hisat-output/temp/ -U "$line"?.fastq -S /myvol1/hisat-outp
 }
 
 #START here: Make a list of all fastq files
+PATH=$PATH:/docker_main/hisat2-2.0.0-beta
+
 find /myvol1/ -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | uniq >/myvol1/hisat-fastqlist
 
 #Make output directories
