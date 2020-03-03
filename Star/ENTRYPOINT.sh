@@ -5,11 +5,12 @@ second_attempt() {
 
 }
 #START here: Make a list of fastq files
-cd /myvol1/
+
 find /myvol1/ -maxdepth 1 -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | uniq >/myvol1/star-fastqlist
 
 #make output directories
 mkdir -p /myvol1/star-output/temp/genomedir
+cd /myvol1/star-output
 
 #Build Genome index
 /docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
@@ -29,6 +30,6 @@ done </myvol1/star-fastqlist
 wait
 
 #cleaning up
-rm /myvol1/star-fastqlist
-rm -R /myvol1/star-output/temp
+#rm /myvol1/star-fastqlist
+#rm -R /myvol1/star-output/temp
 echo "script is done"
