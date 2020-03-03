@@ -2,7 +2,7 @@
 second_attempt() {
 
 #Second attempt isn't working for BBMap. :(
-/bbmap/bbmap.sh ref=$(find /docker_main/ -name "*Homo*.fa*") 
+/bbmap/bbmap.sh ref=$(find /myvol1/ -maxdepth 1 -name "*.fa") overwrite=false
 
 /bbmap/bbmap.sh in="$line"?.fastq outm=/myvol1/BBmap-output/"${line##*/}"_mapped.sam outu=/myvol1/BBmap-output/"${line##*/}"_unmapped.sam
 }
@@ -18,7 +18,7 @@ cd /myvol1/BBmap-output/
 while read -r line; do
 
 #First attempt: Paired end mapping
-/bbmap/bbmap.sh ref=$(find /myvol1/ -name "*.fa*")
+/bbmap/bbmap.sh ref=$(find /myvol1/ -maxdepth 1 -name "*.fa") overwrite=false
 
 /bbmap/bbmap.sh in1="$line"1.fastq in2="$line"2.fastq outm=/myvol1/BBmap-output/"${line##*/}"_mapped.sam outu=/myvol1/BBmap-output/"${line##*/}"_unmapped.sam
 
