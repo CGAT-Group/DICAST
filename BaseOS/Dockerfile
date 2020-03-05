@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz 
 
 # Binding the folder where the fastq files are.
-VOLUME /myvol1
+VOLUME ["/myvol1", "/myvol2"]
 
 
 # Base OS install.
