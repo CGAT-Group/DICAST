@@ -30,9 +30,13 @@ build-essential \
     wget \
     zlib1g \
     zlib1g-dev\
+    libbz2-dev \
+    liblzma-dev\
     tmux\
     vim\
     unar
+    
+
     
 WORKDIR /docker_main
 
