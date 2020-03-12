@@ -1,0 +1,24 @@
+Begin3
+Title:		@PACKAGE_NAME@
+Version:	@PACKAGE_VERSION@
+Entered-date:	@ISODATE@
+Description:	libProgressBar is a C++ library to manage... Progress bars!!!
+
+		If you want to easily display progress bar and if you are a
+		C++ programmer, this library is for you!
+
+Keywords:	progress bar c++
+Author: 	DoccY <@PACKAGE_BUGREPORT@>
+Maintained-by:	DoccY <@PACKAGE_BUGREPORT@>
+Primary-site:	???
+		410k @PACKAGE@-@PACKAGE_VERSION@.tar.gz
+		1k   @PACKAGE@.lsm
+Alternate-site:
+Original-site:
+Platforms:      Built with GNU C++ compiler. g++ version 4.1 works,
+                Since the source code support the -Wall, -pedantic and -ansi
+                options, non-GNU C++ compiler might work too, but I haven't
+                tried it. Valgrind says that no memory leaks are possible on
+		each test I have done.
+Copying-policy:	GNU Lesser General Public Licence
+End

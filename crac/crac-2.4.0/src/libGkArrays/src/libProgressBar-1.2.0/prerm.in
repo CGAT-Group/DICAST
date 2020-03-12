@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+rm /etc/ld.so.conf.d/@PACKAGE@-@VERSION@.conf
+ldconfig

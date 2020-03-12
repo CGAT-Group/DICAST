@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18522-genome -r bug-18522-read.fa -k 10 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18522.sam --treat-multiple 2
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18522.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Sofclip when a repeated k-mer is directly after a break (but do not soft the entire read)
+2:^1.* 24M80S .*

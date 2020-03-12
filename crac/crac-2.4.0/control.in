@@ -1,0 +1,18 @@
+Package:	@PACKAGE@
+Version:	@PACKAGE_VERSION@
+Section:	science
+Priority:	optional
+Architecture:	@ARCH@
+Essential:	no
+Depends:
+Recommends:
+Suggests:
+Conflicts:
+Installed-Size:	0
+Maintainer:	@PACKAGE_BUGREPORT@
+Provides:	@PACKAGE@
+Homepage:	@PACKAGE_URL@
+Description:	[Biology] @PACKAGE_DESCRIPTION@
+ .
+ You may access further information on CRAC at @PACKAGE_URL@
+ .

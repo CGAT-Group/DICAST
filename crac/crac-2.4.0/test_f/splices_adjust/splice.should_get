@@ -1,0 +1,10 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/splices_adjust/genome -r splice.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/splices_adjust/splice.sam --detailed-sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/splices_adjust/splice.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/splices_adjust
+
+$splice-adjust the splice boundaries should be adjusted with the donor site signal
+2:^splice-adjust.*chr-signal.*27M38N27M
+
+$splice-no-adjust the splice boundaries should be (3bp) shift to the right since no donor site signal is available
+2:^splice-no-adjust.*chr-no-signal.*30M38N24M
+

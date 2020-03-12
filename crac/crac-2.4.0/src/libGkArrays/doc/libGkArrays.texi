@@ -1,0 +1,400 @@
+\input texinfo @c -*-texinfo-*-
+@documentlanguage en
+@documentencoding UTF-8
+@c This file uses the @command command introduced in Texinfo 4.0.
+@c %**start of header
+@setfilename libGkArrays.info
+@settitle The Gk-arrays library aims at indexing k-factors from a huge set of sequencing reads.
+@finalout
+@setchapternewpage odd
+@iftex
+@afourpaper
+@afourwide
+@end iftex
+@ifinfo
+@firstparagraphindent insert
+@end ifinfo
+@setcontentsaftertitlepage
+@c %**end of header
+
+@include package.texi
+
+@set mails @email{nicolas.philippe@@lirmm.fr}, @email{mikael.salson@@lifl.fr}, @email{thierry.lecroq@@univ-rouen.fr}, @email{Martine.Leonard@@univ-rouen.fr}, @email{eric.rivals@@lirmm.fr}
+@set authormails Nicolas @sc{Philippe} @email{nicolas.philippe@@lirmm.fr}, Mika@"el @sc{Salson} @email{mikael.salson@@lifl.fr}, Thierry @sc{Lecroq} @email{thierry.lecroq@@univ-rouen.fr}, Martine @sc{L@'eonard} @email{Martine.Leonard@@univ-rouen.fr}, Eric @sc{Rivals} @email{eric.rivals@@lirmm.fr}
+@set BUGREPORT @email{crac-gkarrays@@lists.gforge.inria.fr}
+@iftex
+@clear mails
+@clear authormails
+@clear BUGREPORT
+@set mails <@email{nicolas.philippe@@lirmm.fr}>, <@email{mikael.salson@@lifl.fr}>, <@email{thierry.lecroq@@univ-rouen.fr}>, <@email{Martine.Leonard@@univ-rouen.fr}>, <@email{eric.rivals@@lirmm.fr}>
+@set authormails Nicolas @sc{Philippe} <@email{nicolas.philippe@@lirmm.fr}>, Mika@"el @sc{Salson}    <@email{mikael.salson@@lifl.fr}>, Thierry @sc{Lecroq} <@email{thierry.lecroq@@univ-rouen.fr}>, Martine @sc{L@'eonard} <@email{Martine.Leonard@@univ-rouen.fr}>, Eric @sc{Rivals} <@email{eric.rivals@@lirmm.fr}>
+@set BUGREPORT <@email{crac-gkarrays@@lists.gforge.inria.fr}>
+@end iftex
+
+@ifinfo
+This file documents the Gk-Arrays library.
+
+Copyright @copyright{} 2010-2013 -- @sc{IRB}/@sc{INSERM}
+                        (Institut de Recherches en Bioth@'erapie /
+                        Institut National de la Sant@'e et de la Recherche
+                        Médicale),
+                         @sc{lifl}/@sc{inria}
+                        (Laboratoire d'Informatique Fondamentale de
+                         Lille / Institut National de Recherche en
+                         Informatique et Automatique),
+                        @sc{lirmm}/@sc{cnrs}
+                        (Laboratoire d'Informatique, de Robotique et de
+                         Micro@'electronique de Montpellier /
+                         Centre National de la Recherche Scientifique),
+                         @sc{litis}
+                        (Laboratoire d'Informatique, du Traitement de
+                         l'Information et des Syst@`emes).
+
+Authors: @value{authormails}
+          
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the
+results, provided the printed document carries copying permission
+notice identical to this one except for the removal of this paragraph
+(this paragraph not being relevant to the printed manual).
+
+@end ignore
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation as circulated by @sc{c@'ea}, @sc{cnrs} and @sc{inria} at the
+following @sc{url} @url{http://www.cecill.info}.
+@end ifinfo
+
+@titlepage
+@title The Gk-arrays library
+@subtitle The Gk-arrays library aims at indexing k-factors from a huge set of sequencing reads.
+@author Nicolas @sc{Philippe}
+@author Mika@"el @sc{Salson}
+@author Thierry @sc{Lecroq}
+@author Martine @sc{L@'eonard}
+@author Eric @sc{Rivals}
+
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2010-2013 -- @sc{IRB}/@sc{INSERM}
+                        (Institut de Recherches en Bioth@'erapie /
+                        Institut National de la Sant@'e et de la Recherche
+                        Médicale),
+                         @sc{lifl}/@sc{inria}
+                        (Laboratoire d'Informatique Fondamentale de
+                         Lille / Institut National de Recherche en
+                         Informatique et Automatique),
+                        @sc{lirmm}/@sc{cnrs}
+                        (Laboratoire d'Informatique, de Robotique et de
+                         Micro@'electronique de Montpellier /
+                         Centre National de la Recherche Scientifique),
+                         @sc{litis}
+                        (Laboratoire d'Informatique, du Traitement de
+                         l'Information et des Syst@`emes).
+
+Authors: @value{authormails}
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation as circulated by @sc{c@'ea}, @sc{cnrs} and @sc{inria} at the
+following @sc{url} @url{http://www.cecill.info}.
+@end titlepage
+@headings on
+
+@c Before using the EMACS texinfo-every-node-update (C-c C-u C-e)
+@c and texinfo-all-menus-update (C-c C-u C-a) commands, follow these
+@c instructions:
+@c  - Go to the node Copying and uncomment its @chapter line.
+@c  - Go to the node Table of contents and uncomment its @unnumbered
+@c    line.
+@c  - Do the update
+@c  - Go to the node Copying and comment again its @chapter line.
+@c  - Go to the node Table of contents and comment again its
+@c    @unnumbered line.
+@c  - Remove the inserted menu (a few lines below):
+@c      @menu
+@c      * Instructions::
+@c      * Copying::
+@c          ...
+@c      * Table of contents::
+@c      @end menu
+@c  - Replace the line (just below):
+@c    '@node Top, Top, (dir), (dir)' by
+@c    '@node Top, Instructions'. 
+@c  - Replace the line (near the end):
+@c    '@node Problems, Table of contents, Copying, Top' by
+@c    '@node Problems, Concept Index, Copying, Top'. 
+@c  - Replace the line in the @ifinfo block (near the end):
+@c    '@node Concept Index, Table of contents, Problems, Top' by
+@c    '@node Concept Index, , Problems, Top'.
+@c  - Replace the line (near the end):
+@c    '@node Table of contents,  , Problems, Top' by
+@c    '@node Table of contents,  , Concept Index, Top'.
+
+@c All the nodes can be updated using the EMACS command
+@c texinfo-every-node-update, which is normally bound to C-c C-u C-e.
+@ifnotinfo
+@node Top, Instructions
+@end ifnotinfo
+
+@ifinfo
+@node Top, Instructions, (dir), (dir)
+@end ifinfo
+
+@ifhtml
+@top Documentation of the Gk-Arrays library version @value{VERSION}
+@end ifhtml
+@ifnottex
+@ifnothtml
+@top
+
+Documentation for the version @value{VERSION} of the Gk-Arrays library.
+@end ifnothtml
+@end ifnottex
+
+@c All the menus can be updated with the EMACS command
+@c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.
+@c * Table of Contents::		Contents of this manual. 
+@menu
+* Instructions::                How to Read This Manual
+* Developing::                  How to develop using the Gk-Arrays library
+* Copying::                     How you can copy and share the Gk-Arrays library
+* Problems::                    Reporting Bugs
+* Concept Index::               Concept Index
+@ifnotinfo
+* Table of contents::           Table of Contents
+@end ifnotinfo
+@end menu
+
+@node Instructions, Developing, Top, Top
+@chapter How to Read This Manual
+
+@cindex reading
+@cindex manual, how to read
+@cindex how to read
+@itemize
+@item
+In the Developing section, we explain how to use the Gk-arrays library in
+your code.
+@item
+You will find in the Copying section the CeCILL-C License.
+@end itemize
+
+@node Developing, Copying, Instructions, Top
+@chapter Developing
+
+@cindex library
+@cindex development
+@cindex code
+@cindex class
+@cindex method
+@cindex compilation
+The Gk-arrays library is dedicated to indexing millions of reads from 
+high-throughput sequencing experiments.
+This library can index variable-length (as produced by Roche 454) or 
+fixed-length reads.
+It provides several functions to find reads or occurrences in reads of 
+@math{k}-mers where @math{k} is specified at index creation.
+
+@noindent If you use Gk-arrays, please don't forget to cite:@*
+N. Philippe, M. Salson, T. Lecroq, M. L@'eonard, T. Commes, @'E. Rivals. Querying large read collections in main memory: a versatile data structure. In @i{BMC Bioinformatics}, 2011, doi:10.1186/1471-2105-12-242.
+
+@section Installing Gk-arrays
+@subsection Installation from the source code
+@enumerate
+@item 
+Unpack the archive
+@item
+Enter the directory libGkArrays-@i{version-number}
+@item
+Type @t{./configure}
+@item
+If everything went fine, run @t{make}
+@item
+To install the library on your machine, type @t{make install} as an administrator
+@item
+Afterwards, you may want to run @t{ldconfig} as an administrator
+@end enumerate
+
+You can specify parameters to the configure script.
+For instance you can choose to build a static version (quicker) of the library
+rather than a shared version. Typing @t{./configure --help} will
+provide you the list of available options.
+
+@subsection Installation from the @t{deb} package
+You just need to install the package using a dedicated program on your
+distribution or by typing @t{dpkg -i @i{package-name}}
+This will install the library and source file headers.
+
+@section Using Gk-arrays in your code
+
+First, you need to include the header file that defines all the functions
+in the Gk-arrays:
+@verbatim
+#include <libGkArrays/gkArrays.h>
+@end verbatim
+
+The Gk-arrays consist of a @t{C++} class. To build an index
+on a new collection of reads, you first need to build a new object from
+that class.
+The class is called @t{gkArrays} in the namespace @t{gkarrays}.
+
+The constructor of that class has two compulsory parameters and one optional:
+@enumerate
+@item
+The name of the file containing the reads in raw, FASTA, FASTQ format.
+The file can also be gunzipped.
+@item
+The length of the @math{k}-mer you want to use, @i{ie} the value of @math{k}.
+@item
+(optional) The length of the reads. The length of the reads is automatically 
+detected but you may want to specify a shorter length (cannot be larger than
+the actual length).
+@end enumerate
+Hence, if filename holds the name of a file and 10 is the desired value of @math{k}, a valid index creation would be:
+@verbatim
+gkarrays::gkArrays *reads = new gkarrays::gkArrays(filename, 10);
+@end verbatim
+
+Then the main methods are (but you can report to the full documentation in 
+the @t{docs/documentation} directory of the project or to the online 
+documentation @url{http://crac.gforge.inria.fr/gkarrays/doc}):
+
+@multitable @columnfractions .4 .6
+@headitem Method @tab Purpose
+@item @t{getNbTags()} @tab Number of reads indexed
+@item @t{getTag(i)} @tab Return a @t{char*} containing the read itself
+@item @t{getTagNumWithFactor(r, l)} @tab Read numbers (indexed from 0) containing the same @math{k}-mer as in read @t{r} at position @t{l}.
+@item @t{getTagsWithFactor(r, l)} @tab Same as above but return the occurrences
+as a pair (read number, position in the read).
+@item @t{getNbTagsWithFactor(r, l, m)} @tab Return the number of occurrences
+returned by @t{getTagsWithFactor(r, l)} (if @t{m} is @t{true}) or by
+@t{getTagNumWithFactor(r, l)} (if @t{m} is @t{false}).
+@end multitable
+
+
+@section Compiling your code
+
+At compilation time, you need to specify that you are using the 
+Gk-arrays library.
+This can be done by specifying @t{-lGkArrays} during the linking.
+You may have to specify where the library is installed using the @t{-L} flag
+if you didn't install the library in the default library directory.
+
+
+@section Example
+
+@verbatim
+#include <iostream>
+#include <cstdlib>
+#include <libGkArrays/gkArrays.h>
+#include <cstdio>
+
+int main(int argc, char **argv) {
+  
+  if (argc < 2) {
+    std::cerr << "Usage: " << argv[0] << " filename" << std::endl;
+    exit(1);
+  }
+
+  // Default k-mer length
+  int k = 5;
+  // Building the index
+  gkarrays::gkArrays *reads = new gkarrays::gkArrays(argv[1], k);
+  // Retrieving the first k-mer of the first read
+  char *kmer = reads->getTagFactor(0, 0, k);
+
+  // Displaying the number of indexed reads
+  printf("%d reads in the collection\n", reads->getNbTags());
+  
+  // Displaying the number of reads with a given k-mer
+  printf("%d read(s) share the k-mer %s\n",
+         reads->getNbTagsWithFactor(0, 0, false),
+         kmer);
+
+  // Displaying the read numbers that contain that specific k-mer
+  printf("Read containing the occurrences:\n");
+  uint *read_occurrences = reads->getTagNumWithFactor(0, 0);
+  for (uint i = 0; i < reads->getNbTagsWithFactor(0, 0, false); i++) 
+    printf("%d\t", read_occurrences[i]);
+  printf("\n");
+
+  // Displaying the occurrences (read number, position in the read)
+  // for that specific k-mer.
+  printf("All the occurrences:\n");
+  std::pair<uint, uint> *occurrences = reads->getTagsWithFactor(0, 0);
+  for (uint i = 0; i < reads->getNbTagsWithFactor(0, 0, true); i++) {
+    printf("(%d,%d)\t", occurrences[i].first, occurrences[i].second);
+  }
+  printf("\n");
+
+  // Free-ing memory.
+  free(read_occurrences);
+  delete [] occurrences;
+  delete reads;
+  delete [] kmer;
+  exit(0);  
+}
+@end verbatim
+
+If you store this example in a file called @t{test.cpp}, you can compile it 
+with @t{g++  -Wall -pedantic -O3 test4.cpp -o test4 -lGkArrays}.
+Note that a more complete example is given in the @t{src} directory in the 
+file @t{buildTables.cpp}.
+
+@node Copying, Problems, Developing, Top
+@c @chapter How you can copy and share the Gk-arrays library.
+@include CeCILL-C.texi
+
+@node Problems, Concept Index, Copying, Top
+@chapter Reporting Bugs
+@cindex bugs
+@cindex problems
+
+If you find a bug in Gk-arrays library, please send
+electronic mail to @value{BUGREPORT}.  Include the version
+number. Also include in your message the output that the program
+produced and the output you expected.@refill
+
+If you have other questions, comments or suggestions about the
+GkArrays library, contact the authors via electronic mail to
+@value{BUGREPORT}.  The authors will try to help you out, although
+they may not have time to fix your problems.
+
+@ifinfo
+@node Concept Index, , Problems, Top
+@end ifinfo
+@ifnotinfo
+@node Concept Index, Table of contents, Problems, Top
+@end ifnotinfo
+@unnumbered Concept Index
+
+@cindex tail recursion
+@printindex cp
+
+@ifnotinfo
+@node Table of contents,  , Concept Index, Top
+@c @unnumbered Table of contents
+@contents
+@end ifnotinfo
+@bye

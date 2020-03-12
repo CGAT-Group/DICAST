@@ -1,0 +1,253 @@
+#!/bin/bash
+
+###############################################################################
+#                                                                             #
+#									      #
+#    Copyright © 2010-2012 -- LIRMM/CNRS                                      #
+#                            (Laboratoire d'Informatique, de Robotique et de  #
+#                             Microélectronique de Montpellier /              #
+#                             Centre National de la Recherche Scientifique).  #
+#                             LIFL/INRIA                                      #
+#                            (Laboratoire d'Informatique, du Traitement de    #
+#                             l'Information et des Systèmes)                  #
+#                                                                             #
+#  Auteurs/Authors: CRAC list        <crac-bug@gforge.inria.fr>               #
+#                   Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              #
+#                   Mikaël SALSON    <mikael.salson@lifl.fr>                  #
+#                   Thérèse COMMES   <therese.commes@univ-montp2.fr>          #
+#                   Éric RIVALS      <eric.rivals@lirmm.fr>                   #
+#                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               #
+#                                                                             #
+#  -------------------------------------------------------------------------  #
+#                                                                             #
+#  Ce fichier fait partie du programme CRAC.                                  #
+#                                                                             #
+#  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       #
+#                                                                             #
+#  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  #
+#  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  #
+#  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  #
+#  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  #
+#  le site "http://www.cecill.info".                                          #
+#                                                                             #
+#  En contrepartie de l'accessibilité au code source et des droits de copie,  #
+#  de modification et de redistribution accordés par cette licence, il n'est  #
+#  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  #
+#  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  #
+#  titulaire des droits patrimoniaux et les concédants successifs.            #
+#                                                                             #
+#  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  #
+#  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  #
+#  développement  et à la reproduction du  logiciel par  l'utilisateur étant  #
+#  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  #
+#  manipuler et qui le réserve donc à des développeurs et des professionnels  #
+#  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  #
+#  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  #
+#  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  #
+#  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  #
+#  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         #
+#                                                                             #
+#  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  #
+#  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  #
+#  termes.                                                                    #
+#                                                                             #
+#  -------------------------------------------------------------------------  #
+#                                                                             #
+#  This File is part of the CRAC program.                                     #
+#                                                                             #
+#  Crac is a tool to analyse RNA-Seq data provided by NGS.                    #
+#                                                                             #
+#  This software is governed by the CeCILL license under French law and       #
+#  abiding by the rules of distribution of free software. You can use,        #
+#  modify and/ or redistribute the software under the terms of the CeCILL     #
+#  license as circulated by CEA, CNRS and INRIA at the following URL          #
+#  "http://www.cecill.info".                                                  #
+#                                                                             #
+#  As a counterpart to the access to the source code and rights to copy,      #
+#  modify and redistribute granted by the license, users are provided only    #
+#  with a limited warranty and the software's author, the holder of the       #
+#  economic rights, and the successive licensors have only limited            #
+#  liability.                                                                 #
+#                                                                             #
+#  In this respect, the user's attention is drawn to the risks associated     #
+#  with loading, using, modifying and/or developing or reproducing the        #
+#  software by the user in light of its specific status of free software,     #
+#  that may mean that it is complicated to manipulate, and that also          #
+#  therefore means that it is reserved for developers and experienced         #
+#  professionals having in-depth computer knowledge. Users are therefore      #
+#  encouraged to load and test the software's suitability as regards their    #
+#  requirements in conditions enabling the security of their systems and/or   #
+#  data to be ensured and, more generally, to use and operate it in the same  #
+#  conditions as regards security.                                            #
+#                                                                             #
+#  The fact that you are presently reading this means that you have had       #
+#  knowledge of the CeCILL license and that you accept its terms.             #
+#                                                                             #
+###############################################################################
+
+
+PIPE=`dirname $0`/classify.fifo
+PIPE_OUT=`dirname $0`/classify.out.fifo
+MAX_NB_ITER=100 # 100s
+if [ $# -gt 5 -o "$1" == "-h" -o "$1" == "--help" ]
+then
+    echo "Usage: $0 [-in <input_pipe>] [-out <output_pipe>] [-q]" >&2
+    exit 1
+fi
+
+QUIET=0
+while [ $# -gt 0 ]
+do
+  if [ "$1" == "-in" ]; then
+      PIPE=$2
+      shift
+  elif [ "$1" == "-out" ]; then
+      PIPE_OUT=$2
+      shift
+  elif [ "$1" == "-q" ]; then
+      QUIET=1
+  else 
+      echo "Unknown option $1" >&2
+  fi
+  shift
+done
+
+if [ $QUIET -eq 0 ]; then
+   echo "This is the client of @PACKAGE_NAME@ v. @PACKAGE_VERSION@";
+fi
+
+[ -p $PIPE ] || PIPE=${PIPE/`dirname $0`/$PWD}
+[ -p $PIPE_OUT ] || PIPE_OUT=${PIPE_OUT/`dirname $0`/$PWD}
+
+if [ ! -p $PIPE -o ! -p $PIPE_OUT ]
+then
+    echo "$PIPE or $PIPE_OUT does not exist... Maybe you didn't launch @PACKAGE_NAME@ --server?"
+    exit 1
+fi
+
+# Connecting
+echo -n "connect@$$" > $PIPE
+cat $PIPE_OUT > /dev/null
+
+SUBPIPE=`dirname $0`/in.$$.fifo
+SUBPIPE_OUT=`dirname $0`/out.$$.fifo
+NB_ITER=0
+
+[ -p $SUBPIPE ] || SUBPIPE=${SUBPIPE/`dirname $0`/`dirname $PIPE`}
+[ -p $SUBPIPE_OUT ] || SUBPIPE_OUT=${SUBPIPE_OUT/`dirname $0`/`dirname $PIPE_OUT`}
+
+while [ ! -p $SUBPIPE_OUT -a $NB_ITER -le $MAX_NB_ITER ]; do
+    sleep 0.1s
+    NB_ITER=$((NB_ITER+1))
+done
+
+if [ $NB_ITER -ge $MAX_NB_ITER ]; then
+    echo "Oops! Output pipe was not created. 
+Maybe it has not been created in the directory I expected.
+Something going wrong, I'm leaving cowardly." >&2
+    exit 2
+fi
+
+if [ $QUIET -eq 0 ]; then
+    echo -n "> "
+fi
+while read line; do
+    set -- $line
+
+    PRINT=0
+    if [ "$1" == "help" ]; then
+	echo "* Set a variable: set <variable> <value>
+* Locate a pattern: locate <pattern>
+* Locate each k-mer in a sequence: klocate <k> <dna sequence>
+* Get information about a read: <read id>
+* Get information about a read (with its name): name <read name>
+* Get reads sharing the same k-factor as the one at position <pos> in <read id>: <read id>:<pos>
+* Get reads sharing a given factor: tag <factor>
+* Get reads that have a given factor at a given position: tag pos <position> <factor>
+* Retrieve a genome factor: genome [reverse] <chr_name:position> <length>
+* Get GkSA value: GkSA <pos>
+* Quit main server: quit
+* Quit only child server: <Ctrl>+D"
+    elif [ "$1" != "" -a "${1:0:1}" != ">" -a "${1:0:1}" != "#" ]; then
+	while [ $# -gt 0 ]; do
+	    if [ "$1" == "set" -a $# -ge 3 ]
+		then
+		echo -n "set|$2|$3" > $SUBPIPE
+		shift 3
+            elif [ "$1" == "name" -a $# -ge 2 ]; then
+                echo -n "name|$2" > $SUBPIPE
+                shift 2
+	    elif [ "$1" == "locate" -a $# -ge 2 ]; then
+		echo -n "loc|"`expr length $2`"|$2" > $SUBPIPE
+		shift 2
+	    elif [ "$1" == "klocate" -a $# -ge 3 ]; then
+                k=$2
+                seq=$3
+                for (( i=0 ; $i < $((${#seq}-k+1)); i++ )); do
+		    echo -n "loc|$k|"${seq:$i:$k} > $SUBPIPE
+                    cat $SUBPIPE_OUT
+                done
+                PRINT=1
+		shift 3
+	    elif [ "$1" == "tag" -a $# -ge 4 -a "$2" == "pos" ]; then
+		echo -n "tag|"`expr length $4`"|$4" > $SUBPIPE
+		cat $SUBPIPE_OUT | grep -Ewo "[0-9]+:$3" | awk -F: '{print $1}'
+		shift 4
+		PRINT=1
+	    elif [ "$1" == "tag" -a $# -ge 2 ]; then 
+		echo -n "tag|"`expr length $2`"|$2" > $SUBPIPE
+		shift 2
+	    elif [ "$1" == "GkSA" -a $# -ge 2 ]; then 
+		echo -n "GkSA|$2" > $SUBPIPE
+		shift 2
+	    elif [ "$1" == "genome" -a $# -ge 3 ]; then
+		if [ "$2" == "reverse" ]; then
+		    REV="true"
+		    shift
+		else
+		    REV="false"
+		fi
+		if [[ $2 == *:* ]]; then
+		    chr=$(echo $2 | cut -d: -f1)
+		    pos=$(echo $2 | cut -d: -f2)
+		    if [ "$REV" == "true" ]; then
+		        pos=-$pos
+		    fi
+		    echo -n "genome|$chr|$pos|$3" > $SUBPIPE
+		else
+                    echo "Missing ``:''" >&2
+                fi
+		shift 3
+	    elif [ "$1" == "quit" ]; then
+		echo -n "q" > $SUBPIPE
+		cat $SUBPIPE_OUT
+		echo -n "q" > $PIPE
+		cat $PIPE_OUT
+		exit 0
+	    elif [ "$1" == "print" ]; then
+		shift
+		echo $* 
+		shift $#
+		PRINT=1
+	    elif [[ "$1" =~ ^[0-9]+$ ]] || [[ "$1" =~ ^[0-9]+:[0-9]+$ ]]; then 
+		echo -n "$1" > $SUBPIPE
+		shift
+	    else
+                echo "Unkown command."
+                shift
+                PRINT=1
+            fi
+	    if [ $PRINT -eq 0 ]; then
+		cat $SUBPIPE_OUT
+	    fi
+	done
+    fi
+    if [ $QUIET -eq 0 ]; then
+	echo -n "> "
+    fi
+done  
+if [ $QUIET -eq 0 ]; then
+    echo
+fi
+echo -n "q" > $SUBPIPE
+cat $SUBPIPE_OUT > /dev/null

@@ -1,0 +1,17 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-17175-genome -r bug-17175-read.fa --detailed-sam -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-17175.sam --use-x-in-cigar
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-17175.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 17175: the read had several breaks (including a godd chimera break) and crac was not consider the chimera in the CIGAR, so SA was empty 
+2:^read2 0 chr17 .* 22M1X161M112S .*[^SA:Z:\\s].*XE:Z:.*;2:2:chimera:247:chr1\\|1,9739:chr17\\|1,946
+
+$Bug 17175: not a bug, just a methodo choice - But in a better world, we should have a XE field and a SA field with a chimeric alignment
+s2:^read2.* SA:Z:chr?.* XE:Z:.*chimera:247:chr1\\|1,9739:chr17\\|1,946
+s2:^read2.* SA:Z:chr?.* XE:Z:.*chimera:247:chr1\\|1,9739:chr17\\|1,946
+
+$Bug 17175: idem, the read had several breaks (including a good chimera break) and crac was not consider the chimera in the CIGAR because a strand problem (+1 before the junction, -1 after the junction)
+s2:^read1 16 chr16 .* 79S121M .* SA:Z:chr15,0,\\+,121S22M57S,254,0 .* XE:Z:0:0:chimera:78:chr16\\|-1,22:chr15\\|1,0
+s2:^read1 2048 chr15 .* 121S22M57S .* SA:Z:chr16,0,\\-,79S121M,254,0
+
+
+

@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18568-genome -r bug-18568-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18568.sam --detailed-sam --reads-index GKARRAYS
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18568.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$max(uint) in cigar string
+2:138M62S

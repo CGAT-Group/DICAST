@@ -1,0 +1,482 @@
+2013-11-29  mancheron
+
+	* [r2735] configure.ac, src/Makefile.am, src/gkArrays.cpp,
+	  src/gkCFPSBuilder.cpp, src/gkIFABuilder.cpp, src/gkSABuilder.cpp,
+	  src/libProgressBar-1.1.2, src/libProgressBar-1.2.0,
+	  src/libProgressBar-1.2.0/ChangeLog,
+	  src/libProgressBar-1.2.0/Makefile.am,
+	  src/libProgressBar-1.2.0/Makefile.in,
+	  src/libProgressBar-1.2.0/configure,
+	  src/libProgressBar-1.2.0/configure.in,
+	  src/libProgressBar-1.2.0/doc/Makefile.in,
+	  src/libProgressBar-1.2.0/doc/libProgressBar.3,
+	  src/libProgressBar-1.2.0/libProgressBar/Makefile.in,
+	  src/libProgressBar-1.2.0/libProgressBar/progressBar.cpp,
+	  src/libProgressBar-1.2.0/libProgressBar/progressBar.h,
+	  src/libProgressBar-1.2.0/libProgressBar/testPB.cpp: Updating
+	  libProgressBar library. Enhance display. Remove pkg-config usage
+	  to detect library since some people dislike it.
+
+2013-11-28  mancheron
+
+	* [r2730] ChangeLog:
+	* [r2729] src/gkSABuilder.cpp,
+	  src/libProgressBar-1.1.2/doc/libProgressBar.3: Bug Fix:
+	  Multithreading displayed the progress bar twice for SA
+	  construction.
+	* [r2728] ., configure.ac, src/Makefile.am, src/gkArrays.cpp,
+	  src/gkArrays.h, src/gkCFPSBuilder.cpp, src/gkIFABuilder.cpp,
+	  src/gkSABuilder.cpp, src/libProgressBar-1.1.2: New release
+
+2013-09-30  salson
+
+	* [r2564] GkSABuilder: Prevent loop variables to go out the
+	  boundaries
+
+2013-09-28  salson
+
+	* [r2559] Release 2.0.6: - Correction in quicksort algorithm: pivot
+	  choice changed to avoid long computations in very specific cases
+	* [r2558] GkSABuilder: Remove med function not needed anymore
+	  (pivot choice method changed)
+	* [r2557] gkSABuilder: Change the way pivot is chosen: pick one
+	  randomly.
+	  
+	  Choosing the median could generate some highly inefficient
+	  processing in specific conditions (array sorted in reverse order)
+	* [r2555] Release 2.0.5: - Fixed a bug when processing (very) large
+	  files. A uint value should have been a uintSA - Fixed some
+	  autotools issues
+
+2013-09-27  salson
+
+	* [r2554] GkIFABuilder: uintSA instead of uint
+	  
+	  Using a uint provoked an overflow on very large files, when
+	  computing i+j (which was therefore done as a uint).
+
+2013-05-21  salson
+
+	* [r2446] GkArrays: Check for libpthread in GkArrays
+	* [r2445] GkArrays: Remove config.h.in file
+
+2013-05-07  nphilippe
+
+	* [r2424] -fixed typo error in configure.ac -remove AC_PROG_RANLIB
+	  obsolete
+
+2013-04-29  salson
+
+	* [r2395] GkArrays: remove Makefile.in, configure scripts and so
+	  on. Generate them usign aclocal && autoconf && autoheader &&
+	  automake --add-missing
+
+2013-04-19  nphilippe
+
+	* [r2352]
+
+2013-04-19  salson
+
+	* [r2349] GkArrays: Typo in configure.ac (space missing) and check
+	  that kpsewhich exists
+
+2013-04-17  salson
+
+	* [r2288] Release 2.0.3: - Bug correction on the number of bits
+	  used with the bitvector version - Bug correction on the size of
+	  an array, that could cause segfault in very specific cases - Some
+	  compilation warnings removed
+	* [r2287] GkArrays: Array values'' must be of size nb_kmers+1 just
+	  in case all the kmers are distinct
+
+2013-04-16  salson
+
+	* [r2274] GkArrays: gkSABuilder uses the new SolArray constructor
+	  since gkSA is not really a permutation (GkSA length is not the
+	  maximal value that can be stored in the array
+	* [r2273] GkArrays: solArrays have another constructor that take as
+	  a parameter the maximal value that can be stored in the array
+	* [r2272] GkArrays: computation of number of bits needed for an
+	  array did not work depending on the endianness
+	* [r2271] GkArrays: Use bitvectors in consistency tests.
+
+2013-04-13  salson
+
+	* [r2270] GkArrays: filename parameters to the constructors are now
+	  const char*
+
+2013-04-12  salson
+
+	* [r2261] GkArrays: Remove compilation warnings
+
+2013-04-12  nphilippe
+
+	* [r2258] new release 2.0.2
+
+2013-04-10  jaudoux
+
+	* [r2245] [BUG] Correction of bug #15561 paired-end iterators were
+	  having a trouble in numbering.
+
+2013-04-05  salson
+
+	* [r2223] GkArrays: Bug #15583 corrected (concerning problems in
+	  tests/Makefile.am). Version 2.0.1 issued
+
+2013-04-05  nphilippe
+
+	* [r2222] configure.ac
+
+2013-04-03  jaudoux
+
+	* [r2192] Correct the read numeration of readsIterator. The first
+	  tag has now the id 0.
+
+2013-03-21  salson
+
+	* [r2127] GkArrays: Changelog of version 2.0.0
+	* [r2126] GkArrays: testGkArrays.cpp: Added some comments to
+	  explain the possibilities with the constructor
+	* [r2125] GkArrays: src/Makefiles: Many headers must be installed
+	* [r2124] GkArrays: Code cleanup
+	* [r2123] GkArrays: Example for new users
+	* [r2122] GkArrays: Tests: Add tests for bit vectors. Add
+	  information in case of failed tests
+	* [r2121] GkArrays: Bit vector implementation by Alban Mancheron
+	  included, replaced former one. Beware: we only use bit vectors on
+	  a multiple of 8bits to avoid race conditions with multi-threading
+	* [r2118] GkArrays: Add a --coverage option in configure script to
+	  compute the code coverage
+
+2013-03-20  nphilippe
+
+	* [r2117] put Solarray type for values table and modify code in
+	  function
+
+2013-03-20  jaudoux
+
+	* [r2115] Add a method in readsReader to get the read number
+
+2013-03-20  salson
+
+	* [r2113] GkArrays: Javadoc: specify that arrays on the output are
+	  sorted
+
+2013-03-18  salson
+
+	* [r2104] GkArrays: Unit tests: Produce a .tap file when tests are
+	  launched [file testing.h forgotten]
+	* [r2103] GkArrays: Unit tests: Produce a .tap file when tests are
+	  launched
+
+2013-03-12  salson
+
+	* [r2100] GkArrays: Keep a N in dataset files.
+
+2013-03-11  salson
+
+	* [r2099] GkArrays: Makefile.in file deleted during a previous
+	  commit, put back on the SVN
+
+2013-03-10  nphilippe
+
+	* [r2095] last cleanup for gk-arrays 2.0.0
+
+2013-03-08  salson
+
+	* [r2094] GkArrays: Fixed some Javadoc problems (typos in the
+	  command name, parameter not documented, unknown parameter
+	  documented, ...)
+
+2013-03-08  jaudoux
+
+	* [r2089] * New headers for each soure file * Change copyright year
+	  * Add IRB/INSERM in copyright * Add a name of developpers in a
+	  specific part * Tests added for pairedEnd classes * Builtables
+	  can now be run using pairedEnd reads * New methods in readsReader
+	  for switching between paired-end reads
+
+2013-03-07  salson
+
+	* [r2083] GkArrays: Changed the delay for waiting the children. It
+	  is now small (for the start) and increases until it reaches an
+	  upper bound Moved the place sem_post is put. sem_post must be
+	  executed each time we leave a thread. Since we may launch the
+	  insertion sort in a thread, sem_post had to be executed after
+	  that too.
+
+2013-03-06  salson
+
+	* [r2082] GkArrays: - Removed two unnecessary variables (not used
+	  anymore) - Removed a comparison between signed and unsigned
+	  interger
+
+2013-03-03  salson
+
+	* [r2048] GkArrays: GkSABuilder: quicksort has now a better
+	  parallel implementation and uses all the available resources (but
+	  not more)
+	* [r2047] Bug #15429 corrected: use of uintSA rather than uint for
+	  the end position of a read in C_R.
+
+2013-03-01  jaudoux
+
+	* [r2037] Add an ifndef declaration in readsReader class.
+
+2013-03-01  nphilippe
+
+	* [r2035] -oops
+
+2013-03-01  jaudoux
+
+	* [r2034] Add missing comments and JavaDoc in readsReader class and
+	  gkarrays class.
+
+2013-03-01  nphilippe
+
+	* [r2033] Version 1.3.1 with the following modifs: - integration of
+	  paired reads - threading of gkIFA and gkSA - modification of
+	  architecture
+
+2013-02-28  salson
+
+	* [r2032] GkArrays: Benchmarks: Evaluate performance depending on
+	  the constant values
+	* [r2022] Gkarrays tests: Also perform tests on multi-threaded
+	  implementation. On the variable and fixed consistency, check also
+	  with changing values of k and with the stranded or non-stranded
+	  implementation
+	* [r2021] GkArrays: Constant changed for the minimal size to call a
+	  thread. This size has been changed according to the benchmarks
+	  performed.
+
+2013-02-27  jaudoux
+
+	* [r2015] Integration of stranded for paired-end reads in values
+	  array. Reverse complement the first read of each pair and keep
+	  the second read of the pair as forward
+	* [r2013] Bug correction on paired-end iterator.
+
+2013-02-26  jaudoux
+
+	* [r2010] Function getPair now return -1 if data are not paired-end
+	* [r2009] - Add header to files : readsReader.h readsReader.cpp -
+	  Correcting the function to reverse complement reads when using
+	  paired-end - Add the function getPair(uint i), to get the read
+	  associated to an other when using paired-end data
+	* [r2008] Correcting warnings display in case of paired-end. Only
+	  show them the first time we run trough the reads files
+
+2013-02-25  salson
+
+	* [r2007] Bug correction: read_lengths is of type uint64_t and not
+	  size_t, therefore we must specify the type uint64_t to Calloc
+	* [r2006] Tests: NDEBUG must not be set so that tests work
+
+2013-02-25  jaudoux
+
+	* [r2002] Correct the way to discard reads when using paired-end
+	  files : - if one of the read has its length < k or <
+	  expectedLength, both reads are discarded - Display the number of
+	  tags discarded with informations about wich tag was in cause
+
+2013-02-25  nphilippe
+
+	* [r2000] change version with an integreted paired reads management
+
+2013-02-25  jaudoux
+
+	* [r1999] Add paired-end files management : - files management is
+	  no longer in gkarrays.h class but in the new class readsReader.h
+	  - for reading FASTA and FASTQ files, create an readReader object
+	  using the simple file constructor for singleRead or double file
+	  constructor for pairedEnd. - Use method begin() of readsReader in
+	  order to get an generic iterator for getting reads - Don't forget
+	  to delete the iterator.
+
+2013-02-24  salson
+
+	* [r1993] Tests: constant DATADIR was removed during a merge,
+	  recovered
+	* [r1992] Added benchmarks to test the best values for the
+	  constants
+	* [r1991] * Replaced the hard-coded value for the minimal size of
+	  the array to call a thread, by a constant * Added ifndef in
+	  const.h to allow defining the constant at compilation time
+
+2013-02-23  salson
+
+	* [r1990] GkArrays: getGkCFALength() now really returns GkCFA
+	  length, ie. the number of distinct factors
+	* [r1989] Building GkSA: quicksort must not be launched on an empty
+	  range
+	* [r1988] Tests: getGkCFALength() now really returns GkCFA length,
+	  ie. the number of distinct factors
+	* [r1987] * Updated call to GkArrays constructor: we do consider
+	  the dataset is stranded (otherwise the tests would fail) * Solved
+	  memory leaks
+
+2013-02-18  nphilippe
+
+	* [r1973] add isLarge() and isStranded() in gkArrays.h
+	* [r1972] test for MAC configuration
+
+2013-02-17  nphilippe
+
+	* [r1970] add isLarge() and isStranded() in gkArrays.h
+	* [r1969] add isLarge() and isStranded() in gkArrays.h
+	* [r1968] add missing file
+	* [r1967] add missing file
+	* [r1966] add missing file
+	* [r1963] - cleanup libdivsufsort
+	* [r1962] - integration of gk-arrays stranded with a direct
+	  construction of gkIFA and gkCFPS from values array - optimization
+	  of the parallelization of gkSA
+	* [r1961] code cleanup and mv int64 -> uint64
+
+2013-02-15  salson
+
+	* [r1927] configure.ac: Added -g flag at compilation
+	* [r1926] Unit test: check consistency → corrected a memory leak
+	* [r1921] GkArrays: Actually, getGkCFALength() had no good reason
+	  to return the size of nb_commons. Given its name, the function
+	  must return the number of element in GkCFA
+	* [r1920] GkArrays: size_t was used for storing bits, which was a
+	  pretty bad idea for 32-bit architecture
+	* [r1919] testConsistency: Changed the order of the tests. Start by
+	  the query of the table, and finish by more complex queries
+
+2013-02-14  salson
+
+	* [r1918] Tests: Now compile with distcheck.
+	* [r1913] readIterator: add a isFinished() method to know when the
+	  file has been completely read
+	* [r1912] GkArrays: unit tests. Added unit tests for the GkArrays,
+	  to check that variable and fixed-length implementation give the
+	  same result and to test that all the results in the GkArrays are
+	  consistent. Some little datasets have been added. They should be
+	  completed in the future.
+	* [r1911] GkArrays: the comment of getGkCFALength() was not
+	  accurate enough: the number returned is not exactly the number of
+	  distinct k-mers. There is one more cell, to deal with the sum
+	  properly.
+	* [r1910] GkArrays: in getGkSA(), no reason for transforming the
+	  P-position in Q-position: the comment said the opposite. I
+	  checked that no other function would be impacted
+	* [r1908] Autotools file updates for creating version 1.1.0
+	* [r1907] GkArrays: Removed code duplication by using another class
+	  that makes the choice between a large and a small array
+
+2013-02-11  nphilippe
+
+	* [r1885] bug fixed between configure.ac and doc
+	* [r1884] bug fixed between configure.ac and doc
+
+2013-02-11  salson
+
+	* [r1881] Gk-Arrays: Add solArray type to deal with arrays
+	  containing 32-bit or 64-bit integers
+
+2013-02-10  salson
+
+	* [r1873] variableAndFixedLength: Int overflow when computing
+	  position queried in getTagNum. Replaced int type for uintSA
+	* [r1872] variableAndFixedLength: Test getTagNum function on each
+	  position of the read concatenation, check that the results are
+	  correct; test read length for each read and check the result is
+	  correct
+	* [r1871] Delete PRINT_VAR that were in the middle of the code!
+	  Sorry for the disturbance...
+
+2013-02-09  salson
+
+	* [r1870] GkArrays test case: add output information on assert
+	  failure
+	* [r1869] Disable NDEBUG macro so that asserts are evaluated
+
+2013-02-04  salson
+
+	* [r1841] Added a tests directory with a test to check that
+	  variable and fixed length implementations give the same results
+	* [r1840] New assert macro for displaying a message (with variable
+	  values for instance)
+	* [r1839] Code of getGkCFALength()
+	* [r1838] Added a getGkCFALength() method that returns the number
+	  of elements in GkCFA
+
+2013-01-30  salson
+
+	* [r1824] Cancel previous commit and modified getTagFactor code so
+	  that we can retrieve substrings of length < 4
+	* [r1823] Add a pre-condition to getTagFactor() and getTextFactor()
+	  to tell that the shortest factor must be of length 4 at least
+
+2012-07-02  salson
+
+	* [r1708] Changing minor version to 1.0.1
+
+2012-06-29  salson
+
+	* [r1707] * Added comments to detail class and function roles *
+	  Added static method isDiscarded in gkArrays to know if a read is
+	  discarded * Bug corrected in readIterator: now we do not take
+	  into account reads that should be discarded -> parameters have
+	  been added to the constructors so that we can determine if a read
+	  must be discarded
+
+2012-05-18  salson
+
+	* [r1631] Updated documentation: remove reference to four library
+	  versions and added procedure for installing
+	* [r1630] Adding Doxygen configuration file
+	* [r1629] Do not display anymore the bit version. That is
+	  meaningless now.
+	* [r1628] Bug: kseq/kseq.h was not included with 'make install'.
+	  Solved.
+
+2012-04-26  nphilippe
+
+	* [r1613] bug fixed about the limit between large et small SA
+
+2012-04-25  nphilippe
+
+	* [r1612] bug fixed about the limit between large et small SA
+
+2012-04-05  salson
+
+	* [r1591] Solved memory leaks
+
+2012-04-04  salson
+
+	* [r1581] * Bug correction: in readIterator finished was not
+	  modified properly * Bug correction: in readIterator seq was not
+	  initialised properly (first item was missed)
+
+2012-04-03  nphilippe
+
+	* [r1578]
+	* [r1577] add iterators in input file
+
+2012-04-02  nphilippe
+
+	* [r1566] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1565] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1564] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1563] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1562] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1561] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1560] one lib for all version (fixed,variable,32bits,64 bits)
+	* [r1558] pour le developpement
+	* [r1550] update svn struct
+
+2011-07-11  salson
+
+	* [r781] Release 0.2.0
+	* [r780] Not the newest
+
+2011-07-10  salson
+
+	* [r775] Right version of the release (hopefully)
+	* [r768] Release 0.2.0 of GkArrays
+	* [r767] Gk arrays tag directory
+

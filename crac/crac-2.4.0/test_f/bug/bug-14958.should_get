@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-14958-genome -r bug-14958-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-14958.sam --detailed-sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-14958.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$alignement overlapping chromosomes
+1:chr1 203 .* 38M19S

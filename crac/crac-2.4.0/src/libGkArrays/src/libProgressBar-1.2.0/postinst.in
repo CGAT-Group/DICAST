@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+echo "@hacked_prefix@/lib" > /etc/ld.so.conf.d/@PACKAGE@-@VERSION@.conf
+ldconfig

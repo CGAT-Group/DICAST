@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18435-genome -r bug-18435-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18435.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18435.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 18435: We have a segfault when we try to merge two consecutives breaks
+1:read	0	chr1	101	[0-9]*	139M61S

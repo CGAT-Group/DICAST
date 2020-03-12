@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15630-genome -r bug-15630-read.fa --detailed-sam -k 18 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15630.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15630.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 15630: the read had only two occurrences where it should have three and we should have 0 cause in the read
+1:^read1.* XC:i:0 .*p_loc=3

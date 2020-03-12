@@ -1,0 +1,90 @@
+crac - Package
+
+CRAC is a tool to analyze High Throughput Sequencing (HTS) data in
+comparison to a reference genome. It is intended for transcriptomic
+and genomic sequencing reads. More precisely, with transcriptomic
+reads as input, it predicts point mutations, indels, splice junction,
+and chimeric RNAs (ie, non colinear splice junctions). CRAC can also
+output positions and nature of sequence error that it detects in the
+reads. CRAC uses a genome index. This index must be computed before
+running the read analysis. For this sake, use the command "crac-index"
+on your genome files. You can then process the reads using the command
+crac. See the man page of CRAC (help file) by typing "man crac". CRAC
+requires large amount of main memory on your computer. For processing
+against the Human genome, say 50 million reads of 100 nucleotide each,
+CRAC requires about 40 gigabytes of main memory. Check whether the
+system of your computing server is equipped with sufficient amount of
+memory before launching an analysis.  
+
+crac - Source code
+
+CRAC is freely available under a GPL-compliant CeCILL license. The
+distribution comes as an archive (a gzipped tarball file .tar.gz)
+containing the source code.
+
+crac - Installation
+
+1) Unpack the archive
+2) Enter the directory crac-version-number
+3) Type ./configure
+4) If everything went fine, run make
+5) You may want to check everything is ok by running make check
+6) Finally, you can install the software on your system by running make install
+
+If the configure step failed, that may be due to a missing library. In particular the zlib is needed. On a Debian or Debian-like system, you'll need to install zlib1g, zlib1g-dev.
+
+After the compilation succeded you can find a more complete documentation 
+inside the doc directory and a man page is also available.
+
+-------------------------------------------------------------------------
+
+ Copyright © 2009-2011 -- LIRMM/CNRS
+                          (Laboratoire d'Informatique, de Robotique et de
+                          Microélectronique de Montpellier /
+                          Centre National de la Recherche Scientifique)
+                          LIFL/INRIA
+                          (Laboratoire d'Informatique Fondamentale de
+                          Lille / Institut National de Recherche en
+                          Informatique et Automatique)
+                          LITIS
+                          (Laboratoire d'Informatique, du Traitement de
+                          l'Information et des Systèmes).
+
+ Copyright © 2011-2015 -- IRB/INSERM
+                          (Institut de Recherches en Biothérapie /
+                          Institut National de la Santé et de la Recherche
+                          Médicale).
+
+ Copyright © 2015-2016 -- AxLR/SATT
+                          (Lanquedoc Roussilon/ 
+			   Societe d'Acceleration de Transfert de Technologie).	  
+
+ Programmeurs                                                               
+      /Progammers: 
+                   Nicolas PHILIPPE <nphilippe.resear@gmail.com>              
+                   Mikaël SALSON    <mikael.salson@lifl.fr>
+                   Jérôme Audoux    <jerome.audoux@gmail.com>                  
+  with additional contribution for the packaging of:	                      
+                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               
+                                                                             
+  Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr> 
+  Paper:           CRAC: An integrated RNA-Seq read analysis
+                   Philippe N., Salson M., Commes T., Rivals E.
+                   Genome Biology 2013; 14:R30.
+ 
+-------------------------------------------------------------------------
+
+This File is part of the CRAC program.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version.  This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU General Public License for more details.  You
+should have received a copy of the GNU General Public License along
+with this program.  If not, see <http://www.gnu.org/licenses/>.  
+-------------------------------------------------------------------------
+
+Les commentaires sont les bienvenus/Comments are welcome.

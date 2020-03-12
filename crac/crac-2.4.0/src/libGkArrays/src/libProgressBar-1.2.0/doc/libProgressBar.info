@@ -1,0 +1,294 @@
+This is libProgressBar.info, produced by makeinfo version 4.13 from
+libProgressBar.texinfo.
+
+This file documents the `libProgressBar' library.
+
+   Copyright © 2007 - Université des Antilles et de la Guyane/Institut
+National de Recherche en Informatique et en Automatique
+
+   Author: DoccY <alban.mancheron@inria.fr>
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided that
+the entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation approved by the Foundation.
+
+
+File: libProgressBar.info,  Node: Top,  Next: Instructions,  Prev: (dir),  Up: (dir)
+
+   This file documents the `libProgressBar' library.
+
+* Menu:
+
+* Instructions::                How to read this manual.
+* Copying::                     How you can copy and share `libProgressBar'.
+* Overview::                    Preliminary information.
+* Example::                      An example of the use of `libProgressBar'.
+* Problems::                    Reporting bugs.
+* Concept Index::               Index of concepts.
+
+
+File: libProgressBar.info,  Node: Instructions,  Next: Copying,  Prev: Top,  Up: Top
+
+1 How to Read This Manual
+*************************
+
+   You will find in the Copying section the GNU Lesser General Public
+License.  In the Overview section, is given a quick description about
+what does `libProgressBar'. Then, you will have an example of use.
+
+   Indeed, we'll hope you having a good fun using `libProgressBar'.
+
+
+File: libProgressBar.info,  Node: Copying,  Next: Overview,  Prev: Instructions,  Up: Top
+
+2 Copying
+*********
+
+                        Version 3, 29 June 2007
+
+     Copyright (C) 2007 Free Software Foundation, Inc. `http://fsf.org/'
+
+     Everyone is permitted to copy and distribute verbatim copies of this
+     license document, but changing it is not allowed.
+
+   This version of the GNU Lesser General Public License incorporates
+the terms and conditions of version 3 of the GNU General Public
+License, supplemented by the additional permissions listed below.
+
+  0. Additional Definitions.
+
+     As used herein, "this License" refers to version 3 of the GNU
+     Lesser General Public License, and the "GNU GPL" refers to version
+     3 of the GNU General Public License.
+
+     "The Library" refers to a covered work governed by this License,
+     other than an Application or a Combined Work as defined below.
+
+     An "Application" is any work that makes use of an interface
+     provided by the Library, but which is not otherwise based on the
+     Library.  Defining a subclass of a class defined by the Library is
+     deemed a mode of using an interface provided by the Library.
+
+     A "Combined Work" is a work produced by combining or linking an
+     Application with the Library.  The particular version of the
+     Library with which the Combined Work was made is also called the
+     "Linked Version".
+
+     The "Minimal Corresponding Source" for a Combined Work means the
+     Corresponding Source for the Combined Work, excluding any source
+     code for portions of the Combined Work that, considered in
+     isolation, are based on the Application, and not on the Linked
+     Version.
+
+     The "Corresponding Application Code" for a Combined Work means the
+     object code and/or source code for the Application, including any
+     data and utility programs needed for reproducing the Combined Work
+     from the Application, but excluding the System Libraries of the
+     Combined Work.
+
+  1. Exception to Section 3 of the GNU GPL.
+
+     You may convey a covered work under sections 3 and 4 of this
+     License without being bound by section 3 of the GNU GPL.
+
+  2. Conveying Modified Versions.
+
+     If you modify a copy of the Library, and, in your modifications, a
+     facility refers to a function or data to be supplied by an
+     Application that uses the facility (other than as an argument
+     passed when the facility is invoked), then you may convey a copy
+     of the modified version:
+
+       a. under this License, provided that you make a good faith
+          effort to ensure that, in the event an Application does not
+          supply the function or data, the facility still operates, and
+          performs whatever part of its purpose remains meaningful, or
+
+       b. under the GNU GPL, with none of the additional permissions of
+          this License applicable to that copy.
+
+  3. Object Code Incorporating Material from Library Header Files.
+
+     The object code form of an Application may incorporate material
+     from a header file that is part of the Library.  You may convey
+     such object code under terms of your choice, provided that, if the
+     incorporated material is not limited to numerical parameters, data
+     structure layouts and accessors, or small macros, inline functions
+     and templates (ten or fewer lines in length), you do both of the
+     following:
+
+       a. Give prominent notice with each copy of the object code that
+          the Library is used in it and that the Library and its use are
+          covered by this License.
+
+       b. Accompany the object code with a copy of the GNU GPL and this
+          license document.
+
+  4. Combined Works.
+
+     You may convey a Combined Work under terms of your choice that,
+     taken together, effectively do not restrict modification of the
+     portions of the Library contained in the Combined Work and reverse
+     engineering for debugging such modifications, if you also do each
+     of the following:
+
+       a. Give prominent notice with each copy of the Combined Work that
+          the Library is used in it and that the Library and its use are
+          covered by this License.
+
+       b. Accompany the Combined Work with a copy of the GNU GPL and
+          this license document.
+
+       c. For a Combined Work that displays copyright notices during
+          execution, include the copyright notice for the Library among
+          these notices, as well as a reference directing the user to
+          the copies of the GNU GPL and this license document.
+
+       d. Do one of the following:
+
+            0. Convey the Minimal Corresponding Source under the terms
+               of this License, and the Corresponding Application Code
+               in a form suitable for, and under terms that permit, the
+               user to recombine or relink the Application with a
+               modified version of the Linked Version to produce a
+               modified Combined Work, in the manner specified by
+               section 6 of the GNU GPL for conveying Corresponding
+               Source.
+
+            1. Use a suitable shared library mechanism for linking with
+               the Library.  A suitable mechanism is one that (a) uses
+               at run time a copy of the Library already present on the
+               user's computer system, and (b) will operate properly
+               with a modified version of the Library that is
+               interface-compatible with the Linked Version.
+
+       e. Provide Installation Information, but only if you would
+          otherwise be required to provide such information under
+          section 6 of the GNU GPL, and only to the extent that such
+          information is necessary to install and execute a modified
+          version of the Combined Work produced by recombining or
+          relinking the Application with a modified version of the
+          Linked Version. (If you use option 4d0, the Installation
+          Information must accompany the Minimal Corresponding Source
+          and Corresponding Application Code. If you use option 4d1,
+          you must provide the Installation Information in the manner
+          specified by section 6 of the GNU GPL for conveying
+          Corresponding Source.)
+
+  5. Combined Libraries.
+
+     You may place library facilities that are a work based on the
+     Library side by side in a single library together with other
+     library facilities that are not Applications and are not covered
+     by this License, and convey such a combined library under terms of
+     your choice, if you do both of the following:
+
+       a. Accompany the combined library with a copy of the same work
+          based on the Library, uncombined with any other library
+          facilities, conveyed under the terms of this License.
+
+       b. Give prominent notice with the combined library that part of
+          it is a work based on the Library, and explaining where to
+          find the accompanying uncombined form of the same work.
+
+  6. Revised Versions of the GNU Lesser General Public License.
+
+     The Free Software Foundation may publish revised and/or new
+     versions of the GNU Lesser General Public License from time to
+     time. Such new versions will be similar in spirit to the present
+     version, but may differ in detail to address new problems or
+     concerns.
+
+     Each version is given a distinguishing version number. If the
+     Library as you received it specifies that a certain numbered
+     version of the GNU Lesser General Public License "or any later
+     version" applies to it, you have the option of following the terms
+     and conditions either of that published version or of any later
+     version published by the Free Software Foundation. If the Library
+     as you received it does not specify a version number of the GNU
+     Lesser General Public License, you may choose any version of the
+     GNU Lesser General Public License ever published by the Free
+     Software Foundation.
+
+     If the Library as you received it specifies that a proxy can decide
+     whether future versions of the GNU Lesser General Public License
+     shall apply, that proxy's public statement of acceptance of any
+     version is permanent authorization for you to choose that version
+     for the Library.
+
+
+
+File: libProgressBar.info,  Node: Overview,  Next: Example,  Prev: Copying,  Up: Top
+
+3 Overview
+**********
+
+   TODO
+
+
+File: libProgressBar.info,  Node: Example,  Next: Problems,  Prev: Overview,  Up: Top
+
+4 Example of use
+****************
+
+   TODO
+
+
+File: libProgressBar.info,  Node: Problems,  Next: Concept Index,  Prev: Example,  Up: Top
+
+5 Reporting Bugs
+****************
+
+   If you find a bug in `libProgressBar', please send electronic mail to
+<alban.mancheron@inria.fr>.  Include the version number.  Also include
+in your message a decription of the encountered problem.
+
+
+   If you have other questions, comments or suggestions about
+`lbProgressBar', contact the author via electronic mail to
+<alban.mancheron@inria.fr>.  The author will try to help you out,
+although he may not have time to fix your problems.
+
+
+File: libProgressBar.info,  Node: Concept Index,  Prev: Problems,  Up: Top
+
+Concept Index
+*************
+
+ [index ]
+* Menu:
+
+* bugs:                                  Problems.              (line 6)
+* copying:                               Copying.               (line 6)
+* example:                               Example.               (line 6)
+* GNU LGPL:                              Copying.               (line 6)
+* greetings:                             Overview.              (line 6)
+* how to read:                           Instructions.          (line 6)
+* manual, how to read:                   Instructions.          (line 6)
+* overview:                              Overview.              (line 6)
+* problems:                              Problems.              (line 6)
+* reading:                               Instructions.          (line 6)
+* usage:                                 Example.               (line 6)
+
+
+
+Tag Table:
+Node: Top977
+Node: Instructions1495
+Node: Copying1913
+Node: Overview10305
+Node: Example10425
+Node: Problems10558
+Node: Concept Index11130
+
+End Tag Table

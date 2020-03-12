@@ -1,0 +1,51 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/cigar/genome -r reads_sam1.fasta reads_sam2.fasta -k 10 -o ${abs_top_builddir:-../..}/test_f/cigar/consistency3.sam --treat-multiple 100 --use-x-in-cigar
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/cigar/consistency3.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/cigar
+
+$SAM consistency check -- bitset-cigar-extended_fields: insertion,first_read
+2:^r001.*insertion.* 99 .* 30M24N25M .* 151 .*MC:Z:28M.*NM:i:24
+
+$SAM consistency check -- bitset-cigar-extended_fields: strand=-1,second_read
+2:^r001.*strand-1.* 147 .* 28M .* -151 .*MC:Z:30M24N25M
+
+$SAM consistency check -- bitset-cigar-extended_fields: deletion,first_read
+1:^r002.*deletion.* 67 .* 19M4D22M .* 0 .*MC:Z:19M4D22M.*NM:i:4
+
+$SAM consistency check -- bitset-cigar-extended_fields: deletion,second_read
+1:^r002.* 131 .* 19M4D22M .* 0 .*MC:Z:19M4D22M .*NM:i:4
+
+$SAM consistency check -- bitset-cigar-extended_fields: substitution,first_read
+1:^r003.*substitution.* 67 .* 16M1X17M .*MC:Z:16M1X17M.*NM:i:1
+
+$SAM consistency check -- bitset-cigar-extended_fields: chimera(cat4),first_read
+1:^r004.*chimera_cat4.* 67 .* 29M25S .*MC:Z:29M25S.*NM:i:0 .*SA:Z:sam_check1,68,-,25M29S,254,0
+1:^r004.*chimera_cat4.* 2131 .* 25M29S .*NM:i:0 .*SA:Z:sam_check1,1,\\+,29M25S,254,0
+
+$SAM consistency check -- bitset-cigar-extended_fields: chimera(cat1),first_read
+1:^r005.*chimera_cat1.* 67 .* 33M30S .*MC:Z:33M30S.*NM:i:0 .*SA:Z:sam_check2,1,\\+,33S30M,254,0
+1:^r005.*chimera_cat1.* 2115 .* 33S30M .*SA:Z:sam_check1,17,\\+,33M30S,254,0
+
+$SAM consistency check -- bitset-cigar-extended_fields: multiple,first_read
+1:^r006.*multiple.* 67 .* 24M .*MC:Z:24M.*NH:i:33.*NM:i:0
+32:^r006.*multiple.* 323 .* 24M .*NH:i:33.*NM:i:0
+
+$SAM consistency check -- bitset-cigar-extended_fields: single,first_read
+1:^r007.*single.* 75 .* 29M .*MC:Z:\*.*NM:i:0.*XD:i:0.*XM:i:0.*XU:i:1
+
+$SAM consistency check -- bitset-cigar-extended_fields: unmapped,second_read
+1:^r007.*unmapped.* 135 .*MC:Z:29M.*NM:i:0.*XD:i:0.*XM:i:0.*XU:i:0
+
+$SAM consistency check -- bitset-cigar-extended_fields: unmapped,first_read
+1:^r008.*unmapped.* 71 .*MC:Z:29M.*NM:i:0.*XD:i:0.*XM:i:0.*XU:i:0
+
+$SAM consistency check -- bitset-cigar-extended_fields: single,second_read
+1:^r008.*single.* 139 .* 29M .*MC:Z:\*.*NM:i:0.*XD:i:0.*XM:i:0.*XU:i:1
+
+$SAM consistency check -- bitset-cigar-extended_fields: error,first_read
+1:^r009.*error.* 67 .* 16M1X12M .*MC:Z:29M.*NM:i:1.*XE:Z:0:0:Error:Sub:16:0.852158:G:T
+
+$SAM consistency check -- bitset-cigar-extended_fields: without_error,second_read
+1:^r009.*without_error.* 131 .* 29M .*MC:Z:16M1X12M.*NM:i:0.*XU:i:1
+
+$SAM consistency check -- bitset-cigar-extended_fields: chimera(cat1),multiple,first_read
+1:^r010.*chimera_cat1.* 67 .* 24M90S .*MC:Z:24M90S.*NM:i:0.*XE:Z:0:0:BioUndetermined:15:7.*XM:i:1

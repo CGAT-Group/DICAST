@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15677-genome -r bug-15677-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15677.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15677.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 15677: the read produces a chimera instead of a no start break bioUndetermined
+1:^read1.*24S31M46S

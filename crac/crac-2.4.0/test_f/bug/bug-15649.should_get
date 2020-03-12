@@ -1,0 +1,7 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15649-genome -r bug-15649-read.fa --detailed-sam -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15649.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15649.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$ Bug 15649: affectation was not made to chr4
+1:^chr4.*\\s+4\\s+1\\s+[0-9]+\\s+23M\\s+.*XO:Z:4|1,0\\s+
+

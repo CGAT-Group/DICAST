@@ -1,0 +1,94 @@
+.\"                              hie, Emacs:   -*- nroff -*-
+.\" @PACKAGE@ is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; see the file COPYING.  If not, write to
+.\" the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+.\"
+
+.TH @PACKAGE@ 3 "@ISODATE@" "@PACKAGE@ version @VERSION@" "C++"
+
+.\" Please update the above date whenever this man page is modified.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins (default)
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+
+
+.\"
+.\" SECTION "NAME"
+.\"
+.SH "NAME"
+
+.ce 3
+.SB @PACKAGE@
+
+This library intends to create and manipulate... Progress bars!!!
+.ce 0
+
+.\"
+.\" SECTION "SEE ALSO"
+.\"
+.SH "SEE ALSO"
+
+The full documentation for
+.B @PACKAGE@
+is maintained as a Texinfo manual.  If the
+.B info
+and
+.B @PACKAGE@
+programs are properly installed at your site, the command
+.IP
+.B info @PACKAGE@
+.PP
+should give you access to the complete manual.
+.PP
+You can also find the ps and pdf versions of these manuals in /usr/local/share/@PACKAGE@/.
+
+.\"
+.\" SECTION "COPYRIGHT"
+.\"
+.SH "COPYRIGHT"
+
+Copyright @ 2007 -- Université des Antilles et de la Guyane
+
+Author: DoccY <@PACKAGE_BUGREPORT@>
+.PP
+@PACKAGE@ comes with ABSOLUTELY NO WARRANTY.
+.PP
+This is free library, and you are welcome to redistribute it under certain conditions.
+.PP
+See the GNU Lesser General Public License for more details.
+
+
+.\"
+.\" SECTION "BUGS"
+.\"
+.SH "BUGS"
+
+We thank you for reporting bugs to:
+.RS
+<@PACKAGE_BUGREPORT@>
+
+
+.\"
+.\" SECTION "AUTHOR"
+.\"
+.SH "AUTHOR"
+
+DoccY <alban.mancheron@inria.fr>

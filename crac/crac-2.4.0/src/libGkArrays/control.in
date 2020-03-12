@@ -1,0 +1,29 @@
+Package:	@PACKAGE@
+Version:	@PACKAGE_VERSION@
+Section:	libs
+Priority:	optional
+Architecture:	@ARCH@
+Essential:	no
+Depends:	
+Recommends:	
+Suggests:	
+Conflicts:
+Installed-Size: @INSTALLED_SIZE@
+Maintainer:	DoccY <@PACKAGE_BUGREPORT@>
+Provides:	@PACKAGE@
+Description:	libGkArrays is a C++ library to build GkArrays.
+ .
+ GkArrays are a set of arrays that indexes all k-factors of given collection
+ of q reads of length m.
+ .
+ This structure provides constant access to:
+   - the number of occurences of a given k-factor ;
+   - the number of occurences of a k-factor in at a given position in some read.
+ This structure provides linear in the number of occurences access to:
+   - the positions of each occurences of a given k-factor ;
+   - the number of reads sharing a given k-factor.
+ .
+ The construction of GkArrays requires O(q x m x k) time and O(q x m) space.
+ More peculiarly, if K is the number of distinct k-factors in the given set of
+ reads, GkArrays use 2 x (q x (m-k+1)) + K memory words.
+ .

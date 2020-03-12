@@ -1,0 +1,118 @@
+2013-11-29 Friday  tag Release_1_2_0
+
+2013-11-29 Friday  DoccY <alban@mancheron.infos.st>
+
+	* configure.in (1.9), Makefile.am (1.7),
+	  libProgressBar/progressBar.cpp (1.4),
+	  libProgressBar/progressBar.h (1.4), libProgressBar/testPB.cpp
+	  (1.3), configure (1.9), Makefile.in (1.5), doc/Makefile.in (1.3),
+	  libProgressBar/Makefile.in (1.4):
+
+	Update:
+	- Time display enhancement.
+	- Allows systems without tex distribution to install the library (doc is just not built).
+	- Add a method/constructor option to add/set an initial  a value to the timer.
+	- Add a 'C' function to get version number.
+
+2013-11-22 Friday  DoccY <alban@mancheron.infos.st>
+
+	* INSTALL (1.2), Makefile.am (1.6), Makefile.in (1.4), aclocal.m4
+	  (1.2), config.guess (1.2), config.sub (1.2), configure (1.7),
+	  configure.in (1.8), depcomp (1.2), install-sh (1.2),
+	  libProgressBar-1.1.pc.in (1.2), libProgressBar.pc.in (1.1),
+	  ltmain.sh (1.2), missing (1.2), mkinstalldirs (1.2),
+	  doc/Makefile.am (1.2), doc/Makefile.in (1.2),
+	  doc/libProgressBar.1.in (1.3), doc/libProgressBar.3.in (1.1),
+	  doc/texinfo.tex (1.2), libProgressBar/Makefile.am (1.4),
+	  libProgressBar/Makefile.in (1.3), libProgressBar/config.h.in
+	  (1.2), m4/libtool.m4 (1.1), m4/ltoptions.m4 (1.1), m4/ltsugar.m4
+	  (1.1), m4/ltversion.m4 (1.1), m4/lt~obsolete.m4 (1.1), configure
+	  (1.8):
+
+	Update:
+	- autotools automatic update.
+
+	BugFix:
+	- pkg-config configuration was erroneous.
+	- man page was in wrong section
+
+2007-10-17 Wednesday  DoccY <alban.mancheron@lirmm.fr>
+
+	* configure.in (1.7), configure (1.6):
+
+	Changement de x86_64 amd64 pour les paquets 'deb'.
+
+2007-09-27 Thursday  DoccY <alban.mancheron@lirmm.fr>
+
+	* AUTHORS (1.2), README (1.2), configure.in (1.6),
+	  libProgressBar.spec.in (1.3), doc/libProgressBar.1.in (1.2),
+	  doc/libProgressBar.texinfo (1.2):
+
+	Mise à jour des mentions légales et de mon adresse mail.
+
+2007-09-27 Thursday  DoccY <alban.mancheron@lirmm.fr>
+
+	* configure.in (1.5), libProgressBar-1.0.pc.in (1.3),
+	  libProgressBar-1.1.pc.in (1.1), libProgressBar/Makefile.am (1.3),
+	  libProgressBar/progressBar.cpp (1.3),
+	  libProgressBar/progressBar.h (1.3), libProgressBar/testPB.cpp
+	  (1.2), libProgressBar/Makefile.in (1.2):
+
+	Ajout de la méthode GetTime() qui permet de récupérer le temps
+	écoulé (en s.) depuis le début du processus en progrès.
+
+2007-09-10 Monday  DoccY <alban.mancheron@lirmm.fr>
+
+	* Makefile.am (1.5), Makefile.in (1.2):
+
+	Coquille dans la génération du paquet debian.
+
+2007-09-10 Monday  DoccY <alban.mancheron@lirmm.fr>
+
+	* Makefile.in (1.1), libProgressBar/testPB.cpp (1.1),
+	  libProgressBar/Makefile.in (1.1), doc/Makefile.in (1.1):
+
+	Fichiers manquant pour l'import/export.
+
+2007-09-09 Sunday  DoccY <alban.mancheron@lirmm.fr>
+
+	* Makefile.am (1.4), configure.in (1.4), postrm.in (1.3), prerm.in
+	  (1.1), configure (1.4):
+
+	Bonne correction du bug sur le script de suppression pour le paquet
+	debian!!!
+
+2007-09-09 Sunday  DoccY <alban.mancheron@lirmm.fr>
+
+	* postrm.in (1.2):
+
+	Correction de ce qui semble être un bug dans le fichier de
+	post suppression du paquet debian...
+
+2007-09-09 Sunday  DoccY <alban.mancheron@lirmm.fr>
+
+	* libProgressBar/Makefile.am (1.2), libProgressBar/progressBar.cpp
+	  (1.2), libProgressBar/progressBar.h (1.2):
+
+	Modulation de l'affichage (avec ou sans temps/pourcentage).
+
+2007-08-16 Thursday  DoccY <alban.mancheron@lirmm.fr>
+
+	* postinst.in (1.2):
+
+	Bug dans le script de post-installation.
+
+2007-08-16 Thursday  DoccY <alban.mancheron@lirmm.fr>
+
+	* Makefile.am (1.3), configure.in (1.3), libProgressBar.spec.in
+	  (1.2), postinst.in (1.1), postrm.in (1.1), configure (1.3):
+
+	Ajout des scripts de mise à jour pour la liaison dynamque.
+
+2007-08-15 Wednesday  DoccY <alban.mancheron@lirmm.fr>
+
+	* Makefile.am (1.2), configure.in (1.2), libProgressBar-1.0.pc.in
+	  (1.2), configure (1.2):
+
+	Petit bug pour pkg-config.
+

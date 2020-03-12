@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/cigar/genome -r reads_k18.fasta -k 18 -o ${abs_top_builddir:-../..}/test_f/cigar/consistency2.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/cigar/consistency2.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/cigar
+
+$CIGAR consistency check -- bug #15352
+2:^bug15352-[1-2].*\\s30M21S\\s

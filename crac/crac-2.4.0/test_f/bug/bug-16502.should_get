@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-16502-genome -r bug-16502-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-16502.sam --reads-index GKARRAYS
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-16502.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 16502: SAM XE Fields not consistent with location profile
+1:XE:Z:0:0:Undetermined

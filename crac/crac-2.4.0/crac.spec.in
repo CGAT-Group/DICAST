@@ -1,0 +1,179 @@
+###############################################################################
+#									      #
+#    Copyright © 2010-2012 -- LIRMM/CNRS                                      #
+#                            (Laboratoire d'Informatique, de Robotique et de  #
+#                             Microélectronique de Montpellier /              #
+#                             Centre National de la Recherche Scientifique).  #
+#                             LIFL/INRIA                                      #
+#                            (Laboratoire d'Informatique, du Traitement de    #
+#                             l'Information et des Systèmes)                  #
+#                                                                             #
+#  Auteurs/Authors: CRAC list        <crac-bug@gforge.inria.fr>               #
+#                   Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              #
+#                   Mikaël SALSON    <mikael.salson@lifl.fr>                  #
+#                   Thérèse COMMES   <therese.commes@univ-montp2.fr>          #
+#                   Éric RIVALS      <eric.rivals@lirmm.fr>                   #
+#                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               #
+#                                                                             #
+#  -------------------------------------------------------------------------  #
+#                                                                             #
+#  Ce fichier fait partie du programme CRAC.                                  #
+#                                                                             #
+#  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       #
+#                                                                             #
+#  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  #
+#  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  #
+#  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  #
+#  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  #
+#  le site "http://www.cecill.info".                                          #
+#                                                                             #
+#  En contrepartie de l'accessibilité au code source et des droits de copie,  #
+#  de modification et de redistribution accordés par cette licence, il n'est  #
+#  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  #
+#  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  #
+#  titulaire des droits patrimoniaux et les concédants successifs.            #
+#                                                                             #
+#  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  #
+#  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  #
+#  développement  et à la reproduction du  logiciel par  l'utilisateur étant  #
+#  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  #
+#  manipuler et qui le réserve donc à des développeurs et des professionnels  #
+#  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  #
+#  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  #
+#  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  #
+#  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  #
+#  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         #
+#                                                                             #
+#  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  #
+#  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  #
+#  termes.                                                                    #
+#                                                                             #
+#  -------------------------------------------------------------------------  #
+#                                                                             #
+#  This File is part of the CRAC program.                                     #
+#                                                                             #
+#  Crac is a tool to analyse RNA-Seq data provided by NGS.                    #
+#                                                                             #
+#  This software is governed by the CeCILL license under French law and       #
+#  abiding by the rules of distribution of free software. You can use,        #
+#  modify and/ or redistribute the software under the terms of the CeCILL     #
+#  license as circulated by CEA, CNRS and INRIA at the following URL          #
+#  "http://www.cecill.info".                                                  #
+#                                                                             #
+#  As a counterpart to the access to the source code and rights to copy,      #
+#  modify and redistribute granted by the license, users are provided only    #
+#  with a limited warranty and the software's author, the holder of the       #
+#  economic rights, and the successive licensors have only limited            #
+#  liability.                                                                 #
+#                                                                             #
+#  In this respect, the user's attention is drawn to the risks associated     #
+#  with loading, using, modifying and/or developing or reproducing the        #
+#  software by the user in light of its specific status of free software,     #
+#  that may mean that it is complicated to manipulate, and that also          #
+#  therefore means that it is reserved for developers and experienced         #
+#  professionals having in-depth computer knowledge. Users are therefore      #
+#  encouraged to load and test the software's suitability as regards their    #
+#  requirements in conditions enabling the security of their systems and/or   #
+#  data to be ensured and, more generally, to use and operate it in the same  #
+#  conditions as regards security.                                            #
+#                                                                             #
+#  The fact that you are presently reading this means that you have had       #
+#  knowledge of the CeCILL license and that you accept its terms.             #
+#                                                                             #
+###############################################################################
+
+
+# crac.spec
+#
+# Copyright (c) 2011-2012 Nicolas PHILIPPE, Mikael SALSON, Alban MANCHERON crac-bugs@listsgforge.inria.fr
+#
+%define name @PACKAGE@
+%define version @VERSION@
+%define release 1
+%define manifest %{_builddir}/%{name}-%{version}-%{release}.manifest
+
+# required items
+Name: %{name}
+Version: %{version}
+Release: %{release}
+License: CeCILL
+Group: Application/Misc
+
+# optional items
+#Vendor: Nicolas PHILIPPE, Mikael SALSON, Alban MANCHERON
+#Distribution:
+#Icon:
+#URL:
+#Packager: Nicolas PHILIPPE, Mikael SALSON, Alban MANCHERON crac-bug@gforge.inria.fr
+
+# source + patches
+Source: %{name}-%{version}.tar.gz
+#Source1:
+#Patch:
+#Patch1:
+
+# RPM info
+#Provides:
+#Requires:
+#Conflicts:
+#Prereq:
+
+#Prefix: /usr
+BuildRoot: /var/tmp/%{name}-%{version}
+
+Summary: Crac is a tool to analyse RNA-Seq data provided by NGS.
+
+%description 
+We propose a novel way of analyzing reads that integrates
+genomic locations and local coverage, and delivers all above mentioned
+predictions in a single step. Our program, CRAC, uses a double k-mer profiling
+approach to detect candidate mutations, indels, splice or fusion junctions in
+each single read.
+
+%prep
+%setup -q
+#%patch0 -p1
+
+%build
+%configure
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT
+make DESTDIR=%{buildroot} install
+
+# __os_install_post is implicitly expanded after the
+# %install section... do it now, and then disable it,
+# so all work is done before building manifest.
+
+%{?__os_install_post}
+%define __os_install_post %{nil}
+
+# build the file list automagically into %{manifest}
+
+cd $RPM_BUILD_ROOT
+rm -f %{manifest}
+find . -type d \
+        | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' >> %{manifest}
+find . -type f \
+        | sed 's,^\.,\%attr(-\,root\,root) ,' >> %{manifest}
+find . -type l \
+        | sed 's,^\.,\%attr(-\,root\,root) ,' >> %{manifest}
+
+#%pre
+#%post
+#%preun
+#%postun
+
+%clean
+rm -f %{manifest}
+rm -rf $RPM_BUILD_ROOT
+
+%files -f %{manifest}
+%defattr(-,root,root)
+#%doc README
+#%docdir
+#%config
+
+%changelog

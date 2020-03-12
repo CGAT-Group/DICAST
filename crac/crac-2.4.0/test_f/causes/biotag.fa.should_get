@@ -1,0 +1,15 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/causes/genome -r biotag.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/causes/biotag.sam --detailed-sam --use-x-in-cigar
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/causes/biotag.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/causes
+
+$deletion of GT pos 60
+2:.*60:chr1\\|1,60
+
+$deletion of G pos 180
+2:.*60:chr1\\|1,180
+
+$insertion of CC pos 299
+2:.*60:chr1\\|1,299
+
+$insertion of A pos 419
+2:.*60:chr1\\|1,419

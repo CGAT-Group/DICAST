@@ -1,0 +1,7 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15639-genome -r bug-15639-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15639.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15639.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 15639, the read produce a segfault because a condition in saveCandidat process in SupportBreak about single consistency 
+#We should have 1 cause in the read, it is enough to check the bug
+1:^read1.*XC:i:1\\s

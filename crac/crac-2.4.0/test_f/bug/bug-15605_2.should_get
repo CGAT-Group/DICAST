@@ -1,0 +1,7 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15605_2-genome -r bug-15605_2-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15605_2.sam --detailed-sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15605_2.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 15605: (reopened) this was provoking a segfault
+3:^bug-15605_2-[1-3]\\s+16\\s+.*p_support=3(,3){29}
+

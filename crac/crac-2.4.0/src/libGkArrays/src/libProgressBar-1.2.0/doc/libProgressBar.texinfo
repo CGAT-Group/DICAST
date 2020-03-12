@@ -1,0 +1,165 @@
+\input texinfo @c -*-texinfo-*-
+@documentlanguage en
+@documentencoding ISO-8859-1
+@c This file uses the @command command introduced in Texinfo 4.0.
+@c %**start of header
+@setfilename libProgressBar.info
+@settitle A library to manage progress bars in C++: libProgressBar
+@c finalout
+@setchapternewpage odd
+@iftex
+@afourlatex
+@internalpagesizes{247mm}{170mm}{-5.4mm}{-5.4mm}{5mm}{10mm}{297mm}{210mm}
+@end iftex
+@ifinfo
+@firstparagraphindent insert
+@end ifinfo
+@setcontentsaftertitlepage
+@c %**end of header
+
+@set VERSION 1.0.0
+@set author DoccY
+@set mail @email{alban.mancheron@@inria.fr}
+@set authormail @value{author} @value{mail}
+@set Copyrights Copyright © 2007 -- Université des Antilles et de la Guyane/Institut National de Recherche en Informatique et en Automatique
+@iftex
+@clear mail
+@clear Copyrights
+@set mail <@email{alban.mancheron@@inria.fr}>
+@set Copyrights Copyright @copyright{} 2007 -- Université des Antilles et de la Guyane/Institut National de Recherche en Informatique et en Automatique
+@end iftex
+
+@ifinfo
+This file documents the @command{libProgressBar} library.
+
+@value{Copyrights}
+
+Author: @value{authormail}
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the
+results, provided the printed document carries copying permission
+notice identical to this one except for the removal of this paragraph
+(this paragraph not being relevant to the printed manual).
+
+@end ignore
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation approved
+by the Foundation.
+@end ifinfo
+
+@titlepage
+@title @command{libProgressBar}
+@subtitle library to manage progress bars.
+@author by @value{authormail}
+
+
+@page
+@vskip 0pt plus 1filll
+
+@value{Copyrights}
+
+Author: @value{authormail}
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation approved
+by the Foundation.
+
+@end titlepage
+@headings on
+
+@c All the nodes can be updated using the EMACS command
+@c texinfo-every-node-update, which is normally bound to C-c C-u C-e.
+@node Top, Instructions, (dir), (dir)
+
+@ifinfo
+This file documents the @command{libProgressBar} library.
+
+@end ifinfo
+
+@c All the menus can be updated with the EMACS command
+@c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.
+@menu
+* Instructions::                How to read this manual. 
+* Copying::                     How you can copy and share @command{libProgressBar}.
+* Overview::                    Preliminary information.
+* Example::                      An example of the use of @command{libProgressBar}.
+* Problems::                    Reporting bugs.
+* Concept Index::               Index of concepts.
+@end menu
+
+@node Instructions, Copying, Top, Top
+@chapter How to Read This Manual
+
+@cindex reading
+@cindex manual, how to read
+@cindex how to read
+You will find in the Copying section the GNU Lesser General Public License. 
+In the Overview section, is given a quick description about what does
+@command{libProgressBar}. Then, you will have an example of use.
+
+Indeed, we'll hope you having a good fun using @command{libProgressBar}.
+
+@node Copying, Overview, Instructions, Top
+@chapter Copying
+
+@cindex copying
+@cindex GNU LGPL
+@include lgpl.texinfo
+
+@node Overview, Example, Copying, Top
+@chapter Overview
+@cindex greetings
+@cindex overview
+
+TODO
+
+@node Example, Problems, Overview, Top
+@chapter Example of use
+@cindex example
+@cindex usage
+
+TODO
+
+@node Problems, Concept Index, Example, Top
+@chapter Reporting Bugs
+@cindex bugs
+@cindex problems
+
+If you find a bug in @command{libProgressBar}, please send electronic mail to
+@value{mail}.  Include the version number.
+Also include in your message a decription of the encountered problem.@refill
+
+@sp 1
+
+If you have other questions, comments or suggestions about
+@command{lbProgressBar}, contact the author via electronic mail to
+@value{mail}.
+The author will try to help you out, although he may not have time to
+fix your problems.
+
+@node Concept Index,  , Problems, Top
+@unnumbered Concept Index
+@printindex cp
+
+@bye

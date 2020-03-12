@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18180-genome -r bug-18180-read.fa --detailed-sam --emt -k 18 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18180.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18180.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 18180: SAM positions are 1-based and not 0-based as it is in the FM-Index
+1:^read1 0 chr1 4

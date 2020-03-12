@@ -1,0 +1,18 @@
+Package:	@PACKAGE@
+Version:	@PACKAGE_VERSION@
+Section:	libs
+Priority:	optional
+Architecture:	@ARCH@
+Essential:	no
+Depends:	
+Recommends:	
+Suggests:	
+Conflicts:
+Installed-Size: 284K
+Maintainer:	DoccY <@PACKAGE_BUGREPORT@>
+Provides:	@PACKAGE@
+Description:	libProgressBar is a C++ library to manage... Progress bars!!!
+ .
+ If you want to easily display progress bar and if you are a
+ C++ programmer, this library is for you!
+ .

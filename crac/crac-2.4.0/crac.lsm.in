@@ -1,0 +1,21 @@
+Begin3
+Title:		crac
+Version:	@VERSION@
+Entered-date:	@ISODATE@
+Description:	Crac is a tool to analyse RNA-Seq data provided by NGS.
+		@configure_input@
+		Please edit crac.lsm.in to fix the Keywords and
+		Primary-site entries, add several more lines of
+		description here if appropriate, and to delete these
+		instructions.
+Keywords:	[substitute your keywords here]
+Author: 	crac-bug@gforge.inria.fr (Nicolas PHILIPPE, Mikael SALSON, Alban MANCHERON)
+Maintained-by:	crac-bug@gforge.inria.fr (Nicolas PHILIPPE, Mikael SALSON, Alban MANCHERON)
+Primary-site:	metlab.unc.edu pub/Linux/apps/some/directory
+		31k crac-@VERSION@.tar.gz
+		500  crac.lsm
+Alternate-site: 
+Original-site:  
+Platforms:      
+Copying-policy:	GNU copyleft
+End

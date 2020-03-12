@@ -1,0 +1,11 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15646-genome -r bug-15646-read.fa --detailed-sam -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-15646.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15646.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+#Bug 15646: first, on the small extract of the genome, we have a segmentation fault
+$Bug 15646: First, segmentation fault when querying the index
+1:^segfault
+
+#Bug 15646: Second, the one really reported
+$Bug 15646: Second, does CIGAR string have a strange integer value in it?
+3:^seq.*\\s+20M48I30M\\s+.*

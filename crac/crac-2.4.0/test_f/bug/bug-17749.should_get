@@ -1,0 +1,9 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-17749-genome -r bug-17749-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-17749.sam --max-splice-length 100 --max-extension-length 2 --min-chimera-score 0
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-17749.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 17749: read_break_lenght should be equal to k-1
+2:chimera:55:17|1,55:17|1,572
+
+$Test the adjustment with the donor_site GT
+2:chimera:51:16|1,51:16|1,568

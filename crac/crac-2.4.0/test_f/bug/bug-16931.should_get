@@ -1,0 +1,11 @@
+# This test for Bug #16931, we do not need really specific sequences to
+# reproduce it. We just need to have a xS at the beginning of the CIGAR. We
+# can find that in data of bug #16403
+
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-16403-genome -r bug-16403-read.fa -k 20 -o ${abs_top_builddir:-../..}/test_f/bug/bug-16931.sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-16931.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Bug 16931: XO should be the position of the k-mer at position given in XQ
+2:XO:Z:chr-16403_3\\|1,60
+

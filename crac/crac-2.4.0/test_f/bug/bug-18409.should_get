@@ -1,0 +1,5 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18409-genome -r bug-18409-read.fa --detailed-sam  -k 22 -o /dev/stdout | tr ';' '\\n'
+!LOG: bug-18409.log
+
+$Bug 18409: We have a break starting at the beginning twice
+3:pos_start_break=0

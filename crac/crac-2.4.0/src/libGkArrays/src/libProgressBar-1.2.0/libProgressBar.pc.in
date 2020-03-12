@@ -1,0 +1,10 @@
+prefix=@hacked_prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libProgressBar
+Description: C++ library to manage progress bar.
+Version: @VERSION@
+Libs: -L${libdir} -lProgressBar
+Cflags: -I${includedir}/@PACKAGE@-@VERSION@

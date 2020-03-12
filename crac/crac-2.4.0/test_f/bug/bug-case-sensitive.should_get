@@ -1,0 +1,18 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-case-sensitive-genome -r bug-case-sensitive-read.fa -k 12 -o ${abs_top_builddir:-../..}/test_f/bug/bug-case-sensitive.sam --detailed-sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-case-sensitive.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$Case sensitivity: check that the read is found with lower cases
+2:lower[12] 0 seq 10 254 34M
+$Case sensitivity: check that the read is found with upper cases
+2:upper[12] 0 seq 10 254 34M
+$Case sensitivity: check that the read is found with lower and upper cases
+2:both[12] 0 seq 10 254 34M
+
+$Case sensitivity: check that the revcomp of the read is found with lower cases
+2:lower[12]-rc 16 seq 10 254 34M
+$Case sensitivity: check that the revcomp of the read is found with upper cases
+2:upper[12]-rc 16 seq 10 254 34M
+$Case sensitivity: check that the revcomp of the read is found with lower and upper cases
+2:both[12]-rc 16 seq 10 254 34M
+

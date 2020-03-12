@@ -1,0 +1,6 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18524-genome -r bug-18524-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18524.sam --detailed-sam
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18524.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$positions of the junctions have been reversed but not p_loc and p_support (we must reversed both together)
+2:XE:Z:.*;1:1:Junction:normal:71:.*;0:2:Junction:normal:38:

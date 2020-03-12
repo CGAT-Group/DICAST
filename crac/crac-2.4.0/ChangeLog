@@ -1,0 +1,132 @@
+------------------------------------------------------------------------
+r2879 | nphilippe | 2014-04-30 20:48:18 +0200 (mer. 30 avril 2014) | 1 ligne
+
+test 17175 updated and the second one is removed
+------------------------------------------------------------------------
+r2880 | nphilippe | 2014-04-30 22:15:32 +0200 (mer. 30 avril 2014) | 1 ligne
+
+version 1.5 released
+------------------------------------------------------------------------
+r2883 | nphilippe | 2014-06-02 09:04:34 +0200 (lun. 02 juin 2014) | 1 ligne
+
+apply patch1 from guigui to improve CPU time
+------------------------------------------------------------------------
+r2884 | nphilippe | 2014-06-02 09:05:24 +0200 (lun. 02 juin 2014) | 1 ligne
+
+update version
+------------------------------------------------------------------------
+r2902 | jaudoux | 2014-09-04 10:01:55 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+[#17911] Change semaphore to named semaphore that are the only one available on Mac OS. CRAC should now be usable on Mac devices (not tested yet)
+------------------------------------------------------------------------
+r2903 | jaudoux | 2014-09-04 10:35:39 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+Forgot that piece of code that was link to the previous commit #2902
+------------------------------------------------------------------------
+r2904 | jaudoux | 2014-09-04 11:44:39 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+SpliceInterInfo has a new attribute: 'chim_class' that correspond to the chimera class from 1 to 4. This class is now outputed on both SAM and .chimera files (documentation has been updated). An other improvement concerns the chimeric alignement given for a class 2 chimera. Since it is a colinnear alignement we do not use the '0N' nomenclature anymore.
+------------------------------------------------------------------------
+r2905 | jaudoux | 2014-09-04 15:16:20 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+Create a library for ReadsReader outside the GkArrays
+------------------------------------------------------------------------
+r2906 | jaudoux | 2014-09-04 15:18:53 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+Classify tags now use the new ReadsReader library
+------------------------------------------------------------------------
+r2907 | jaudoux | 2014-09-04 16:07:01 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+remove 'gkarrays' namespace from the libReadsReader
+------------------------------------------------------------------------
+r2908 | nphilippe | 2014-09-04 17:02:11 +0200 (jeu. 04 sept. 2014) | 1 ligne
+
+bug 17749 fixed adding a new procedure to shift to the real break lengths, add chimera class test and correct the genome break length in SpliceInterInfo (add -1)
+------------------------------------------------------------------------
+r2909 | nphilippe | 2014-09-08 11:30:50 +0200 (lun. 08 sept. 2014) | 3 lignes
+
+- adjust boundaries of splicing events and fixed bug 17749 and 17772
+
+
+------------------------------------------------------------------------
+r2910 | nphilippe | 2014-09-08 14:35:43 +0200 (lun. 08 sept. 2014) | 1 ligne
+
+fixed a segfault because a free on a unitialized value
+------------------------------------------------------------------------
+r2911 | nphilippe | 2014-09-09 10:14:35 +0200 (mar. 09 sept. 2014) | 1 ligne
+
+
+------------------------------------------------------------------------
+r2912 | nphilippe | 2014-09-09 12:02:26 +0200 (mar. 09 sept. 2014) | 1 ligne
+
+
+------------------------------------------------------------------------
+r2913 | nphilippe | 2014-09-09 14:44:59 +0200 (mar. 09 sept. 2014) | 1 ligne
+
+
+------------------------------------------------------------------------
+r2914 | jaudoux | 2014-09-09 17:01:30 +0200 (mar. 09 sept. 2014) | 6 lignes
+
+Extraction of GkArrays library from CRAC core:
+- We can now use any ReadIndex we want by just creating a new class inheriting from "ReadIndex" and declaring a support(Read*r) method
+- The parrallelization has changed in order to use the new Read object
+- locateServer is out of order waiting for an implementation that can use the new abstract ReadIndex instead of GkArrays
+- :) yes this is a huge commit, but it is a lot of fun too ;)
+
+------------------------------------------------------------------------
+r2915 | jaudoux | 2014-09-09 17:02:31 +0200 (mar. 09 sept. 2014) | 1 ligne
+
+Crac version 1.9.9, yes this is almost 2.0, just waiting for jellyfish full integration! :)
+------------------------------------------------------------------------
+r2916 | jaudoux | 2014-09-09 18:01:26 +0200 (mar. 09 sept. 2014) | 1 ligne
+
+Forgot to init the classifier object in the non-threaded version
+------------------------------------------------------------------------
+r2917 | jaudoux | 2014-09-10 15:17:53 +0200 (mer. 10 sept. 2014) | 1 ligne
+
+Correct //lization in crac --emt, but this class will soon disapear and become a dougther class of Classifier
+------------------------------------------------------------------------
+r2918 | nphilippe | 2014-09-15 15:20:56 +0200 (lun. 15 sept. 2014) | 3 lignes
+
+- Bug fixed in adjustBreakWithSplicingSites(). Change condition for reverse strand case
+
+
+------------------------------------------------------------------------
+r2919 | nphilippe | 2014-09-15 20:59:42 +0200 (lun. 15 sept. 2014) | 5 lignes
+
+- add a score when using stringent-chimera option
+- consider chimeras of class 2 as a good candidat
+- change paired condition for chimeras of class 2
+
+
+------------------------------------------------------------------------
+r2920 | nphilippe | 2014-09-15 21:25:26 +0200 (lun. 15 sept. 2014) | 2 lignes
+
+- check a condition about no-ambiguity in stringent chimera process 
+
+------------------------------------------------------------------------
+r2921 | nphilippe | 2014-09-16 11:16:55 +0200 (mar. 16 sept. 2014) | 4 lignes
+
+- Automatically compute a score for chimera. Using of stringent-chimera to classify 
+  chimera with a low score (0.6 by default) as a bioundetermined event.
+
+
+------------------------------------------------------------------------
+r2922 | nphilippe | 2014-09-16 13:34:22 +0200 (mar. 16 sept. 2014) | 3 lignes
+
+- update doc with chimera_score value
+
+
+------------------------------------------------------------------------
+r2923 | jaudoux | 2014-09-17 16:38:46 +0200 (mer. 17 sept. 2014) | 1 ligne
+
+Locate server is again on track, but some command have been desactivated since we no longer have a GkArray instance (tag, GkSA and factor search)
+------------------------------------------------------------------------
+r2924 | jaudoux | 2014-09-17 16:41:05 +0200 (mer. 17 sept. 2014) | 1 ligne
+
+Forgot to commit the Makefile.am to reactivate locateServer compilation
+------------------------------------------------------------------------
+r2925 | jaudoux | 2014-09-17 17:42:56 +0200 (mer. 17 sept. 2014) | 1 ligne
+
+newClassifier is not private anymore
+------------------------------------------------------------------------

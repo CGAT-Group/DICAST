@@ -1,0 +1,8 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-18793-genome -r bug-18793-read.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-18793.sam --detailed-sam --reads-index GKARRAYS
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-18793.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$The first two reads (NH:i:1) 
+2:NH:i:1
+$The last read (NH:i:2)
+1:NH:i:2
