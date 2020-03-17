@@ -26,6 +26,7 @@ while read -r line; do
 #...tag outputs with this flag to name it per fastqfile         "${line##*/}"
 #...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
+
 #If paired end mapping fails, run unpaired mapping.
 trap 'second_attempt $line' ERR
 done </myvol1/"$tool"-fastqlist
