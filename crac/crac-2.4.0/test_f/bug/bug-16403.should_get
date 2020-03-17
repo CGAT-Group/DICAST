@@ -1,6 +1,0 @@
-!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-16403-genome -r bug-16403-read.fa --max-extension-length 2 --stringent-chimera -k 20 -o ${abs_top_builddir:-../..}/test_f/bug/bug-16403.sam
-!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-16403.sam
-!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
-
-$Bug 16403: Segmentation fault when using a small --max-extension-length value and --stringent-chimera option
-2: 23M27S 

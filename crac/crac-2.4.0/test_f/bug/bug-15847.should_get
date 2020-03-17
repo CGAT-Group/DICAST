@@ -1,6 +1,0 @@
-!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-15847-genome -r bug-15847-read.fa -k 22 --treat-multiple 36 --detailed-sam -o ${abs_top_builddir:-../..}/test_f/bug/bug-15847.sam
-!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-15847.sam
-!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
-
-$Bug 15847: no-alignment in the output sam then that the argument --treat-multiple has been defined  
-36:^bug-15847-1.*\\s+101M\\s+.*\\s+XM:i:1
