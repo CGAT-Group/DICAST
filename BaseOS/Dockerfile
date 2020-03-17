@@ -34,8 +34,29 @@ build-essential \
     liblzma-dev\
     tmux\
     vim\
-    unar
+    unar\
+    gcc-multilib \
+    apt-utils \
+    zlib1g-dev \
+    libhdf5-dev \
+    git-all \
+    autoconf \
+    automake \
+    libcurl4-openssl-dev
     
+#Adding a signature
+RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \
+    >> /etc/bash.bashrc \
+    ; echo "\
+===================================================================\n\
+=  Welcome to a Docker container built by Amit Fenn               =\n\
+===================================================================\n\
+\n\
+If you've used this docker, consider citing me ^_^ \n\
+Amit FENN, Chair of Experimental Bioinformatics, Technical University of Munich (TUM), Freising, Germany \n\
+\n\
+If you cannot, then consider buying me a beer.\n"\
+    > /etc/motd
 
     
 WORKDIR /docker_main
