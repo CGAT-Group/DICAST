@@ -26,3 +26,5 @@ cd path/to/fastq/files/
 docker run -v "$(pwd)":/myvol1 --user $(id -u):$(id -g)  amit/
 
 ```
+
+If you'd like a cheat sheet on using dockers with this repo, it's available [here](https://gitlab.lrz.de/ge46ban/dockers/-/wikis/Docker-commands-CHEAT-SHEET)
