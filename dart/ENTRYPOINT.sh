@@ -30,7 +30,7 @@ if ! test -f "/myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa";
 	then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; 
 
 exit; fi
-if ! test -d "myvol1/index/dartindex"; then build_index; fi
+if ! test -d "/myvol1/index/dartindex"; then build_index; fi
 
 
 
