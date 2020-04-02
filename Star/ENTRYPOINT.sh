@@ -12,9 +12,14 @@ find /myvol1/ -maxdepth 1 -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//'
 mkdir -p /myvol1/star-output/temp/genomedir
 cd /myvol1/star-output
 
-#Build Genome index
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
+#test filepaths for fasta and indexing
+if ! test -f "/myvol1/Homo_sapiens.GRCh*.fa"; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
+if ! test -f "myvol1/star-output/temp/genomedir/SAindex"; then build_index; fi
 
+#Build Genome index
+build_index() {
+/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
+}
 
 #Iterate list with paired end map command first
 while read -r line; do
