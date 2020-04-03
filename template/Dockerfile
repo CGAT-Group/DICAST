@@ -5,6 +5,9 @@ LABEL maintainer="Amit Fenn"
 
 WORKDIR /docker_main
 
+#Installing dependencies
+# RUN apt-get update -y && apt-get --no-install-recommends --fix-broken inst    all -y \
+
 #Installing tool
 RUN 
 
