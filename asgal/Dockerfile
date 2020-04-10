@@ -39,13 +39,17 @@ RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y
     pip3 install gffutils
 
 #Installing ASGAL
-RUN git clone --recursive https://github.com/AlgoLab/galig.git ;\
-cd /opt/ ;\
-git clone --recursive https://github.com/COMBINE-lab/salmon.git
-# make prerequisites;\
-# make 
+RUN cd /opt/ ;\
+git clone --recursive https://github.com/AlgoLab/galig.git ;\
+cd galig/salmon ;\
+wget https://github.com/AlgoLab/galig/files/4437983/CMakeLists.txt.patch.txt ;\
+git apply CMakeLists.txt.patch.txt ;\
+cd /opt/galig/ ;\
+make salmon ;\
+make lemon sdsl ;\
+make
 
-
+ENV PATH=$PATH:/opt/galig/
 
 #ENTRYPOINT SCRIPT
 # COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
