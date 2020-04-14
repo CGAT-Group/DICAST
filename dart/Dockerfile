@@ -1,37 +1,26 @@
-FROM ubuntu:base	
-LABEL description="Image for dart"
+FROM ubuntu:base
+ENV tool=dart
+LABEL description="Image for $tool"
 LABEL maintainer="Amit Fenn"
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
+WORKDIR /opt
 
-VOLUME /myvol1
-
-WORKDIR /docker_main
+#Installing dependencies
+# RUN apt-get update -y && apt-get --no-install-recommends --fix-broken inst    all -y \
 
 #Installing tool
+RUN git clone https://github.com/hsinnan75/Dart.git ;\
+cd /opt/Dart/ ;\
+git fetch ;\
+git merge origin/master master ;\
+sed -i '823,824 s/^/\/\//' /opt/Dart/src/Mapping.cpp ;\
+make
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
-    #/opt/conda/bin/conda clean -tipsy && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc && \
-    find /opt/conda/ -follow -type f -name '*.a' -delete && \
-    find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
-    /opt/conda/bin/conda clean -afy
-
-COPY [--chown=nobody:nogroup] ./script.sh /docker_main/script.sh
-RUN chmod 777 /docker_main/script.sh
+ENV PATH=$PATH:/opt/Dart/bin
 
 
-# RUN conda activate dart
-RUN conda config --add channels defaults &&\
-conda config --add channels bioconda &&\
-conda config --add channels conda-forge &&\
-conda install dart -y
 
+#ENTRYPOINT SCRIPT
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
-# ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
