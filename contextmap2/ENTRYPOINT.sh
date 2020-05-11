@@ -38,7 +38,7 @@ find /myvol1/ -maxdepth 1 -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//'
 mkdir -p /myvol1/"$tool"-output/
 
 #test filepaths for fasta and indexing
-if ! test -f "${fastapath}1.fa"; then echo "check the path for the contextmap/bowtie fasta files: ${fastapath}1.fa"; exit; fi
+if ! test -e "${fastapath}1.fa"; then echo "check the path for the contextmap/bowtie fasta files: ${fastapath}1.fa"; exit; fi
 if ! test -f "${indexpath}MT.1.bt2"; then build_index; fi
 
 #Iterate list with paired end map command first

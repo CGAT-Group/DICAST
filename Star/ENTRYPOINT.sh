@@ -13,7 +13,7 @@ mkdir -p /myvol1/star-output/temp/genomedir
 cd /myvol1/star-output
 
 #test filepaths for fasta and indexing
-if ! test -f "/myvol1/Homo_sapiens.GRCh*.fa"; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
+if ! test -e "/myvol1/Homo_sapiens.GRCh*.fa"; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
 if ! test -f "myvol1/star-output/temp/genomedir/SAindex"; then build_index; fi
 
 #Build Genome index
