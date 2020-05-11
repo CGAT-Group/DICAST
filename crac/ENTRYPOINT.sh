@@ -31,11 +31,11 @@ find /myvol1/ -name "*fastq" -nowarn -maxdepth 1| sed s/.fastq// | sed 's/.$//' 
 chmod 777 /myvol1/"$tool"-fastqlist
 
 #test filepaths for fasta and indexing
-if ! test -e "/myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa"; 
+if ! test -e /myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa; 
 	then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?";
 	cleaner;
 	exit; fi
-if ! test -d "/myvol1/index/${tool}-index"; then build_index; fi
+if ! test -d /myvol1/index/${tool}-index; then build_index; fi
 
 #make output directories
 mkdir -p /myvol1/"$tool"-output/

@@ -29,11 +29,11 @@ chmod -R 777 /myvol1/"$tool"-fastqlist
 
 
 #test filepaths for fasta and indexing
-if ! test -e "/myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa"; 
+if ! test -e /myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa; 
 	then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; 
 	cleaner;
 	exit; fi
-if ! test -d "/myvol1/index/dartindex"; then build_index; fi
+if ! test -d /myvol1/index/dartindex; then build_index; fi
 
 #make output directories
 mkdir -p /myvol1/"$tool"-output/

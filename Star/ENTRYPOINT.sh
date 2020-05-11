@@ -4,6 +4,12 @@ second_attempt() {
 /docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /myvol1/star-output/temp/genomedir --outFileNamePrefix /myvol1/star-output/Star_mapped_"${line##*/}" --sjdbGTFfile $(find /myvol1/ -maxdepth 1 -name "*.gtf")  --twopassMode Basic --runThreadN 60 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn "$line"?.fastq
 
 }
+
+#Build Genome index
+build_index() {
+/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
+}
+
 #START here: Make a list of fastq files
 
 find /myvol1/ -maxdepth 1 -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | uniq >/myvol1/star-fastqlist
@@ -13,13 +19,8 @@ mkdir -p /myvol1/star-output/temp/genomedir
 cd /myvol1/star-output
 
 #test filepaths for fasta and indexing
-if ! test -e "/myvol1/Homo_sapiens.GRCh*.fa"; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
-if ! test -f "myvol1/star-output/temp/genomedir/SAindex"; then build_index; fi
-
-#Build Genome index
-build_index() {
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
-}
+if ! test -e /myvol1/Homo_sapiens.GRCh*.fa; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
+if ! test -f myvol1/star-output/temp/genomedir/SAindex; then build_index; fi
 
 #Iterate list with paired end map command first
 while read -r line; do

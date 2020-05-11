@@ -34,9 +34,9 @@ mkdir -p /myvol1/index/"$tool"-index/
 chmod 777 /myvol1/"$tool"-output/
 
 #test filepaths for fasta and indexing
-if ! test -e "/myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa"; 
+if ! test -e /myvol1/Homo_sapiens.GRCh38.dna.primary_assembly.fa; 
 	then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?";  cleaner; fi
-if ! test -f "myvol1/index/${tool}-index"; then build_index; fi
+if ! test -f myvol1/index/${tool}-index; then build_index; fi
 
 
 
