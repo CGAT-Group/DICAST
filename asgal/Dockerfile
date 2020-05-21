@@ -49,7 +49,9 @@ make salmon ;\
 make lemon sdsl ;\
 make
 
-ENV PATH=$PATH:/opt/galig/
+RUN conda install -c anaconda biopython -y
+
+ENV PATH=$PATH:/opt/galig:/opt/galig/salmon/bin
 
 #ENTRYPOINT SCRIPT
 # COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
