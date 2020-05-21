@@ -9,15 +9,11 @@ WORKDIR /opt
 # RUN apt-get update -y && apt-get --no-install-recommends --fix-broken inst    all -y \
 
 #Installing tool
-RUN git clone https://github.com/hsinnan75/Dart.git ;\
-cd /opt/Dart/ ;\
-git fetch ;\
-git merge origin/master master ;\
-sed -i '823,824 s/^/\/\//' /opt/Dart/src/Mapping.cpp ;\
+RUN git clone https://github.com/hsinnan75/Dart.git v1.4.0 ;\
+cd /opt/v1.4.0/ ;\
 make
 
-ENV PATH=$PATH:/opt/Dart/bin
-
+ENV PATH=$PATH:/opt/v1.4.0/bin
 
 
 #ENTRYPOINT SCRIPT
