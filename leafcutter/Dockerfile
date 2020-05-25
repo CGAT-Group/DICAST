@@ -13,7 +13,10 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 FROM rocker/tidyverse:3.4.0
 
 #needed to later install devtools
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y libcurl4-openssl-dev libssl-dev libssh2-1-dev libxml2-dev
+#RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y libcurl4-openssl-dev libssl-dev libssh2-1-dev libxml2-dev
+
+#install git to download repo
+RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y git
 
 ARG star_version=2.7.3a
 
@@ -30,6 +33,9 @@ RUN R -e "install.packages('rstan',dependencies=TRUE, repos='http://cran.rstudio
 #install leafcutter
 #RUN R -e "install.packages('devtools')"
 RUN R -e "devtools::install_github('davidaknowles/leafcutter/leafcutter')"
+
+#download git-repo for python scripts
+RUN git clone https://github.com/davidaknowles/leafcutter
 
 
 ENTRYPOINT ["/bin/bash"]
