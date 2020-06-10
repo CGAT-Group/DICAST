@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-LABEL description="Image for "
+LABEL description="Image for project base OS"
 LABEL maintainer="Amit Fenn"
 
 # Needed for smooth OS Install
@@ -48,14 +48,16 @@ build-essential \
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \
     >> /etc/bash.bashrc \
     ; echo "\
-===================================================================\n\
-=  Welcome to a Docker container built by Amit Fenn               =\n\
-===================================================================\n\
+=========================================================================================\n\
+=  Welcome to a Docker container built by the Alternative Splicing - Docker Team at TUM =\n\
+=========================================================================================\n\
 \n\
-If you've used this docker, consider citing me ^_^ \n\
+If you need help with this Docker, please contact:  ^_^ \n\
 Amit FENN, Chair of Experimental Bioinformatics, Technical University of Munich (TUM), Freising, Germany \n\
 \n\
-If you cannot, then consider buying me a beer.\n"\
+The Docker team: Fanny Rößler, Alexander Dietrich and Amit
+\n\
+If you liked our Docker, then consider buying us a beer.\n"\
     > /etc/motd
 
     
