@@ -1,11 +1,13 @@
 #!/bin/bash
 
+### Tool-specific variables ###
+tool=minimap2
+
 # use confic and function file
-source config.sh
-source func.sh
+source mapping-config.sh
+source mapping-func.sh
 
-
-### Needed tool-specific functions ###
+### Tool-specific functions ###
 
 # Unpaired mapping command: second attempt, used if paired end mapping failes
 second_attempt() {
@@ -13,7 +15,7 @@ second_attempt() {
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	# Parameters
 	# -a 		Generate CIGAR and output alignments in the SAM format. Minimap2 outputs in PAF by default. 
-	# -o FILE 	Output alignments to FILE [stdout]. 
+	# -o FILE 	Output alignments to FILE  [stdout]. 
 	# -t INT 	Number of threads [3]. Minimap2 uses at most three threads when indexing target sequences, 
 	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
 	#			idle and takes little CPU time). 
@@ -29,9 +31,9 @@ second_attempt() {
 build_index() {
 	mkdir -p /$wd/index/$tool-index
 	echo "compute index ..."
-	minimap2 -d /$wd/index/$tool-index/$index $(ls /$wd/$fasta)
+	minimap2 -d /$wd/index/$tool-index/$index $(ls /$wd/$inputdir/$fasta)
 	chmod -R 777 /$wd/index/$tool-index
-	echo "Index is now saved at /$wd/index/$tool-index/$index"
+	echo "Index is now saved under /$wd/index/$tool-index/$index"
 }
 
 ### START here ############################################################################
@@ -55,8 +57,8 @@ echo "compute ${tool} mapping..."
 while read -r line; do
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
-	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
+	# Parameters
 	# -a 		Generate CIGAR and output alignments in the SAM format. Minimap2 outputs in PAF by default. 
 	# -o FILE 	Output alignments to FILE [stdout]. 
 	#-t INT 	Number of threads [3]. Minimap2 uses at most three threads when indexing target sequences, 
@@ -65,7 +67,7 @@ while read -r line; do
 
 	minimap2 \
 		-a \
-		-t ${nthreads} \
+		-t $nthreads \
 		-o /$wd/$out/${line##*/}${tool}.sam \
 		/$wd/index/$tool-index/$index \
 		${line}1.fastq \
