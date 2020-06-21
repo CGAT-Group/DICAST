@@ -4,8 +4,8 @@
 tool=minimap2
 
 # use confic and function file
-source mapping-config.sh
-source mapping-func.sh
+source /myvo11/config/mapping_config.sh
+source /myvol1/func/mapping_func.sh
 
 ### Tool-specific functions ###
 
