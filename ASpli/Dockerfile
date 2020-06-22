@@ -9,6 +9,7 @@ RUN R -e "install.packages(c('optparse','BiocManager'),dependencies=TRUE,repos='
 RUN R -e "BiocManager::install('rtracklayer',update=TRUE,ask=FALSE)"
 RUN R -e "BiocManager::install('ASpli',update=TRUE,ask=FALSE)"
 
+WORKDIR /docker_main
 
 ENTRYPOINT ["/bin/bash"]
 
