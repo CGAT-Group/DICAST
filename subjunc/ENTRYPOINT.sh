@@ -28,7 +28,7 @@ second_attempt() {
 	#		and  they  are  in  the same order as in the input file.
 
 	subjunc \
-		-r ${line}.fastq \
+		-r ${line}?.fastq \
 		-i /$wd/index/$tool-index/$index \
 		-T $nthreads \
 		−−SAMoutput \
