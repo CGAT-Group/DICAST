@@ -24,11 +24,11 @@ second_attempt() {
 	# X --ordered      Print output in same order as input (relevant only if there is more than one worker thread)
 	# ...
 	gsnap \
-		-d $index \
-		-dir $indexdir \
+		--db $index \
+		--dir $indexdir \
 		--output-file $out/${line##*/}${tool}.sam \
 		--format sam \
-		--nthreads 64 \
+		--nthreads $nthreads \
 		${line}?.fastq
 
 }
@@ -73,7 +73,7 @@ while read -r line; do
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
 	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 	
-	# Usage: gsnap [OPTIONS...] <FASTA file>, or
+	# Usage: gsnap [OPTIONS...] <FASTA file>
 	# Parameters (X means that the parameter is currently not used)
 	# --db	Genome database
 	# --dir Genome directory
@@ -84,11 +84,11 @@ while read -r line; do
 	# ...
 
 	gsnap \
-	-d $index \
-	-dir $indexdir \
+	--db $index \
+	--dir $indexdir \
 	--output-file $out/${line##*/}${tool}.sam \
 	--format sam \
-	--nthreads 64 \
+	--nthreads $nthreads \
 	${line}1.fastq ${line}2.fastq
 
 	#If paired end mapping fails, run unpaired mapping.
