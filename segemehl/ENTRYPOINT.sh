@@ -89,7 +89,7 @@ segemehl.x \
 
 #If paired end mapping fails, run unpaired mapping.
 trap 'second_attempt $line' ERR
-done <$out/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
