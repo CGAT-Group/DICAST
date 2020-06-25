@@ -23,21 +23,21 @@ second_attempt() {
 	# -nb-threads = number of threads used
 	# --stranded = strand specific rnaseq protocol
 	crac \
-		-i /$wd/index/$tool-index/$index \
+		-i $indexdir/$index \
 		-k 22 \
 		-r ${line}?.fastq \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		-o $out/${line##*/}${tool}.sam \
 		--detailed-sam \
 		--nb-threads $nthreads
 }
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
-	crac-index index /$wd/index/$tool-index/$index $(ls /$wd/$inputdir/$fasta)
-	chmod -R 777 /myvol1/index/${tool}-index/
-	echo "Index is now saved under /$wd/index/$tool-index/$index"
+	crac-index index $indexdir/$index $(ls $inputdir/$fasta)
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$index"
 }
 
 
@@ -47,7 +47,7 @@ build_index() {
 test_fasta
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index.ssa; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index.ssa; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -73,17 +73,17 @@ while read -r line; do
 	# --stranded = strand specific rnaseq protocol
 
 	crac \
-		-i /$wd/index/$tool-index/$index \
+		-i $indexdir/$index \
 		-k 22 \
 		-r ${line}1.fastq ${line}2.fastq \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		-o $out/${line##*/}${tool}.sam \
 		--detailed-sam \
 		--nb-threads $nthreads \
 		--stranded
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done < $out/$tool-fastqlist
 
 # wait for all processes to end
 wait
