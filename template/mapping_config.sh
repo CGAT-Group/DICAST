@@ -18,19 +18,21 @@
 
 # variables
 
-nthreads=64 
+nthreads=60
+recompute_index=false
 
 # directories
 
 wd=myvol1
-out=output/$tool-output 
-inputdir=input
-fastqdir=/$wd/$inputdir/
+out=/$wd/output/${tool:-unspecific}-output
+inputdir=/$wd/input
+fastqdir=$inputdir/
+indexdir=/$wd/index/${tool:-unspecific}-index
 
 # filenames
 
 #find .fa files in inputdir
-fasta=$(find /$wd/$inputdir/ -maxdepth 1 -type f -name "*.fa" -printf "%f\n")
+fasta=$(find $inputdir -maxdepth 1 -type f -name "*.fa" -printf "%f\n")
 #gtf=Homo_sapiens.GRCh38.99.gtf
-gtf=$(find /$wd/$inputdir/ -maxdepth 1 -type f -name "*.gtf" -printf "%f\n")
+gtf=$(find $inputdir -maxdepth 1 -type f -name "*.gtf" -printf "%f\n")
 index=$fasta
