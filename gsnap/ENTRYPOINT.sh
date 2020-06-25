@@ -4,7 +4,7 @@
 tool=gsnap
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 
@@ -25,8 +25,8 @@ second_attempt() {
 	# ...
 	gsnap \
 		-d $index \
-		-dir /$wd/index/$tool-index \
-		--output-file /$wd/$out/${line##*/}${tool}.sam \
+		-dir $indexdir \
+		--output-file $out/${line##*/}${tool}.sam \
 		--format sam \
 		--nthreads 64 \
 		${line}?.fastq
@@ -35,7 +35,7 @@ second_attempt() {
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
 	# Usage: gmap_build [options...] -d <genomename> <fasta_files>
 	# -D, --dir=STRING          Destination directory for installation (defaults to gmapdb directory specified at configure time)
@@ -43,11 +43,11 @@ build_index() {
 
 	gmap_build \
 	-db $index \
-	-dir /$wd/index/$tool-index \
-	$(ls /$wd/$inputdir/$fasta)
+	-dir $indexdir \
+	$(ls $inputdir/$fasta)
 
-	chmod -R 777 /myvol1/index/${tool}-index/
-	echo "Index is now saved under /$wd/index/$tool-index/$index"
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$index"
 }
 
 ### START here ############################################################################
@@ -56,7 +56,7 @@ build_index() {
 test_fasta
 
 # Build genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index/$index.contig; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index/$index.contig; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -85,15 +85,15 @@ while read -r line; do
 
 	gsnap \
 	-d $index \
-	-dir /$wd/index/$tool-index \
-	--output-file /$wd/$out/${line##*/}${tool}.sam \
+	-dir $indexdir \
+	--output-file $out/${line##*/}${tool}.sam \
 	--format sam \
 	--nthreads 64 \
 	${line}1.fastq ${line}2.fastq
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
