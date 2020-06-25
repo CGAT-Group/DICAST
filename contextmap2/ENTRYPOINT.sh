@@ -4,7 +4,7 @@
 tool=contextmap
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 #To call contextmap as a command.
@@ -28,20 +28,20 @@ second_attempt() {
 		mapper \
 		-reads ${line}?.fastq \
 		-aligner_name bowtie2 \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		-o $out/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/\
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices /$wd/index/$tool-index/$index \
-		-genome $(ls /$wd/$inputdir/$fasta)
+		-indices $indexdir/$index \
+		-genome $(ls $inputdir/$fasta)
 }
 
 #Build Genome index
 build_index(){
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
-	for line in $(ls /$wd/$inputdir/$fasta); do bowtie2-build -f "/$wd/$inputdir/$fasta""$line" "/$wd/index/$tool-index""$fasta""$line" ; done
-	chmod -R 777 /myvol1/index/${tool}-index/
-	echo "Index is now saved under /$wd/index/$tool-index/$index"
+	bowtie2-build -f $(ls $inputdir/$fasta) $indexdir/$index
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$index"
 }
 
 
@@ -51,7 +51,7 @@ build_index(){
 test_fasta
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index.MT.1.bt2; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index.MT.1.bt2; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -80,15 +80,15 @@ while read -r line; do
 		mapper \
 		-reads ${line}1.fastq,${line}2.fastq \
 		-aligner_name bowtie2 \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		-o $out/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/\
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices /$wd/index/$tool-index/$index \
-		-genome $(ls /$wd/$inputdir/$fasta)
+		-indices $indexdir/$index \
+		-genome $(ls $inputdir/$fasta)
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
