@@ -1,41 +1,49 @@
 #!/bin/bash
-second_attempt() {
-#Unpaired mapping command
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /myvol1/star-output/temp/genomedir --outFileNamePrefix /myvol1/star-output/Star_mapped_"${line##*/}" --sjdbGTFfile $(find /myvol1/ -maxdepth 1 -name "*.gtf")  --twopassMode Basic --runThreadN 60 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn "$line"?.fastq
+tool=star
 
-}
+source /myvol1/config/mapping_config.sh
+source /myvol1/func/mapping_func.sh
+
 
 #Build Genome index
 build_index() {
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /myvol1/star-output/temp/genomedir --genomeFastaFiles $(find /myvol1/  -maxdepth 1 -name "*.fa") --runThreadN 60 --sjdbGTFfile $(find /myvol1/  -maxdepth 1 -name "*.gtf") --sjdbOverhang 100
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir /$wd/$out/genomedir --genomeFastaFiles /$wd/$fasta --runThreadN $nthreads --sjdbGTFfile /$wd/$gtf -sjdbOverhang 100 --outFileNamePrefix /$wd/$out/Star_mapped_${line##*/}
 }
 
-#START here: Make a list of fastq files
+#Unpaired mapping command
+second_attempt() {
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /$wd/$out/genomedir --outFileNamePrefix /$wd/$out/Star_mapped_${line##*/} --sjdbGTFfile /$wd/$gtf  --twopassMode Basic --runThreadN $nthreads --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn ${line}?.fastq
 
-find /myvol1/ -maxdepth 1 -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | uniq >/myvol1/star-fastqlist
+}
+
+
+#START here: Make a list of fastq files
+mk_fastqlist
+
 
 #make output directories
-mkdir -p /myvol1/star-output/temp/genomedir
-cd /myvol1/star-output
+mk_outdir
 
 #test filepaths for fasta and indexing
-if ! test -e /myvol1/Homo_sapiens.GRCh*.fa; then echo "check the path for the Homo_sapiens.GRCh* fasta files: is it under <mounted folder>/Homo_sapiens.GRCh*.fa?"; exit; fi
-if ! test -f myvol1/star-output/temp/genomedir/SAindex; then build_index; fi
+test_fasta
+test_gtf
+mkdir /$wd/$out/genomedir
+if ! test -f /$wd/$out/genomedir/SAindex; then build_index; fi
+
 
 #Iterate list with paired end map command first
 while read -r line; do
 
-#First attempt: Paired end mapping
-/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir /myvol1/star-output/temp/genomedir --outFileNamePrefix /myvol1/star-output/Star_mapped_"${line##*/}" --sjdbGTFfile $(find /myvol1/ -maxdepth 1  -name "*.gtf")  --twopassMode Basic --runThreadN 60 --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn "$line"1.fastq "$line"2.fastq
+	#First attempt: Paired end mapping
+echo mapping paired
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR --genomeDir  /$wd/$out/genomedir --outFileNamePrefix /$wd/$out/Star_mapped_${line##*/} --sjdbGTFfile /$wd/$gtf  --twopassMode Basic --runThreadN $nthreads --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn ${line}1.fastq ${line}2.fastq
 
-#If paired end mapping fails, run unpaired mapping.
-trap 'second_attempt $line' ERR
-done </myvol1/star-fastqlist
+	#If paired end mapping fails, run unpaired mapping.
+	trap 'second_attempt $line' ERR
+done < /$wd/tmp/$tool-fastqlist
 
 #wait for all processes to end
 wait
 
 #cleaning up
-#rm /myvol1/star-fastqlist
-#rm -R /myvol1/star-output/temp
-echo "script is done"
+trap cleaner EXIT
