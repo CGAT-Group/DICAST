@@ -4,7 +4,7 @@
 tool=subjunc
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 
@@ -28,20 +28,20 @@ second_attempt() {
 	#		and  they  are  in  the same order as in the input file.
 
 	subjunc \
+		-i $indexdir/$index \
 		-r ${line}?.fastq \
-		-i /$wd/index/$tool-index/$index \
+		-o $out/${line##*/}$tool.sam \
 		-T $nthreads \
-		−−SAMoutput \
-		-o /$wd/$out/${line##*/}$tool.sam
+		--SAMoutput
 }
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
-	subread-buildindex $(ls /$wd/$inputdir/$fasta) -o /$wd/index/$tool-index/$index -F -B 
-	chmod -R 777 /$wd/index/$tool-index
-	echo "Index is now saved under /$wd/index/$tool-index/$index"
+	subread-buildindex $(ls $inputdir/$fasta) -o $indexdir/$index -F -B 
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$index"
 }
 
 ### START here ############################################################################
@@ -53,7 +53,7 @@ test_fasta
 PATH=$PATH:/opt/subread-2.0.0-Linux-x86_64/bin/ 
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index.reads; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index.reads; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -85,16 +85,16 @@ while read -r line; do
 
 
 subjunc \
-	-i /$wd/index/$tool-index/$index \
+	-i $indexdir/$index \
 	-r ${line}1.fastq \
 	-R ${line}2.fastq \
-	-o /$wd/$out/${line##*/}${tool}.sam \
+	-o $out/${line##*/}${tool}.sam \
 	-T $nthreads \
-	−−SAMoutput
+	--SAMoutput
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done <$out/$tool-fastqlist
 
 # wait for all processes to end
 wait
