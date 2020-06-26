@@ -4,7 +4,7 @@
 tool=dart
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 
@@ -15,18 +15,18 @@ second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	dart \
-		-i /$wd/index/$tool-index/$index \
+		-i $indexdir/$index \
 		-f $line?.fastq  \
-		-o /$wd/$out/${line##*/}$tool.sam
+		-o $out/${line##*/}$tool.sam
 }
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
-	bwt_index $(ls /$wd/$fasta) /$wd/index/$tool-index/$index
-	chmod -R 777 /$wd/index/$tool-index
-	echo "Index is now saved at /$wd/index/$tool-index/$index"
+	bwt_index $(ls $inputdir/$fasta) $indexdir/$index
+	chmod -R 777 $indexdir
+	echo "Index is now saved at $indexdir/$index"
 }
 
 ### START here ############################################################################
@@ -35,7 +35,7 @@ build_index() {
 test_fasta
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index.sa; then build_index; fi
+if ! test -f $indexdir/$index.sa; then build_index; fi
 
 #make list of fastq files
 mk_fastqlist
@@ -53,14 +53,14 @@ while read -r line; do
 	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
 	dart \
-		-i /$wd/index/$tool-index/$index \
+		-i $indexdir/$index \
 		-f ${line}1.fastq \
 		-f2 ${line}2.fastq \
-		-o /$wd/$out/${line##*/}${tool}.sam
+		-o $out/${line##*/}${tool}.sam
 		
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 
 # wait for all processes to end
