@@ -26,11 +26,11 @@ for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
 do
 	echo Starting SGSeq for $filename ...
         makebamfromsam $filename
-	Rscript $wd/Rscripts/SGSeq.R --gtf $wd/$gtf --path_to_bam $filename --out $wd/$output/${tool:-unspecific}-output --cores $ncores
+	sample_out=$(mk_sample_out $filename)
+	Rscript $wd/Rscripts/SGSeq.R --gtf $wd/$gtf --path_to_bam $filename --out $sample_out --cores $ncores
+	wait
 done
 
-
-wait
 
 cleaner
 
