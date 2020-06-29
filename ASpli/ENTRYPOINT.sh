@@ -14,7 +14,7 @@ mk_outdir $tool
 
 #checking BAM files
 readbamfiles
-for filename in $(cat $wd/$output/${1:-unspecific}-output/bamlist)
+for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
 do
         makebamfromsam $filename
 done
