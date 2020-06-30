@@ -2,12 +2,10 @@ FROM ubuntu:base
 LABEL description="Image for MAJIQ"
 LABEL maintainer="Alexander Dietrich"
 
-
+WORKDIR /opt
 #install htslib
 RUN cd /usr/bin
-RUN wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2 && tar -vxjf htslib-1.9.tar.bz2 && cd htslib-1.9 && make && make install
-
-WORKDIR ~
+RUN wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2 && tar -vxjf htslib-1.9.tar.bz2 && rm -f htslib-1.9.tar.bz2 && cd htslib-1.9 && make && make install
 
 #install python3.6 and update pip
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y software-properties-common
@@ -27,11 +25,14 @@ WORKDIR /tmp/majiq_stable
 RUN pip3.6 install --no-cache-dir -r requirements.txt
 RUN python3.6 setup.py install
 RUN rm -rf /tmp
-WORKDIR /docker_main
+WORKDIR /opt
 
 #download and add script to convert GTF file to GFF3 format
-RUN wget http://majiq.biociphers.org/download/gtf2gff3.pl
+RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl && wget http://www.sequenceontology.org/resources/gtf2gff3.cfg
 
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt:/opt/htslib-1.9
+
+WORKDIR /docker_main
 
 
 ENTRYPOINT ["/bin/bash"] 
