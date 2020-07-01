@@ -19,12 +19,6 @@ fasta=$wd/$fasta
 test_gtf $gtf
 test_fasta $fasta
 
-#TODO: rename files!
-
-#if [ ! $gtf = "transcripts.gtf" ] || [ ! $fasta = "genome.fa" ]
-#then
-#	echo gtf and fasta filenames not correct, please check $gtf and $fasta again!
-#fi
 
 #move both files into tmp folder
 echo linking annotation files into reference folder...
@@ -41,9 +35,9 @@ wait
 echo reference built, moving on...
 
 
-###############
-# quantify IR #
-###############
+#####################
+#### quantify IR ####
+#####################
 
 readfastqs $fastqfolder
 fastqs=$(cat $out/fastqlist)
@@ -51,6 +45,5 @@ fastqs=$(cat $out/fastqlist)
 echo looking for intron retention events...
 IRFinder -r $out/tmp -d $out $fastqs 
 
-
-exit 
-#cleaner
+ 
+cleaner
