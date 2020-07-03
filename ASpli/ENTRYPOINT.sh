@@ -13,9 +13,15 @@ test_gtf $wd/$gtf
 
 mk_outdir $tool
 
+<<<<<<< HEAD
 #checking for SAM files and building BAM-files with index with them
 readsamfiles
 for filename in $(cat $wd/$output/${tool:-unspecific}-output/samlist)
+=======
+#checking BAM files
+readbamfiles
+for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
+>>>>>>> 27968621b951552e19b0b60f0f2191487861456b
 do
         makebamfromsam $filename
 done
