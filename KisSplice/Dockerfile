@@ -3,7 +3,7 @@ FROM ubuntu:base as builder1
 LABEL description="Builder image for STAR"
 LABEL maintainer="Alexander Dietrich"
 
-ARG star_version=2.7.3a
+ARG star_version=2.7.4a
 
 
 #install STAR
@@ -16,7 +16,7 @@ LABEL description="Image for KisSplice and KissDE"
 LABEL maintainer="Alexander Dietrich"
 
 
-ARG star_version=2.7.3a
+ARG star_version=2.7.4a
 #Copying STAR from builder docker
 COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
 
