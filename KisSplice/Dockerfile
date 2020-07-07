@@ -1,6 +1,25 @@
+FROM ubuntu:base as builder1
+#this is a temp docker image
+LABEL description="Builder image for STAR"
+LABEL maintainer="Alexander Dietrich"
+
+ARG star_version=2.7.3a
+
+
+#install STAR
+RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-check-certificate -P /docker_main && tar -xzf /docker_main/${star_version}.tar.gz && cd STAR-${star_version}/source && make STAR && rm -rf /docker_main/${star_version}.tar.gz && apt autoremove && apt clean
+
+
+#this is the final docker image
 FROM rocker/r-base:3.6.3
 LABEL description="Image for KisSplice and KissDE"
 LABEL maintainer="Alexander Dietrich"
+
+
+ARG star_version=2.7.3a
+#Copying STAR from builder docker
+COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
+
 
 
 #############
@@ -28,7 +47,8 @@ RUN pip2.7 install biopython==1.76 intervaltree intervaltree-bio
 WORKDIR /opt
 RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/tools/kissplice2refgenome-1.2.3.tar.gz && tar -xvf /opt/kissplice2refgenome-1.2.3.tar.gz && rm -f /opt/kissplice2refgenome-1.2.3.tar.gz && cd /opt/kissplice2refgenome-1.2.3 && python2.7 setup.py install --user 
 
-ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-1.2.3
+#add Kissplice & Kissplice2refgenome & STAR to path
+ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-1.2.3:/opt/STAR-${star_version}/bin/Linux_x86_64
 
 #############
 #  KissDE   #
