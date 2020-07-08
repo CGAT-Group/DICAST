@@ -39,16 +39,18 @@ RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/download/kissplice-2.5.
 #  KisSplice2refgenome #
 ########################
 
-#kissplice2refgenome requires python2.7 for some reason.......................
+#kissplice2refgenome requires python2.7 for some reason..
+#kissplice2refgenome 2.0.0 also works with python3; will leave python2.7 installation as comment, to maybe use later
 
 #install python 2.7 and pip for that specific version
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python python-dev && wget https://bootstrap.pypa.io/get-pip.py && python2.7 get-pip.py && rm -f get-pip.py
-RUN pip2.7 install biopython==1.76 intervaltree intervaltree-bio
+#RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python python-dev && wget https://bootstrap.pypa.io/get-pip.py && python2.7 get-pip.py && rm -f get-pip.py
+#RUN pip2.7 install biopython==1.76 intervaltree intervaltree-bio
+RUN pip3 install biopython intervaltree intervaltree-bio
 WORKDIR /opt
-RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/tools/kissplice2refgenome-1.2.3.tar.gz && tar -xvf /opt/kissplice2refgenome-1.2.3.tar.gz && rm -f /opt/kissplice2refgenome-1.2.3.tar.gz && cd /opt/kissplice2refgenome-1.2.3 && python2.7 setup.py install --user 
+RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/tools/kissplice2refgenome-2.0.0.tar.gz && tar -xvf /opt/kissplice2refgenome-2.0.0.tar.gz && rm -f /opt/kissplice2refgenome-2.0.0.tar.gz && cd /opt/kissplice2refgenome-2.0.0 && python3 setup.py install --user 
 
 #add Kissplice & Kissplice2refgenome & STAR to path
-ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-1.2.3:/opt/STAR-${star_version}/bin/Linux_x86_64
+ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-2.0.0:/opt/STAR-${star_version}/bin/Linux_x86_64
 
 #############
 #  KissDE   #
