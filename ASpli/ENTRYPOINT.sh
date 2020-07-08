@@ -10,11 +10,12 @@ test_gtf $wd/$gtf
 #test_bam $wd/$bamfolder/$bamfile
 
 #making outdir
+
 mk_outdir $tool
 
-#checking BAM files
-readbamfiles
-for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
+#checking for SAM files and building BAM-files with index with them
+readsamfiles
+for filename in $(cat $wd/$output/${tool:-unspecific}-output/samlist)
 do
         makebamfromsam $filename
 done
@@ -27,7 +28,7 @@ if [ $differential = 0 ]; then
 fi
 if [ $differential = 1 ]; then
 	echo Starting Aspli in DS analysis mode...
-	Rscript $wd/Rscripts/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $casefolder --controlfolder $controlfolder $differential
+	Rscript $wd/Rscripts/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $casefolder --controlfolder $controlfolder --differential $differential
 fi
 
 
