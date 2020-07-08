@@ -11,7 +11,7 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 
 
 #this is the final docker image
-FROM rocker/r-base:3.6.3
+FROM rocker/r-base:4.0.0
 LABEL description="Image for KisSplice and KissDE"
 LABEL maintainer="Alexander Dietrich"
 
