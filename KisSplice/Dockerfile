@@ -59,7 +59,7 @@ ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/
 WORKDIR /docker_main 
 RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y curl libcurl4-openssl-dev libssl-dev libxml2-dev 
 
-RUN R -e "install.packages('BiocManager,optparse',dependencies=TRUE,repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('BiocManager','optparse',dependencies=TRUE,repos='http://cran.rstudio.com/')"
 RUN R -e "BiocManager::install('kissDE',update=TRUE,ask=FALSE)" 
 
 
