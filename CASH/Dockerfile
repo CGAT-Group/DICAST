@@ -1,0 +1,17 @@
+FROM ubuntu:base
+LABEL description="Image for CASH"
+LABEL maintainer="Alexander Dietrich"
+
+#link to zip folder
+ARG cash_download=https://sourceforge.net/projects/cash-program/files/2.2.1/cash_v2.2.1.zip
+
+WORKDIR /opt
+
+RUN apt-get update && wget ${cash_download} && unzip cash_v2.2.1.zip && rm cash_v2.2.1.zip && chmod +x cash_v2.2.1/cash.jar
+
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/cash_v2.2.1/cash.jar
+
+WORKDIR /$HOME
+
+#ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+ENTRYPOINT ["/bin/bash"]
