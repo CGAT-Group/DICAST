@@ -5,6 +5,7 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 
 FROM alpine:latest
 ARG star_version=2.7.3a
+RUN apk update && apk upgrade && apk add bash && apk add bash-completion && echo Bash installed
 COPY --from=builder /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
 
 LABEL description="Image for STAR aligner version 2.7.3a"
