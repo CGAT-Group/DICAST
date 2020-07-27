@@ -4,7 +4,7 @@
 tool=hisat
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 #Update PATH
@@ -19,7 +19,7 @@ second_attempt() {
 	hisat2 -q \
 	-x /$wd/index/$tool-index/$index \
 	-U "$line"?.fastq \
-	-S /$wd/$out/${line##*/}${tool}.sam \
+	-S $out/${line##*/}${tool}.sam \
 	--known-splicesite-infile /$wd/index/$tool-index/$index.splicesites.txt
 }
 
@@ -27,7 +27,7 @@ second_attempt() {
 build_index() {
 	mkdir -p /$wd/index/$tool-index
 	echo "compute index ..."
-	hisat2-build  $(ls /$wd/$inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls /$wd/$inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
+	hisat2-build  $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls /$wd/$inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
 	chmod -R 777 /myvol1/index/${tool}-index/
 	echo "Index is now saved under /$wd/index/$tool-index/$index"
 }
@@ -40,7 +40,7 @@ test_fasta
 test_gtf
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index; then build_index; fi
+if ! test -f /$wd/index/$tool-index/$index/1.ht2; then build_index; fi
 
 #make list of fastq files
 mk_fastqlist
