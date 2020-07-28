@@ -11,6 +11,8 @@ RUN R -e "BiocManager::install('ASpli',update=TRUE,ask=FALSE)"
 
 WORKDIR /docker_main
 
-ENTRYPOINT ["/bin/bash"]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
 
 
