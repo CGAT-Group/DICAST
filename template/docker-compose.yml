@@ -1,107 +1,93 @@
-version: "3.7"
-  services:
+version: '3.3'
+
+services:
 
   #Base images
     base:
       build:
         context: ../BaseOS/
-        dockerfile: Dockerfile
-        image: ubuntu:base
+      image: ubuntu:base
 
     conda:
       build:
         context: ../conda/
-        dockerfile: Dockerfile
-        image: ubuntu:conda
+      image: ubuntu:conda
 
     bowtie:
       build:
         context: ../contextmap2/bowtie/
-        dockerfile: Dockerfile
-        image: bowtie:0.1
+      image: bowtie:0.1
 
   #Mapping tools
     star:
       build:
         context: ../Star/
-        image: proj/star:0.01
-        dockerfile: Dockerfile
+      image: proj/star:0.01
 
     asgal:
       build:
         context: ../asgal/
-        image: proj/asgal:0.01
-        dockerfile: Dockerfile
+      image: proj/asgal:0.01
 
 
     bbmap:
       build:
         context: ../BBMap/
-        image: proj/bbmap:0.01
-        dockerfile: Dockerfile
+      image: proj/bbmap:0.01
 
 
     contextmap2:
       build:
         context: ../contextmap2
-        image: proj/contextmap:0.01
-        dockerfile: Dockerfile
+      image: proj/contextmap:0.01
 
 
     dart:
       build:
         context: ../dart
-        image: proj/dart:0.01
-        dockerfile: Dockerfile
+      image: proj/dart:0.01
 
 
     gsnap:
       build:
         context: ../gsnap
-        image: proj/gsnap:0.01
-        dockerfile: Dockerfile
+      image: proj/gsnap:0.01
 
 
     crac:
       build:
         context: ../crac
-        image: proj/crac:0.01
-        dockerfile: Dockerfile
+      image: proj/crac:0.01
 
 
     subjunc:
       build:
         context: ../subjunc
-        image: proj/subjunc:0.01
-        dockerfile: Dockerfile
+      image: proj/subjunc:0.01
 
 
     minimap:
       build:
         context: ../minimap2
-        image: proj/minimap2:0.01
-        dockerfile: Dockerfile
+      image: proj/minimap2:0.01
 
 
     hisat2:
       build:
         context: ../contextmap2
-        image: proj/contextmap2:0.01
-        dockerfile: Dockerfile
+      image: proj/contextmap2:0.01
 
 
     segemehl:
       build:
         context: ../segemehl
-        image: proj/segemehl:0.01
-        dockerfile: Dockerfile
+      image: proj/segemehl:0.01
 
 
     mapsplice2:
       build:
         context: ../mapsplice2
-        image: proj/mapsplice2:0.01
-        dockerfile: Dockerfile
+      image: proj/mapsplice2:0.01
 
 
   #AS event detection tools
