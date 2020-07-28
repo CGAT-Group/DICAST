@@ -1,0 +1,7 @@
+version: '3.3'
+
+services:
+  base:
+    build:
+      context: ./BaseOS/
+    image: ubuntu:base

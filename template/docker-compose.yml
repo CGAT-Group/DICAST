@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
   services:
 
   #Base images
@@ -6,13 +6,14 @@ version: "3.8"
       build:
         context: ../BaseOS/
         dockerfile: Dockerfile
-        image:ubuntu:base
+        image: ubuntu:base
 
     conda:
       build:
         context: ../conda/
         dockerfile: Dockerfile
-        image:ubuntu:conda
+        image: ubuntu:conda
+
     bowtie:
       build:
         context: ../contextmap2/bowtie/
