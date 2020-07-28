@@ -1,0 +1,115 @@
+version:"3.8"
+services:
+
+#Base images
+  base:
+    build:
+      context: ../BaseOS/
+      dockerfile: Dockerfile
+      image:ubuntu:base
+
+  conda:
+    build:
+      context: ../conda/
+      dockerfile: Dockerfile
+      image:ubuntu:conda
+  bowtie:
+    build:
+      context: ../contextmap2/bowtie/
+      dockerfile: Dockerfile
+      image: bowtie:0.1
+
+#Mapping tools
+  star:
+    build:
+      context: ../Star/
+      image: proj/star:0.01
+      dockerfile: Dockerfile
+
+  asgal:
+    build:
+      context: ../asgal/
+      image: proj/asgal:0.01
+      dockerfile: Dockerfile
+
+
+  bbmap:
+    build:
+      context: ../BBMap/
+      image: proj/bbmap:0.01
+      dockerfile: Dockerfile
+
+
+  contextmap2:
+    build:
+      context: ../contextmap2
+      image: proj/contextmap:0.01
+      dockerfile: Dockerfile
+
+
+  dart:
+    build:
+      context: ../dart
+      image: proj/dart:0.01
+      dockerfile: Dockerfile
+
+
+  gsnap:
+    build:
+      context: ../gsnap
+      image: proj/gsnap:0.01
+      dockerfile: Dockerfile
+
+
+  crac:
+    build:
+      context: ../crac
+      image: proj/crac:0.01
+      dockerfile: Dockerfile
+
+
+  subjunc:
+    build:
+      context: ../subjunc
+      image: proj/subjunc:0.01
+      dockerfile: Dockerfile
+
+
+  minimap:
+    build:
+      context: ../minimap2
+      image: proj/minimap2:0.01
+      dockerfile: Dockerfile
+
+
+  hisat2:
+    build:
+      context: ../contextmap2
+      image: proj/contextmap2:0.01
+      dockerfile: Dockerfile
+
+
+  segemehl:
+    build:
+      context: ../segemehl
+      image: proj/segemehl:0.01
+      dockerfile: Dockerfile
+
+
+  mapsplice2:
+    build:
+      context: ../mapsplice2
+      image: proj/mapsplice2:0.01
+      dockerfile: Dockerfile
+
+
+#AS event detection tools
+#  cash:
+#    build:
+#      context: ../CASH/
+#      image: proj/cash:0.01
+#      dockerfile: Dockerfile
+
+
+
+#AS diff tools
