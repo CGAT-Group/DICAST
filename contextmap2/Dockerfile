@@ -4,9 +4,10 @@ LABEL software="ContextMap"
 LABEL maintainer="Amit Fenn"
 
 #Copying Java runtime install file
-COPY [--chown=nobody:nogroup] ./jre-8u241-linux-i586.tar.gz /home/biodocker/jre-8u241-linux-i586.tar.gz
+#COPY [--chown=nobody:nogroup] ./jre-8u241-linux-i586.tar.gz /home/biodocker/jre-8u241-linux-i586.tar.gz
 
 WORKDIR /home/biodocker/
+RUN wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242978_a4634525489241b9a9e1aa73d9e118e6
 
 #Installations
 RUN wget https://www.bio.ifi.lmu.de/software/contextmap/contextmap_source_v2_7_9.zip && unzip contextmap_source_v2_7_9.zip && tar -zxvf jre-8u241-linux-i586.tar.gz && rm contextmap_source_v2_7_9.zip jre-8u241-linux-i586.tar.gz
