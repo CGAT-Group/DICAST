@@ -13,4 +13,4 @@ RUN conda install mapsplice -y
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
-# ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

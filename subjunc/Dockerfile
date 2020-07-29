@@ -1,6 +1,6 @@
 FROM ubuntu:base
 ENV tool=subjunc
-LABEL description="Image for $tool"
+LABEL description="Image for subjunc"
 LABEL maintainer="Amit Fenn"
 
 WORKDIR /opt/
@@ -13,8 +13,7 @@ RUN ls /opt/subread-2.0.0-Linux-x86_64
 
 WORKDIR /docker_main
 
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
 
-#ENTRYPOINT SCRIPT
-# COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
-# RUN chmod +x /docker_main/ENTRYPOINT.sh
-# ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

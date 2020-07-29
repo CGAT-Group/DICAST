@@ -13,12 +13,6 @@ VOLUME /myvol1
 RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download" && \
     tar xf download
 
-
-#Downloading References
-# RUN wget ${refgenlink} -P /docker_main && ref_gen=$(find / -name "*Homo*.fa*") && zcat -d ${ref_gen}>     $(echo "${ref_gen}"|sed s/.gz//)&& rm ${ref_gen}
-
-
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
-

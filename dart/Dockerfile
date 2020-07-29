@@ -1,6 +1,6 @@
 FROM ubuntu:base
 ENV tool=dart
-LABEL description="Image for $tool"
+LABEL description="Image for dart "
 LABEL maintainer="Amit Fenn"
 
 WORKDIR /opt

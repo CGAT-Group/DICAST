@@ -1,6 +1,6 @@
 FROM ubuntu:base
 ENV tool=segemehl
-LABEL description="Image for $tool"
+LABEL description="Image for segemehl"
 LABEL maintainer="Amit Fenn"
 
 WORKDIR /docker_main
@@ -28,6 +28,6 @@ RUN cd /docker_main/segemehl* && \
     apt-get clean -yq  
 
 #ENTRYPOINT SCRIPT
-# COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
-# RUN chmod 777 /docker_main/ENTRYPOINT.sh
-# ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

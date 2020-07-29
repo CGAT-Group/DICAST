@@ -1,6 +1,6 @@
 FROM ubuntu:base
 ENV tool=gsnap
-LABEL description="Image for $tool"
+LABEL description="Image for gsnap"
 LABEL maintainer="Amit Fenn"
 
 WORKDIR /docker_main
