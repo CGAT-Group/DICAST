@@ -24,10 +24,11 @@ services:
         context: ../Star/
       image: proj/star:0.01
 
-    asgal:
-      build:
-        context: ../asgal/
-      image: proj/asgal:0.01
+# ONLY BUILDS ON DOCKER 19
+#    asgal:
+#      build:
+#        context: ../asgal/
+#      image: proj/asgal:0.01
 
 
     bbmap:
@@ -74,8 +75,8 @@ services:
 
     hisat2:
       build:
-        context: ../contextmap2
-      image: proj/contextmap2:0.01
+        context: ../hisat2
+      image: proj/hisat2:0.01
 
 
     segemehl:
