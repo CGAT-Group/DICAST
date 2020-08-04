@@ -32,7 +32,7 @@ indexdir=/$wd/index/${tool:-unspecific}-index
 # filenames
 
 #find .fa files in inputdir
-fasta=$(find $inputdir -maxdepth 1 -type f -name "*.fa" -printf "%f\n")
+fasta=$(find $inputdir -maxdepth 1 -type f -name "Homo*.fa" -printf "%f\n")
 #gtf=Homo_sapiens.GRCh38.99.gtf
 gtf=$(find $inputdir -maxdepth 1 -type f -name "*.gtf" -printf "%f\n")
 index=$fasta

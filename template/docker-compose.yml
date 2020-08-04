@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
 
-  #Base images
+#################################################### Base images
     base:
       build:
         context: ../BaseOS/
@@ -18,10 +18,10 @@ services:
         context: ../contextmap2/bowtie/
       image: bowtie:0.1
 
-  #Mapping tools
+#################################################### Mapping tools
     star:
       build:
-        context: ../Star/
+        context: ../Star
       image: proj/star:0.01
 
 # ONLY BUILDS ON DOCKER 19
@@ -33,7 +33,7 @@ services:
 
     bbmap:
       build:
-        context: ../BBMap/
+        context: ../BBMap
       image: proj/bbmap:0.01
 
 
@@ -91,7 +91,7 @@ services:
       image: proj/mapsplice2:0.01
 
 
-  #AS event detection tools
+######################################################### AS event detection tools
   #  cash:
   #    build:
   #      context: ../CASH/
@@ -100,4 +100,4 @@ services:
 
 
 
-  #AS diff tools
+######################################################### AS diff tools
