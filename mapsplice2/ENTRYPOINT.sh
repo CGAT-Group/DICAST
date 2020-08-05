@@ -21,10 +21,10 @@ second_attempt() {
 	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
 	#			idle and takes little CPU time). 
 	python mapsplice.py \
-		-c /$wd/$inputdir/$fasta \
+		-c $inputdir/fasta \
 		-x /$wd/index/$tool-index/$index \
-		--gene-gtf /$wd/$inputdir/$gtf \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		--gene-gtf $inputdir/$gtf \
+		-o $out/${line##*/}${tool}.sam \
 		-p $nthreads \
 		-1 ${line}?.fastq
 }
@@ -38,17 +38,17 @@ build_index() {
 	#    ebwt_outfile_base       write Ebwt data to files with this dir/basename
 	# Parameters:
 	# --seed <int>            seed for random number generator 
-	#bwt_index $(ls /$wd/$inputdir/$fasta) /$wd/index/$tool-index/$index
+	#bwt_index $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index
 	bowtie-build \
 		--seed 42 \
-		/$wd/$inputdir/$fasta \
-		/$wd/index/$tool-index/$index
+		$inputdir/$fasta \
+		$wd/index/$tool-index/$index
 	chmod -R 777 /myvol1/index/${tool}-index/
 }
 
 
 ### START here ############################################################################
-
+fasta=$(find $inputdir -maxdepth 1 -type f -name "*mapsplice*.fa" -printf "%f\n")
 # test filepaths
 test_fasta
 test_gtf
@@ -84,10 +84,10 @@ while read -r line; do
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
 	python mapsplice.py \
-		-c /$wd/$inputdir/$fasta \
+		-c $inputdir/fasta \
 		-x /$wd/index/$tool-index/$index \
-		--gene-gtf /$wd/$inputdir/$gtf \
-		-o /$wd/$out/${line##*/}${tool}.sam \
+		--gene-gtf $inputdir/$gtf \
+		-o $out/${line##*/}${tool}.sam \
 		-p $nthreads \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq
