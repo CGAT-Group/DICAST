@@ -14,7 +14,7 @@ test_gtf(){
 
 # make a list of fastq files to perform the mapping on and make it accessible
 mk_fastqlist(){
-	find $fastqdir -name "*fastq" -nowarn -maxdepth 1| sed s/.fastq// | sed 's/.$//' | sort | uniq >$out/$tool-fastqlist
+	find $fastqdir -name "*fastq" -nowarn -maxdepth 1| sed s/.fastq// | sed 's/.$//' | sort | uniq > /tmp/$tool-fastqlist
 	chmod 777 $out/$tool-fastqlist
 }
 
