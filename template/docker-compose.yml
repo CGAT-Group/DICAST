@@ -24,13 +24,6 @@ services:
         context: ../Star
       image: proj/star:0.01
 
-# ONLY BUILDS ON DOCKER 19
-#    asgal:
-#      build:
-#        context: ../asgal/
-#      image: proj/asgal:0.01
-
-
     bbmap:
       build:
         context: ../BBMap
@@ -92,12 +85,75 @@ services:
 
 
 ######################################################### AS event detection tools
-  #  cash:
-  #    build:
-  #      context: ../CASH/
-  #      image: proj/cash:0.01
-  #      dockerfile: Dockerfile
 
+# ONLY BUILDS ON DOCKER 19
+#    asgal:
+#      build:
+#        context: ../asgal/
+#      image: proj/asgal:0.01
+
+    cash:
+      build:
+        context: ../CASH/
+        image: proj/cash:0.01
+        dockerfile: Dockerfile
+    majiq:
+      build: 
+        context: ../MAJIQ/
+        image: proj/majiq:0.01
+        dockerfile: Dockerfile
+
+
+    spladder:
+      build: 
+        context: ../spladder/
+        image: proj/spladder:0.01
+        dockerfile: Dockerfile
+
+    aspli:
+      build: 
+        context: ../ASpli/
+        image: proj/aspli:0.01
+        dockerfile: Dockerfile
+
+    eventpointer:
+      build: 
+        context: ../EventPointer/
+        image: proj/eventpointer:0.01
+        dockerfile: Dockerfile
+
+    kisssplice:
+      build: 
+        context: ../KisSplice/
+        image: proj/kisssplice:0.01
+        dockerfile: Dockerfile
+
+    whippet:
+      build: 
+        context: ../Whippet/
+        image: proj/whippet:0.01
+        dockerfile: Dockerfile
+
+    sgseq:
+      build: 
+        context: ../SGSeq/
+        image: proj/sgseq:0.01
+        dockerfile: Dockerfile
+
+    irfinder:
+      build: 
+        context: ../irfinder/
+        image: proj/irfinder:0.01
+        dockerfile: Dockerfile
+
+
+#### Diff Splicing tools
+    :
+      build: 
+        context: ..//
+        image: proj/:0.01
+        dockerfile: Dockerfile
+        
 
 
 ######################################################### AS diff tools
