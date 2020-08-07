@@ -95,64 +95,56 @@ services:
     cash:
       build:
         context: ../CASH/
-        image: proj/cash:0.01
-        dockerfile: Dockerfile
+      image: proj/cash:0.01
+      
     majiq:
       build: 
         context: ../MAJIQ/
-        image: proj/majiq:0.01
-        dockerfile: Dockerfile
-
+      image: proj/majiq:0.01
 
     spladder:
       build: 
         context: ../spladder/
-        image: proj/spladder:0.01
-        dockerfile: Dockerfile
+      image: proj/spladder:0.01      
 
     aspli:
       build: 
         context: ../ASpli/
-        image: proj/aspli:0.01
-        dockerfile: Dockerfile
+      image: proj/aspli:0.01      
 
     eventpointer:
       build: 
         context: ../EventPointer/
-        image: proj/eventpointer:0.01
-        dockerfile: Dockerfile
+      image: proj/eventpointer:0.01
 
     kisssplice:
       build: 
         context: ../KisSplice/
-        image: proj/kisssplice:0.01
-        dockerfile: Dockerfile
+      image: proj/kisssplice:0.01
 
     whippet:
       build: 
         context: ../Whippet/
-        image: proj/whippet:0.01
-        dockerfile: Dockerfile
+      image: proj/whippet:0.01
 
     sgseq:
       build: 
         context: ../SGSeq/
-        image: proj/sgseq:0.01
-        dockerfile: Dockerfile
+      image: proj/sgseq:0.01
 
     irfinder:
       build: 
         context: ../irfinder/
-        image: proj/irfinder:0.01
-        dockerfile: Dockerfile
+      image: proj/irfinder:0.01
+
 
 
 #### Diff Splicing tools
-    :
-      build: 
-        context: ..//
-        image: proj/:0.01
-        dockerfile: Dockerfile
+#    :
+#      build: 
+#        context: ..//
+#        image: proj/:0.01
+#       dockerfile: Dockerfile
         
 
 
