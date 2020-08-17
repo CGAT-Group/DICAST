@@ -4,7 +4,7 @@
 tool=mapsplice2
 
 # use confic and function file
-source /myvo11/config/mapping_config.sh
+source /myvol1/config/mapping_config.sh
 source /myvol1/func/mapping_func.sh
 
 
