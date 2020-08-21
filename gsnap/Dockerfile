@@ -6,8 +6,8 @@ LABEL maintainer="Amit Fenn"
 WORKDIR /docker_main
 
 #Installing tool
-RUN wget http://research-pub.gene.com/gmap/src/gmap-gsnap-2020-03-12.tar.gz && tar -xvf /docker_main/gmap-gsnap-2020-03-12.tar.gz && rm /docker_main/gmap-gsnap-2020-03-12.tar.gz  && cd gmap-2020-03-12 && mkdir /myvol1/gsnap/gmapdb -p
-RUN ./g*/configure --with-gmapdb=/myvol1/gsnap/gmapdb && make && make install
+RUN wget http://research-pub.gene.com/gmap/src/gmap-gsnap-2020-03-12.tar.gz && tar -xvf /docker_main/gmap-gsnap-2020-03-12.tar.gz && rm /docker_main/gmap-gsnap-2020-03-12.tar.gz  && cd gmap-2020-03-12 && mkdir /docker_main/gsnap/gmapdb -p
+RUN ./g*/configure --with-gmapdb=/docker_main/gsnap/gmapdb && make && make install
 
 
 #ENTRYPOINT SCRIPT

@@ -28,7 +28,7 @@ build_index() {
 	mkdir -p /$wd/index/$tool-index
 	echo "compute index ..."
 	hisat2-build  $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls /$wd/$inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
-	chmod -R 777 /myvol1/index/${tool}-index/
+	chmod -R 777 /$wd/index/${tool}-index/
 	echo "Index is now saved under /$wd/index/$tool-index/$index"
 }
 
