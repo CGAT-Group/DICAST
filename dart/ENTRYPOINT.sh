@@ -35,7 +35,7 @@ build_index() {
 test_fasta
 
 # Build Genome index if not already available
-if ! test -f $indexdir/$index.sa; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index.sa; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist

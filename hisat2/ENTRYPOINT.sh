@@ -40,7 +40,7 @@ test_fasta
 test_gtf
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index/1.ht2; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f /$wd/index/$tool-index/$index/1.ht2; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -64,7 +64,7 @@ while read -r line; do
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
