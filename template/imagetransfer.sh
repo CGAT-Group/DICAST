@@ -8,7 +8,7 @@ echo " "
 
 echo $HOSTNAME
 echo logging $USER onto Bert: ; ssh ${USER}@bert 'echo $HOSTNAME; for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file) ; done '
-echo logging $USER onto Elmo: ; ssh ${USER}@elmo 'echo $HOSTNAME: for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file)  ; done '
+echo logging $USER onto Elmo: ; ssh ${USER}@elmo 'echo $HOSTNAME; for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file)  ; done '
 echo logging $USER onto Ernie: ; ssh ${USER}@ernie 'echo $HOSTNAME; for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file) ; done '
 echo logging $USER onto Grover: ; ssh ${USER}@grover 'echo $HOSTNAME; for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file) ; done '
 echo logging $USER onto Kermit: ; ssh ${USER}@kermit 'echo $HOSTNAME; for file in $(find /nfs/proj/AS_dockers/images/ -name '*.tar'); do echo $file $( docker load -i $file) ; done '
