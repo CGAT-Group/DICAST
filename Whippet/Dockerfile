@@ -22,4 +22,7 @@ RUN ln -s /opt/.julia/v0.6/Whippet/bin /docker_main
 RUN chmod 777 /opt/.julia/lib/v0.6/*
 
 
-ENTRYPOINT ["/bin/bash"]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+
