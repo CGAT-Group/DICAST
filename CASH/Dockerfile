@@ -13,5 +13,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/cash_
 
 WORKDIR /$HOME
 
-#ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
-ENTRYPOINT ["/bin/bash"]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+

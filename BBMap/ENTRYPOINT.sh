@@ -1,35 +1,67 @@
 #!/bin/bash
+
+### Tool-specific variables ###
+tool=BBMap
+
+# use confic and function file
+source /myvol1/config/mapping_config.sh
+source /myvol1/func/mapping_func.sh
+
+
+### Tool-specific functions ###
+
+# Unpaired mapping command: second attempt, used if paired end mapping failes
 second_attempt() {
-
-#Second attempt isn't working for BBMap. :(
-/bbmap/bbmap.sh ref=$(find /myvol1/ -maxdepth 1 -name "*.fa") overwrite=false
-
-/bbmap/bbmap.sh in="$line"?.fastq outm=/myvol1/BBmap-output/"${line##*/}"_mapped.sam outu=/myvol1/BBmap-output/"${line##*/}"_unmapped.sam
+	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
+	echo "paired mapping failed for ${line}. Try unpaired mapping."
+	/bbmap/bbmap.sh \
+		in=${line}?.fastq \
+		outm=$out/${line##*/}${tool}_mapped.sam \
+		outu=$out/${line##*/}${tool}_unmapped.sam
 }
 
-#START here: Make a list of fastq files
-find /myvol1/ -name "*fastq" -nowarn | sed s/.fastq// | sed 's/.$//' | sort | uniq >/myvol1/BBmap-fastqlist
+build_index() {
+	mkdir -p $indexdir/$index
+	echo "compute index ..."
+	/bbmap/bbmap.sh ref=$(ls $inputdir/$fasta) path=$indexdir/$index overwrite=false
+	chmod -R 777 $indexdir
+	echo "Index is now saved at $indexdir/$index"
+}
+
+### START here ############################################################################
+
+# test filepaths
+test_fasta
+
+# Build Genome index if not already available
+if $recompute_index; then build_index; else if ! test -d $indexdir/$index; then build_index; fi fi
+
+#make list of fastq files
+mk_fastqlist
 
 #make output directories
-mkdir -p /myvol1/BBmap-output/
-cd /myvol1/BBmap-output/
+mk_outdir
 
+echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
+	#First attempt: Paired end mapping
+	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
+	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
-#First attempt: Paired end mapping
-/bbmap/bbmap.sh ref=$(find /myvol1/ -maxdepth 1 -name "*.fa") overwrite=false
+	/bbmap/bbmap.sh \
+		in=${line}1.fastq \
+		in2=${line}2.fastq \
+		ref=$(ls $inputdir/$fasta) \
+		path=$indexdir/$index \
+		outm=$out/${line##*/}${tool}_mapped.sam \
+		outu=$out/${line##*/}${tool}_unmapped.sam
 
-/bbmap/bbmap.sh in1="$line"1.fastq in2="$line"2.fastq outm=/myvol1/BBmap-output/"${line##*/}"_mapped.sam outu=/myvol1/BBmap-output/"${line##*/}"_unmapped.sam
+	#If paired end mapping fails, run unpaired mapping.
+	trap 'second_attempt $line' ERR
+done </tmp/$tool-fastqlist
 
-#If paired end mapping fails, run unpaired mapping.
-trap 'second_attempt $line' ERR
-done </myvol1/BBmap-fastqlist
-
-#wait for all processes to end
+# wait for all processes to end
 wait
-
-#cleaning up
-rm /myvol1/BBmap-fastqlist
-echo "script is done"
+cleaner
 

@@ -20,9 +20,9 @@ second_attempt() {
 	#-t INT 	Number of threads [3]. Minimap2 uses at most three threads when indexing target sequences, 
 	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
 	#			idle and takes little CPU time). 
-	python mapsplice.py \
-		-c $inputdir/fasta \
-		-x /$wd/index/$tool-index/$index \
+	python /opt/conda/bin/mapsplice.py \
+		-c $inputdir/$mapsplice_fastadir \
+		-x $indexdir/$index \
 		--gene-gtf $inputdir/$gtf \
 		-o $out/${line##*/}${tool}.sam \
 		-p $nthreads \
@@ -31,7 +31,7 @@ second_attempt() {
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /myvol1/index/${tool}-index
+	mkdir -p $indexdir
 	echo "Build bowtie-index..."
 	# Usage: bowtie-build [options]* <reference_in> <ebwt_outfile_base>
 	#    reference_in            comma-separated list of files with ref sequences
@@ -41,14 +41,14 @@ build_index() {
 	#bwt_index $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index
 	bowtie-build \
 		--seed 42 \
-		$inputdir/$fasta \
-		$wd/index/$tool-index/$index
-	chmod -R 777 /myvol1/index/${tool}-index/
+		$inputdir/$mapsplice_fastadir \
+		$indexdir/$index
+	chmod -R 777 $indexdir
 }
 
 
 ### START here ############################################################################
-fasta=$(find $inputdir -maxdepth 1 -type f -name "*mapsplice*.fa" -printf "%f\n")
+
 # test filepaths
 test_fasta
 test_gtf
@@ -57,7 +57,7 @@ test_gtf
 PATH=$PATH:/opt/conda/bin/mapsplice.py
 
 # Build Genome index if not already available
-if ! test -f /$wd/index/$tool-index/$index.rev.2.ebwt; then build_index; fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$index.rev.2.ebwt; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -83,9 +83,9 @@ while read -r line; do
 	# -o / --output <string> 	The directory in which MapSplice will write its output. Default is "./mapsplice_out/".
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
-	python mapsplice.py \
-		-c $inputdir/fasta \
-		-x /$wd/index/$tool-index/$index \
+	python /opt/conda/bin/mapsplice.py \
+		-c $inputdir/$mapsplice_fastadir \
+		-x $indexdir/$index \
 		--gene-gtf $inputdir/$gtf \
 		-o $out/${line##*/}${tool}.sam \
 		-p $nthreads \
@@ -94,7 +94,7 @@ while read -r line; do
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
-done </$wd/tmp/$tool-fastqlist
+done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait

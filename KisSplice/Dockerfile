@@ -62,7 +62,6 @@ RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y cu
 RUN R -e "install.packages(c('optparse','BiocManager'),dependencies=TRUE,repos='http://cran.rstudio.com/')"
 RUN R -e "BiocManager::install('kissDE',update=TRUE,ask=FALSE)" 
 
-
-
-ENTRYPOINT ["/bin/bash"]
-
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

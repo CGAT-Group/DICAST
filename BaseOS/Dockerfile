@@ -55,7 +55,7 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \
 If you need help with this Docker, please contact:  ^_^ \n\
 Amit FENN, Chair of Experimental Bioinformatics, Technical University of Munich (TUM), Freising, Germany \n\
 \n\
-The Docker team: Fanny Rößler, Alexander Dietrich and Amit\
+The Docker team: Fanny Rößler, Alexander Dietrich, Tim Faro and Amit\
 \n\
 If you liked our Docker, then consider buying us a beer.\n"\
     > /etc/motd

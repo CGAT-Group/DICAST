@@ -2,6 +2,8 @@ FROM ubuntu:base
 LABEL description="Image for Whippet"
 LABEL maintainer="Alexander Dietrich"
 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+samtools
 
 WORKDIR /opt
 #download and install julia; need to change folder name manually, since it is not consistent
@@ -22,4 +24,7 @@ RUN ln -s /opt/.julia/v0.6/Whippet/bin /docker_main
 RUN chmod 777 /opt/.julia/lib/v0.6/*
 
 
-ENTRYPOINT ["/bin/bash"]
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+RUN chmod 777 /docker_main/ENTRYPOINT.sh
+ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
+
