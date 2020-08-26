@@ -93,7 +93,8 @@ if [ $updatecluster -eq 1 ]
 then
 /bin/bash ./imagetransfer.sh
 fi
-sbatch ./slurm-docker-runner.sh
+bash arraymaker.sh
+sbatch ./slurmsubmit.sh
 else
 #Runscript without SLURM
 bash ./docker-runner.sh

@@ -92,10 +92,10 @@ services:
 #        context: ../asgal/
 #      image: proj/asgal:0.01
 
-    cash:
-      build:
-        context: ../CASH/
-      image: proj/cash:0.01
+#    cash:
+#      build:
+#        context: ../CASH/
+#      image: proj/cash:0.01
       
     majiq:
       build: 

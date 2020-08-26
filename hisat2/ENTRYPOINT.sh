@@ -27,7 +27,7 @@ second_attempt() {
 build_index() {
 	mkdir -p /$wd/index/$tool-index
 	echo "compute index ..."
-	hisat2-build  $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls /$wd/$inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
+	hisat2-build  $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls $inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
 	chmod -R 777 /$wd/index/${tool}-index/
 	echo "Index is now saved under /$wd/index/$tool-index/$index"
 }
@@ -59,7 +59,7 @@ while read -r line; do
 	hisat2 -q \
 	-x /$wd/index/$tool-index/$index \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
-	-S /$wd/$out/${line##*/}${tool}.sam \
+	-S /$out/${line##*/}${tool}.sam \
 	--known-splicesite-infile /$wd/index/$tool-index/$index.splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping.

@@ -2,6 +2,8 @@ FROM ubuntu:base
 LABEL description="Image for Whippet"
 LABEL maintainer="Alexander Dietrich"
 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+samtools
 
 WORKDIR /opt
 #download and install julia; need to change folder name manually, since it is not consistent
