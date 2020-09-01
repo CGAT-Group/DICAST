@@ -140,6 +140,14 @@ mk_sample_out(){
 	echo $wd/$output/${tool:-unspecific}-output/$sample_out-output
 }
 
+
+build_STAR_index(){
+	echo "Did not find STAR index in $out/tmp/STAR_index/ ; building it now..."
+	STAR --runMode genomeGenerate --genomeDir $out/tmp/STAR_index --genomeFastaFiles $wd/$fasta --sjdbGTFfile $wd/$gtf --runThreadN $ncores --outFileNamePrefix $out/tmp/Star_mapped_ --sjdbOverhang 100
+	echo "STAR index built and saved to $out/tmp/STAR_index/"
+}
+
+
 #cleaning up
 cleaner(){
 	rm -f $wd/$output/${tool:-unspecific}-output/bamlist
