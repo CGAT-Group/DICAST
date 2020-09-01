@@ -8,14 +8,20 @@ tool=sgseq
 
 ### START here ###################
 
-#test filepath for gtf and BAM+BAM-index
-test_gtf $wd/$gtf
-#test_bam $wd/$bamfolder/$bamfile
-
-
-
-#make output directories and bamlist
+#tests
 mk_outdir $tool
+test_gtf $wd/$gtf
+out=$wd/$output/${tool:-unspecific}-output #local variable for output folder
+
+
+#handle sam files
+readsamfiles
+for filename in $(cat $wd/$output/${tool:-unspecific}-output/samlist)
+do
+        makebamfromsam $filename
+done
+
+#build bamlist
 readbamfiles
 
 ### Start AS event detection ###
@@ -25,7 +31,6 @@ echo compute ${tool} AS event detection...
 for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
 do
 	echo Starting SGSeq for $filename ...
-        makebamfromsam $filename
 	sample_out=$(mk_sample_out $filename)
 	Rscript $wd/Rscripts/SGSeq.R --gtf $wd/$gtf --path_to_bam $filename --out $sample_out --cores $ncores
 	wait
