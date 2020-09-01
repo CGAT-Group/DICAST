@@ -4,7 +4,7 @@
 #SBATCH --output=/nfs/home/users/afenn/slurm/logs/%x.%j.%a.out
 #SBATCH --error=/nfs/home/users/afenn/slurm/logs/%x.%j.%a.err
 #SBATCH --mem=1G
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=5
 
 # Making an array $images with a list of images
 
