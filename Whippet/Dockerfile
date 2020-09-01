@@ -2,8 +2,9 @@ FROM ubuntu:base
 LABEL description="Image for Whippet"
 LABEL maintainer="Alexander Dietrich"
 
-RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
-samtools
+#install samtools
+RUN apt-get update && apt-get --no-install-recommends --fix-broken -y install samtools
+
 
 WORKDIR /opt
 #download and install julia; need to change folder name manually, since it is not consistent
@@ -11,17 +12,20 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.4-linux-
 
 #export julia binary to path
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/julia-0.6.4/bin
+#install julia packages into /opt
 ENV JULIA_PKGDIR=/opt/.julia
+ENV JULIA_HISTORY=/opt/.julia_history
 
-#install whippet and add to path
+#install whippet 
 RUN julia -e 'Pkg.init(); Pkg.resolve(); Pkg.add("Whippet"); using Whippet'
-#RUN cp ~/.julia/v0.6/REQUIRE /opt/.julia/v0.6 && julia -e 'Pkg.resolve()'
-#RUN julia -e 'Pkg.add("Whippet"); using Whippet' 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/julia-0.6.4/bin:/opt/.julia/v0.6/Whippet
 
 WORKDIR /docker_main
-RUN ln -s /opt/.julia/v0.6/Whippet/bin /docker_main
-RUN chmod 777 /opt/.julia/lib/v0.6/*
+#create link to whippet scripts
+RUN ln -s /opt/.julia/v0.6/Whippet/bin /docker_main/
+#run script once in "dry" mode to precompile all libraries and change permissions of them
+RUN julia /docker_main/bin/whippet-index.jl -h
+RUN julia /docker_main/bin/whippet-delta.jl -h
+RUN chmod 777 -R /opt/.julia/lib/v0.6/*
 
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
