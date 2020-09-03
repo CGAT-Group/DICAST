@@ -91,8 +91,29 @@ if [ $updatecluster -eq 1 ]
 then
 /bin/bash ./imagetransfer.sh
 fi
+
+read -r -p "Run Sbatch? " sinput
+
+case $sinput in
+[yY][eE][sS]|[yY])
+echo "Yes"
+runsbatch=0
+;;
+[nN][oO]|[nN])
+echo "No"
+runsbatch=1
+;;
+*)
+echo "Invalid input..."
+exit 1
+;;
+esac
+
+if [ $runsbatch -eq 0 ]
+then
 bash arraymaker.sh
 sbatch ./slurmsubmit.sh
+fi
 else
 #Runscript without SLURM
 bash ./docker-runner.sh
