@@ -14,13 +14,13 @@ read_length=76								#length of reads inside fastq files
 
 
 inputdir=$workdir/input							#base directory for all needed input files
-fastqdir=$workdir/$inputdir/fastq					#directory for fastqfiles
-bamdir=$workdir/$inputdir/bamdir					#directory for bamfiles
-samdir=$workdir/$inputdir/samdir					#directory for samfiles
-fasta=$workdir/$inputdir/fasta						#name of the genome reference file (fasta format)
-gtf=$workdir/$inputdir/gtf						#name of gtf reference file
-gff=$workdir/$inputdir/gff						#name of gff reference file
-indexdir=$workdir/$inputdir/index					#directory for STAR index
+fastqdir=$inputdir/fastq						#directory for fastqfiles
+bamdir=$inputdir/bamdir							#directory for bamfiles
+samdir=$inputdir/samdir							#directory for samfiles
+fasta=$inputdir/fasta							#name of the genome reference file (fasta format)
+gtf=$inputdir/gtf							#name of gtf reference file
+gff=$inputdir/gff							#name of gff reference file
+indexdir=$inputdir/index						#directory for STAR index
 indexname=$fasta							#name of the STAR index
 
 
