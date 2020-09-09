@@ -41,7 +41,7 @@ build_index() {
 	#bwt_index $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index
 	bowtie-build \
 		--seed 42 \
-		$inputdir/$mapsplice_fastadir \
+		$inputdir/$mapsplice_fastadir_index \
 		$indexdir/$index
 	chmod -R 777 $indexdir
 }
@@ -84,7 +84,7 @@ while read -r line; do
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
 	python /opt/conda/bin/mapsplice.py \
-		-c $inputdir/$mapsplice_fastadir \
+		-c $inputdir/$mapsplice_fastadir_chromosomes \
 		-x $indexdir/$index \
 		--gene-gtf $inputdir/$gtf \
 		-o $out/${line##*/}${tool}.sam \

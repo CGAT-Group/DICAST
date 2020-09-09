@@ -39,7 +39,7 @@ second_attempt() {
 build_index(){
 	mkdir -p $indexdir/$index
 	echo "compute index ..."
-	for line in $fasta; do bowtie2-build -f $inputdir/$line $indexdir/$line --threads $nthreads; done
+	for line in $fasta; do bowtie2-build -f $inputdir/$contextmap_fastadir/$line $indexdir/$line --threads $nthreads; done
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$index"
 }
@@ -81,7 +81,7 @@ while read -r line; do
 		-reads ${line}1.fastq,${line}2.fastq \
 		-aligner_name bowtie2 \
 		-o $out/${line##*/}${tool}.sam \
-		-aligner_bin /home/biodocker/bin/\
+		-aligner_bin /home/biodocker/bin/bowtie2\
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indexdir/$index \
 		-genome $(ls $inputdir/$contextmap_fastadir)
