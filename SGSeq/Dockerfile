@@ -11,6 +11,7 @@ RUN R -e "BiocManager::install('SGSeq',update=TRUE,ask=FALSE)"
 
 WORKDIR /docker_main
 
+COPY [--chown=nobody:nogroup] ./SGSeq.R /docker_main/SGSeq.R
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

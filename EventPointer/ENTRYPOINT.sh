@@ -28,7 +28,7 @@ done
 #### AS event detection mode ####
 if [ $differential = 0 ]; then
 	echo Starting EventPointer in AS event detection mode...
-	Rscript $wd/Rscripts/EventPointer.R --gtf $wd/$gtf --cores $ncores --out $wd/$output/${tool:-unspecific}-output --workdir $wd --bamfolder $wd/$bamfolder --differential $differential
+	Rscript /docker_main/EventPointer.R --gtf $wd/$gtf --cores $ncores --out $wd/$output/${tool:-unspecific}-output --workdir $wd --bamfolder $wd/$bamfolder --differential $differential
 	wait
 	cleaner
 fi
@@ -38,7 +38,7 @@ fi
 if [ $differential = 1 ]; then
         echo Starting EventPointer in DS analysis mode...
 	combined=$(combine_case_control $casefolder $controlfolder) #combine case and control folder into single folder
-        Rscript $wd/Rscripts/EventPointer.R --gtf $wd/$gtf --cores $ncores  --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $wd/$casefolder --controlfolder $wd/$controlfolder --differential $differential --combined $combined
+        Rscript /docker_main/EventPointer.R --gtf $wd/$gtf --cores $ncores  --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $wd/$casefolder --controlfolder $wd/$controlfolder --differential $differential --combined $combined
 	wait
 	cleaner_diff
 fi
