@@ -48,7 +48,7 @@ kissplice2refgenome -a $wd/$gtf -o $out/events --readLength $read_length $out/Al
 if [ $differential = 1 ]
 then
 	echo Starting differential analysis with kissDE...
-	Rscript $wd/Rscripts/kissDE.R --counts $out/events.tsv --cores $ncores --caseprefix $caseprefix --controlprefix $controlprefix --casefastq $wd/$casefastq --controlfastq $wd/$controlfastq --out $out
+	Rscript /docker_main/kissDE.R --counts $out/events.tsv --cores $ncores --caseprefix $caseprefix --controlprefix $controlprefix --casefastq $wd/$casefastq --controlfastq $wd/$controlfastq --out $out
 
 fi
 
