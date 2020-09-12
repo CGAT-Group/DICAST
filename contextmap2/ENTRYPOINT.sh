@@ -32,7 +32,7 @@ second_attempt() {
 		-aligner_bin /home/biodocker/bin/\
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indexdir/$index \
-		-genome $(ls $inputdir/$contextmap_fastadir)
+		-genome  $inputdir/$contextmap_fastadir
 }
 
 #Build Genome index
@@ -84,7 +84,7 @@ while read -r line; do
 		-aligner_bin /home/biodocker/bin/bowtie2\
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indexdir/$index \
-		-genome $(ls $inputdir/$contextmap_fastadir)
+		-genome $inputdir/$contextmap_fastadir
 
 	#If paired end mapping fails, run unpaired mapping.
 	trap 'second_attempt $line' ERR
