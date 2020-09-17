@@ -1,7 +1,15 @@
 #!/bin/bash
 #Initiating list of images
+if command -v squeue &> /dev/null #checking if SLURM exists.
+then
 :> /nfs/proj/AS_dockers/images.txt
+SLURM=1
+else
+:> ./dockerrunlist
+SLURM=0
+fi
 
+#Welcome message
 printf "\
 =========================================================================================\n\
 =  Welcome to CoMPASS  built by the Alternative Splicing - Docker Team at TUM =\n\
@@ -20,54 +28,22 @@ read -r -p "Is this the ./template/ folder of the CoMPASS project [Y/N]? " confi
 case $confirmdir in
 [yY][eE][sS]|[yY])
 echo "Yes"
-runscriptenv=0
+pushd ./
 ;;
 [nN][oO]|[nN])
 echo "No"
-runscriptenv=1
+newdir=$(zenity --file-selection --directory --text="Where is the ./template/ of the CoMPASS project?")
+pushd $newdir
 ;;  
 *)  
 echo "Invalid input..."
 exit 1
 ;;
 esac
-
-if [ $runscriptenv -eq 1 ] 
-then
-newdir=$(zenity --file-selection --directory --text="Where is the ./template/ of the CoMPASS project?")
-pushd $newdir
-else
-pushd ./
-fi
 
 # Updating Docker Images
 docker-compose build 
-echo $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2|wc -l) images to run 
-for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt
-echo ------------
-echo "Enable dry run? [Y/N] "
-
-read -r -p " Enable dry run? [Y/N] " dryrunner
-case $dryrunner in
-[yY][eE][sS]|[yY])
-echo "Yes"
-rundry=0
-;;
-[nN][oO]|[nN])
-echo "No"
-rundry=1
-;;  
-*)  
-echo "Invalid input..."
-exit 1
-;;
-esac
-if [ $rundry -eq 0 ] 
-then
-popd
-exit
-fi
-
+#echo $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2|wc -l) images to run 
 #Is the runscript executed on the server with SLURM? 
 if command -v squeue &> /dev/null #checking if SLURM exists.
 then
@@ -76,45 +52,69 @@ read -r -p "Images will not be transfered, if the clusters are updated. Are the 
 case $input in
 [yY][eE][sS]|[yY])
 echo "Yes"
-updatecluster=0
-;;
-[nN][oO]|[nN])
-echo "No"
-updatecluster=1
 ;;
 *)
-echo "Invalid input..."
-exit 1
+echo "No"
+/bin/bash ./imagetransfer.sh
 ;;
 esac
-if [ $updatecluster -eq 1 ]
-then
-/bin/bash ./imagetransfer.sh
-fi
 
+
+# Select Dockers to run
+IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --checklist --title="Select dockers to run"\
+    --text="Select the tools to run"\
+    --column="Use"\
+    --column="Docker"\
+    $(for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo  TRUE proj/${i}:0.01;done ))
+unset $IFS
+case $SLURM in
+1)	#Print the split string
+for i in "${dockerarray[@]}"
+do
+    echo ${i} | tee -a  /nfs/proj/AS_dockers/images.txt 
+done
+;;
+0)  #Print the split string 
+for i in "${dockerarray[@]}"
+do
+    echo ${i} | tee -a  ./dockerrunlist
+done
+;;
+esac
+#for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt ./dockerrunlist
+# Allow Exit
+echo ------------
+read -r -p " Enable dry run? [Y/N] " dryrunner
+case $dryrunner in
+[yY][eE][sS]|[yY])
+echo "Yes"
+exit 1
+popd
+;;
+*)  
+echo "No"
+;;  
+esac
+
+
+if command -v squeue &> /dev/null #checking if SLURM exists.
+then
 read -r -p "Run Sbatch? " sinput
 
 case $sinput in
 [yY][eE][sS]|[yY])
 echo "Yes"
-runsbatch=0
-;;
-[nN][oO]|[nN])
-echo "No"
-runsbatch=1
+bash arraymaker.sh
+sbatch ./slurmsubmit.sh
 ;;
 *)
-echo "Invalid input..."
+echo "No"
 exit 1
 ;;
 esac
-
-if [ $runsbatch -eq 0 ]
-then
-bash arraymaker.sh
-sbatch ./slurmsubmit.sh
 fi
 else
+echo Running dockers locally.
 #Runscript without SLURM
 bash ./docker-runner.sh
 fi
