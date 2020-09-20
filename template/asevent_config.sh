@@ -24,7 +24,7 @@ fastqpair1suffix="_1.fastq"						#suffix for first file of fastq-pair
 fastqpair2suffix="_2.fastq"						#suffix for second file of fastq-pair
 
 read_length=76								#length of mapped reads 
-
+use_bam_input_files=1							#determines what kind of input to use: 1 for bam files, 0 for fastq files
 
 #####################################
 # values for differential analysis  #
