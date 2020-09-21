@@ -1,5 +1,5 @@
 #!/bin/bash
-arno=$( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2|wc -l)
+arno=$( cat /nfs/proj/AS_dockers/images.txt |wc -l)
 cat<<EOF>./slurmsubmit.sh
 #!/bin/bash
 #SBATCH --array=1-${arno}%1

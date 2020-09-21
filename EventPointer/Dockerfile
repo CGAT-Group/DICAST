@@ -1,5 +1,5 @@
 FROM rocker/r-base:3.6.3 
-LABEL description="Image for ASpli" 
+LABEL description="Image for EventPointer" 
 LABEL maintainer="Alexander Dietrich" 
 
 
@@ -11,6 +11,7 @@ RUN R -e "BiocManager::install('EventPointer',update=TRUE,ask=FALSE)"
 
 WORKDIR /docker_main
 
+COPY [--chown=nobody:nogroup] ./EventPointer.R /docker_main/EventPointer.R
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
