@@ -59,6 +59,17 @@ echo "No"
 ;;
 esac
 
+read -r -p " Enable dry run? [Y/N] " dryrunner
+case $dryrunner in
+[yY][eE][sS]|[yY])
+echo "Yes"
+exit 1
+popd
+;;
+*)  
+echo "No"
+;;  
+esac
 
 # Select Dockers to run
 IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --checklist --title="Select dockers to run"\
@@ -84,17 +95,6 @@ esac
 #for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt ./dockerrunlist
 # Allow Exit
 echo ------------
-read -r -p " Enable dry run? [Y/N] " dryrunner
-case $dryrunner in
-[yY][eE][sS]|[yY])
-echo "Yes"
-exit 1
-popd
-;;
-*)  
-echo "No"
-;;  
-esac
 
 
 if command -v squeue &> /dev/null #checking if SLURM exists.
