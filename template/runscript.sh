@@ -67,6 +67,20 @@ then
 			;;
 	esac
 fi
+
+#############################################################################################################
+read -r -p "Temp workflow for dev: Is this a cronjob? [Y/N] " dryrunner
+case $dryrunner in
+        [yY][eE][sS]|[yY])
+                echo "Yes"
+                popd
+                exit 1
+                ;;
+        *)
+                echo "No"
+                ;;
+esac
+
 #############################################################################################################
 
 # Select Dockers to run
@@ -129,7 +143,7 @@ esac
 #for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt ./dockerrunlist
 echo ------------
 #############################################################################################################
-read -r -p " Enable dry run? [Y/N] " dryrunner
+read -r -p "Temp workflow for dev: Quit Execution? [Y/N] " dryrunner
 case $dryrunner in
 	[yY][eE][sS]|[yY])
 		echo "Yes"
