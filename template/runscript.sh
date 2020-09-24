@@ -39,7 +39,7 @@ case $confirmdir in
 		;;
 	[nN][oO]|[nN])
 		echo "No"
-		newdir=$(zenity --file-selection --directory --text="Where is the ./template/ of the CoMPASS project?")
+		newdir=$(zenity --file-selection --directory --text="Where is the ./template/ of the CoMPASS project?" 2> /dev/null )
 		pushd $newdir
 		;;  
 	*)  
@@ -86,14 +86,14 @@ fi
 # Select Dockers to run
 echo Selecting Tools to run:..
 #Main Menu of tools
-IFS='|' read -ra mode <<<  $(zenity --list --height 200 --width 400  --checklist --title="Select dockers to run"\
-	--text="Select the tools to run"\
+IFS='|' read -ra mode <<<  $(zenity --list --height 200 --width 400  --checklist --title="Select Analysis Modules"\
+	--text="Select Analysis Modules"\
 	--column="Use"\
 	--column="Tool Set"\
 	TRUE "Mapping tools" \
 	FALSE "AS Event detection tools" \
 	#       FLASE "Diff AS tools"\
-	2> /dev/null)
+	2> /dev/null )
 echo ${mode[@]}
 
 
@@ -115,7 +115,7 @@ fi
 predockarray=( ${mappers[@]} ${asevent[@]} ${diffas[@]})
 
 # Select Dockers to run
-IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --checklist --title="Select dockers to run"\
+IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --checklist --title="Select tools to run"\
 	--text="Select the tools to run"\
 	--column="Use"\
 	--column="Docker"\
