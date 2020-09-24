@@ -48,27 +48,10 @@ case $confirmdir in
 		;;
 esac
 #############################################################################################################
-
 # Updating Docker Images
 docker-compose build 
-#echo $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2|wc -l) images to run 
-#Is the runscript executed on the server with SLURM? 
-if command -v squeue &> /dev/null #checking if SLURM exists.
-then
-	read -r -p "Images will not be transfered, if the clusters are updated. Are the clusters updated? [Y/N] " input
-
-	case $input in
-		[yY][eE][sS]|[yY])
-			echo "Yes"
-			;;
-		*)
-			echo "No"
-			/bin/bash ./imagetransfer.sh
-			;;
-	esac
-fi
-
 #############################################################################################################
+#Cron Exit
 read -r -p "Temp workflow for dev: Is this a cronjob? [Y/N] " dryrunner
 case $dryrunner in
         [yY][eE][sS]|[yY])
@@ -80,6 +63,23 @@ case $dryrunner in
                 echo "No"
                 ;;
 esac
+
+#Is the runscript executed on the server with SLURM? 
+if command -v squeue &> /dev/null #checking if SLURM exists.
+then
+	read -r -p "Transfer images to the clusters? [Y/N] " input
+
+	case $input in
+		[yY][eE][sS]|[yY])
+			echo "Yes"
+			/bin/bash ./imagetransfer.sh
+			;;
+		*)
+			echo "No"
+			;;
+	esac
+fi
+
 
 #############################################################################################################
 
@@ -124,7 +124,7 @@ do echo TRUE $i
 done) 2> /dev/null )
 
 #############################################################################################################
-#Pre Slurm list
+#Pre Execution list
 ###Rewrite SLURM operation below
 case $SLURM in
 	1)	#Print the split string
