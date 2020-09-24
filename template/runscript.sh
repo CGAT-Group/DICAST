@@ -70,7 +70,7 @@ fi
 #############################################################################################################
 
 # Select Dockers to run
-
+echo Selecting Tools to run:..
 #Main Menu of tools
 IFS='|' read -ra mode <<<  $(zenity --list --height 200 --width 400  --checklist --title="Select dockers to run"\
 	--text="Select the tools to run"\
@@ -86,13 +86,13 @@ echo ${mode[@]}
 # if Mapping tools were selected.
 if [[ "${mode[@]} " == *"Mapping tools"* ]]
 then
-	mappers=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'star|minimap2' ))
+	mappers=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'star|minimap2|contextmap|crac|dart|gsnap|hisat|mapsplice|segemehl|subjunc|bbmap' ))
 fi
 
 # If As tools were selected
 if [[ " ${mode[@]}" == *"AS Event detection tools"* ]]
 then
-	asevent=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'asgal|majiq' ))
+	asevent=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'asgal|majiq|spladder|aspli|eventpointer|kisssplice|whippet|sgseq|irfinder' ))
 fi
 
 # If Diff AS tools were selected
