@@ -1,4 +1,16 @@
 #!/bin/bash
+#############################################################################################################
+function cleanup {
+IFS=$OLDIFS
+popd
+printf "\
+        =================================\n\
+        Thank you for using CoMPASS \n\
+        \n\ "
+
+}
+trap cleanup EXIT
+OLDIFS=$IFS
 
 #############################################################################################################
 #Initiating list of images && Setting SLURM tasks
@@ -49,14 +61,13 @@ case $confirmdir in
 esac
 #############################################################################################################
 # Updating Docker Images
-docker-compose build 
+docker-compose build  
 #############################################################################################################
 #Cron Exit
 read -r -p "Temp workflow for dev: Is this a cronjob? [Y/N] " dryrunner
 case $dryrunner in
         [yY][eE][sS]|[yY])
                 echo "Yes"
-                popd
                 exit 1
                 ;;
         *)
@@ -86,16 +97,17 @@ fi
 # Select Dockers to run
 echo Selecting Tools to run:..
 #Main Menu of tools
-IFS='|' read -ra mode <<<  $(zenity --list --height 200 --width 400  --checklist --title="Select Analysis Modules"\
+OLDIFS=$IFS
+IFS='|' read -ra mode <<<  $(zenity --list --height 250 --width 400  --checklist --title="Select Analysis Modules"\
 	--text="Select Analysis Modules"\
 	--column="Use"\
 	--column="Tool Set"\
 	TRUE "Mapping tools" \
 	FALSE "AS Event detection tools" \
-	#       FLASE "Diff AS tools"\
+        FLASE "Differential AS tools"\
 	2> /dev/null )
-echo ${mode[@]}
-
+echo Selected modes: ${mode[@]}
+IFS=$OLDIFS
 
 # if Mapping tools were selected.
 if [[ "${mode[@]} " == *"Mapping tools"* ]]
@@ -110,11 +122,16 @@ then
 fi
 
 # If Diff AS tools were selected
-#...
+if [[ " ${mode[@]}" == *"Differential AS tools"* ]]
+then
+        diffas=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'rmats' ))
+fi
+
 
 predockarray=( ${mappers[@]} ${asevent[@]} ${diffas[@]})
 
 # Select Dockers to run
+OLDIFS=$IFS
 IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --checklist --title="Select tools to run"\
 	--text="Select the tools to run"\
 	--column="Use"\
@@ -122,6 +139,7 @@ IFS='|' read -ra dockerarray <<<  $(zenity --list --height 800 --width 400  --ch
 	$( for i in "${predockarray[@]}"
 do echo TRUE $i
 done) 2> /dev/null )
+IFS=$OLDIFS
 
 #############################################################################################################
 #Pre Execution list
@@ -143,15 +161,14 @@ esac
 #for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt ./dockerrunlist
 echo ------------
 #############################################################################################################
-read -r -p "Temp workflow for dev: Quit Execution? [Y/N] " dryrunner
+read -r -p "Ready to execute CoMPASS?  [Y/N] " dryrunner
 case $dryrunner in
 	[yY][eE][sS]|[yY])
 		echo "Yes"
-		popd
-		exit 1
 		;;
 	*)  
 		echo "No"
+		exit 1
 		;;  
 esac
 
@@ -160,12 +177,12 @@ esac
 echo Executing CoMPASS now... 
 if command -v squeue &> /dev/null #checking if SLURM exists.
 then
+	echo Running Dockers on SLURM
 	bash arraymaker.sh
 	sbatch ./slurmsubmit.sh
 else
-	echo Running dockers locally.
+	echo Running Dockers locally.
 	#Runscript without SLURM
 	bash ./docker-runner.sh
 
 fi
-popd
