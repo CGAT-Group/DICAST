@@ -21,10 +21,10 @@ gff=splicing_variants.gff3									#name of gff reference file, directory=$gfffi
 #############################
 
 
-inputdir=$workdir/inputdir	#base directory for all needed input files
-fastqdir=$inputdir/fastqdir	#directory for fastqfiles
-bamdir=$inputdir/bamdir		#directory for bamfiles
-samdir=$inputdir/samdir		#directory for samfiles
+inputdir=$workdir/input		#base directory for all needed input files
+fastqdir=$inputdir/fastq		#directory for fastqfiles
+bamdir=$inputdir/bam			#directory for bamfiles
+samdir=$inputdir/sam			#directory for samfiles
 fastadir=$inputdir				#directory for fastafile (might vary for specific tools -> see mapping or as-specific config file)
 gtfdir=$inputdir				#directory for gtffile
 gffdir=$inputdir				#directory for gfffile
