@@ -11,10 +11,13 @@ read_length=76								#length of reads inside fastq files
 #     Input Parameters     #
 ############################
 
-fasta=Homo_sapiens.GRCh38.dna.primary_assembly.fa 		#name of the genome reference file (fasta format), directory=$fastadir
-gtf=splicing_variants.gtf										#name of gtf reference file, directory=$gtffile
-gff=splicing_variants.gff3									#name of gff reference file, directory=$gfffile
+fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa 		#name of the genome reference file (fasta format), directory=$fastadir
+gtfname=splicing_variants.gtf										#name of gtf reference file, directory=$gtffile
+gffname=splicing_variants.gff3										#name of gff reference file, directory=$gfffile
 
+fasta=${fastadir:-unspecific}/$fastaname							#fasta full path
+gtf=${gtfdir:-unspecific}/$gtfname									#gtf full path
+gff=${gffdir:-unspecific}/$gffname									#gff full path
 
 #############################
 #     Input Directories     #
