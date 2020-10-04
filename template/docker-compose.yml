@@ -149,3 +149,10 @@ services:
 
 
 ######################################################### AS diff tools
+
+    rmats:
+      build: 
+        context: ../rMATS/
+      image: proj/rmats:0.01
+
+

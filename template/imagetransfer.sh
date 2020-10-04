@@ -6,26 +6,17 @@ done
 echo -ne "\r\033[K All Docker images saved ^_^. Let's begin the export."
 echo ------------
 
-read -r -p "Ready to export? [Y/N] " dryrunner
-case $dryrunner in
+read -r -p "Ready to export? [Y/N] " exporter
+case $exporter in
 [yY][eE][sS]|[yY])
 echo "Yes"
-rundry=1
 ;;
-[nN][oO]|[nN])
+*)
 echo "No"
-rundry=0
-;;  
-*)  
-echo "Invalid input..."
-exit 1
-;;
-esac
-if [ $rundry -eq 0 ] 
-then
 popd
 exit
-fi
+;;  
+esac
 
 
 
