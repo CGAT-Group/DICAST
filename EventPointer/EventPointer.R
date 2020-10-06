@@ -8,8 +8,7 @@ option_list = list(make_option(c("--gtf"), type='character', default = NULL, hel
 		   make_option(c("--differential"),type='integer',default=0,help="0:only AS event detection using file from --bamfile;1: differential analysis using files from --casefolder & --controlfolder"),
 		   make_option(c("--casefolder"),type='character',default=NULL,help="path to folder with BAMs considered case (only use with --differential 1)"),
 		   make_option(c("--controlfolder"),type='character',default=NULL,help="path to folder with BAMs considered control (only use with --differential 1)"),
-		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"),
-		   make_option(c("--workdir"),type='character',default=NULL,help="Path to workdir (in here all files and folders shall be placed)"),
+		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"), 
 		   make_option(c("--output"),type='character',default=NULL, help="output folder"),
 		   make_option(c("--cores"), type='integer',default=1,help="Number of cores",metavar="integer"))
 opt_parser = OptionParser(option_list=option_list)

@@ -3,7 +3,11 @@
 ############################
 
 ncores=6										#number of cores the tool will use
+<<<<<<< Updated upstream
 workdir=/MOUNT								#name of the base directory inside the Docker
+=======
+workdir=/myvol1/unify_test_MOUNT								#name of the base directory inside the Docker
+>>>>>>> Stashed changes
 outdir=$workdir/output/${tool:-unspecific}-output			#name of the output directory; will be named after the specific tool that was used
 read_length=76								#length of reads inside fastq files
 

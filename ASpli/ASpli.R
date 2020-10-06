@@ -7,8 +7,7 @@ option_list = list(make_option(c("--gtf"), type='character', default = NULL, hel
                    make_option(c("--cores"), type='integer', default = 1, help="the number of cores", metavar='character'),
                    make_option(c("--readLength"), type='integer', default = NULL, help="the read length", metavar='character'),
 		   make_option(c("--out"), type ='character',default = NULL, help="output directory",metavar='character'),
-		   make_option(c("--differential"),type='integer',help="1 for differential analysis, needs at least two BAMs in config (case&control); 0 for AS event detection",metavar='character'),
-		   make_option(c("--workdir"),type='character',help="the working drectory (all of the used folders have to be inside here)",metavar="character"),
+		   make_option(c("--differential"),type='integer',help="1 for differential analysis, needs at least two BAMs in config (case&control); 0 for AS event detection",metavar='character'), 
 		   make_option(c("--bamfolder"),type='character',default=NULL,help="folder containing BAM file used for AS event detection; only use this paramter if --differential parameter is NOT used",metavar='character'),
 		   make_option(c("--bamfile"),type='character',default=NULL,help="Name of BAM file to use for AS event detection"),
 		   make_option(c("--casefolder"),type='character',default=NULL,help="folder containing all BAM-files, which will be labeled CASE for differential splicing analysis; --differential parameter needs to be used", metavar='character'),
@@ -33,10 +32,6 @@ if(is.null(opt$out)){
   print_help(opt_parser)
   stop("Please provide an output directory", call.=FALSE)
 }
-if(is.null(opt$workdir)){
-  print_help(opt_parser)
-  stop("Please provide the working directory", call.=FALSE)
-}
 if(differential){
   if(is.null(opt$casefolder)) stop("Please provide a case-folder")
   if(is.null(opt$controlfolder)) stop ("Please provide control-folder")
@@ -52,13 +47,13 @@ readLength=opt$readLength
 
 if(differential){
   #get files from case & control folders with full path, but only BAM files, not the index!
-  cases <- list.files(paste0(opt$workdir,"/",opt$casefolder),full.names=T, pattern="\\.bam$")
-  controls <- list.files(paste0(opt$workdir,"/",opt$controlfolder),full.names=T,pattern="\\.bam$")
-
+  cases <- list.files(opt$casefolder,full.names=T, pattern="\\.bam$")
+  controls <- list.files(opt$controlfolder,full.names=T,pattern="\\.bam$")
+	
   targets <- data.frame(row.names=paste0("Sample_",c(1:(length(cases)+length(controls)))),bam=c(cases,controls),genotype=c(rep("Case",length(cases)),rep("Control",length(controls))))
   #targets$bam <- paste0(opt$workdir,targets$bam) #add workdir to each filepath of BAMfiles
 }else{
-  asevent_bams <- list.files(paste0(opt$workdir,"/",opt$bamfolder),full.names=T,pattern="\\.bam$")
+  asevent_bams <- list.files(opt$bamfolder,full.names=T,pattern="\\.bam$")
   #asevent_bams <- basename(opt$bamfile)
   targets <- data.frame(row.names=paste0("Sample_",c(1:length(asevent_bams))),bam=asevent_bams,genotype=paste0("BAM",c(1:length(asevent_bams))))
 }
