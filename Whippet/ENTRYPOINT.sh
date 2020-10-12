@@ -21,16 +21,16 @@ done
 echo "Merging and indexing BAM files of $bamdir to use for splice graph building..."
 readbamfiles
 bamlist=$(cat $outdir/bamlist | xargs echo)
-mkdir -p $outdir/tmp
-samtools merge $outdir/tmp/merged_bam.bam $bamlist
-samtools sort $outdir/tmp/merged_bam.bam $outdir/tmp/merged_bam_sorted
-samtools rmdup -S $outdir/tmp/merged_bam_sorted.bam $outdir/tmp/merged_bam_sorted_rmdup.bam
-samtools index $outdir/tmp/merged_bam_sorted_rmdup.bam
+mkdir -p /docker_main/tmp
+samtools merge /docker_main/tmp/merged_bam.bam $bamlist
+samtools sort /docker_main/tmp/merged_bam.bam /docker_main/tmp/merged_bam_sorted
+samtools rmdup -S /docker_main/tmp/merged_bam_sorted.bam /docker_main/tmp/merged_bam_sorted_rmdup.bam
+samtools index /docker_main/tmp/merged_bam_sorted_rmdup.bam
 
 echo ----------Starting Whippet---------
 
 echo Building splice graph...
-julia /docker_main/bin/whippet-index.jl --fasta $fasta --gtf $gtf --bam $outdir/tmp/merged_bam_sorted_rmdup.bam -x $outdir/graph 
+julia /docker_main/bin/whippet-index.jl --fasta $fasta --gtf $gtf --bam /docker_main/tmp/merged_bam_sorted_rmdup.bam -x $outdir/graph 
 
 if [ $differential = 0  ]; then
 	echo Starting Whippet in AS event detection mode...
