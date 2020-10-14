@@ -2,9 +2,9 @@
 
 # use config and function file
 tool=aspli
-source template/config.sh
-source template/asevent_config.sh
-source template/asevent_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/asevent_config.sh
+source /MOUNT/scripts/asevent_func.sh
 
 
 #test input-files
@@ -24,11 +24,11 @@ echo starting ASpli...
 
 if [ $differential = 0 ]; then
 	echo Starting ASpli in AS event detection mode...
-	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --workdir $workdir --bamfolder $bamdir --differential $differential
+	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --bamfolder $bamdir --differential $differential
 fi
 if [ $differential = 1 ]; then
 	echo Starting Aspli in DS analysis mode...
-	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --workdir $workdir --casefolder $casefolder --controlfolder $controlfolder --differential $differential
+	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --casefolder $casebam --controlfolder $controlbam --differential $differential
 fi
 
 
