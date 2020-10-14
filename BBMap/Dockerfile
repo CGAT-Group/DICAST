@@ -6,8 +6,8 @@ LABEL maintainer="Amit Fenn"
 #link to ref genome
 ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 
-# Binding the folder where the fastq files are.
-VOLUME /myvol1
+# Name of mounted folder
+VOLUME /MOUNT
 
 #Installing tool
 RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download" && \
