@@ -40,7 +40,7 @@ second_attempt() {
 build_index(){
 	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-	for line in $(ls $contextmap_fastadir); do bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$line --threads $ncores; done
+	for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
@@ -48,6 +48,9 @@ build_index(){
 
 ### START here ############################################################################
 
+
+#get names of chromosome-wise fasta files
+# fasta_filenames=$(for f in $(ls $contextmap_fastadir); do printf "%s\n" ${f%.*}; done)
 
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; then build_index; fi fi
@@ -57,6 +60,10 @@ mk_fastqlist
 
 #make output directories
 mk_outdir
+
+# get indices basenames
+indices=$(for f in $(ls $contextmap_fastadir); do printf "%s\n" $indexdir/$indexname/${f%.*},; done)
+
 
 ### Start mapping ###
 
@@ -82,7 +89,7 @@ while read -r line; do
 		-o $outdir/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices $(ls -m $indexdir/$indexname) \
+		-indices $indices \
 		-genome $contextmap_fastadir
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
