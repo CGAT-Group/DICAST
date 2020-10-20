@@ -4,13 +4,14 @@
 tool=gsnap
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
@@ -24,11 +25,11 @@ second_attempt() {
 	# X --ordered      Print output in same order as input (relevant only if there is more than one worker thread)
 	# ...
 	gsnap \
-		--db $index \
+		--db $indexname \
 		--dir $indexdir \
-		--output-file $out/${line##*/}${tool}.sam \
+		--output-file $outdir/${line##*/}${tool}.sam \
 		--format sam \
-		--nthreads $nthreads \
+		--nthreads $ncores \
 		${line}?.fastq
 
 }
@@ -42,12 +43,12 @@ build_index() {
 	# -d, --db=STRING           Genome name
 
 	gmap_build \
-	-db $index \
+	-db $indexname \
 	-dir $indexdir \
-	$(ls $inputdir/$fasta)
+	$fasta
 
 	chmod -R 777 $indexdir
-	echo "Index is now saved under $indexdir/$index"
+	echo "Index is now saved under $indexdir/$indexname"
 }
 
 ### START here ############################################################################
@@ -56,7 +57,7 @@ build_index() {
 test_fasta
 
 # Build genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/$index/$index.contig; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname/$indexname.contig; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -71,8 +72,7 @@ echo "compute ${tool} mapping..."
 while read -r line; do
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
-	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
-	
+ 
 	# Usage: gsnap [OPTIONS...] <FASTA file>
 	# Parameters (X means that the parameter is currently not used)
 	# --db	Genome database
@@ -84,14 +84,14 @@ while read -r line; do
 	# ...
 
 	gsnap \
-	--db $index \
+	--db $indexname \
 	--dir $indexdir \
-	--output-file $out/${line##*/}${tool}.sam \
+	--output-file $outdir/${line##*/}${tool}.sam \
 	--format sam \
-	--nthreads $nthreads \
+	--nthreads $ncores \
 	${line}1.fastq ${line}2.fastq
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 

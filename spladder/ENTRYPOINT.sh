@@ -1,18 +1,18 @@
 #!/bin/bash
 
-source /myvol1/config/asevent_config.sh
-source /myvol1/func/asevent_func.sh
 tool=spladder
+source /MOUNT/scripts/config.sh 
+source /MOUNT/scripts/asevent_config.sh
+source /MOUNT/scripts/asevent_func.sh
 
 
 #make output directory
 mk_outdir $tool
-out=$wd/$output/${tool:-unspecific}-output #local variable for output folder
 
 
 #handle SAM file
 readsamfiles
-for filename in $(cat $out/samlist)
+for filename in $(cat $outdir/samlist)
 do
 	makebamfromsam $filename
 done
@@ -21,21 +21,21 @@ done
 if [ $differential = 0 ]
 then
 	#list all .bam files in bamfolder with comma seperated
-	bamlist=$(ls -1p $wd/$bamfolder/*.bam | xargs echo | sed 's/ /,/g')
+	bamlist=$(ls -1p $bamdir/*.bam | xargs echo | sed 's/ /,/g')
 	echo Starting spladder in event detection mode ...
-	spladder build -b $bamlist -o $out -a $wd/$gtf --parallel $ncores -n $read_length
+	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length
 	cleaner
 fi
 
 if [ $differential = 1 ]
 then
-	caselist=$(ls -1p $wd/$casefolder/*.bam | xargs echo | sed 's/ /,/g')
-	controllist=$(ls -1p $wd/$controlfolder/*.bam | xargs echo | sed 's/ /,/g')
+	caselist=$(ls -1p $casebam/*.bam | xargs echo | sed 's/ /,/g')
+	controllist=$(ls -1p $controlbam/*.bam | xargs echo | sed 's/ /,/g')
 	echo Starting spladder in DS mode ...
-	echo "$caselist,$controllist"
-	spladder build -b "$caselist,$controllist" -o $out -a $wd/$gtf --parallel $ncores -n $read_length
+	#echo "$caselist,$controllist"
+	spladder build -b "$caselist,$controllist" -o $outdir -a $gtf --parallel $ncores -n $read_length
 
 	echo testing for differential splicing  ...
-	spladder test --conditionA $caselist --conditionB $controllist -o $out --parallel $ncores -n $read_length --labelA "CASE" --labelB "CONTROL"
+	spladder test --conditionA $caselist --conditionB $controllist -o $outdir --parallel $ncores -n $read_length --labelA "CASE" --labelB "CONTROL"
 	cleaner
 fi

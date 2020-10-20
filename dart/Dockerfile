@@ -15,6 +15,9 @@ make
 
 ENV PATH=$PATH:/opt/v1.4.0/bin
 
+# Name of mounted folder
+VOLUME /MOUNT
+
 
 #ENTRYPOINT SCRIPT
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh

@@ -4,13 +4,14 @@
 tool=subjunc
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
@@ -28,10 +29,10 @@ second_attempt() {
 	#		and  they  are  in  the same order as in the input file.
 
 	subjunc \
-		-i $indexdir/$index \
+		-i $indexdir/$indexname \
 		-r ${line}?.fastq \
-		-o $out/${line##*/}$tool.sam \
-		-T $nthreads \
+		-o $outdir/${line##*/}$tool.sam \
+		-T $ncores \
 		--SAMoutput
 }
 
@@ -39,9 +40,9 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "compute index ..."
-	subread-buildindex $(ls $inputdir/$fasta) -o $indexdir/$index -F -B 
+	subread-buildindex $fasta -o $indexdir/$indexname -F -B 
 	chmod -R 777 $indexdir
-	echo "Index is now saved under $indexdir/$index"
+	echo "Index is now saved under $indexdir/$indexname"
 }
 
 ### START here ############################################################################
@@ -53,7 +54,7 @@ test_fasta
 PATH=$PATH:/opt/subread-2.0.0-Linux-x86_64/bin/ 
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/$index.reads; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname.reads; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -69,7 +70,6 @@ while read -r line; do
 
 #First attempt: Paired end mapping
 #...tag outputs with this flag to name it per fastqfile         "${line##*/}"
-#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
 # -r	Give the name of an input file (multiple files are allowed tobe provided toalignandsubjuncfunctions inRsubread).
 #		For paired-end read data, this gives the first read file andthe other read file should be provided via the -R option.
@@ -84,15 +84,15 @@ while read -r line; do
 #		and  they  are  in  the same order as in the input file.
 
 
-subjunc \
-	-i $indexdir/$index \
-	-r ${line}1.fastq \
-	-R ${line}2.fastq \
-	-o $out/${line##*/}${tool}.sam \
-	-T $nthreads \
-	--SAMoutput
+	subjunc \
+		-i $indexdir/$indexname \
+		-r ${line}1.fastq \
+		-R ${line}2.fastq \
+		-o $outdir/${line##*/}${tool}.sam \
+		-T $ncores \
+		--SAMoutput
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 

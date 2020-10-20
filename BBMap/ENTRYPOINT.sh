@@ -1,31 +1,32 @@
 #!/bin/bash
 
 ### Tool-specific variables ###
-tool=BBMap
+tool=bbmap
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	/bbmap/bbmap.sh \
 		in=${line}?.fastq \
-		outm=$out/${line##*/}${tool}_mapped.sam \
-		outu=$out/${line##*/}${tool}_unmapped.sam
+		outm=$outdir/${line##*/}${tool}_mapped.sam \
+		outu=$outdir/${line##*/}${tool}_unmapped.sam
 }
 
 build_index() {
-	mkdir -p $indexdir/$index
+	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-	/bbmap/bbmap.sh ref=$(ls $inputdir/$fasta) path=$indexdir/$index overwrite=false
+	/bbmap/bbmap.sh ref=$fasta path=$indexdir/$indexname overwrite=false
 	chmod -R 777 $indexdir
-	echo "Index is now saved at $indexdir/$index"
+	echo "Index is now saved at $indexdir/$indexname"
 }
 
 ### START here ############################################################################
@@ -34,7 +35,7 @@ build_index() {
 test_fasta
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -d $indexdir/$index; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -47,17 +48,16 @@ echo "compute ${tool} mapping..."
 while read -r line; do
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
-	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
 	/bbmap/bbmap.sh \
 		in=${line}1.fastq \
 		in2=${line}2.fastq \
-		ref=$(ls $inputdir/$fasta) \
-		path=$indexdir/$index \
-		outm=$out/${line##*/}${tool}_mapped.sam \
-		outu=$out/${line##*/}${tool}_unmapped.sam
+		ref=$fasta \
+		path=$indexdir/$indexname \
+		outm=$outdir/${line##*/}${tool}_mapped.sam \
+		outu=$outdir/${line##*/}${tool}_unmapped.sam
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 

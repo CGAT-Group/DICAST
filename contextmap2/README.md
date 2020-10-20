@@ -1,0 +1,1 @@
+Contextmap: Make sure that the file jre-8u241-linux-i586.tar.gz is in the same folder as the Dockerfile

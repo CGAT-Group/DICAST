@@ -4,32 +4,33 @@
 tool=hisat
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 #Update PATH
 PATH=$PATH:/docker_main/hisat2-2.0.0-beta
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	hisat2 -q \
-	-x /$wd/index/$tool-index/$index \
+	-x $indexdir/$indexname \
 	-U "$line"?.fastq \
-	-S $out/${line##*/}${tool}.sam \
-	--known-splicesite-infile /$wd/index/$tool-index/$index.splicesites.txt
+	-S $outdir/${line##*/}${tool}.sam \
+	--known-splicesite-infile $indexdir/$index.splicesites.txt
 }
 
 # make index directory and build index if index was not found
 build_index() {
-	mkdir -p /$wd/index/$tool-index
+	mkdir -p $indexdir
 	echo "compute index ..."
-	hisat2-build  $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $(ls $inputdir/$gtf) > /$wd/index/$tool-index/$index.splicesites.txt
-	chmod -R 777 /$wd/index/${tool}-index/
-	echo "Index is now saved under /$wd/index/$tool-index/$index"
+	hisat2-build  $fasta $indexdir/$indexname && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/$indexname/splicesites.txt
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$indexname"
 }
 
 
@@ -40,7 +41,7 @@ test_fasta
 test_gtf
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f /$wd/index/$tool-index/$index/1.ht2; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname/1.ht2; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -57,12 +58,12 @@ while read -r line; do
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
 
 	hisat2 -q \
-	-x /$wd/index/$tool-index/$index \
+	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
-	-S /$out/${line##*/}${tool}.sam \
-	--known-splicesite-infile /$wd/index/$tool-index/$index.splicesites.txt
+	-S $outdir/${line##*/}${tool}.sam \
+	--known-splicesite-infile $indexdir/$indexname/splicesites.txt
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 

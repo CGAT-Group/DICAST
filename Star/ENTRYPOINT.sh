@@ -1,49 +1,82 @@
 #!/bin/bash
 tool=star
-star_version=2.7.5c
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+
+# use confic and function file
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 
 #Build Genome index
 build_index() {
-	mkdir $indexdir; chmod 777 $indexdir
-	/docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir $indexdir --genomeFastaFiles $inputdir/$fasta --runThreadN $nthreads --sjdbGTFfile $inputdir/$gtf -sjdbOverhang 100 --outFileNamePrefix $out/Star_mapped_${line##*/}
+	mkdir -p $indexdir/$indexname
+	echo "compute index ..."
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+		--runMode genomeGenerate \
+		--genomeDir $indexdir/$indexname \
+		--genomeFastaFiles $fasta \
+		--runThreadN $ncores \
+		--sjdbGTFfile $gtf \
+		-sjdbOverhang 100 \
+		--outFileNamePrefix $outdir/Star_mapped_${line##*/}
+	chmod -R 777 $indexdir
+	echo "Index is now saved under $indexdir/$indexname"
 }
 
-#Unpaired mapping command
+#Unpaired mapping command (EXPERIMENTAL)
 second_attempt() {
 for line1 in $(ls ${line}*.fastq| sed s/.fastq// );
 do
-	/docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --genomeDir $indexdir --outFileNamePrefix $out/Star_mapped_${line1##*/} --sjdbGTFfile $inputdir/$gtf  --twopassMode Basic --runThreadN $nthreads --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn ${line1}.fastq
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+	--genomeDir $indexdir/$indexname \
+	--outFileNamePrefix $outdir/Star_mapped_${line1##*/} \
+	--sjdbGTFfile $gtf  \
+	--twopassMode Basic \
+	--runThreadN $ncores \
+	--outSAMstrandField intronMotif \
+	--outSAMattributes NH HI AS nM NM XS \
+	--readFilesIn ${line1}.fastq
 done
 }
 
+### START here ############################################################################
 
-#START here: Make a list of fastq files
-mk_fastqlist
-
-
-#make output directories
-mk_outdir
-
-#test filepaths for fasta and indexing
+# test filepaths
 test_fasta
 test_gtf
 
+echo $gtf
+#make output directories
 mk_outdir
-if ! test -f $indexdir/genomeParameters.txt; then build_index; fi
 
 
+# Build Genome index if not already available
+if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname/genomeParameters.txt; then build_index; fi fi
+
+#make list of fastq files
+mk_fastqlist
+
+
+### Start mapping ###
+
+echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
 	trap 'second_attempt $line' ERR
-
+	
 	#First attempt: Paired end mapping
-echo mapping paired
-	/docker_main/STAR-${star_version}/bin/Linux_x86_64/STAR --genomeDir  $indexdir --outFileNamePrefix $out/Star_mapped_${line##*/} --sjdbGTFfile $inputdir/$gtf  --twopassMode Basic --runThreadN $nthreads --outSAMstrandField intronMotif --outSAMattributes NH HI AS nM NM XS --readFilesIn ${line}1.fastq ${line}2.fastq
+	echo mapping paired
+	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+		--genomeDir $indexdir/$indexname \
+		--outFileNamePrefix $outdir/Star_mapped_${line##*/} \
+		--sjdbGTFfile $gtf  \
+		--twopassMode Basic \
+		--runThreadN $ncores \
+		--outSAMstrandField intronMotif \
+		--outSAMattributes NH HI AS nM NM XS \
+		--readFilesIn ${line}1.fastq ${line}2.fastq
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 done < /tmp/$tool-fastqlist
 
 #wait for all processes to end

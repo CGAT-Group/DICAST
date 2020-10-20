@@ -4,8 +4,9 @@
 tool=contextmap
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 #To call contextmap as a command.
 PATH="$PATH":/home/biodocker/ContextMap_Source_v2.7.9/:/home/biodocker/jre1.8.0_241/
@@ -13,7 +14,7 @@ PATH="$PATH":/home/biodocker/ContextMap_Source_v2.7.9/:/home/biodocker/jre1.8.0_
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
@@ -28,36 +29,55 @@ second_attempt() {
 		mapper \
 		-reads ${line}?.fastq \
 		-aligner_name bowtie2 \
-		-o $out/${line##*/}${tool}.sam \
-		-aligner_bin /home/biodocker/bin/\
+		-o $outdir/${line##*/}${tool}.sam \
+		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
+<<<<<<< HEAD
 		-indices $indexdir/$index \
 		-genome  $inputdir/$contextmap_fastadir
+||||||| merged common ancestors
+		-indices $indexdir/$index \
+		-genome $(ls $inputdir/$contextmap_fastadir)
+=======
+		-indices $(ls -m $indexdir/$indexname) \
+		-genome  $contextmap_fastadir
+>>>>>>> unify-config
 }
 
 #Build Genome index
 build_index(){
-	mkdir -p $indexdir/$index
+	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
+<<<<<<< HEAD
 	for line in $fasta; do bowtie2-build -f $inputdir/$contextmap_fastadir/$line $indexdir/$line --threads $nthreads; done
+||||||| merged common ancestors
+	for line in $fasta; do bowtie2-build -f $inputdir/$line $indexdir/$line --threads $nthreads; done
+=======
+	for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
+>>>>>>> unify-config
 	chmod -R 777 $indexdir
-	echo "Index is now saved under $indexdir/$index"
+	echo "Index is now saved under $indexdir/$indexname"
 }
 
 
 ### START here ############################################################################
 
-# test filepaths
-test_fasta
+
+#get names of chromosome-wise fasta files
+# fasta_filenames=$(for f in $(ls $contextmap_fastadir); do printf "%s\n" ${f%.*}; done)
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/$index.1.bt2; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
 
 #make output directories
 mk_outdir
+
+# get indices basenames
+indices=$(for f in $(ls $contextmap_fastadir); do printf "%s\n" $indexdir/$indexname/${f%.*},; done)
+
 
 ### Start mapping ###
 
@@ -80,14 +100,30 @@ while read -r line; do
 		mapper \
 		-reads ${line}1.fastq,${line}2.fastq \
 		-aligner_name bowtie2 \
+<<<<<<< HEAD
 		-o $out/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2\
+||||||| merged common ancestors
+		-o $out/${line##*/}${tool}.sam \
+		-aligner_bin /home/biodocker/bin/\
+=======
+		-o $outdir/${line##*/}${tool}.sam \
+		-aligner_bin /home/biodocker/bin/bowtie2 \
+>>>>>>> unify-config
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
+<<<<<<< HEAD
 		-indices $indexdir/$index \
 		-genome $inputdir/$contextmap_fastadir
+||||||| merged common ancestors
+		-indices $indexdir/$index \
+		-genome $(ls $inputdir/$contextmap_fastadir)
+=======
+		-indices $indices \
+		-genome $contextmap_fastadir
+>>>>>>> unify-config
 
-	#If paired end mapping fails, run unpaired mapping.
-	trap 'second_attempt $line' ERR
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
+	#trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 
 # wait for all processes to end
