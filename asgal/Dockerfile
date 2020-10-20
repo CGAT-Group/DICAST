@@ -54,7 +54,7 @@ RUN set -eux; \
 
 RUN git clone --recursive https://github.com/AlgoLab/galig.git
 RUN cd galig ; make prerequisites
-RUN cd galig ; make
+#RUN cd galig ; make
 
 VOLUME ["/data"]
 COPY ENTRYPOINT.sh /galig/ENTRYPOINT.sh

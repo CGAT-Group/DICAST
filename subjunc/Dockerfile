@@ -13,6 +13,9 @@ RUN ls /opt/subread-2.0.0-Linux-x86_64
 
 WORKDIR /docker_main
 
+# Name of mounted folder
+VOLUME /MOUNT
+
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

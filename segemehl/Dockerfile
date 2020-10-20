@@ -25,7 +25,10 @@ RUN cd /docker_main/segemehl* && \
     mv /docker_main/segemehl-${SEGEMEHL_VERSION}/ /opt/ && \
     rm -rf /docker_main/segemehl-${SEGEMEHL_VERSION} && \
     apt-get purge -y --auto-remove curl &&  \
-    apt-get clean -yq  
+    apt-get clean -yq
+
+# Name of mounted folder
+VOLUME /MOUNT  
 
 #ENTRYPOINT SCRIPT
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh

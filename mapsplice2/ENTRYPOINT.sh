@@ -4,13 +4,14 @@
 tool=mapsplice2
 
 # use confic and function file
-source /myvol1/config/mapping_config.sh
-source /myvol1/func/mapping_func.sh
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/mapping_config.sh
+source /MOUNT/scripts/mapping_func.sh
 
 
 ### Tool-specific functions ###
 
-# Unpaired mapping command: second attempt, used if paired end mapping failes
+# Unpaired mapping command: second attempt, used if paired end mapping failes (EXPERIMENTAL)
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
@@ -21,11 +22,11 @@ second_attempt() {
 	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
 	#			idle and takes little CPU time). 
 	python /opt/conda/bin/mapsplice.py \
-		-c $inputdir/$mapsplice_fastadir \
-		-x $indexdir/$index \
-		--gene-gtf $inputdir/$gtf \
-		-o $out/${line##*/}${tool}.sam \
-		-p $nthreads \
+		-c $mapsplice_fastadir_mapping \
+		-x $indexdir/$indexname \
+		--gene-gtf $gtf \
+		-o $outdir/${line##*/}${tool}.sam \
+		-p $ncores \
 		-1 ${line}?.fastq
 }
 
@@ -38,11 +39,11 @@ build_index() {
 	#    ebwt_outfile_base       write Ebwt data to files with this dir/basename
 	# Parameters:
 	# --seed <int>            seed for random number generator 
-	#bwt_index $(ls $inputdir/$fasta) /$wd/index/$tool-index/$index
+
 	bowtie-build \
 		--seed 42 \
-		$inputdir/$mapsplice_fastadir_index \
-		$indexdir/$index
+		$mapsplice_fastadir_index \
+		$indexdir/$indexname
 	chmod -R 777 $indexdir
 }
 
@@ -57,7 +58,7 @@ test_gtf
 PATH=$PATH:/opt/conda/bin/mapsplice.py
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/$index.rev.2.ebwt; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname.rev.2.ebwt; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -73,7 +74,6 @@ while read -r line; do
 
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
-	#...address for all gtf files are                               $(find /myvol1/ -name "*.gtf")
 
 	# python mapsplice.py [options]* -c <Reference_Sequence> -x <Bowtie_Index> -1 <Read_List1> -2 <Read_List2>
 	# Parameters (X means that the parameter is currently not used)
@@ -84,15 +84,15 @@ while read -r line; do
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
 	python /opt/conda/bin/mapsplice.py \
-		-c $inputdir/$mapsplice_fastadir_chromosomes \
-		-x $indexdir/$index \
-		--gene-gtf $inputdir/$gtf \
-		-o $out/${line##*/}${tool}.sam \
-		-p $nthreads \
+		-c $inputdir/$mapsplice_fastadir_mapping \
+		-x $indexdir/$indexname \
+		--gene-gtf $gtf \
+		-o $outdir/${line##*/}${tool}.sam \
+		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq
 
-	#If paired end mapping fails, run unpaired mapping.
+	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 

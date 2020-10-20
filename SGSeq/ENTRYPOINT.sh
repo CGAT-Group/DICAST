@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # use config and function file
-source /myvol1/config/asevent_config.sh
-source /myvol1/func/asevent_func.sh
 tool=sgseq
+source /MOUNT/scripts/config.sh
+source /MOUNT/scripts/asevent_config.sh
+source /MOUNT/scripts/asevent_func.sh
 
 
 ### START here ###################
 
 #tests
 mk_outdir $tool
-test_gtf $wd/$gtf
-out=$wd/$output/${tool:-unspecific}-output #local variable for output folder
+test_gtf $gtf
 
 
 #handle sam files
 readsamfiles
-for filename in $(cat $wd/$output/${tool:-unspecific}-output/samlist)
+for filename in $(cat $outdir/samlist)
 do
         makebamfromsam $filename
 done
@@ -28,11 +28,11 @@ readbamfiles
 
 echo compute ${tool} AS event detection...
 
-for filename in $(cat $wd/$output/${tool:-unspecific}-output/bamlist)
+for filename in $(cat $outdir/bamlist)
 do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)
-	Rscript /docker_main/SGSeq.R --gtf $wd/$gtf --path_to_bam $filename --out $sample_out --cores $ncores
+	Rscript /docker_main/SGSeq.R --gtf $gtf --path_to_bam $filename --out $sample_out --cores $ncores
 	wait
 done
 

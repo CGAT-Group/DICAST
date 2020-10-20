@@ -13,7 +13,7 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 #this is the final docker image
 FROM ubuntu:base
 LABEL description="Image for IRFinder"
-LABEL maintainer="Amit Fenn"
+LABEL maintainer="Alexander Dietrich"
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 

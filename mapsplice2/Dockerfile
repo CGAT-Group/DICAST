@@ -5,6 +5,8 @@ LABEL maintainer="Amit Fenn"
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
+# Name of mounted folder
+VOLUME /MOUNT
 
 WORKDIR /docker_main
 
