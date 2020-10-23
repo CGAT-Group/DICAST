@@ -24,23 +24,11 @@ echo starting ASpli...
 
 if [ $differential = 0 ]; then
 	echo Starting ASpli in AS event detection mode...
-<<<<<<< HEAD
-	Rscript /docker_main/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --bamfolder $bamfolder --differential $differential
-||||||| merged common ancestors
-	Rscript $wd/Rscripts/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --bamfolder $bamfolder --differential $differential
-=======
 	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --bamfolder $bamdir --differential $differential
->>>>>>> unify-config
 fi
 if [ $differential = 1 ]; then
 	echo Starting Aspli in DS analysis mode...
-<<<<<<< HEAD
-	Rscript /docker_main/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $casefolder --controlfolder $controlfolder --differential $differential
-||||||| merged common ancestors
-	Rscript $wd/Rscripts/ASpli.R --gtf $wd/$gtf --cores $ncores --readLength $read_length --out $wd/$output/${tool:-unspecific}-output --workdir $wd --casefolder $casefolder --controlfolder $controlfolder --differential $differential
-=======
 	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --casefolder $casebam --controlfolder $controlbam --differential $differential
->>>>>>> unify-config
 fi
 
 

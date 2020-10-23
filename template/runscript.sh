@@ -104,7 +104,7 @@ IFS='|' read -ra mode <<<  $(zenity --list --height 250 --width 400  --checklist
 	--column="Tool Set"\
 	TRUE "Mapping tools" \
 	FALSE "AS Event detection tools" \
-        FLASE "Differential AS tools"\
+        FALSE "Differential AS tools"\
 	2> /dev/null )
 echo Selected modes: ${mode[@]}
 IFS=$OLDIFS
