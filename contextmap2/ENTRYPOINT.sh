@@ -48,13 +48,7 @@ second_attempt() {
 build_index(){
 	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-<<<<<<< HEAD
-	for line in $fasta; do bowtie2-build -f $inputdir/$contextmap_fastadir/$line $indexdir/$line --threads $nthreads; done
-||||||| merged common ancestors
-	for line in $fasta; do bowtie2-build -f $inputdir/$line $indexdir/$line --threads $nthreads; done
-=======
 	for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
->>>>>>> unify-config
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
