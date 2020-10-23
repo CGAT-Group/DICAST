@@ -32,16 +32,8 @@ second_attempt() {
 		-o $outdir/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-<<<<<<< HEAD
-		-indices $indexdir/$index \
-		-genome  $inputdir/$contextmap_fastadir
-||||||| merged common ancestors
-		-indices $indexdir/$index \
-		-genome $(ls $inputdir/$contextmap_fastadir)
-=======
 		-indices $(ls -m $indexdir/$indexname) \
 		-genome  $contextmap_fastadir
->>>>>>> unify-config
 }
 
 #Build Genome index
@@ -94,27 +86,11 @@ while read -r line; do
 		mapper \
 		-reads ${line}1.fastq,${line}2.fastq \
 		-aligner_name bowtie2 \
-<<<<<<< HEAD
-		-o $out/${line##*/}${tool}.sam \
-		-aligner_bin /home/biodocker/bin/bowtie2\
-||||||| merged common ancestors
-		-o $out/${line##*/}${tool}.sam \
-		-aligner_bin /home/biodocker/bin/\
-=======
 		-o $outdir/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
->>>>>>> unify-config
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-<<<<<<< HEAD
-		-indices $indexdir/$index \
-		-genome $inputdir/$contextmap_fastadir
-||||||| merged common ancestors
-		-indices $indexdir/$index \
-		-genome $(ls $inputdir/$contextmap_fastadir)
-=======
 		-indices $indices \
 		-genome $contextmap_fastadir
->>>>>>> unify-config
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	#trap 'second_attempt $line' ERR
