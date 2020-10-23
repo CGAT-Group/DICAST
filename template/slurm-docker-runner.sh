@@ -10,4 +10,4 @@
 
 image=${1:-$(cat /nfs/proj/AS_dockers/images.txt | head -${SLURM_ARRAY_TASK_ID}|tail -1 )}
 echo $image $USER
-docker run -v "/nfs/proj/AS_dockers/:/myvol1" --user $(id -u):$(id -g) --rm proj/${image}:0.01 ; echo This docker exited with status is: $?
+docker run -v "/nfs/proj/AS_dockers/:/MOUNT/" --user $(id -u):$(id -g) --rm proj/${image}:0.01 ; echo This docker exited with status is: $?

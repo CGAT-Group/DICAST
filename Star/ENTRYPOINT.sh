@@ -11,7 +11,7 @@ source /MOUNT/scripts/mapping_func.sh
 build_index() {
 	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 		--runMode genomeGenerate \
 		--genomeDir $indexdir/$indexname \
 		--genomeFastaFiles $fasta \
@@ -27,7 +27,7 @@ build_index() {
 second_attempt() {
 for line1 in $(ls ${line}*.fastq| sed s/.fastq// );
 do
-	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 	--genomeDir $indexdir/$indexname \
 	--outFileNamePrefix $outdir/Star_mapped_${line1##*/} \
 	--sjdbGTFfile $gtf  \
@@ -66,7 +66,7 @@ while read -r line; do
 	
 	#First attempt: Paired end mapping
 	echo mapping paired
-	/docker_main/STAR-2.7.3a/bin/Linux_x86_64/STAR \
+	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 		--genomeDir $indexdir/$indexname \
 		--outFileNamePrefix $outdir/Star_mapped_${line##*/} \
 		--sjdbGTFfile $gtf  \
