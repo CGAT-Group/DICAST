@@ -142,9 +142,20 @@ mk_sample_out(){
 
 
 build_STAR_index(){
-	echo "Did not find STAR index in $outdir/tmp/STAR_index/ ; building it now..."
-	STAR --runMode genomeGenerate --genomeDir $outdir/tmp/STAR_index --genomeFastaFiles $fasta --sjdbGTFfile $gtf --runThreadN $ncores --outFileNamePrefix $outdir/tmp/Star_mapped_ --sjdbOverhang 100
-	echo "STAR index built and saved to $outdir/tmp/STAR_index/"
+	mkdir -p $star_index
+	STAR --runMode genomeGenerate --genomeDir $star_index --genomeFastaFiles $fasta --sjdbGTFfile $gtf --runThreadN $ncores --outFileNamePrefix $star_index/Star_mapped_ --sjdbOverhang 100
+	wait
+	echo "Built STAR index and saved into $star_index ..."
+}
+
+check_star_index(){
+	echo "Looking for STAR index in $star_index ..."
+	if [ ! -d $star_index ]; then
+		echo "Did not find index, building it now into $star_index ..."
+		build_STAR_index
+	else
+		echo "Found STAR index, moving on ..."
+	fi
 }
 
 
