@@ -16,18 +16,32 @@ test_gtf $gtf
 test_fasta $fasta
 
 
+
+# did not work with our STAR index version; error: unrecognized parameter name "genomeType" in input "genomeParameters.txt"
+#if [ ! -d $outdir/irfinder-index ]; then
+#	#build reference
+#	check_star_index
+#	echo building custom IRFinder reference...
+#	IRFinder -m BuildRefFromSTARRef -r $outdir/irfinder_index -x $star_index -f $fasta -g $gtf
+#	wait
+#	echo reference built, moving on...
+#else 
+#	echo "IRFinder index folder already present in $outdir/irfinder_index; no need to build new index"
+#fi
+
 #move both files into tmp folder
 echo linking annotation files into reference folder...
-mkdir -p $outdir/index
-ln -sf $gtf $outdir/index/transcripts.gtf
-ln -sf $fasta $outdir/index/genome.fa
+mkdir -p $outdir/irfinder_index
+ln -sf $gtf $outdir/irfinder_index/transcripts.gtf
+ln -sf $fasta $outdir/irfinder_index/genome.fa
 
 
 #build reference
 echo building reference...
-IRFinder -m BuildRefProcess -r $outdir/index 
+IRFinder -m BuildRefProcess -r $outdir/irfinder_index 
 wait
 echo reference built, moving on...
+
 
 
 #####################
@@ -64,7 +78,7 @@ then
 		#create output folder for fastq-pair (named by first file)
 		sample_out=$(mk_sample_out $fastq1)
 		#run irdinder
-		IRFinder -r $outdir/index -d $sample_out $fastq1 $fastq2
+		IRFinder -r $outdir/irfinder_index -d $sample_out $fastq1 $fastq2
 		wait
 	done
 
@@ -76,7 +90,7 @@ then
 	bams=$(cat $outdir/bamlist)
 	for bam in $bams
 	do
-       		IRFinder -m BAM -r $outdir/index -d $outdir $bam
+       		IRFinder -m BAM -r $outdir/irfinder_index -d $outdir $bam
        		wait
 	done
 fi
