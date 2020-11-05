@@ -15,11 +15,7 @@ create_input(){
   fi
 }
 
-if [[ ! -d afolder ]]; then
-  mkdir $folder
-fi
 cd afolder
-
 ln -s $renamed_casebam/*.bam* .
 ln -s $renamed_controlbam/*.bam* .
 ln -s $renamed_star_alignment_files/*.SJ.* .
