@@ -11,6 +11,10 @@ WORKDIR /docker_main
 # Installing tool
 RUN conda install -c bioconda rmats -y
 
+#Create temporary folder
+RUN mkdir tmp
+RUN chmod 777 tmp
+
 #ENTRYPOINT SCRIPT
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
