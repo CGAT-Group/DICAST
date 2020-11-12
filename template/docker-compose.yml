@@ -143,7 +143,7 @@ services:
 #    :
 #      build: 
 #        context: ..//
-#        image: proj/:0.01
+#      image: proj/:0.01
 #       dockerfile: Dockerfile
         
 
@@ -156,3 +156,23 @@ services:
       image: proj/rmats:0.01
 
 
+    dsplicetype:
+      build: 
+        context: ../dSpliceType/
+      image: proj/dsplicetype:0.01
+
+    psisigma:
+      build: 
+        context: ../PSI-Sigma/
+      image: proj/psisigma:0.01
+
+    leafcutter:
+      build: 
+        context: ../leafcutter/
+      image: proj/leafcutter:0.01
+
+
+    jum:
+      build: 
+        context: ../JUM/
+      image: proj/jum:0.01
