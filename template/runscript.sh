@@ -124,7 +124,7 @@ fi
 # If Diff AS tools were selected
 if [[ " ${mode[@]}" == *"Differential AS tools"* ]]
 then
-        diffas=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'rmats|cash|leafcutter|dsplicetype|edger|jum|dexseq' ))
+        diffas=($(docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 |grep -E 'rmats|cash|leafcutter|dsplicetype|edger|jum|dexseq|psisigma|miso' ))
 fi
 
 
