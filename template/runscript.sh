@@ -18,7 +18,7 @@ OLDIFS=$IFS
 
 if command -v squeue &> /dev/null #checking if SLURM exists.
 then
-	:> /nfs/proj/AS_dockers/images.txt
+	#:> /nfs/proj/AS_dockers/images.txt  #Managed by arraymaker.
 	SLURM=1
 else
 	:> ./dockerrunlist
@@ -146,11 +146,13 @@ IFS=$OLDIFS
 ###Rewrite SLURM operation below
 case $SLURM in
 	1)	#Print the split string
-		for i in "${dockerarray[@]}"
-		do
-			echo ${i} | tee -a  /nfs/proj/AS_dockers/images.txt 
-		done
-		;;
+		# for i in "${dockerarray[@]}"
+		# do
+		# 	echo ${i} | tee -a  /nfs/proj/AS_dockers/images.txt 
+		# done
+		# ;;
+		######### ${dockerarray[@]} managed by arraymaker.sh
+
 	0)  #Print the split string 
 		for i in "${dockerarray[@]}"
 		do
@@ -158,7 +160,6 @@ case $SLURM in
 		done
 		;;
 esac
-#for i in $( docker images | grep proj | grep 0.01 | cut -d ' ' -f1 | cut -d '/' -f2 ); do echo proj/${i}:0.01;done |tee /nfs/proj/AS_dockers/images.txt ./dockerrunlist
 echo ------------
 #############################################################################################################
 read -r -p "Ready to execute CoMPASS?  [Y/N] " dryrunner
@@ -178,7 +179,7 @@ echo Executing CoMPASS now...
 if command -v squeue &> /dev/null #checking if SLURM exists.
 then
 	echo Running Dockers on SLURM
-	bash arraymaker.sh
+	bash arraymaker.sh ${dockerarray[@]}
 	sbatch ./slurmsubmit.sh
 else
 	echo Running Dockers locally.

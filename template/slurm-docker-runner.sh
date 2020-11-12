@@ -6,8 +6,9 @@
 #SBATCH --mem=1G
 #SBATCH --cpus-per-task=5
 
-# Making an array $images with a list of images
+# This script needs an array $images with a list of images made by arraymaker.sh
+# This scripts needs to assign $image done with arraymaker.sh
+# Do not modify this code, line numbers are counted by other scripts.
 
-image=${1:-$(cat /nfs/proj/AS_dockers/images.txt | head -${SLURM_ARRAY_TASK_ID}|tail -1 )}
 echo $image $USER
 docker run -v "/nfs/proj/AS_dockers/:/MOUNT/" --user $(id -u):$(id -g) --rm proj/${image}:0.01 ; echo This docker exited with status is: $?
