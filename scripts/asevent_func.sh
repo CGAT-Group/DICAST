@@ -52,14 +52,15 @@ test_bam(){
 #take all BAM & BAM-index files from bamfolder(or case-/controlfolder) and store paths in the new bamlist contained in the tool-output folder
 #Parameter: folder to check for bam files; 
 readbamfiles(){
-	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty > $outdir/bamlist
+	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> $outdir/bamlist
 	chmod  777 $outdir/bamlist
 }
 
 #just as readbamfiles, but for SAM-files
+#parameter1: optional different bamdirectory
 readsamfiles(){
 	#touch $wd/$output/${tool:-unspecific}-output/samlist
-	find ${1:-$bamdir} -maxdepth 1 -name "*.sam" -nowarn -not -empty > $outdir/samlist
+	find ${1:-$bamdir} -maxdepth 1 -name "*.sam" -nowarn -not -empty >> $outdir/samlist
 	chmod  777 $outdir/samlist
 }
 
@@ -81,39 +82,76 @@ sortnindexbam(){
 
 
 #Function: Check if bam exists in sam folder or bam folder, if not, build a bam from sam in parameter, sort and index it.
-#Parameter: Full file path to sam file
-#
+#Parameter1: Full file path to sam file
+#Parameter2: directory on which this function is used ($bamdir or $casebam or $controlbam); default is $bamdir
 makebamfromsam(){
 	local sampath=$(dirname $1)
 	local samfileprefix=$(basename -s .sam $1)
 
 		if [[ ! -e ${sampath}/${samfileprefix}.bam ]] 
 			then
-				if [[ ! -e ${bamdir}/${samfileprefix}.bam ]]
+				if [[ ! -e ${2:-$bamdir}/${samfileprefix}.bam ]]
 					then
 					{
 #Make a Bam file
-						echo making bam of $1, in $bamdir/$samfileprefix.bam.  This may take a while..
-							samtools view -bS $1 > ${bamdir}/${samfileprefix}.bam
+						echo making bam of $1, in ${2:-$bamdir}/$samfileprefix.bam.  This may take a while..
+							samtools view -bS $1 > ${2:-$bamdir}/${samfileprefix}.bam
 #Sort bam file
 						echo sorting and indexing bam file $samfileprefix.bam
-							sortnindexbam "${bamdir}/$samfileprefix.bam"
+							sortnindexbam "${2:-$bamdir}/$samfileprefix.bam"
 					}
 				else 
-					echo bam file for $1 exists in $bamdir
-						sortnindexbam "${bamdir}/$samfileprefix.bam"				
+					echo bam file for $1 exists in ${2:-$bamdir}
+						sortnindexbam "${2:-$bamdir}/$samfileprefix.bam"				
 				fi
 		else
 			echo bam file for $1 exists in $sampath
-				if [[ ! -e ${bamdir}/${samfileprefix}.bam ]] ; then
-					mv $1 "${bamdir}" 
-						echo "moved $1 to :" $bamdir
-						sortnindexbam "${bamdir}/${samfileprefix}.bam"
+				if [[ ! -e ${2:-$bamdir}/${samfileprefix}.bam ]] ; then
+					mv $1 "${2:-$bamdir}" 
+						echo "moved $1 to :" ${2:-$bamdir}
+						sortnindexbam "${2:-$bamdir}/${samfileprefix}.bam"
 				fi
 		fi
 } 
 
+#function to handle sam files in either bamdir (for as_tools) or case/control-bamdir (for ds_tools)
+#parameter: 0 to use for as_tools; 1 to use in ds_tools
+handlesamfiles(){
+	if [[ $1 = 0 ]]
+	then
+		echo "Looking for SAM files in $bamdir and converting them to BAM-files..."
+		readsamfiles $bamdir
+		#make bam file out of all samfiles in samlist
+		for filename in $(cat $outdir/samlist)
+		do
+		        makebamfromsam $filename $bamdir
+		done  		
 
+	elif [[ $1 = 1 ]]
+	then
+		echo "Looking for SAM files in $casebam and $controlbam and converting them to BAM-files..."
+		readsamfiles $casebam
+		#make bam file out of all samfiles in samlist
+                for filename in $(cat $outdir/samlist)
+                do
+                        makebamfromsam $filename $casebam
+                done
+		echo "-------------------"
+		rm -f $outdir/samlist
+		readsamfiles $controlbam
+                #make bam file out of all samfiles in samlist
+                for filename in $(cat $outdir/samlist)
+                do
+                        makebamfromsam $filename $controlbam
+                done
+	else
+		echo "wrong argument provided for handlesamfiles(). please only use 0 for as tools or 1 for ds tools."	
+	fi
+
+}
+
+
+	
 # read fastq files in fastqfolder and save paths ins fastqlist file
 readfastqs(){
         find ${1:-$fastqdir} -maxdepth 1 -name "*.fastq" -nowarn > $outdir/fastqlist
