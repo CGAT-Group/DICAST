@@ -50,10 +50,11 @@ test_bam(){
 
 
 #take all BAM & BAM-index files from bamfolder(or case-/controlfolder) and store paths in the new bamlist contained in the tool-output folder
-#Parameter: folder to check for bam files; 
+#Parameter1: folder to check for bam files; 
+#Parameter2: optional output filename (standard is bamlist)
 readbamfiles(){
-	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> $outdir/bamlist
-	chmod  777 $outdir/bamlist
+	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> $outdir/${2:-bamlist}
+	chmod  777 $outdir/${2:-bamlist}
 }
 
 #just as readbamfiles, but for SAM-files
@@ -74,9 +75,9 @@ indexbam(){
 #sort bams if unsorted
 sortnindexbam(){
 	if [[ ! "$(samtools view -H $1 | grep SO: | cut -f 3 | cut -d ":" -f2)" == "coordinate" ]]; then
-		local bamname=$(basename -s .bam $1)
-			samtools sort $1 -o "${bamname}.bam" && \
-			indexbam "${bamname}.bam"
+		#local bamname=$(basename -s .bam $1)
+			samtools sort $1 -o $1 && \
+			indexbam $1
 	fi
 }
 
@@ -106,17 +107,19 @@ makebamfromsam(){
 				fi
 		else
 			echo bam file for $1 exists in $sampath
-				if [[ ! -e ${2:-$bamdir}/${samfileprefix}.bam ]] ; then
-					mv $1 "${2:-$bamdir}" 
-						echo "moved $1 to :" ${2:-$bamdir}
-						sortnindexbam "${2:-$bamdir}/${samfileprefix}.bam"
-				fi
+				#if [[ ! -e ${2:-$bamdir}/${samfileprefix}.bam ]] ; then
+				#	mv $1 "${2:-$bamdir}" 
+				#		echo "moved $1 to :" ${2:-$bamdir}
+				#		sortnindexbam "${2:-$bamdir}/${samfileprefix}.bam"
+				#fi
 		fi
 } 
 
 #function to handle sam files in either bamdir (for as_tools) or case/control-bamdir (for ds_tools)
 #parameter: 0 to use for as_tools; 1 to use in ds_tools
 handlesamfiles(){
+	#clear samlist file first
+	rm -f $outdir/samlist
 	if [[ $1 = 0 ]]
 	then
 		echo "Looking for SAM files in $bamdir and converting them to BAM-files..."
@@ -127,8 +130,7 @@ handlesamfiles(){
 		        makebamfromsam $filename $bamdir
 		done  		
 
-	elif [[ $1 = 1 ]]
-	then
+	else
 		echo "Looking for SAM files in $casebam and $controlbam and converting them to BAM-files..."
 		readsamfiles $casebam
 		#make bam file out of all samfiles in samlist
@@ -137,6 +139,7 @@ handlesamfiles(){
                         makebamfromsam $filename $casebam
                 done
 		echo "-------------------"
+		#clear samlist again
 		rm -f $outdir/samlist
 		readsamfiles $controlbam
                 #make bam file out of all samfiles in samlist
@@ -144,8 +147,7 @@ handlesamfiles(){
                 do
                         makebamfromsam $filename $controlbam
                 done
-	else
-		echo "wrong argument provided for handlesamfiles(). please only use 0 for as tools or 1 for ds tools."	
+		
 	fi
 
 }
