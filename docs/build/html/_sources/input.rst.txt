@@ -1,0 +1,12 @@
+Setup
+=====
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Guide:
+   
+   setup/git
+   setup/docker
+   setup/input
+   setup/config
+   
