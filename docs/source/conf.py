@@ -48,10 +48,9 @@ exclude_patterns = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-# one of 'default, 'alabaster'
 #
-#html_theme = 'bizstyle'
 html_theme = 'sphinx_rtd_theme'
+#html_theme_options =
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

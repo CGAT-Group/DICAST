@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build Docker Images &mdash; CoMPASS 1.0 documentation</title>
+  <title>Setup docker &mdash; CoMPASS 1.0 documentation</title>
   
 
   
@@ -80,15 +80,36 @@
               
             
             
-              <p class="caption"><span class="caption-text">Guide:</span></p>
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="git.html">Clone Git Repository</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Build Docker Images</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-docker-for-your-system">1. Get docker for your system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos">MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#build-docker-images">2. Build docker Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#use-our-run-script">Use our run script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-one-image">Build one image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#run-docker-images">3. Run docker Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Use our run script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-one-image">Run one image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-helpful-commands">4. Other helpful commands</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="input.html">Input File Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Change Filenames in the Config Files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
 </ul>
 
             
@@ -136,7 +157,7 @@
         
           <li><a href="../setup.html">Setup</a> &raquo;</li>
         
-      <li>Build Docker Images</li>
+      <li>Setup docker</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,8 +176,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-docker-images">
-<h1>Build Docker Images<a class="headerlink" href="#build-docker-images" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="setup-docker">
+<h1>Setup docker<a class="headerlink" href="#setup-docker" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="get-docker-for-your-system">
+<h2>1. Get docker for your system<a class="headerlink" href="#get-docker-for-your-system" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></p>
+</div>
+<div class="section" id="macos">
+<h3>MacOS<a class="headerlink" href="#macos" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.docker.com/docker-for-mac/install/">https://docs.docker.com/docker-for-mac/install/</a></p>
+</div>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.docker.com/docker-for-windows/install/">https://docs.docker.com/docker-for-windows/install/</a></p>
+</div>
+</div>
+<div class="section" id="build-docker-images">
+<h2>2. Build docker Images<a class="headerlink" href="#build-docker-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-our-run-script">
+<h3>Use our run script<a class="headerlink" href="#use-our-run-script" title="Permalink to this headline">¶</a></h3>
+<p>If you intend to use multiple dockers at once you can use our run script, which will take care of building the docker images.</p>
+<p>&#64;Amit</p>
+</div>
+<div class="section" id="build-one-image">
+<h3>Build one image<a class="headerlink" href="#build-one-image" title="Permalink to this headline">¶</a></h3>
+<p>If you only want to build one specific docker image run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">&lt;</span><span class="n">directory</span> <span class="n">level</span> <span class="n">path</span> <span class="n">to</span> <span class="n">Dockerfile</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tag</span><span class="o">=&lt;</span><span class="n">tool</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">tag</span><span class="o">&gt;</span>
+
+<span class="c1"># for example if you are inside of the base directory (&quot;dockers&quot;) and want to build gsnap:</span>
+<span class="n">docker</span> <span class="n">build</span> <span class="o">./</span><span class="n">gsnap</span><span class="o">/</span> <span class="o">--</span><span class="n">tag</span><span class="o">=</span><span class="n">gsnap</span><span class="p">:</span><span class="mf">0.1</span>
+<span class="c1"># if you are already inside the dockers/gsnap directory::</span>
+<span class="n">docker</span> <span class="n">build</span> <span class="o">./</span> <span class="o">--</span><span class="n">tag</span><span class="o">=</span><span class="n">gsnap</span><span class="p">:</span><span class="mf">0.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-docker-images">
+<h2>3. Run docker Images<a class="headerlink" href="#run-docker-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Use our run script<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>If you intend to use multiple dockers at once you can use our run script, which will take care of running the docker images.
+&#64;Amit</p>
+</div>
+<div class="section" id="run-one-image">
+<h3>Run one image<a class="headerlink" href="#run-one-image" title="Permalink to this headline">¶</a></h3>
+<p>If you have already built the image with &lt;tool&gt;:&lt;tag&gt; you can run the following command to run the image and start the tool:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -v &lt;your mounted folder&gt;:/MOUNT --user $(id -u):$(id -g) &lt;tool&gt;:&lt;tag&gt;
+
+# for example if you are using our directory structure for your input and are in the dockers directory:
+docker run -v ./:/MOUNT --user $(id -u):$(id -g) gsnap:0.1
+# add the --rm flag to clean up after yourself
+docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="other-helpful-commands">
+<h2>4. Other helpful commands<a class="headerlink" href="#other-helpful-commands" title="Permalink to this headline">¶</a></h2>
+<p>Get image id:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">images</span>
+</pre></div>
+</div>
+<p>Remove an image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">rmi</span> <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">image</span> <span class="nb">id</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

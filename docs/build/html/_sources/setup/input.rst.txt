@@ -1,3 +1,5 @@
-Input File Structure
-====================
-   
+Folder Structure
+================
+
+.. toctree::
+   :maxdepth: 1
