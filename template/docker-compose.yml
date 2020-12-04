@@ -117,10 +117,10 @@ services:
         context: ../EventPointer/
       image: proj/eventpointer:0.01
 
-    kisssplice:
+    kissplice:
       build: 
         context: ../KisSplice/
-      image: proj/kisssplice:0.01
+      image: proj/kissplice:0.01
 
     whippet:
       build: 
