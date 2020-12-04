@@ -1,0 +1,178 @@
+version: '3.3'
+
+services:
+
+#################################################### Base images
+    base:
+      build:
+        context: ../BaseOS/
+      image: ubuntu:base
+
+    conda:
+      build:
+        context: ../conda/
+      image: ubuntu:conda
+
+    bowtie:
+      build:
+        context: ../contextmap2/bowtie/
+      image: bowtie:0.1
+
+#################################################### Mapping tools
+    star:
+      build:
+        context: ../Star
+      image: proj/star:0.01
+
+    bbmap:
+      build:
+        context: ../BBMap
+      image: proj/bbmap:0.01
+
+
+    contextmap2:
+      build:
+        context: ../contextmap2
+      image: proj/contextmap:0.01
+
+
+    dart:
+      build:
+        context: ../dart
+      image: proj/dart:0.01
+
+
+    gsnap:
+      build:
+        context: ../gsnap
+      image: proj/gsnap:0.01
+
+
+    crac:
+      build:
+        context: ../crac
+      image: proj/crac:0.01
+
+
+    subjunc:
+      build:
+        context: ../subjunc
+      image: proj/subjunc:0.01
+
+
+    minimap:
+      build:
+        context: ../minimap2
+      image: proj/minimap2:0.01
+
+
+    hisat2:
+      build:
+        context: ../hisat2
+      image: proj/hisat2:0.01
+
+
+    segemehl:
+      build:
+        context: ../segemehl
+      image: proj/segemehl:0.01
+
+
+    mapsplice2:
+      build:
+        context: ../mapsplice2
+      image: proj/mapsplice2:0.01
+
+
+######################################################### AS event detection tools
+
+# ONLY BUILDS ON DOCKER 19
+#    asgal:
+#      build:
+#        context: ../asgal/
+#      image: proj/asgal:0.01
+
+#    cash:
+#      build:
+#        context: ../CASH/
+#      image: proj/cash:0.01
+      
+    majiq:
+      build: 
+        context: ../MAJIQ/
+      image: proj/majiq:0.01
+
+    spladder:
+      build: 
+        context: ../spladder/
+      image: proj/spladder:0.01      
+
+    aspli:
+      build: 
+        context: ../ASpli/
+      image: proj/aspli:0.01      
+
+    eventpointer:
+      build: 
+        context: ../EventPointer/
+      image: proj/eventpointer:0.01
+
+    kissplice:
+      build: 
+        context: ../KisSplice/
+      image: proj/kissplice:0.01
+
+    whippet:
+      build: 
+        context: ../Whippet/
+      image: proj/whippet:0.01
+
+    sgseq:
+      build: 
+        context: ../SGSeq/
+      image: proj/sgseq:0.01
+
+    irfinder:
+      build: 
+        context: ../irfinder/
+      image: proj/irfinder:0.01
+
+
+
+#### Diff Splicing tools
+#    :
+#      build: 
+#        context: ..//
+#      image: proj/:0.01
+#       dockerfile: Dockerfile
+        
+
+
+######################################################### AS diff tools
+
+    rmats:
+      build: 
+        context: ../rMATS/
+      image: proj/rmats:0.01
+
+
+    dsplicetype:
+      build: 
+        context: ../dSpliceType/
+      image: proj/dsplicetype:0.01
+
+    psisigma:
+      build: 
+        context: ../PSI-Sigma/
+      image: proj/psisigma:0.01
+
+    leafcutter:
+      build: 
+        context: ../leafcutter/
+      image: proj/leafcutter:0.01
+
+
+    jum:
+      build: 
+        context: ../JUM/
+      image: proj/jum:0.01
