@@ -1,4 +1,4 @@
 test/
 contextmap2/jre*
-asgal/asgal.tar
+*asgal.tar
 template/slurmsubmit.sh
