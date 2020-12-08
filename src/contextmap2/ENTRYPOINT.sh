@@ -29,7 +29,7 @@ second_attempt() {
 		mapper \
 		-reads ${line}?.fastq \
 		-aligner_name bowtie2 \
-		-o $outdir/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $(ls -m $indexdir/$indexname) \
@@ -85,7 +85,7 @@ while read -r line; do
 		mapper \
 		-reads ${line}1.fastq,${line}2.fastq \
 		-aligner_name bowtie2 \
-		-o $outdir/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indices \

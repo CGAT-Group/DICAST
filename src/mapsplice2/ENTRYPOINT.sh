@@ -25,7 +25,7 @@ second_attempt() {
 		-c $mapsplice_fastadir_mapping \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
 		-p $ncores \
 		-1 ${line}?.fastq
 }
@@ -87,7 +87,7 @@ while read -r line; do
 		-c $inputdir/$mapsplice_fastadir_mapping \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
 		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq

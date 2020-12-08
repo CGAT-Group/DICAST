@@ -18,7 +18,7 @@ second_attempt() {
 	dart \
 		-i $indexdir/$indexname \
 		-f $line?.fastq  \
-		-o $outdir/${line##*/}$tool.sam
+		-o $outdir/$(basename $(dirname $line))/${line##*/}$tool.sam
 }
 
 # make index directory and build index if index was not found
@@ -56,7 +56,7 @@ while read -r line; do
 		-i $indexdir/$indexname \
 		-f ${line}1.fastq \
 		-f2 ${line}2.fastq \
-		-o $outdir/${line##*/}${tool}.sam
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam
 		
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR

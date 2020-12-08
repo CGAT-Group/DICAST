@@ -31,7 +31,7 @@ second_attempt() {
 	subjunc \
 		-i $indexdir/$indexname \
 		-r ${line}?.fastq \
-		-o $outdir/${line##*/}$tool.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}$tool.sam \
 		-T $ncores \
 		--SAMoutput
 }
@@ -88,7 +88,7 @@ while read -r line; do
 		-i $indexdir/$indexname \
 		-r ${line}1.fastq \
 		-R ${line}2.fastq \
-		-o $outdir/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
 		-T $ncores \
 		--SAMoutput
 
