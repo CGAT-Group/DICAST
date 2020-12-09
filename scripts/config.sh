@@ -37,8 +37,8 @@ gff=${gffdir:-unspecific}/$gffname                              #gff full path
 #     ASimulatoR Parameters     #
 #################################
 
-asimulator_inputdir=/nfs/home/students/tfaro/dockers/ASimulatoR/in
-asimulator_outputdir=/nfs/home/students/tfaro/dockers/ASimulatoR/out
+asimulator_inputdir=/nfs/home/students/tfaro/dockers/src/ASimulatoR/in
+asimulator_outputdir=/nfs/home/students/tfaro/dockers/src/ASimulatoR/out
 
 
 
