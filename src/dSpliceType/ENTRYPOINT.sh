@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tool=dSpliceType
+tool=dsplicetype
 
 source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh

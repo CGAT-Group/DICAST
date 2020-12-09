@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tool=ASimulatoR
+tool=asimulator
 
 print_help(){
   echo "$tool run script"

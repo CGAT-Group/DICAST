@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Tool-specific variables ###
-tool=mapsplice2
+tool=mapsplice
 
 # use confic and function file
 source /MOUNT/scripts/config.sh

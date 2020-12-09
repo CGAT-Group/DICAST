@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tool=psi_sigma
+tool=psisigma
 source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh

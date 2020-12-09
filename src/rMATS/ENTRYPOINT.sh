@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tool=rMATS
+tool=rmats
 source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh

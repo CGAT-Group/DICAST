@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Tool-specific variables ###
-tool=minimap2
+tool=minimap
 
 # use confic and function file
 source /MOUNT/scripts/config.sh

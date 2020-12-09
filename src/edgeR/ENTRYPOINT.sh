@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # use config and function file
-tool=edgeR
+tool=edger
 source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
