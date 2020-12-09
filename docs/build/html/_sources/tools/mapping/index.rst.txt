@@ -1,0 +1,8 @@
+General Info about mapping
+===================================
+
+Config file
+
+
+.. toctree::
+   :maxdepth: 2

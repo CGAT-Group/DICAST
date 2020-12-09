@@ -5,82 +5,82 @@ services:
 #################################################### Base images
     base:
       build:
-        context: ../BaseOS/
+        context: ../src/BaseOS/
       image: ubuntu:base
 
     conda:
       build:
-        context: ../conda/
+        context: ../src/conda/
       image: ubuntu:conda
 
     bowtie:
       build:
-        context: ../contextmap2/bowtie/
+        context: ../src/contextmap2/bowtie/
       image: bowtie:0.1
 
 #################################################### Mapping tools
     star:
       build:
-        context: ../Star
+        context: ../src/Star
       image: proj/star:0.01
 
     bbmap:
       build:
-        context: ../BBMap
+        context: ../src/BBMap
       image: proj/bbmap:0.01
 
 
     contextmap2:
       build:
-        context: ../contextmap2
+        context: ../src/contextmap2
       image: proj/contextmap:0.01
 
 
     dart:
       build:
-        context: ../dart
+        context: ../src/dart
       image: proj/dart:0.01
 
 
     gsnap:
       build:
-        context: ../gsnap
+        context: ../src/gsnap
       image: proj/gsnap:0.01
 
 
     crac:
       build:
-        context: ../crac
+        context: ../src/crac
       image: proj/crac:0.01
 
 
     subjunc:
       build:
-        context: ../subjunc
+        context: ../src/subjunc
       image: proj/subjunc:0.01
 
 
     minimap:
       build:
-        context: ../minimap2
+        context: ../src/minimap2
       image: proj/minimap2:0.01
 
 
     hisat2:
       build:
-        context: ../hisat2
+        context: ../src/hisat2
       image: proj/hisat2:0.01
 
 
     segemehl:
       build:
-        context: ../segemehl
+        context: ../src/segemehl
       image: proj/segemehl:0.01
 
 
     mapsplice2:
       build:
-        context: ../mapsplice2
+        context: ../src/mapsplice2
       image: proj/mapsplice2:0.01
 
 
@@ -89,52 +89,52 @@ services:
 # ONLY BUILDS ON DOCKER 19
 #    asgal:
 #      build:
-#        context: ../asgal/
+#        context: ../src/asgal/
 #      image: proj/asgal:0.01
 
 #    cash:
 #      build:
-#        context: ../CASH/
+#        context: ../src/CASH/
 #      image: proj/cash:0.01
       
     majiq:
       build: 
-        context: ../MAJIQ/
+        context: ../src/MAJIQ/
       image: proj/majiq:0.01
 
     spladder:
       build: 
-        context: ../spladder/
+        context: ../src/spladder/
       image: proj/spladder:0.01      
 
     aspli:
       build: 
-        context: ../ASpli/
+        context: ../src/ASpli/
       image: proj/aspli:0.01      
 
     eventpointer:
       build: 
-        context: ../EventPointer/
+        context: ../src/EventPointer/
       image: proj/eventpointer:0.01
 
-    kisssplice:
+    kissplice:
       build: 
-        context: ../KisSplice/
-      image: proj/kisssplice:0.01
+        context: ../src/KisSplice/
+      image: proj/kissplice:0.01
 
     whippet:
       build: 
-        context: ../Whippet/
+        context: ../src/Whippet/
       image: proj/whippet:0.01
 
     sgseq:
       build: 
-        context: ../SGSeq/
+        context: ../src/SGSeq/
       image: proj/sgseq:0.01
 
     irfinder:
       build: 
-        context: ../irfinder/
+        context: ../src/irfinder/
       image: proj/irfinder:0.01
 
 
@@ -142,8 +142,8 @@ services:
 #### Diff Splicing tools
 #    :
 #      build: 
-#        context: ..//
-#        image: proj/:0.01
+#        context: ../src//
+#      image: proj/:0.01
 #       dockerfile: Dockerfile
         
 
@@ -152,7 +152,27 @@ services:
 
     rmats:
       build: 
-        context: ../rMATS/
+        context: ../src/rMATS/
       image: proj/rmats:0.01
 
 
+    dsplicetype:
+      build: 
+        context: ../src/dSpliceType/
+      image: proj/dsplicetype:0.01
+
+    psisigma:
+      build: 
+        context: ../src/PSI-Sigma/
+      image: proj/psisigma:0.01
+
+    leafcutter:
+      build: 
+        context: ../src/leafcutter/
+      image: proj/leafcutter:0.01
+
+
+    jum:
+      build: 
+        context: ../src/JUM/
+      image: proj/jum:0.01
