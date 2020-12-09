@@ -33,9 +33,12 @@ fasta=${fastadir:-unspecific}/$fastaname                        #fasta full path
 gtf=${gtfdir:-unspecific}/$gtfname                              #gtf full path
 gff=${gffdir:-unspecific}/$gffname                              #gff full path
 
+#################################
+#     ASimulatoR Parameters     #
+#################################
 
-
-
+asimulator_inputdir=/nfs/home/students/tfaro/dockers/ASimulatoR/in
+asimulator_outputdir=/nfs/home/students/tfaro/dockers/ASimulatoR/out
 
 
 
