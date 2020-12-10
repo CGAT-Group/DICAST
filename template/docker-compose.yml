@@ -15,7 +15,7 @@ services:
 
     bowtie:
       build:
-        context: ../src/contextmap2/bowtie/
+        context: ../src/contextmap/bowtie/
       image: bowtie:0.1
 
 #################################################### Mapping tools
