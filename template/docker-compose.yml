@@ -22,66 +22,66 @@ services:
     star:
       build:
         context: ../src/star
-      image: dicast/0.01:star
+      image: proj/star:0.01
 
     bbmap:
       build:
         context: ../src/bbmap
-      image: dicast/0.01:bbmap
+      image: proj/bbmap:0.01
 
 
     contextmap2:
       build:
         context: ../src/contextmap
-      image: dicast/0.01:contextmap
+      image: proj/contextmap:0.01
 
 
     dart:
       build:
         context: ../src/dart
-      image: dicast/0.01:dart
+      image: proj/dart:0.01
 
 
     gsnap:
       build:
         context: ../src/gsnap
-      image: dicast/0.01:gsnap
+      image: proj/gsnap:0.01
 
 
     crac:
       build:
         context: ../src/crac
-      image: dicast/0.01:crac
+      image: proj/crac:0.01
 
 
     subjunc:
       build:
         context: ../src/subjunc
-      image: dicast/0.01:subjunc
+      image: proj/subjunc:0.01
 
 
     minimap:
       build:
         context: ../src/minimap
-      image: dicast/0.01:minimap2
+      image: proj/minimap2:0.01
 
 
     hisat2:
       build:
         context: ../src/hisat
-      image: dicast/0.01:hisat2
+      image: proj/hisat2:0.01
 
 
     segemehl:
       build:
         context: ../src/segemehl
-      image: dicast/0.01:segemehl
+      image: proj/segemehl:0.01
 
 
     mapsplice2:
       build:
         context: ../src/mapsplice
-      image: dicast/0.01:mapsplice2
+      image: proj/mapsplice2:0.01
 
 
 ######################################################### AS event detection tools
@@ -90,52 +90,52 @@ services:
 #    asgal:
 #      build:
 #        context: ../src/asgal/
-#      image: dicast/0.01:asgal
+#      image: proj/asgal:0.01
 
 #    cash:
 #      build:
 #        context: ../src/cash/
-#      image: dicast/0.01:cash
+#      image: proj/cash:0.01
       
     majiq:
       build: 
         context: ../src/majiq/
-      image: dicast/0.01:majiq
+      image: proj/majiq:0.01
 
     spladder:
       build: 
         context: ../src/spladder/
-      image: dicast/0.01:spladder      
+      image: proj/spladder:0.01    
 
     aspli:
       build: 
         context: ../src/aspli/
-      image: dicast/0.01:aspli      
+      image: proj/aspli:0.01
 
     eventpointer:
       build: 
         context: ../src/eventpointer/
-      image: dicast/0.01:eventpointer
+      image: proj/eventpointer:0.01
 
     kissplice:
       build: 
         context: ../src/kissplice/
-      image: dicast/0.01:kissplice
+      image: proj/kissplice:0.01
 
     whippet:
       build: 
         context: ../src/whippet/
-      image: dicast/0.01:whippet
+      image: proj/whippet:0.01
 
     sgseq:
       build: 
         context: ../src/sgseq/
-      image: dicast/0.01:sgseq
+      image: proj/sgseq:0.01
 
     irfinder:
       build: 
         context: ../src/irfinder/
-      image: dicast/0.01:irfinder
+      image: proj/irfinder:0.01
 
 
 
@@ -143,7 +143,7 @@ services:
 #    :
 #      build: 
 #        context: ../src//
-#      image: dicast/0.01:
+#      image: proj/ :0.01
 #       dockerfile: Dockerfile
         
 
@@ -153,26 +153,26 @@ services:
     rmats:
       build: 
         context: ../src/rmats/
-      image: dicast/0.01:rmats
+      image: proj/rmats:0.01
 
 
     dsplicetype:
       build: 
         context: ../src/dsplicetype/
-      image: dicast/0.01:dsplicetype
+      image: proj/dsplicetype:0.01
 
     psisigma:
       build: 
         context: ../src/psisigma/
-      image: dicast/0.01:psisigma
+      image: proj/psisigma:0.01
 
     leafcutter:
       build: 
         context: ../src/leafcutter/
-      image: dicast/0.01:leafcutter
+      image: proj/leafcutter:0.01
 
 
 #    jum:
 #      build: 
 #        context: ../src/jum/
-#      image: dicast/0.01:jum
+#      image: proj/jum:0.01
