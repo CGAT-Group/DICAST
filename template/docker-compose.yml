@@ -172,7 +172,7 @@ services:
       image: proj/leafcutter:0.01
 
 
-    jum:
-      build: 
-        context: ../src/JUM/
-      image: proj/jum:0.01
+#    jum:
+#      build: 
+#        context: ../src/JUM/
+#      image: proj/jum:0.01
