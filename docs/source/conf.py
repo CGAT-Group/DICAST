@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'CoMPASS'
+project = 'DICAST'
 copyright = '2020'
 author = 'Amit Fenn, Olga Tsoy, Alexander Dietrich, Tim Faro, Fanny Rößler'
 
@@ -32,7 +32,8 @@ release = '1.0'
 # ones.
 extensions = [
     'recommonmark',
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'sphinx.ext.autosectionlabel'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -43,6 +44,9 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# Git
+gitlab_url = 'ge46ban/dockers'
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -50,9 +54,16 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-#html_theme_options =
+html_theme_options = {
+    'navigation_depth' : 3,
+    'titles_only' : True
+    # 'html_logo': , 'logo_only': True,
+
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+# custom.css is inside one of the html_static_path folders (e.g. _static)
+html_css_files = ["custom.css"]

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to CoMPASS! &mdash; CoMPASS 1.0 documentation</title>
+  <title>Welcome to DICAST! &mdash; DICAST 1.0 documentation</title>
   
 
   
@@ -33,6 +33,7 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Setup" href="setup.html" /> 
@@ -49,7 +50,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> CoMPASS
+            <a href="#" class="icon icon-home"> DICAST
           
 
           
@@ -100,7 +101,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">CoMPASS</a>
+          <a href="#">DICAST</a>
         
       </nav>
 
@@ -131,7 +132,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to CoMPASS!</li>
+      <li>Welcome to DICAST!</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -150,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-compass">
-<h1>Welcome to CoMPASS!<a class="headerlink" href="#welcome-to-compass" title="Permalink to this headline">¶</a></h1>
-<p>The CoMPASS docker collection was initially designed to benchmark alternative splicing tools based on simulated “ground truth” reads produced by ASimulator. Here we provide a pipeline for running several mapping and alternative/differential splicing tools and evaluate and compare the results.  The containers are however not only suitable for simulated data. You can use it for real data too.</p>
+  <div class="section" id="welcome-to-dicast">
+<h1>Welcome to DICAST!<a class="headerlink" href="#welcome-to-dicast" title="Permalink to this headline">¶</a></h1>
+<p>The DICAST docker collection was initially designed to benchmark alternative splicing tools based on simulated “ground truth” reads produced by ASimulator. Here we provide a pipeline for running several mapping and alternative/differential splicing tools and evaluate and compare the results.  The containers are however not only suitable for simulated data. You can use it for real data too.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>We tried our best to unify the input that is required for all tools. This did not work for all tools. When a tool requires custom input you will see a warning like this on the concerning documentation page.</p>
@@ -177,9 +178,7 @@ We hope this collection can be a starting point for future benchmarking approach
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/mapping.html">Mapping tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/splicing.html">Splicing tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#mapping">Mapping</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul class="simple">
@@ -253,7 +252,16 @@ We hope this collection can be a starting point for future benchmarking approach
   
   
     
-   
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #00ff00;
+    }
+
+  </style>
+
 
 </body>
 </html>

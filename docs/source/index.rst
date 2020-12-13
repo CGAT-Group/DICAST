@@ -1,7 +1,7 @@
-Welcome to CoMPASS!
-===================================
+Welcome to DICAST!
+===================
 
-The CoMPASS docker collection was initially designed to benchmark alternative splicing tools based on simulated "ground truth" reads produced by ASimulator. Here we provide a pipeline for running several mapping and alternative/differential splicing tools and evaluate and compare the results.  The containers are however not only suitable for simulated data. You can use it for real data too. 
+The DICAST docker collection was initially designed to benchmark alternative splicing tools based on simulated "ground truth" reads produced by ASimulator. Here we provide a pipeline for running several mapping and alternative/differential splicing tools and evaluate and compare the results.  The containers are however not only suitable for simulated data. You can use it for real data too. 
 
 .. warning::
 	We tried our best to unify the input that is required for all tools. This did not work for all tools. When a tool requires custom input you will see a warning like this on the concerning documentation page.

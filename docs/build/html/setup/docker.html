@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Setup docker &mdash; CoMPASS 1.0 documentation</title>
+  <title>Setup docker &mdash; DICAST 1.0 documentation</title>
   
 
   
@@ -33,9 +33,10 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Input File Structure" href="input.html" />
+    <link rel="next" title="Folder Structure" href="input.html" />
     <link rel="prev" title="Clone Git Repository" href="git.html" /> 
 </head>
 
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> CoMPASS
+            <a href="../index.html" class="icon icon-home"> DICAST
           
 
           
@@ -84,32 +85,17 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="git.html">Clone Git Repository</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup docker</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#get-docker-for-your-system">1. Get docker for your system</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#macos">MacOS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup docker</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#build-docker-images">2. Build docker Images</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#use-our-run-script">Use our run script</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#build-one-image">Build one image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#run-docker-images">3. Run docker Images</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Use our run script</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#run-one-image">Run one image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#other-helpful-commands">4. Other helpful commands</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="input.html">Input File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Folder Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Change Filenames in the Config Files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 </ul>
 
             
@@ -124,7 +110,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CoMPASS</a>
+          <a href="../index.html">DICAST</a>
         
       </nav>
 
@@ -256,7 +242,7 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="input.html" class="btn btn-neutral float-right" title="Input File Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="input.html" class="btn btn-neutral float-right" title="Folder Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="git.html" class="btn btn-neutral float-left" title="Clone Git Repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -294,7 +280,16 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
   
   
     
-   
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #00ff00;
+    }
+
+  </style>
+
 
 </body>
 </html>
