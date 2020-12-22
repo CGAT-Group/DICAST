@@ -9,6 +9,8 @@ source /MOUNT/scripts/asevent_func.sh
 #make output directory
 mk_outdir $tool
 
+#handle sam files
+handlesamfiles $differential
 
 #list all fastq files in fastqfolder and make list, seperating the file with " -r " to work with kissplice arguments; the first -r will be added manually
 #if differential analysis: combine lists of casefastq-folder and controlfastq-folder into the fastqlist

@@ -10,13 +10,8 @@ mk_outdir $tool
 test_gtf $gtf
 test_fasta $fasta
 
-
-readsamfiles
-for filename in $(cat $outdir/samlist)
-do
-        makebamfromsam $filename
-done
-
+#handle sam files
+handlesamfiles $differential
 
 echo "Merging and indexing BAM files of $bamdir to use for splice graph building..."
 readbamfiles

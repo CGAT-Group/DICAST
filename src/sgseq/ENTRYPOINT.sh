@@ -15,11 +15,8 @@ test_gtf $gtf
 
 
 #handle sam files
-readsamfiles
-for filename in $(cat $outdir/samlist)
-do
-        makebamfromsam $filename
-done
+handlesamfiles 0
+
 
 #build bamlist
 readbamfiles

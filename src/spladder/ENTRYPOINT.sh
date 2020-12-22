@@ -11,12 +11,7 @@ mk_outdir $tool
 
 
 #handle SAM file
-readsamfiles
-for filename in $(cat $outdir/samlist)
-do
-	makebamfromsam $filename
-done
-
+handlesamfiles $differential
 
 if [ $differential = 0 ]
 then

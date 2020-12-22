@@ -14,11 +14,7 @@ test_gtf $gtf
 mk_outdir $tool
 
 #checking for SAM files and building BAM-files with index with them
-readsamfiles
-for filename in $(cat $outdir/samlist)
-do
-        makebamfromsam $filename
-done
+handlesamfiles $differential
 
 echo starting ASpli...
 

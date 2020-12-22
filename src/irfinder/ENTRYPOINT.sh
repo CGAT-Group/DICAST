@@ -15,7 +15,8 @@ mk_outdir $tool
 test_gtf $gtf
 test_fasta $fasta
 
-
+#handle SAM files
+handlesamfiles 0
 
 # did not work with our STAR index version; error: unrecognized parameter name "genomeType" in input "genomeParameters.txt"
 #if [ ! -d $outdir/irfinder-index ]; then

@@ -16,13 +16,7 @@ test_gtf $gtf
 mk_outdir $tool
 
 #handle SAM files
-readsamfiles
-for filename in $(cat $outdir/samlist)
-do
-	makebamfromsam $filename
-done
-
-
+handlesamfiles $differential
 
 #### AS event detection mode ####
 if [ $differential = 0 ]; then
