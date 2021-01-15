@@ -16,11 +16,11 @@ use_bam_input_files=0                                                   #determi
 #####################################
 
 differential=0                                                          #1: tools which can calculate differential splicing, will use it; 0: only AS event detection
-casefolder=$inputdir/casedir
+
 casebam=$casefolder/bamdir                                              #path of folder with BAMs used as case for DS analysis; needs to be filled when differential=1; filled like bamfolder
 casefastq=$casefolder/fastqdir                                          #path of folder with fastq files used as case for DS analysis
 caseprefix="subsample_0"                                                #all files in the casefastq folder must have this by the user specified prefix
-controlfolder=$inputdir/controldir
+
 controlbam=$controlfolder/bamdir                                        #path of folder with BAMs used as control for DS analysis; needs to be filled when differential=1; filled like bamfolder
 controlfastq=$controlfolder/fastqdir                                    #path of folder with fastq files used as control for DS analysis
 controlprefix="subsample_1"                                             #add files in the controlfastq folder must have this by the user specified prefix
