@@ -3,7 +3,7 @@
 ############################
 
 ncores=6                                                	#number of cores or threads the tool will use
-workdir=/MOUNT/unify_test_MOUNT                         	#name of the base directory inside the Docker
+workdir=/MOUNT			                         	#name of the base directory inside the Docker
 outdir=$workdir/output/${tool:-unspecific}-output       	#name of the output directory; will be named after the specific tool that was used
 read_length=76                                          	#length of reads inside fastq files
 
