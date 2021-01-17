@@ -13,11 +13,11 @@ read_length=76                                          	#length of reads inside
 
 
 inputdir=$workdir/input
-controlfolder=$inputdir/controldir         				#base directory for all needed input files (when no differential comparison, control inputs when differential AS Event Detection)
-casefolder=$inputdir/casedir                            #base directory for only case files (for AS Event detection)
-fastqdir=$controlfolder/fastq        				#directory for fastqfiles
-bamdir=$controlfolder/bam            				#directory for bamfiles
-samdir=$controlfolder/bam            				#directory for samfiles
+controlfolder=$inputdir/controldir         			#base directory for all needed input files (when no differential comparison, control inputs when differential AS Event Detection)
+casefolder=$inputdir/casedir					#base directory for only case files (for AS Event detection)
+fastqdir=$controlfolder/fastqdir       				#directory for fastqfiles
+bamdir=$controlfolder/bamdir           				#directory for bamfiles
+samdir=$controlfolder/bamdir           				#directory for samfiles
 fastadir=$inputdir              				#directory for fastafile (might vary for specific tools -> see mapping or as-specific config file)
 gtfdir=$inputdir                				#directory for gtffile
 gffdir=$inputdir                				#directory for gfffile
