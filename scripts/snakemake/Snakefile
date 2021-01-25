@@ -1,0 +1,127 @@
+final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
+as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
+working_directory = os.getcwd()
+report: "report.html"
+docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
+run_asimulator = config["ASimulatoR"]['do']
+asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
+overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
+
+rule all:
+    input:
+        final_out
+
+rule overwrite_acknowledged_rule:
+    output:
+        "output/snakemake/log_acknowledged_possible_overwrite.txt"
+    params:
+        overwrite=overwrite_acknowledged
+    shell:
+        """
+        if [[ "{params.overwrite}" == "True" ]]
+        then
+            echo "Accepted possible overwrite of output files." | tee {output}
+            echo "Working directory is : {working_directory}"
+        else
+            echo "Didn't acknowledge possible overwrite of output files, exiting."
+            exit 1
+        fi
+        """
+
+rule get_base_os_docker:
+    input:
+        overwrite_out=rules.overwrite_acknowledged_rule.output
+    output:
+        "output/snakemake/log_pulled_base_os.txt"
+    shell:
+        """
+        mkdir -p output/snakemake/
+        docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/base-image | tee {output}
+        """
+
+rule run_asimulator_rule:
+    input:
+        get_base_out=rules.get_base_os_docker.output
+    output:
+        "output/snakemake/log_ran_asimulator.txt"
+    params:
+        run_asim=run_asimulator
+    shell:
+        """
+        cat {input.get_base_out} >> {output}
+        if [[ "{params.run_asim}" == "True" ]]
+        then
+            echo "Running ASimulatoR"
+            ./src/ASimulatoR/run_asimulator.sh -c {asimulator_config_folder} | tee {output}
+        else
+            echo "Didn't run ASimulatoR." | tee {output}
+        fi
+        """
+
+
+rule run_mapping_tools_rule:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        "output/snakemake/log_ran_mapping.txt"
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        cat {input.asim_out} >> {output}
+        if [[ -z "{params.tools}" ]]
+        then
+            echo "No mapping tools selected." | tee {output}
+        else
+            for tool in {params.tools}
+            do
+                echo "Started $tool at $(date)" | tee {output}
+                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+                echo "Finished $tool at $(date)" | tee {output}
+                cp output/"$tool"-output/casedir/* input/casedir/bamdir/
+                cp output/"$tool"-output/controldir/* input/controldir/bamdir/
+            done
+        fi
+        """
+
+rule run_as_detection_tools:
+    input:
+        mapping_out=rules.run_mapping_tools_rule.output
+    output:
+        "output/snakemake/log_ran_as_detection.txt"
+    params:
+        tools=as_tools
+    shell:
+        """
+        cat {input.mapping_out} >> {output}
+        if [[ -z "{params.tools}" ]]
+        then
+            echo "No AS tools selected." | tee {output}
+        else
+            for tool in {params.tools}
+            do
+                echo "Started $tool at $(date)" | tee {output}
+                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+                echo "Finished $tool at $(date)" | tee {output}
+            done
+        fi
+        """
+
+rule finished_run_rule:
+    input:
+        as_out=rules.run_as_detection_tools.output
+    output:
+        final_out
+    shell:
+        """
+        dt_format=$(date +"%d_%m_%Y_%H_%M")
+        base_output_name=$(basename {final_out} .txt)
+        cp scripts/config.sh output/snakemake/log_config_"$dt_format"_"$base_output_name".sh
+        cp scripts/mapping_config.sh output/snakemake/log_mapping_config_"$dt_format"_"$base_output_name".sh
+        cp scripts/asevent_config.sh output/snakemake/log_asevent_config_"$dt_format"_"$base_output_name".sh
+        cat {input.as_out} >> {output}
+        echo "Finished run at $(date)" | tee {output}
+        """
