@@ -1,9 +1,11 @@
 final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+report_out = config["Report"]["Report_file_name"]
+
 mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
 as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
 diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
+
 working_directory = os.getcwd()
-report: "report.html"
 docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
 run_asimulator = config["ASimulatoR"]['do']
 asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
@@ -150,3 +152,11 @@ rule finished_run_rule:
         cat {input.diff_as_out} >> {output}
         echo "Finished run at $(date)" | tee {output}
         """
+
+onsuccess:
+    shell(
+        r"""
+        touch {report_out}
+        snakemake --configfile snakemake_config.yaml --unlock
+        snakemake --configfile snakemake_config.yaml --report {report_out}
+        """)
