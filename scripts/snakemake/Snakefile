@@ -1,6 +1,7 @@
 final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
 mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
 as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
+diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
 working_directory = os.getcwd()
 report: "report.html"
 docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
@@ -110,9 +111,33 @@ rule run_as_detection_tools:
         fi
         """
 
-rule finished_run_rule:
+rule run_differential_as_tools:
     input:
         as_out=rules.run_as_detection_tools.output
+    output:
+        "output/snakemake/log_ran_differential_as_detection.txt"
+    params:
+        tools=diff_as_tools
+    shell:
+        """
+        cat {input.as_out} >> {output}
+        if [[ -z "{params.tools}" ]]
+        then
+            echo "No differential AS tools selected." | tee {output}
+        else
+            for tool in {params.tools}
+            do
+                echo "Started $tool at $(date)" | tee {output}
+                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+                echo "Finished $tool at $(date)" | tee {output}
+            done
+        fi
+        """
+
+rule finished_run_rule:
+    input:
+        diff_as_out=rules.run_differential_as_tools.output
     output:
         final_out
     shell:
@@ -122,6 +147,6 @@ rule finished_run_rule:
         cp scripts/config.sh output/snakemake/log_config_"$dt_format"_"$base_output_name".sh
         cp scripts/mapping_config.sh output/snakemake/log_mapping_config_"$dt_format"_"$base_output_name".sh
         cp scripts/asevent_config.sh output/snakemake/log_asevent_config_"$dt_format"_"$base_output_name".sh
-        cat {input.as_out} >> {output}
+        cat {input.diff_as_out} >> {output}
         echo "Finished run at $(date)" | tee {output}
         """
