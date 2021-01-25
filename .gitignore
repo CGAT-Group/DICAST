@@ -3,4 +3,4 @@ contextmap2/jre*
 *asgal.tar
 template/slurmsubmit.sh
 index/*
-input/*
+template/*
