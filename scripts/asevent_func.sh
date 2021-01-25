@@ -35,7 +35,7 @@ test_fasta(){
 test_bam(){
 	if [[ ! -f $1  ]]
 	then
-		echo File not found. Check path for the $bamfile file: is it in ${bamdir}?
+		echo File not found. Check path for the bam file(s): is it in ${bamdir}?
 		exit 1
 	else
 		echo found bam file, moving on...

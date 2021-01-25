@@ -6,14 +6,15 @@ LABEL maintainer="Amit Fenn"
 WORKDIR /opt
 
 #Installing dependencies
-# RUN apt-get update -y && apt-get --no-install-recommends --fix-broken inst    all -y \
+RUN apt-get update -y && apt-get install libboost-all-dev libbz2-dev liblzma-dev --no-install-recommends --fix-broken -y 
 
 #Installing tool
-RUN git clone https://github.com/hsinnan75/Dart.git v1.4.0 ;\
-cd /opt/v1.4.0/ ;\
+#RUN git clone https://github.com/hsinnan75/Dart.git v1.4.0 ;\
+RUN git clone https://github.com/hsinnan75/DART ;\
+cd /opt/DART ;\
 make
 
-ENV PATH=$PATH:/opt/v1.4.0/bin
+ENV PATH=$PATH:/opt/DART/bin
 
 # Name of mounted folder
 VOLUME /MOUNT

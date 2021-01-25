@@ -10,6 +10,6 @@ RUN wget https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download -O 
 # Name of mounted folder
 VOLUME /MOUNT
 
-COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
