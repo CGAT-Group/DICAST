@@ -15,6 +15,7 @@ ASimulatoR:
 
 #########################################
 # Enter the name of the mapping tools you want to run.
+#
 # Currently we support star, hisat, contextmap, segemehl, crac, dart, gsnap, mapsplice, subjunc, minimap, bbmap
 #
 Mapping_tools:
@@ -22,6 +23,7 @@ Mapping_tools:
 
 #########################################
 # Enter the name of the alternative splicing detection tools you want to run.
+#
 # Currently we support majiq, spladder, aspli, eventpointer, kissplice, whippet, sgseq, irfinder, asgal
 #
 Alternative_splicing_detection_tools:
@@ -29,11 +31,26 @@ Alternative_splicing_detection_tools:
 
 #########################################
 # Enter the name of the differential alternative splicing detection tools you want to run.
+#
 # Currently we support cash, dexseq, dsplicetype, leafcutter, edger, rmats, psisigma, jum
 #
 Differential_alternative_splicing_detection_tools:
     What_tools_to_run: ''
 
-
+#########################################
+# The output file will be created once the run was complete. Snakemake checks if this is the same name as from the run before. If that's the case, it won't run again.
+#
+# So make sure to enter a new name when you want to run the pipeline again or delete the old output!
+#
 Output:
     Log_file_name: sample_out
+
+#########################################
+# Snakemake creates a run report after finishing successfully. Here, you can set the file name (must end in .html!)
+# You can also enter a full or relative path (e.g. output/snakemake/report.html).
+#
+# If you want to use the build-in "Open Report" button, you also have to set the parameter under # Option -> Preferences -> HTML page to open as a report. 
+# The file name has to be the same as the config parameter.
+#
+Report:
+    Report_file_name: sample_report.html
