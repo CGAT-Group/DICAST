@@ -1,0 +1,32 @@
+#########################################
+# When running the pipeline again with the same input file names, the output will be also called the same and overwrite the existing files!
+#
+# Overwrite_acknowledge_choice__ = ["Yes", "No"]
+Possible_overwrite_acknowledge:
+    do: true
+
+#########################################
+# Do you want to run the ASimulatoR?    
+#
+# Start_ASimulatoR_with_run_choice__ = ["Yes", "No"]
+ASimulatoR:
+    do: false
+    ASimulatoR_config_directory: /home/tmf/Science/snake_mock/scripts
+
+#########################################
+# Enter the name of the mapping tools you want to run.
+# Currently we support star, hisat, contextmap, segemehl, crac, dart, gsnap, mapsplice, subjunc, minimap, bbmap
+#
+Mapping_tools:
+    What_tools_to_run: ''          # star, hisat, contextmap, segemehl, crac, dart, gsnap, mapsplice, subjunc, minimap, bbmap
+
+#########################################
+# Enter the name of the alternative splicing detection tools you want to run.
+# Currently we support majiq, spladder, aspli, eventpointer, kissplice, whippet, sgseq, irfinder, asgal
+# casi, dexseq, dsplicetype, leafcutter, edger, rmats, psisigma
+#
+Alternative_splicing_detection_tools:
+    What_tools_to_run: ''                           # majiq, spladder, aspli, eventpointer, kissplice, whippet, sgseq, irfinder, asgal, casi, dexseq, dsplicetype, leafcutter, edger, rmats, psisigma
+
+Output:
+    Log_file_name: sample_out
