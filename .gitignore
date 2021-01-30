@@ -5,3 +5,5 @@ template/slurmsubmit.sh
 index/*
 template/*
 input
+output
+.snakemake
