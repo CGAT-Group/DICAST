@@ -4,3 +4,4 @@ contextmap2/jre*
 template/slurmsubmit.sh
 index/*
 template/*
+input
