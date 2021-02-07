@@ -26,6 +26,10 @@ test_gtf(){
 mk_fastqlist(){
 	mkdir -p /tmp/
 	find $fastqdir -name "*.fastq" -nowarn -maxdepth 2| sed s/.fastq$// | sed 's/.$//' | sort | uniq >/tmp/$tool-fastqlist
+	while read -r line; do
+		mkdir -p $outdir/$(basename $(dirname $line))/
+		chmod -R 777 $outdir/	
+	done </tmp/$tool-fastqlist
 }
 
 ######################
@@ -33,10 +37,10 @@ mk_fastqlist(){
 ######################
 
 #make the output directory and make it accessible
-mk_outdir(){
-	mkdir -p $outdir/{case,control}
-	chmod -R 777 $outdir/
-}
+# mk_outdir(){
+# 	mkdir -p $outdir/$(basename $(dirname $line))/
+# 	chmod -R 777 $outdir/
+# }
 
 ##################
 #     Cleaner    #
