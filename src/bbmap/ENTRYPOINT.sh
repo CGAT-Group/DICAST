@@ -41,7 +41,7 @@ if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; t
 mk_fastqlist
 
 #make output directories
-mk_outdir
+#mk_outdir
 
 echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first

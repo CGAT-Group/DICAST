@@ -47,7 +47,7 @@ test_gtf
 
 echo $gtf
 #make output directories
-mk_outdir
+#mk_outdir
 
 
 # Build Genome index if not already available
