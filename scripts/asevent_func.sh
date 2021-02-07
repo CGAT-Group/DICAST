@@ -156,27 +156,30 @@ handlesamfiles(){
 	
 # read fastq files in fastqfolder and save paths ins fastqlist file
 readfastqs(){
-        find ${1:-$fastqdir} -maxdepth 1 -name "*.fastq" -nowarn > $outdir/fastqlist
+        find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > $outdir/fastqlist
         chmod  777 $outdir/fastqlist
+		while read -r line; do
+			mkdir -p $outdir/$(basename $(dirname $line))/
+			chmod -R 777 $outdir/	
+		done </tmp/$tool-fastqlist
 }
 
 
 #make the output directory: $output/$tool-output
 #Parameter: the tools name
-mk_outdir(){
-	mkdir -p $outdir
-	chmod -R 777 $outdir
-}
+# mk_outdir(){
+# 	mkdir -p $outdir
+# 	chmod -R 777 $outdir
+# }
 
 
 #make the output folder for the specific sample (BAM-file) and return the folder path
 #Parameter: BAM filename of sample
 mk_sample_out(){
 	tmp="${1##*/}"	#get basename of file
-        sample_out="${tmp%%.*}"	#remove all file extensions after first . 
-        mkdir -p $outdir/$sample_out-output
+    sample_out="${tmp%%.*}"	#remove all file extensions after first . 
+    mkdir -p $outdir/$sample_out-output
 	chmod -R 777 $outdir/$sample_out-output
-
 	echo $outdir/$sample_out-output
 }
 
