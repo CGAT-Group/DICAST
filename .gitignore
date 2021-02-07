@@ -2,3 +2,8 @@ test/
 contextmap2/jre*
 *asgal.tar
 template/slurmsubmit.sh
+index/*
+template/*
+input
+output
+.snakemake
