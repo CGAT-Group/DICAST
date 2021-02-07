@@ -47,7 +47,7 @@ if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname_1.
 mk_fastqlist
 
 #make output directories
-mk_outdir
+#mk_outdir
 
 ### Start mapping ###
 

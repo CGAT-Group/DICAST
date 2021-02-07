@@ -59,7 +59,7 @@ if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; t
 mk_fastqlist
 
 #make output directories
-mk_outdir
+#mk_outdir
 
 # get indices basenames
 indices=$(for line in $(ls -d $contextmap_fastadir/*); do printf "%s" ${line%.*},; done)
