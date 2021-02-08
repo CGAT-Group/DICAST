@@ -83,8 +83,13 @@ rule run_mapping_tools_rule:
                 docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
                 docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
                 echo "Finished $tool at $(date)" | tee {output}
-                cp output/"$tool"-output/casedir/* input/casedir/bamdir/
-                cp output/"$tool"-output/controldir/* input/controldir/bamdir/
+		casedir=output/"$tool"-output/casedir
+		if [ -d "$casedir" ]; then
+                        find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+                else
+                        echo "No case directory found, assuming non-differential run"
+                fi
+		find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/controldir/bamdir/ \;
             done
         fi
         """
