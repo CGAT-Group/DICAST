@@ -27,7 +27,7 @@ second_attempt() {
 		-i $indexdir/$indexname \
 		-k 22 \
 		-r ${line}?.fastq \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		--detailed-sam \
 		--nb-threads $ncores
 }
@@ -74,7 +74,7 @@ while read -r line; do
 		-i $indexdir/$indexname \
 		-k 22 \
 		-r ${line}1.fastq ${line}2.fastq \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		--detailed-sam \
 		--nb-threads $ncores \
 		--stranded

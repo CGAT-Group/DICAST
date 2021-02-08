@@ -27,7 +27,7 @@ second_attempt() {
 	gsnap \
 		--db $indexname \
 		--dir $indexdir \
-		--output-file $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+		--output-file $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		--format sam \
 		--nthreads $ncores \
 		${line}?.fastq
@@ -86,7 +86,7 @@ while read -r line; do
 	gsnap \
 	--db $indexname \
 	--dir $indexdir \
-	--output-file $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+	--output-file $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 	--format sam \
 	--nthreads $ncores \
 	${line}1.fastq ${line}2.fastq

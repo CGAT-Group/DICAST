@@ -23,7 +23,7 @@ second_attempt() {
 	minimap2 \
 		-a \
 		-t $ncores \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}$tool.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}$tool.sam \
 		$indexdir/$indexname \
 		$line?.fastq
 }
@@ -69,7 +69,7 @@ while read -r line; do
 	minimap2 \
 		-a \
 		-t $ncores \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		$indexdir/$indexname \
 		${line}1.fastq \
 		${line}2.fastq

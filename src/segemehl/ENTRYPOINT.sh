@@ -32,7 +32,7 @@ second_attempt() {
 		-q ${line}?.fastq \
 		-i $indexdir/$indexname \
 		-t $ncores \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam
 }
 
 # make index directory and build index if index was not found
@@ -85,7 +85,7 @@ while read -r line; do
 		-p ${line}2.fastq \
 		-i $indexdir/$indexname \
 		-t $ncores \
-		-o $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
