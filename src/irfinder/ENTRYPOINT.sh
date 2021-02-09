@@ -6,7 +6,7 @@ source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
 
-mk_outdir $tool
+#mk_outdir $tool
 
 #######################################
 ### build IRFinder custom reference ###

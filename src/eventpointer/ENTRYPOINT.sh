@@ -13,7 +13,7 @@ source /MOUNT/scripts/asevent_func.sh
 test_gtf $gtf
 
 #make output directory
-mk_outdir $tool
+#mk_outdir $tool
 
 #handle SAM files
 handlesamfiles $differential

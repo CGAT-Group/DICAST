@@ -10,7 +10,7 @@ source /MOUNT/scripts/asevent_func.sh
 ### START here ###################
 
 #tests
-mk_outdir $tool
+#mk_outdir $tool
 test_gtf $gtf
 
 

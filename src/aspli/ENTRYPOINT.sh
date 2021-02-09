@@ -11,7 +11,7 @@ source /MOUNT/scripts/asevent_func.sh
 test_gtf $gtf
 
 #making outdir
-mk_outdir $tool
+#mk_outdir $tool
 
 #checking for SAM files and building BAM-files with index with them
 handlesamfiles $differential
