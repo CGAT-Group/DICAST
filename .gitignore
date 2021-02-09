@@ -7,3 +7,4 @@ template/*
 input
 output
 .snakemake
+short_input

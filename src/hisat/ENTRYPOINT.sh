@@ -20,7 +20,7 @@ second_attempt() {
 	hisat2 -q \
 	-x $indexdir/$indexname \
 	-U "$line"?.fastq \
-	-S $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 	--known-splicesite-infile $indexdir/$index.splicesites.txt
 }
 
@@ -60,7 +60,7 @@ while read -r line; do
 	hisat2 -q \
 	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
-	-S $outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
+	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 	--known-splicesite-infile $indexdir/$indexname/splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)

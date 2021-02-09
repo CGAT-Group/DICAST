@@ -17,8 +17,8 @@ second_attempt() {
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	/bbmap/bbmap.sh \
 		in=${line}?.fastq \
-		outm=$outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
-		outu=$outdir/$(basename $(dirname $line))/${line##*/}${tool}_unmapped.sam
+		outm=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
+		outu=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}_unmapped.sam
 }
 
 build_index() {
@@ -54,8 +54,8 @@ while read -r line; do
 		in2=${line}2.fastq \
 		ref=$fasta \
 		path=$indexdir/$indexname \
-		outm=$outdir/$(basename $(dirname $line))/${line##*/}${tool}.sam \
-		outu=$outdir/$(basename $(dirname $line))/${line##*/}${tool}_unmapped.sam
+		outm=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
+		outu=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}_unmapped.sam
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
