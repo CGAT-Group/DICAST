@@ -7,8 +7,7 @@ source /MOUNT/scripts/asevent_func.sh
 
 
 #make output directory
-#mk_outdir $tool
-
+mk_outdir
 #handle sam files
 handlesamfiles $differential
 

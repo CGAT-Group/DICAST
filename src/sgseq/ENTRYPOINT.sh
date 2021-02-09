@@ -10,8 +10,7 @@ source /MOUNT/scripts/asevent_func.sh
 ### START here ###################
 
 #tests
-#mk_outdir $tool
-test_gtf $gtf
+mk_outdirtest_gtf $gtf
 
 
 #handle sam files

@@ -6,8 +6,7 @@ source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
 #make output directory
-#mk_outdir $tool
-
+mk_outdir
 
 #one asgal run needs a pair of fastq-files; in the config file the user gave the suffixes which correspond to the partnered fastq-files
 #save all partners with same suffix in array

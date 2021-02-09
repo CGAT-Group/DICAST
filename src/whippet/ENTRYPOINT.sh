@@ -6,8 +6,7 @@ source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
 
-#mk_outdir $tool
-test_gtf $gtf
+mk_outdirtest_gtf $gtf
 test_fasta $fasta
 
 #handle sam files
