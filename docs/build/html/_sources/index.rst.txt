@@ -15,7 +15,7 @@ We hope this collection can be a starting point for future benchmarking approach
 
 .. toctree::
    :maxdepth: 2
-   :caption: Table of contents:
+   :caption: Get started
    
    setup
    run
