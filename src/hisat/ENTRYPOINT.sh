@@ -28,7 +28,7 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "compute index ..."
-	hisat2-build  $fasta $indexdir/$indexname && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/$indexname/splicesites.txt
+	hisat2-build  $fasta $indexdir/$indexname && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/${indexname}_splicesites.txt
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
@@ -41,7 +41,7 @@ test_fasta
 test_gtf
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/${indexname}_1.ht2; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $indexdir/${indexname}.4.ht2; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -61,7 +61,7 @@ while read -r line; do
 	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile $indexdir/$indexname/splicesites.txt
+	--known-splicesite-infile $indexdir/${indexname}_splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
