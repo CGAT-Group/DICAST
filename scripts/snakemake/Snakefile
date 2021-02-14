@@ -82,14 +82,16 @@ rule run_mapping_tools_rule:
                 echo "Started $tool at $(date)" | tee {output}
                 docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
                 docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
-                echo "Finished $tool at $(date)" | tee {output}
 		casedir=output/"$tool"-output/casedir
 		if [ -d "$casedir" ]; then
                         find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
                 else
                         echo "No case directory found, assuming non-differential run"
                 fi
-		find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/controldir/bamdir/ \;
+		find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+		find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+		echo "Finished $tool at $(date)" | tee {output}
+		echo -e "\n\n"
             done
         fi
         """
@@ -161,6 +163,11 @@ rule finished_run_rule:
 onsuccess:
     shell(
         r"""
+	if ! [[ -f Snakefile && -f snakemake_config.yaml ]];
+	then
+		echo "To create the html report, make sure that the Snakefile and snakemake_config.yaml exist in the working directory."
+		exit 0
+	fi
         touch {report_out}
         snakemake --configfile snakemake_config.yaml --unlock
         snakemake --configfile snakemake_config.yaml --report {report_out}
