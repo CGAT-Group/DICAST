@@ -25,7 +25,7 @@ second_attempt() {
 		-c $mapsplice_fastadir_mapping \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-p $ncores \
 		-1 ${line}?.fastq
 }
@@ -84,10 +84,10 @@ while read -r line; do
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
 	python /opt/conda/bin/mapsplice.py \
-		-c $inputdir/$mapsplice_fastadir_mapping \
+		-c $mapsplice_fastadir_mapping \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq
