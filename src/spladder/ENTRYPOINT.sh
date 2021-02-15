@@ -18,7 +18,7 @@ then
 	#list all .bam files in bamfolder with comma seperated
 	bamlist=$(ls -1p $bamdir/*.bam | xargs echo | sed 's/ /,/g')
 	echo Starting spladder in event detection mode ...
-	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length 
+	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length --output-txt-conf
 	cleaner
 fi
 
@@ -28,7 +28,7 @@ then
 	controllist=$(ls -1p $controlbam/*.bam | xargs echo | sed 's/ /,/g')
 	echo Starting spladder in DS mode ...
 	#echo "$caselist,$controllist"
-	spladder build -b "$caselist,$controllist" -o $outdir -a $gtf --parallel $ncores -n $read_length
+	spladder build -b "$caselist,$controllist" -o $outdir -a $gtf --parallel $ncores -n $read_length --output-txt-conf
 
 	echo testing for differential splicing  ...
 	spladder test --conditionA $caselist --conditionB $controllist -o $outdir --parallel $ncores -n $read_length --labelA "CASE" --labelB "CONTROL"
