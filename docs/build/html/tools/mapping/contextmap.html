@@ -33,7 +33,6 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Crac" href="crac.html" />
@@ -51,9 +50,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DICAST
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/dicast.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -92,8 +94,8 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ContextMap 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crac.html">Crac</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dart.html">Dart</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gsnap.html">Gsnap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hisat.html">Hisat 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsnap.html">GSNAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hisat.html">HISAT2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mapsplice.html">Mapsplice 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minimap.html">Minimap 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="segemehl.html">Segemehl</a></li>
@@ -177,8 +179,9 @@
 <h1>ContextMap 2<a class="headerlink" href="#contextmap-2" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>ContextMap requires a <a class="reference internal" href="#input-files"><span class="std std-ref">special input</span></a>: <code class="docutils literal notranslate"><span class="pre">$contextmap_fastadir</span></code>.
-ALSO: make sure to put the file <code class="docutils literal notranslate"><span class="pre">jre-8u241-linux-i586.tar.gz</span></code> in the same folder as the ContextMap Dockerfile (<span class="guilabel">src/contextmap2/</span>). You can get the file here: <a class="reference external" href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html</a></p>
+<p>ContextMap requires a <a class="reference internal" href="#contextmap-input"><span class="std std-ref">special input</span></a>: <code class="docutils literal notranslate"><span class="pre">$contextmap_fastadir</span></code>.</p>
+<p>ALSO: make sure to put the file <code class="file docutils literal notranslate"><span class="pre">jre-8u241-linux-i586.tar.gz</span></code> in the same folder as the ContextMap Dockerfile (<span class="guilabel">src/contextmap2/</span>).
+You can get the file here: <a class="reference external" href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html</a></p>
 </div>
 <div class="sidebar">
 <p class="sidebar-title">ContextMap Factsheet</p>
@@ -188,7 +191,7 @@ ALSO: make sure to put the file <code class="docutils literal notranslate"><span
 <col style="width: 57%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><strong>$tool:</strong></p></td>
+<tr class="row-odd"><td><p><strong>Toolname:</strong></p></td>
 <td><p><em>contextmap</em></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Version:</strong></p></td>
@@ -206,22 +209,25 @@ ALSO: make sure to put the file <code class="docutils literal notranslate"><span
 </div>
 <p>ContextMap is a mapping tool for RNA-seq data which uses context information of near-by mapped reads for the read mapping process.</p>
 <div class="section" id="input-files">
-<h2>1. Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<span id="contextmap-input"></span><h2>1. Input Files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
 <p>The following files are required to run ContextMap.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The filepaths assume you are using our <a class="reference internal" href="../../setup/input.html#folder-structure"><span class="std std-ref">folder structure</span></a>.
+<p>The filepaths assume you are using our <a class="reference internal" href="../../setup/input.html"><span class="doc">folder structure</span></a>.
 Make sure to read the comments (#) as well.</p>
 </div>
 <dl>
-<dt>$fastq</dt><dd><p>Fastq files for paired end mapping. The path variable can be found in <span class="guilabel">scripts/config.sh</span>.</p>
+<dt>$fastq</dt><dd><p>Fastq files for paired end mapping. The path variable can be found in <span class="guilabel">scripts/config.sh</span>.
+If you want to perform a non differential analysis put your files inside the <span class="guilabel">controldir/fastqir/</span> directory.
+If you want to compare two different experimental settings (case and control), put your fastq files in the <span class="guilabel">controldir/fastqir/</span>
+and <span class="guilabel">casedir/fastqir/</span> folders respectively.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fastq file paths</span>
 <span class="c1"># Replace the text between the stars *...* with your file names</span>
 
-input/fastq/*yourFastqFile1_*1.fastq
-input/fastq/*yourFastqFile1_*2.fastq
-input/fastq/*yourFastqFile2_*1.fastq
-input/fastq/*yourFastqFile2_*2.fastq
+input/controldir/fastqir/*yourFastqFile1_*1.fastq
+input/controldir/fastqir/*yourFastqFile1_*2.fastq
+input/controldir/fastqir/*yourFastqFile2_*1.fastq
+input/controldir/fastqir/*yourFastqFile2_*2.fastq
 . . .
 </pre></div>
 </div>
@@ -237,13 +243,12 @@ input/fasta_chromosomes/*yourChromosome3*.fa
 </pre></div>
 </div>
 </dd>
-<dt>Optional: Index</dt><dd><p>If there is no index it will be automatically built with bowtie2. If you want to rebuild the index anyway set <code class="docutils literal notranslate"><span class="pre">$recompute_index=true</span></code> in <span class="guilabel">scripts/mapping_config.sh</span>.
-Once the</p>
+<dt>Optional: Index</dt><dd><p>If there is no index it will be automatically built with <a class="reference external" href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">bowtie2</a>. If you want to rebuild the index anyway set <code class="docutils literal notranslate"><span class="pre">$recompute_index=true</span></code> in <span class="guilabel">scripts/mapping_config.sh</span>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Index files paths</span>
 <span class="c1"># Replace the text between the stars *...* with your file names</span>
 <span class="c1"># Default variable settings in mapping_config.sh:</span>
 <span class="c1">#       indexdir=contextmap_index</span>
-<span class="c1">#       indexname=$fasta</span>
+<span class="c1">#       indexname=$fasta_index</span>
 <span class="c1"># $fasta to make sure we have the right index for the used fasta file</span>
 
 index/*your <span class="nv">$indexdir</span> variable*/*your <span class="nv">$indexname</span> variable*/*yourChromosome1*.1.bt2
@@ -260,8 +265,9 @@ index/*your <span class="nv">$indexdir</span> variable*/*your <span class="nv">$
 </div>
 <div class="section" id="default-parameters">
 <h2>2. Default parameters:<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
-<p>The following parameters are set in the ENTRYPOINT.sh script in our docker to run ContextMap.
-If you want to specify your analysis you will have to change the ENTRYPOINT script.
+<p>The following parameters are set in the ENTRYPOINT.sh script in our docker to run ContextMap. The variables can be changed in
+<span class="guilabel">scripts/config.sh</span> and <span class="guilabel">scripts/mapping_config.sh</span>
+If you want to specify your analysis with different parameters you will have to change the ENTRYPOINT script.
 For further information please consult the ContextMap <a class="reference external" href="https://www.bio.ifi.lmu.de//files/Software/ContextMap/manual/ContextMap-manual.html">manual</a>.</p>
 <blockquote>
 <div><dl class="option-list">
@@ -273,19 +279,19 @@ For further information please consult the ContextMap <a class="reference extern
 </dd>
 <dt><kbd><span class="option">-a<var>ligner_name</var></span></kbd></dt>
 <dd><p>Used aligner (index tool). We use <a class="reference external" href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">bowtie2</a>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bowtie2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-aligner_name bowtie2
 </pre></div>
 </div>
 </dd>
 <dt><kbd><span class="option">-a<var>ligner_bin</var></span></kbd></dt>
 <dd><p>Path to the used aligner. If you use our docker you will not have to wolly about it.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/biodocker/bin/bowtie2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-aligner_bin /home/biodocker/bin/bowtie2
 </pre></div>
 </div>
 </dd>
 <dt><kbd><span class="option">-i<var>ndexer_bin</var></span></kbd></dt>
 <dd><p>Path to the indexing tool of the aligner.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/biodocker/bin/bowtie2-build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-indexer_bin  /home/biodocker/bin/bowtie2-build
 </pre></div>
 </div>
 </dd>
@@ -300,7 +306,7 @@ For further information please consult the ContextMap <a class="reference extern
 <span class="c1"># *IndexChromosome1* is:</span>
 <span class="c1">#       index/*your $indexdir variable*/*your $indexname variable*/*yourChromosome1*</span>
 
-*IndexChromosome1*,*IndexChromosomes2*,*IndexChromosome3*, . . .
+-indices *IndexChromosome1*,*IndexChromosomes2*,*IndexChromosome3*, . . .
 </pre></div>
 </div>
 </dd>
@@ -309,13 +315,14 @@ For further information please consult the ContextMap <a class="reference extern
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you use our default parameters and folder structure:</span>
 <span class="c1">#       $contestmap_fastadir=input/fasta_chromosomes</span>
 
-<span class="nv">$contextmap_fastadir</span>
+-genome <span class="nv">$contextmap_fastadir</span>
 </pre></div>
 </div>
 </dd>
 <dt><kbd><span class="option">-o</span></kbd></dt>
-<dd><p>The path to the output directory.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$outdir</span>/*yourFastqFile1_*contextmap
+<dd><p>The path to the output directory.
+For differential analysis the output will be separated into case and control folder based on the basefolder of the according fastq file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-o <span class="nv">$outdir</span>/controldir/*yourFastqFile1_*contextmap
 </pre></div>
 </div>
 </dd>
@@ -335,7 +342,7 @@ Store the file inside the <span class="guilabel">src/contextmap2/</span> folder.
 <blockquote>
 <div><ul class="simple">
 <li><p>ContextMap <a class="reference external" href="https://www.bio.ifi.lmu.de//files/Software/ContextMap/manual/ContextMap-manual.html">manual</a></p></li>
-<li><p>ContextMap publication: <a class="reference external" href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-S6-S9">A context-based approach to identify the most likely mapping for RNA-seq experiments</a></p></li>
+<li><p>ContextMap publication: <a class="reference external" href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0557-5">ContextMap 2: fasta and accurate context-based RNA-seq mapping</a></p></li>
 <li><p><a class="reference external" href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">bowtie2</a> (used indexing tool)</p></li>
 </ul>
 </div></blockquote>
@@ -393,7 +400,6 @@ Store the file inside the <span class="guilabel">src/contextmap2/</span> folder.
   <style>
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
-      background: #00ff00;
     }
 
   </style>

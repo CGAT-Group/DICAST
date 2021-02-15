@@ -4,26 +4,26 @@ Mapping tools
 Index building takes time
 Use mapping config file
 
-===================  ===============  ==========================
-Tool				 Git			  Comment
-===================  ===============  ==========================
-:ref:`bbmap`                 
-:ref:`contextmap 2`            		  ``Requires special input``
-:ref:`crac`                 
-:ref:`dart`               
-:ref:`gsnap`              
-:ref:`hisat 2`            
-:ref:`mapsplice 2`        
-:ref:`minimap 2`          
-:ref:`segemehl`           
-:ref:`star`               
-===================  ===============  ==========================
+=========================  ===============  ==========================
+Tool                       Git			    Comment
+=========================  ===============  ==========================
+:doc:`mapping/bbmap`                 
+:doc:`mapping/contextmap`            		``Requires special input``
+:doc:`mapping/crac`                 
+:doc:`mapping/dart`               
+:doc:`mapping/gsnap`              
+:doc:`mapping/hisat`            
+:doc:`mapping/mapsplice`        
+:doc:`mapping/minimap`          
+:doc:`mapping/segemehl`           
+:doc:`mapping/star`               
+=========================  ===============  ==========================
 
 1. Mapping Input Files
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-	The paths assume you are using our suggested :ref:`folder structure`. For example input files see :ref:`examples`.
+	The paths assume you are using our suggested :doc:`folder structure`. For example input files see :doc:`examples`.
 	
 If not stated otherwise the mapping tools require the following input files:
 
@@ -35,8 +35,10 @@ If not stated otherwise the mapping tools require the following input files:
 		input/fastq/*yourFastqFile2*_1.fastq
 		input/fastq/*yourFastqFile2*_2.fastq
 		...
+		
 * Fasta Reference:
 	* input/*yourFastaFile*.fa
+	
 * Optional: Index (if there is no index it will be built)
 	* index/*yourIndexBaseName*
 

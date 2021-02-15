@@ -32,8 +32,8 @@ release = '1.0'
 # ones.
 extensions = [
     'recommonmark',
-    'sphinx_rtd_theme',
-    'sphinx.ext.autosectionlabel'
+    'sphinx_rtd_theme'
+#    'sphinx.ext.autosectionlabel'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,14 +56,14 @@ gitlab_url = 'ge46ban/dockers'
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'navigation_depth' : 3,
-    'titles_only' : True
-    # 'html_logo': , 'logo_only': True,
+    'titles_only' : True,
+     'logo_only': True
 
 }
-
+html_logo = 'img/dicast.svg'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 # custom.css is inside one of the html_static_path folders (e.g. _static)
-html_css_files = ["custom.css"]
+#html_css_files = ["custom.css"]

@@ -19,7 +19,7 @@ config=$outdir/config.txt
 echo "[info]" > $config
 echo "readlen=$read_length" >> $config
 #bam-directory depending on type of run
-if [ $differential = 0 ]; then echo "bamdirs=$bamdir" >> $config; else echo "bamdirs=$casebam,$controlbam" >> $config; fi
+echo "bamdirs=$casebam,$controlbam" >> $config
 echo "genome=hg38" >> $config
 echo "strandness=None" >> $config
 echo "[experiments]" >> $config
@@ -30,20 +30,50 @@ if [ $differential = 0 ]
 then
 	#list .bam files, remove last file extension (.bam), list them in one line with comma seperated, no comma after last file
 	#(sed commands from here: https://unix.stackexchange.com/questions/313791/how-to-list-only-files-in-a-directory-separated-by-commas)
-	bamlist=$(cd $bamdir && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
-	echo "ALLBAMS=$bamlist" >> $config
+	#bamlist=$(cd $bamdir && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
+	for filename in $(cat $outdir/bamlist)
+	do
+		# build sperate config file for each BAM file
+		basename=$(basename $filename)
+		majiq_basename=$(basename -s .bam $filename)
+		outdir_name=$(basename -s .bam $filename)_output
+		mkdir -p $outdir/$outdir_name
+		config=$outdir/$outdir_name/config.txt
+		echo "[info]" > $config
+		echo "readlen=$read_length" >> $config
+		#bam-directory depending on type of run
+		echo "bamdirs=$bamdir" >> $config
+		echo "genome=hg38" >> $config
+		echo "strandness=None" >> $config
+		echo "[experiments]" >> $config
+		echo "BAM=$majiq_basename" >> $config
+	
+		echo "building MAJIQ reference ..."
+		majiq build $gff -c $config -j $ncores -o $outdir/$outdir_name/build
+		wait
 
-	echo building majiq reference ...
-	majiq build $gff -c $config -j $ncores -o $outdir/build
-
-	#get all .majiq files which were created with build 
-	majiqlist=$(ls -1p $outdir/build/*.majiq | xargs echo)
-	majiq psi $majiqlist -j $ncores -o $outdir/psi -n "ALLBAMS"
+		#get all .majiq files which were created with build 
+	        majiqlist=$(ls -1p $outdir/$outdir_name/build/*.majiq | xargs echo)	
+		
+		majiq psi $majiqlist -j $ncores -o $outdir/$outdir_name/psi -n "BAM"
+		wait
+	done
 	cleaner
 fi
 
 if [ $differential = 1 ]
 then
+	#build custom config file, override if already present
+	config=$outdir/config.txt
+	echo "[info]" > $config
+	echo "readlen=$read_length" >> $config
+	#bam-directory depending on type of run
+	echo "bamdirs=$casebam,$controlbam" >> $config
+	echo "genome=hg38" >> $config
+	echo "strandness=None" >> $config
+	echo "[experiments]" >> $config
+	
+
 	# list .bam files from case & control folder, without file extension
 	casefiles=$(cd $casebam && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
 	controlfiles=$(cd $controlbam && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')

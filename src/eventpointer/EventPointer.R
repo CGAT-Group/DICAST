@@ -36,30 +36,26 @@ if(differential){
 cores = as.numeric(opt$cores)
 #if(getwd() == opt$workdir){opt$workdir <- ""}  #set opt$workdir empty if it is the current directory
 
-#Reading files
-if(differential){
-  Samples <- basename(list.files(opt$combined,pattern="\\.bam$"))
-  PathToSamples <- opt$combined
-}else{
-  Samples <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
-  PathToSamples <- opt$bamfolder
-}
 PathToGTF<- opt$gtf
 
-print("Preparing BAM file(s)...")
-SG_RNASeq<-PrepareBam_EP(Samples=Samples,
-                         SamplePath=PathToSamples, 
-                         Ref_Transc="GTF", 
-                         fileTransc=PathToGTF, 
-                         cores=cores)
-#AS discovery
-print("looking for AS events...")
-TxtPath<-paste0(opt$output)
-AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
-
-
-#Differential analysis
 if(differential){
+  
+  # read combined folder	
+  Samples <- basename(list.files(opt$combined,pattern="\\.bam$"))
+  PathToSamples <- opt$combined
+
+  print("Preparing BAM files ...")
+
+  SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
+                           SamplePath=PathToSamples,
+                           Ref_Transc="GTF",
+                           fileTransc=PathToGTF,
+                           cores=cores)
+
+  print("Looking for AS events...")
+  TxtPath<-paste0(opt$output)
+  AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+
   print("Starting differential analysis...")
   #number_of_one = opt$one
   #number_of_two = opt$two
@@ -70,5 +66,29 @@ if(differential){
   print(Dmatrix)
   Events <- EventPointer_RNASeq(AllEvents_RNASeq,Dmatrix,Cmatrix,Statistic="LogFC",PSI=TRUE)
   write.table(Events, paste0(opt$output,"/EP_DAS.txt"), sep='\t')
-}
 
+}else{
+
+  Samples <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
+  PathToSamples <- opt$bamfolder
+
+  for (i in range(1:length(Samples))){
+    bam_file = Samples[i]	
+    print(paste("Preparing BAM file",i,":",bam_file,"..." ))
+
+    TxtPath<-paste0(opt$output,"/",bam_file,"_output")
+    if(!dir.exists(TxtPath)){
+      dir.create(TxtPath)
+    }
+
+    SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
+ 		  	     SamplePath=PathToSamples,
+ 			     Ref_Transc="GTF",
+ 			     fileTransc=PathToGTF,
+			     cores=cores)
+
+
+    print("Looking for AS events...")
+    AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+  }
+}
