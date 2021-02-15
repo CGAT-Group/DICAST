@@ -18,7 +18,7 @@ then
 	#list all .bam files in bamfolder with comma seperated
 	bamlist=$(ls -1p $bamdir/*.bam | xargs echo | sed 's/ /,/g')
 	echo Starting spladder in event detection mode ...
-	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length
+	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length 
 	cleaner
 fi
 
