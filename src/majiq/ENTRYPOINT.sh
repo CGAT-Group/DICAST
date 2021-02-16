@@ -56,6 +56,9 @@ then
 	        majiqlist=$(ls -1p $outdir/$outdir_name/build/*.majiq | xargs echo)	
 		
 		majiq psi $majiqlist -j $ncores -o $outdir/$outdir_name/psi -n "BAM"
+
+		# create voila.tsv outputfiles
+		voila tsv $outdir/$outdir_name/build/splicegraph.sql $outdir/$outdir_name/psi/*.voila -f $outdir/$outdir_name/voila.tsv
 		wait
 	done
 	cleaner
@@ -88,6 +91,9 @@ then
 	controllist=$(cd $controlbam && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | sed "s|.*|$outdir/build/&.majiq|" | xargs echo)
 
 	majiq deltapsi -grp1 $caselist -grp2 $controllist -n CASE CONTROL -j $ncores -o $outdir/deltapsi 
+	
+	#create voila.tsv outputfile
+	voila tsv $outdir/build/splicegraph.sql $outdir/deltapsi/*.voila -f $outdir/voila.tsv
 	cleaner
 fi
 

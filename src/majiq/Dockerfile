@@ -18,10 +18,11 @@ RUN pip3.6 install --no-cache-dir -U wheel setuptools
 RUN pip3.6 install --no-cache-dir -U numpy cython
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y git
 
+
 #download and install majiq from source
 WORKDIR /tmp
-RUN git clone https://bitbucket.org/biociphers/majiq_stable.git
-WORKDIR /tmp/majiq_stable
+RUN git clone https://bitbucket.org/biociphers/majiq_academic.git
+WORKDIR /tmp/majiq_academic
 RUN pip3.6 install --no-cache-dir -r requirements.txt
 RUN python3.6 setup.py install
 RUN rm -rf /tmp
