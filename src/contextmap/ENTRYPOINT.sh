@@ -62,7 +62,7 @@ mk_fastqlist
 #mk_outdir
 
 # get indices basenames
-indices=$(for line in $(ls -d $contextmap_fastadir/*); do printf "%s" ${line%.*},; done)
+indices=$(for line in $(ls -d $indexdir/$indexname/*); do echo $(echo $line | cut -d '.' -f 1-5), ; done)
 
 ### Start mapping ###
 

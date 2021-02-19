@@ -34,6 +34,8 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "Build bowtie-index..."
+	mapsplice_fastadir_index=$(find $mapsplice_fastadir_mapping -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
+
 	# Usage: bowtie-build [options]* <reference_in> <ebwt_outfile_base>
 	#    reference_in            comma-separated list of files with ref sequences
 	#    ebwt_outfile_base       write Ebwt data to files with this dir/basename
@@ -71,6 +73,7 @@ mk_fastqlist
 echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
+    mkdir -p $outdir/$(basename $(dirname $line))/${line##*/}
 
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
@@ -87,7 +90,7 @@ while read -r line; do
 		-c $mapsplice_fastadir_mapping \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
+		-o $outdir/$(basename $(dirname $line))/${line##*/} \
 		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq
