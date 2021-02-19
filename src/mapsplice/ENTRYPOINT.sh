@@ -44,6 +44,7 @@ build_index() {
 
 	bowtie-build \
 		--seed 42 \
+		--threads $ncores \
 		$mapsplice_fastadir_index \
 		$indexdir/$indexname
 	chmod -R 777 $indexdir
