@@ -1,15 +1,26 @@
-final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
-report_out = config["Report"]["Report_file_name"]
+import sys
+import traceback
 
-mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
-as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
-diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
+if len(config) == 0:
+    print("Empty or no config file was specified! Use --configfile snakemake_config.yaml")
+    sys.exit(1)
+
+try:
+    final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+    report_out = config["Report"]["Report_file_name"]
+    mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
+    as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
+    diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
+    asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
+    overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
+    run_asimulator = config["ASimulatoR"]['do']
+except KeyError:
+    print("One or more configuration parameters could not be found! Wrong config file specified?\nSee the following traceback for more information:")
+    traceback.print_exc()
+    sys.exit(1)
 
 working_directory = os.getcwd()
 docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
-run_asimulator = config["ASimulatoR"]['do']
-asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
-overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
 
 rule all:
     input:
