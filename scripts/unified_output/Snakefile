@@ -1,0 +1,31 @@
+#### This does not work ####
+
+tools=["MAJIQ"]
+outdir="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/"
+gtf="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/input/splicing_variants_anno.gtf"
+annotation="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/input/event_annotation.tsv"
+
+rule all:
+    input:
+        out=expand(outdir+"{tool}.unified.out", tool=tools)
+
+
+rule run_majiq:
+    input:
+        dir="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/majiq-output/",
+        gtf=gtf
+    output:
+        out=expand(outdir + "{tool}.unified.out",tool=tools),
+        outdir=outdir
+    shell:
+        "python3 output_transformer.py create -m {input.dir} -gtf {input.gtf} -out {output.outdir}"
+
+
+
+rule compare:
+    input:
+        anno=annotation,
+        file=expand(outdir+"{tool}.unified.out", tool=tools),
+        gtf=gtf
+    shell:
+        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf}"
