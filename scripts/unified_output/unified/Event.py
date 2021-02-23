@@ -1,3 +1,35 @@
+# this function can be used to sort skipped exons by coordinate value (for example for MES events);
+# inputs is:
+# list of skipped exons; each index of pattern: "start-end"
+# one of these coordinates can be "nan" -> these exons are not sorted, but will be added to the end of the list
+# return:
+# single list with same pattern, sorted by coordinate
+def sort_exons_with_na(skipped_exons):
+    starts = []
+    ends = []
+    nan_pairs = []
+    for i, exon in enumerate(skipped_exons):
+        start = exon[0]
+        end = exon[1]
+        if start == "nan" or end == "nan":
+            nan_pairs.append((start, end))
+        else:
+            starts.append(start)
+            ends.append(end)
+
+    # the remaining coordinates can just be sorted like this; the exon-pairs will keep the same index
+    sorted_starts = sorted(starts, key=int)
+    sorted_ends = sorted(ends, key=int)
+
+    # add the nan pair to the end of each list
+    for pair in nan_pairs:
+        sorted_starts.append(pair[0])
+        sorted_ends.append(pair[1])
+
+    sorted_list = [[sorted_starts[i], sorted_ends[i]] for i in range(len(sorted_starts))]
+    return sorted_list
+
+
 class Event:
 
     id = None
@@ -58,7 +90,7 @@ class MeeEvent(Event):
 
     def __init__(self, idx, mee_exons, strand, gene, symbol, count=1):
         super().__init__(idx, gene, symbol)
-        self.mee_exons = mee_exons
+        self.mee_exons = sort_exons_with_na(mee_exons)
         self.strand = strand
         self.symbol = symbol
         self.count = count
@@ -80,13 +112,11 @@ class MeeEvent(Event):
         return hash((self.gene, frozenset(frozenset(ev) for ev in self.mee_exons)))
 
     def __eq__(self, other):
-        sorted_exons = sorted([list(map(int, i)) for i in self.mee_exons])
-        other_sorted_exons = sorted([list(map(int, i)) for i in other.mee_exons])
         if type(self) != type(other): return False
-        if len(sorted_exons) != len(other_sorted_exons): return False
+        if len(self.mee_exons) != len(other.mee_exons): return False
         b = True
-        for i in range(len(sorted_exons)):
-            if sorted_exons[i] != other_sorted_exons[i]:
+        for i in range(len(self.mee_exons)):
+            if self.mee_exons[i] is not other.mee_exons[i]:
                 b = False
         return b
 
@@ -102,19 +132,17 @@ class MesEvent(Event):
 
     def __init__(self, idx,  mes_skipped, strand, gene, symbol, count=1):
         super().__init__(idx, gene, symbol)
-        self.mes_skipped_exons = mes_skipped
+        self.mes_skipped_exons = sort_exons_with_na(mes_skipped)
         self.strand = strand
         self.symbol = symbol
         self.count = count
 
     def __eq__(self, other):
-        sorted_exons = sorted([list(map(int, i)) for i in self.mes_skipped_exons])
-        other_sorted_exons = sorted([list(map(int, i)) for i in other.mes_skipped_exons])
         if type(self) != type(other): return False
-        if len(sorted_exons) != len(other_sorted_exons): return False
+        if len(self.mes_skipped_exons) != len(other.mes_skipped_exons): return False
         b = True
-        for i in range(len(sorted_exons)):
-            if sorted_exons[i] != other_sorted_exons[i]:
+        for i in range(len(self.mes_skipped_exons)):
+            if self.mes_skipped_exons[i] is not other.mes_skipped_exons[i]:
                 b = False
         return b
 

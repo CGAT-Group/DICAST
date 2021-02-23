@@ -1,8 +1,6 @@
 from unified.Event import *
 from gtf_utils.GeneClass import Gene
 from gtf_utils.GTFParser import GTFParser
-
-# init event type dict
 from tool_parser.ASParser import ToolParser
 
 
@@ -10,6 +8,7 @@ def openFile(filepath):
     return open(filepath, mode='r')
 
 
+# init event type dict
 EVENT_TYPES = {"ES": "es", "IR": "ir", "A3": "a3", "A5": "a5"}
 
 
