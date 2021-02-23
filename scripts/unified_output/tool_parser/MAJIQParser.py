@@ -361,7 +361,7 @@ def handle_nan_events(event_exons, nan_exon):
 
 
 def merge_psi_voila(psi_file, voila_file, outdir):
-    merged_file = outdir+"merged_majiq.tsv"
+    merged_file = outdir+"/merged_majiq.tsv"
     print(outdir)
     header = ["gene_id", "lsv_id", "num_junctions", "num_exons", "de_novo_junctions", "seqid", "strand",
               "junctions_coords", "exons_coords", "ir_coords", "A3SS", "A5SS", "ES"]
