@@ -56,7 +56,10 @@ def run_create(args):
 
 def run(tool, args):
     header = "chr\tgene\tid\tstrand\tevent_type\tcount\tstart_coordinates\tend_coordinates\n"
-    outfile = args.outdir + tool.NAME + ".unified.out"
+    outfile = args.outdir + "/" + tool.NAME + ".unified.out"
+    if not os.path.exists(args.outdir):
+        os.mkdir(args.outdir)
+    print(outfile)
     with open(outfile, 'w') as f:
         f.write(header)
         while True:
@@ -77,12 +80,12 @@ def main():
     create_parser = argparse.ArgumentParser(add_help=False)
     create_parser.add_argument("-m", "--majiq_dir", help="directory with 2 majiq files: 1) X.psi.tsv in psi folder 2) output-file of voila tsv run (named: X.voila.tsv)")
     create_parser.add_argument("-s", "--spladder_dir", help="directory of spladder output confirmed.txt files")
-    create_parser.add_argument("-w", "--whippet_file", help="whippet out.psi file")
+    create_parser.add_argument("-w", "--whippet_file", help="whippet-out.psi file")
     create_parser.add_argument("-a", "--asgal_file", help="asgal ASGAL.csv file")
     create_parser.add_argument("-out", "--outdir", help="output directory", required=True)
     create_parser.add_argument("-gtf", "--gtf", help="reference file in gtf format", required=True)
     create_parser.add_argument("-comb", "--combine_me", help="Set this to true if you want MES and MEE events to be counted as ES events "
-                                                             "(each skipped exon is one separate ES event)", default=False)
+                                                             "(each skipped exon is one separate ES event)", default=False, action='store_true')
     #create_args = create_parser.parse_args()
 
     compare_parser = argparse.ArgumentParser(add_help=False)
@@ -92,10 +95,10 @@ def main():
     compare_parser.add_argument("-stats", "--stats_outfile", help="path to outputfile, where statistics will be written to; std-out if not given", required=False)
     compare_parser.add_argument("-comb", "--combine_me", help="Set this to true if you want MES and MEE events to be counted as ES events "
                                                               "(each skipped exon is one separate ES event); should also been used when creating"
-                                                              "the compare file!", default=False)
+                                                              "the compare file!", default=False, action='store_true')
     compare_parser.add_argument("-s", "--strict", help="Use this flag if you want strict comparison between the output and event annotation."
                                                        "Strict means that both start and end coordinate have to be equal so that an event is "
-                                                       "counted as correct. Otherwise only one of them has to be equal.", default=False)
+                                                       "counted as correct. Otherwise only one of them has to be equal.", default=False, action='store_true')
     compare_parser.add_argument("-t", "--threshold", help="set threshold to allow for events with minimum distance < threshold to still be"
                                                           "counted as correct; default is 0", default=0)
     #compare_args = compare_parser.parse_args()

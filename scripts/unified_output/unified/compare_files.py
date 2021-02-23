@@ -14,9 +14,9 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
     found_events = {"ES": 0, "IR": 0, "A3": 0, "A5": 0, "MES": 0, "MEE": 0, "ALE": 0, "AFE": 0}
     correct_events = {"ES": 0, "IR": 0, "A3": 0, "A5": 0, "MES": 0, "MEE": 0, "ALE": 0, "AFE": 0}
     anno_events = anno.count_event_types
-    cutoff = threshold
+    cutoff = int(threshold)
     in_cutuff = {"ES": 0, "IR": 0, "A3": 0, "A5": 0, "MES": 0, "MEE": 0, "ALE": 0, "AFE": 0}
-
+    seen_es = set()
 
     with open(file, 'r') as f:
         f.readline() # read header
@@ -36,6 +36,8 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
             for anno_event in anno_events_same_type:
                 if event_type != "MES" and event_type != "MEE":
                     st_st = anno_event.get_start_stop()
+                    if event_type == "ES":
+                        seen_es.add(event[2])
 
                     start_anno = st_st[0]
                     stop_anno = st_st[1]
@@ -47,7 +49,7 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
                         correct_events[event_type] += 1
                         break
                     else:
-                        if total_distance(start_event, stop_event, start_anno, stop_anno) < cutoff:
+                        if total_distance(start_event, stop_event, start_anno, stop_anno) <= cutoff:
                             correct_events[event_type] += 1
                             in_cutuff[event_type] += 1
                             break
@@ -69,6 +71,7 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
     recall = scores_per_type(correct_events, anno_events)
 
     if outfile is None:
+        print("seen es:"+str(len(seen_es)))
         print("#######################################")
         print("correct_events: " + str(correct_events))
         print("found_events: " + str(found_events))

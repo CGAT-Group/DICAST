@@ -4,12 +4,15 @@ import sys, csv
 
 #gene_id	lsv_id	num_junctions	num_exons	de_novo_junctions	seqid	strand	junctions_coords	exons_coords	ir_coords	A3SS	A5SS	ES
 
-nan_max = sys.maxsize
-nan_min = 0
+
 
 
 class MAJIQParser(ToolParser):
     NAME = "MAJIQ"
+
+    # these two variables are needed for handling duplicate events from majiq
+    current_gene = None
+    gene_events = set()
 
     def __init__(self, psi_filepath, voila_filepath, outdir, combine_me):
         super().__init__("MAJIQ")
@@ -26,6 +29,7 @@ class MAJIQParser(ToolParser):
         else:
             self.header_index["ir_coords"] = -1
         self.known_event_types = ["es", "mes", "ir", "a3", "a5", "FP"]
+
 
     def closeFile(self):
         return self.fh.close()
@@ -59,6 +63,8 @@ class MAJIQParser(ToolParser):
 
         return complex_event, events
 
+
+
     def nextEventSet(self):
         next_line = self.fh.readline()
         if next_line == "":
@@ -72,6 +78,12 @@ class MAJIQParser(ToolParser):
     def parseLineToEvents(self, event_line):
         event_line = event_line.split("\t")
         gene = event_line[0]
+        event_set = None
+        if gene != self.current_gene:
+            event_set = self.gene_events
+            self.current_gene = gene
+            self.gene_events = set()
+
         idx = event_line[1]
         symbol = event_line[self.header_index["seqid"]]
 
@@ -95,14 +107,15 @@ class MAJIQParser(ToolParser):
             intron_start = ir_coords.split("-")[0]
             intron_end = ir_coords.split("-")[1]
             event = IrEvent(idx, intron_start, intron_end, strand, gene, symbol)
-            return [event]
+            self.gene_events.add(event)
         else:
             if event_types[3] == "ir":
                 ir_coords = event_line[self.header_index["ir_coords"]]
                 events = handle_ir_plus_complex(event_exons, junctions, event_types, idx, strand, gene, symbol, ir_coords, combine_me=self.combine_me, nan_fake_values=nan_fake_values)
             else:
                 events = handle_complex_event(event_exons, junctions, event_types, idx, strand, gene, symbol, combine_me=self.combine_me, nan_fake_values=nan_fake_values)
-            return events
+            self.gene_events.update(events)
+        return event_set
 
 
 # wrapper for all complex event types
@@ -348,7 +361,8 @@ def handle_nan_events(event_exons, nan_exon):
 
 
 def merge_psi_voila(psi_file, voila_file, outdir):
-    merged_file = outdir+"/merged_majiq.tsv"
+    merged_file = outdir+"merged_majiq.tsv"
+    print(outdir)
     header = ["gene_id", "lsv_id", "num_junctions", "num_exons", "de_novo_junctions", "seqid", "strand",
               "junctions_coords", "exons_coords", "ir_coords", "A3SS", "A5SS", "ES"]
 
