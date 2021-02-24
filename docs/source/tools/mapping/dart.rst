@@ -121,4 +121,4 @@ Make sure to use a bwt/bwa based index. Other than that, |tool| has no special r
 4. Important links:
 ^^^^^^^^^^^^^^^^^^^
 	- |tool| `manual`_
-	- |tool| publication: `DART: a fast and accurate RNA-seq mapper with a partitioning strategy<https://academic.oup.com/bioinformatics/article/34/2/190/4104410>`_
+	- |tool| publication: `DART: a fast and accurate RNA-seq mapper with a partitioning strategy <https://academic.oup.com/bioinformatics/article/34/2/190/4104410>`_

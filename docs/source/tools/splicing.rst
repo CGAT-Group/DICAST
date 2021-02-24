@@ -7,7 +7,8 @@ Use asevent config file
 
 .. toctree::
    :maxdepth: 1
-   
+   :hidden:
+
    splicing/asgal
    splicing/aspli
    splicing/cash
