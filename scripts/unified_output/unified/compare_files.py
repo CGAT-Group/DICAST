@@ -24,6 +24,8 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
         for line in f:
             event = line.strip("\n").split("\t")
             gene = event[1]
+            strand = event[3]
+            count = event[5]
             event_type = event[4]
             found_events[event_type] += 1   # this line could be pushed under the if check..
             # get all events from this gene with same event_type

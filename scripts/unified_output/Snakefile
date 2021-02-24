@@ -1,8 +1,10 @@
 #### This does not work ####
 
-tools=["MAJIQ","SplAdder","Whippet","ASGAL"]
+#tools=["MAJIQ","SplAdder","Whippet","ASGAL"]
+tools=["ASGAL"]
 #tools=["Whippet"]
-reads=["50","100","200"]
+#reads=["50","100","200"]
+reads=["50"]
 combine = ["combined","separate"]
 cutoff=["0","1","5","20"]
 outdir="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified"
@@ -13,7 +15,7 @@ annotation="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/Fortgesc
 rule all:
     input:
         out=expand("/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
-                   "unifyASOutputs/data/unified/{c}/{r}/{t}_{x}_strict.stats.out", r=reads, t=tools, c=combine,x = cutoff)
+                   "unifyASOutputs/data/unified/{c}/{r}/{t}_{x}_loose.stats.out", r=reads, t=tools, c=combine,x = cutoff)
 
 rule compare_combined:
     input:
@@ -23,11 +25,11 @@ rule compare_combined:
              "FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/combined/{r}/{t}.unified.out"
     output:
         file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
-                   "unifyASOutputs/data/unified/combined/{r}/{t}_{x}_strict.stats.out"
+                   "unifyASOutputs/data/unified/combined/{r}/{t}_{x}_loose.stats.out"
     params:
         x="{x}"
     shell:
-        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} -s --combine_me"
+        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} --combine_me"
 
 rule compare_separate:
     input:
@@ -37,11 +39,11 @@ rule compare_separate:
              "FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/separate/{r}/{t}.unified.out"
     output:
         file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
-                   "unifyASOutputs/data/unified/separate/{r}/{t}_{x}_strict.stats.out"
+                   "unifyASOutputs/data/unified/separate/{r}/{t}_{x}_loose.stats.out"
     params:
         x="{x}"
     shell:
-        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} -s "
+        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} "
 
 
 '''

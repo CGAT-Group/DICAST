@@ -104,6 +104,7 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
     j_end = int(junction[1])
     exons_in_gtf = gene.getExonsSortedByPosition()
     event = None
+    count=1
 
     # iterate over all exons for this gene (until second to last)
     for e in range(len(exons_in_gtf)-1):
@@ -114,29 +115,31 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
             if j_end+1 == next_exon.start:
                 alt_part = (str(exon.end), str(j_start))
                 if j_start < exon.end:                          # check if junction is not inside of exon
-                    alt_part = (str(j_start), str(exon.end))
+                    alt_part = (str(j_start-1), str(exon.end))
+                    count=999
                 #if not (exon.end <= j_start <= next_exon.start):  # check if junction really starts in between two exons; it might cover more than 1 exon
                 #    break
                 if j_start == exon.end:                         # alt_part start & stop can be the same -> NaN for alt_start
                     alt_part = ("nan", str(j_start))
                 if event_type == "a3":
-                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol)}
+                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
                 else:
-                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol)}
+                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
 
         elif (event_type == "a5" and strand == "-") or (event_type == "a3" and strand == "+"):
             if j_start-1 == exon.end:
                 alt_part = (str(j_end), str(next_exon.start))
                 if next_exon.start < j_end:                             # check if junction is not inside of exon
-                    alt_part = (str(next_exon.start), str(j_end))
+                    alt_part = (str(next_exon.start), str(j_end+1))
+                    count=999
                 #if not (exon.end <= j_end <= next_exon.start):            # check if junction really ends in between two exons; it might cover more than 1 exon
                 #    break
                 if j_end == next_exon.start:                            # alt_part start & stop can be the same -> NaN for alt_start
                     alt_part = (str(j_end), "nan")
                 if event_type == "a3":
-                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol)}
+                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
                 else:
-                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol)}
+                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
 
 
 
