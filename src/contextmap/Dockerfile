@@ -1,4 +1,4 @@
-FROM bowtie:0.1
+FROM bowtie:0.2
 
 LABEL software="ContextMap"
 LABEL maintainer="Amit Fenn"

@@ -32,7 +32,7 @@ Alternative_splicing_detection_tools:
 #########################################
 # Enter the name of the differential alternative splicing detection tools you want to run as a space separated list.
 #
-# Currently we support cash dexseq, dsplicetype, edger, jum, leafcutter, psisigma, rmats
+# Currently we support cash dexseq, dsplicetype, edger, leafcutter, psisigma, rmats
 #
 Differential_alternative_splicing_detection_tools:
     What_tools_to_run: ''
