@@ -34,7 +34,7 @@ build_index() {
 }
 
 extract_splice_sites() {
-	python /docker_main/hisat2-2.2.1/hisat2-extract_splice_sites.py $gtf > $indexdir/${gtfname}_splicesites.txt
+	python /docker_main/hisat2-2.2.1/hisat2_extract_splice_sites.py $gtf > $indexdir/${gtfname}_splicesites.txt
 	chmod -R 777 $indexdir
 	echo "Extracted plicesites are now saved under $indexdir/${gtfname}_splicesites.txt"
 }
