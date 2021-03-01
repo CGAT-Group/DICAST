@@ -28,11 +28,16 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "compute index ..."
-	hisat2-build  $fasta $indexdir/$indexname && python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/${indexname}_splicesites.txt
+	hisat2-build  $fasta $indexdir/$indexname
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
 
+extract_splice_sites() {
+	python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/${gtf}_splicesites.txt
+	chmod -R 777 $indexdir
+	echo "Splicesites are now saved under $indexdir/${gtf}_splicesites.txt"
+}
 
 ### START here ############################################################################
 
@@ -42,6 +47,9 @@ test_gtf
 
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -f $indexdir/${indexname}.4.ht2; then build_index; fi fi
+
+if $recompute_index; then extract_splice_sites; else if ! test -f  $indexdir/${gtf}_splicesites.txt; then extract_splice_sites; fi fi
+
 
 #make list of fastq files
 mk_fastqlist
