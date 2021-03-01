@@ -48,7 +48,7 @@ test_gtf
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -f $indexdir/${indexname}.4.ht2; then build_index; fi fi
 
-if $recompute_index; then extract_splice_sites; else if ! test -f  $indexdir/${gtfname}_splicesites.txt; then extract_splice_sites; fi fi
+if $recompute_index; then extract_splice_sites; else if ! test -f $indexdir/${gtfname}_splicesites.txt; then extract_splice_sites; fi fi
 
 
 #make list of fastq files
@@ -69,7 +69,7 @@ while read -r line; do
 	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile ${gtfname}_splicesites.txt
+	--known-splicesite-infile $indexdir/${gtfname}_splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
