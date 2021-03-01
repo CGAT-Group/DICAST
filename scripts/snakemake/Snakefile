@@ -44,7 +44,7 @@ rule overwrite_acknowledged_rule:
         fi
         """
 
-rule get_base_os_docker:
+rule get_base_dockers:
     input:
         overwrite_out=rules.overwrite_acknowledged_rule.output
     output:
@@ -52,18 +52,22 @@ rule get_base_os_docker:
     shell:
         """
         mkdir -p output/snakemake/
+        chmod 777 output/snakemake/
 
-        if docker-compose -f scripts/snakemake/docker-compose.yml build base ; then
-            echo "Build base image locally" | tee {output}
-        else 
-            echo "\nLocal build failed, pulling image from registry" | tee {output}
-            docker pull {docker_prefix}base-image | tee {output}
-        fi
+        for img in base conda bowtie
+        do
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $img ; then
+                echo "Built $img base image locally. \n" | tee {output}
+            else 
+                echo "\nBuilding $img image locally failed, exiting pipeline!" | tee {output}
+                exit 1
+            fi
+        done
         """
 
 rule run_asimulator_rule:
     input:
-        get_base_out=rules.get_base_os_docker.output
+        get_base_out=rules.get_base_dockers.output
     output:
         "output/snakemake/log_ran_asimulator.txt"
     params:
