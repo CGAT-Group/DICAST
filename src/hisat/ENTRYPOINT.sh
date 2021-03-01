@@ -9,7 +9,7 @@ source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
 #Update PATH
-PATH=$PATH:/docker_main/hisat2-2.0.0-beta
+PATH=$PATH:/docker_main/hisat2-2.2.1
 
 ### Tool-specific functions ###
 
