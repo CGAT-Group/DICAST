@@ -44,7 +44,7 @@ class WhippetParser(ToolParser):
         symbol = event_line[2].split(":")[0]
         if self.current_gene is None: self.current_gene = gene
         node_id = event_line[1]
-        idx = gene + ":" + node_id
+        idx = gene + "_" + node_id
         strand = event_line[3]
         event_list = None
         if gene != self.current_gene:
@@ -135,7 +135,7 @@ class WhippetParser(ToolParser):
 
                 # more than 1 ES event in this junction -> MES event
                 if len(es_in_junction) > 1:
-                    idx = self.current_gene + ":" + ":".join(sorted(nodes_in_junction))
+                    idx = self.current_gene + "_" + "_".join(sorted(nodes_in_junction))
                     skipped_exons = [[x.start_skipped, x.end_skipped] for x in es_in_junction]
                     final_events.add(MesEvent(idx, skipped_exons, strand, gene, symbol))
                     final_events.difference_update(es_in_junction)

@@ -38,11 +38,14 @@ class Event:
     gene = None
     symbol = None
     exon_list = None
+    count = 1
 
-    def __init__(self, idx, gene, symbol):
-        self.id = idx
+    def __init__(self, idx, gene, symbol, count):
+        self.id = idx + ":" + str(count)
+        #self.id = idx
         self.gene = gene
         self.symbol = symbol
+        self.count = count
 
     def to_string(self):
         print("empty event.")
@@ -60,7 +63,7 @@ class EsEvent(Event):
     count = 0
 
     def __init__(self, idx,  start_skipped, end_skipped, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.start_skipped = start_skipped
         self.end_skipped = end_skipped
         self.strand = strand
@@ -89,7 +92,7 @@ class MeeEvent(Event):
     count = 0
 
     def __init__(self, idx, mee_exons, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.mee_exons = sort_exons_with_na(mee_exons)
         self.strand = strand
         self.symbol = symbol
@@ -131,7 +134,7 @@ class MesEvent(Event):
     count = 0
 
     def __init__(self, idx,  mes_skipped, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.mes_skipped_exons = sort_exons_with_na(mes_skipped)
         self.strand = strand
         self.symbol = symbol
@@ -174,7 +177,7 @@ class A3Event(Event):
     count = 0
 
     def __init__(self, idx, alt_start, alt_end, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.alt_end = alt_end
         self.alt_start = alt_start
         self.strand = strand
@@ -205,7 +208,7 @@ class A5Event(Event):
     count = 0
 
     def __init__(self, idx, alt_start, alt_end, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.alt_end = alt_end
         self.alt_start = alt_start
         self.strand = strand
@@ -237,7 +240,7 @@ class IrEvent(Event):
     count = 0
 
     def __init__(self, idx, intron_start, intron_end, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.intron_start = intron_start
         self.intron_end = intron_end
         self.strand = strand
@@ -269,7 +272,7 @@ class AfeEvent(Event):
     count = 0
 
     def __init__(self, idx, afe_start, afe_end, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.afe_start = afe_start
         self.afe_end = afe_end
         self.strand = strand
@@ -301,7 +304,7 @@ class AleEvent(Event):
     count = 0
 
     def __init__(self, idx, ale_start, ale_end, strand, gene, symbol, count=1):
-        super().__init__(idx, gene, symbol)
+        super().__init__(idx, gene, symbol, count)
         self.ale_start = ale_start
         self.ale_end = ale_end
         self.strand = strand

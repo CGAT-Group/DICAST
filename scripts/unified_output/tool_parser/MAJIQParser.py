@@ -162,13 +162,11 @@ def handle_a3_a5_complex(event_exons, junctions, idx, strand, gene, symbol, nan_
     for event_type, alt_part_list in alt_events.items():
         if event_type == "a3":
             for alt_part in alt_part_list:
-                a_idx = idx + ":" + str(counter)
-                out_events.append(write_a35_event(event_type="a3", idx=a_idx, alt_part=alt_part, strand=strand, gene=gene, symbol=symbol,nan_fake_values=nan_fake_values, count=counter))
+                out_events.append(write_a35_event(event_type="a3", idx=idx, alt_part=alt_part, strand=strand, gene=gene, symbol=symbol,nan_fake_values=nan_fake_values, count=counter))
                 counter += 1
         if event_type == "a5":
             for alt_part in alt_part_list:
-                a_idx = idx + ":" + str(counter)
-                out_events.append(write_a35_event(event_type="a5", idx=a_idx, alt_part=alt_part, strand=strand, gene=gene, symbol=symbol, nan_fake_values=nan_fake_values, count=counter))
+                out_events.append(write_a35_event(event_type="a5", idx=idx, alt_part=alt_part, strand=strand, gene=gene, symbol=symbol, nan_fake_values=nan_fake_values, count=counter))
                 counter += 1
 
     return out_events
@@ -233,17 +231,15 @@ def handle_a35_es_mes_complex(event_exons, junctions, event_types, idx, strand, 
         if len(skipped_exons_lst) == 0 or skipped_exons_lst in seen:
             continue
         seen.append(skipped_exons_lst)
-        es_idx = idx + ":" + str(counter)
         mes = True if len(skipped_exons_lst) > 1 else False
-        event = write_es_mes_event(idx=es_idx, strand=strand, mes=mes, skipped_exons=skipped_exons_lst, nan_fake_values=nan_fake_values, gene=gene, symbol=symbol, count=counter, combine_me=combine_me)
+        event = write_es_mes_event(idx=idx, strand=strand, mes=mes, skipped_exons=skipped_exons_lst, nan_fake_values=nan_fake_values, gene=gene, symbol=symbol, count=counter, combine_me=combine_me)
         out_events.extend(event)
         counter += 1
     for alt_part in alt_junctions:
         if alt_part is None:
             print("Stored alternative part of exon with None value for: " + idx)
             return None
-        a_idx = idx + ":" + str(counter)
-        event = write_a35_event(event_type=a3_or_a5, idx=a_idx, alt_part=alt_part, strand=strand, nan_fake_values=nan_fake_values, gene=gene, symbol=symbol, count=counter)
+        event = write_a35_event(event_type=a3_or_a5, idx=idx, alt_part=alt_part, strand=strand, nan_fake_values=nan_fake_values, gene=gene, symbol=symbol, count=counter)
         out_events.append(event)
         counter += 1
 

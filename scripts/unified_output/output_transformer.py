@@ -59,7 +59,7 @@ def run(tool, args):
     outfile = args.outdir + "/" + tool.NAME + ".unified.out"
     if not os.path.exists(args.outdir):
         os.mkdir(args.outdir)
-    print(outfile)
+    #print(outfile)
     with open(outfile, 'w') as f:
         f.write(header)
         while True:

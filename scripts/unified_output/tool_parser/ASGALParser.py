@@ -81,8 +81,11 @@ def checkES(event_type, junction, gene: Gene, strand, idx, symbol, combine_me):
         print("Found no exons that fit into this ES junction. " + idx)
         return None
     if combine_me:
-        skipped_exons = set([EsEvent(idx, skipped_exons[i][0], skipped_exons[i][1], strand, gene.feature_id, symbol, count=i+1) for i in
-                             range(len(skipped_exons))])
+        skipped_exons = set([EsEvent(idx=idx,
+                                     start_skipped=skipped_exons[i][0],
+                                     end_skipped=skipped_exons[i][1],
+                                     strand=strand, gene=gene.feature_id,
+                                     symbol=symbol, count=i+1) for i in range(len(skipped_exons))])
         return skipped_exons
     else:
         if len(skipped_exons) == 1:
@@ -116,7 +119,6 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
                 alt_part = (str(exon.end), str(j_start))
                 if j_start < exon.end:                          # check if junction is not inside of exon
                     alt_part = (str(j_start-1), str(exon.end))
-                    count=999
                 #if not (exon.end <= j_start <= next_exon.start):  # check if junction really starts in between two exons; it might cover more than 1 exon
                 #    break
                 if j_start == exon.end:                         # alt_part start & stop can be the same -> NaN for alt_start
@@ -131,7 +133,6 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
                 alt_part = (str(j_end), str(next_exon.start))
                 if next_exon.start < j_end:                             # check if junction is not inside of exon
                     alt_part = (str(next_exon.start), str(j_end+1))
-                    count=999
                 #if not (exon.end <= j_end <= next_exon.start):            # check if junction really ends in between two exons; it might cover more than 1 exon
                 #    break
                 if j_end == next_exon.start:                            # alt_part start & stop can be the same -> NaN for alt_start
