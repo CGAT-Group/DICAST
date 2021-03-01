@@ -13,7 +13,7 @@ Asgal
 .. sidebar:: |tool| Factsheet
 
 	=============  =================
-	**Toolname:**  *contextmap*
+	**Toolname:**  *asgal*
 	**Version:**   *v1.1.1*
 	=============  =================
 
@@ -30,80 +30,9 @@ Asgal
 
 |tool|
 
-1. Input Files
-^^^^^^^^^^^^^^
 
-The following files are required to run |tool|.
-
-.. note::
-	The filepaths assume you are using our :doc:`folder structure</setup/input>`.
-	Make sure to read the comments (#) as well.
-
-$fastqdir/$fastqpair1suffix
-	Fastq files for pair 1 fastq files stored in ``$fastqdir``, identified by the suffix ``$fastqpair1suffix``.
-	The path variables can be found in :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`.
-
-	.. code-block:: bash
-
-		# Fastq file paths
-		# Assumed variable settings:
-		#    $fastqdir=input/fastq   ## in config.sh
-		#    $fastqpair1suffix="_1.fastq"   ## in asevent_config.sh
-		# Replace the text between the stars *...* with your file names
-
-		input/fastq/*yourFastqFile1*_1.fastq
-		input/fastq/*yourFastqFile2*_1.fastq
-		. . .
-
-
-$fastqdir/$fastqpair2suffix
-	Fastq files for pair 1 fastq files stored in ``$fastqdir``, identified by the suffix ``$fastqpair2suffix``.
-	The path variables can be found in :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`.
-
-	.. code-block:: bash
-
-		# Fastq file paths
-		# Assumed variable settings:
-		#    $fastqdir=input/fastq   ## in config.sh
-		#    $fastqpair2suffix="_2.fastq"   ## in asevent_config.sh
-		# Replace the text between the stars *...* with your file names
-
-		input/fastq/*yourFastqFile1*_2.fastq
-		input/fastq/*yourFastqFile2*_2.fastq
-		. . .
-
-
-$fasta:
-	The name of the reference fasta file. The path variable can be found in :guilabel:`scripts/config.sh`.
-
-	.. code-block:: bash
-
-		# Fasta files paths
-		# Replace the text between the stars *...* with your file name
-
-		input/*yourFastaFile*.fa
-
-$transcript
-	The name of the fasta file for gene transcripts. The path variable can be found in :guilabel:`scripts/asevent_config.sh`.
-
-	.. code-block:: bash
-
-		# Assumed variable settings:
-		#    $inputdir=input   ## in config.sh
-
-		index/*yourTranscriptFasta*.fasta
-
-$gtf
-	Gene annotation file in GTF format. The path variable can be found in :guilabel:`scripts/config.sh`.
-
-	.. code-block:: bash
-
-		# Replace the text between the stars *...* with your file names
-
-		input/*yourGTFfile*.gtf
-
-2. Default parameters:
-^^^^^^^^^^^^^^^^^^^^^^
+Default parameters:
+^^^^^^^^^^^^^^^^^^^
 The following parameters are set in the ENTRYPOINT.sh script in our docker to run |tool|. The variables can be changed in
 :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`
 If you want to specify your analysis with different parameters you will have to change the ENTRYPOINT script.
@@ -152,7 +81,7 @@ For further information please consult the |tool| `manual`_.
 			-f2 *yourFastqFile1_*2.fastq
 
 	-o
-		The path to the output directory for the accourding fastq file pair. The file will be named after the fastq file basename.
+		The path to the output directory for the according fastq file pair. The file will be named after the fastq file basename.
 
 		.. code-block:: bash
 
@@ -175,4 +104,4 @@ For further information please consult the |tool| `manual`_.
 4. Important links:
 ^^^^^^^^^^^^^^^^^^^
 	- |tool| `manual`_
-	- |tool| publication: 
+	- |tool| publication:

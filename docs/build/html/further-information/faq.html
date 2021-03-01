@@ -33,6 +33,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Examples" href="example-files.html" /> 
@@ -54,7 +55,7 @@
 
           
             
-            <img src="../_static/dicast.svg" class="logo" alt="Logo"/>
+            <img src="../_static/dicast_logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -84,19 +85,81 @@
             
               <p class="caption"><span class="caption-text">Get started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../get-started/setup.html">Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../get-started/run.html">Run your analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../get-started/advanced.html">Use advanced options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/docker.html">Setup docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/input.html">Folder Structure</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/run.html">Run your analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/runscript.html">Use our runscript</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/one_tool.html">Run one specific tool</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/advanced.html">Use advanced options</a><ul class="simple">
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">General Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/mapping.html">Mapping tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/splicing.html">Splicing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">General Information</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/mapping.html">Mapping tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/bbmap.html">BBMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/contextmap.html">ContextMap 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/crac.html">Crac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/dart.html">Dart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/gsnap.html">GSNAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/hisat.html">HISAT 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/mapsplice.html">Mapsplice 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/minimap.html">Minimap 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/segemehl.html">Segemehl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/mapping/star.html">Star</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/splicing.html">Splicing tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/asgal.html">Asgal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/aspli.html">Aspli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/cash.html">CASH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/dartsbht.html">Dartsbht</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/dexseq.html">DEXSeq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/dsplicetype.html">dSpliceType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/eventpointer.html">Eventpointer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/irfinder.html">Irfinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/jum.html">JUM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/juncbase.html">Juncbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/kissplice.html">Kissplice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/leafcutter.html">Leafcutter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/majiq.html">Majiq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/miso.html">Miso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/psisigma.html">psisigma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/rmats.html">rmats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/sajr.html">sajR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/sgseq.html">sgseq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/spladder.html">Spladder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/splicing/whippet.html">Whippet</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="example-files.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -220,13 +283,85 @@
   
     
     
+  <head>
+	<link rel="icon" href="img/icon.png" type="image/x-icon">
 
-  <style>
-    /* Sidebar header (and topbar for mobile) */
-    .wy-side-nav-search, .wy-nav-top {
-    }
+	/*<link rel="stylesheet" type="text/css" href="../_static/custom.css">*/
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+	</head>
+	<style>
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+	background: #60cdbf;
+}
 
-  </style>
+/* Caption headers for sidebar */
+.caption-text {
+	color: #13736a;
+}
+
+/*headings*/
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+	font-size: 200%
+}
+
+.rst-content .sidebar .sidebar-title {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+/* Warning  */
+div .admonition.warning {
+	background: #ffa8ae;
+}
+	
+.rst-content .warning .admonition-title {
+	background: #8b272e;
+}
+
+/* Note */
+div .admonition.note {
+	background: #b9fff4;
+}
+	
+.rst-content .note .admonition-title {
+	background: #1ca58f;
+}
+
+/* List  */
+.rst-content dl:not(.docutils) dt {
+	color: #13736a;
+	background: #e7f2fa;
+	border-top: solid 2px #13736a;
+}
+
+/* code block */
+
+div .highlight {
+	background: #d6f1e9;
+}
+
+.nv {
+	color: #8b272e;
+}
+
+/* inline (guilabel) */
+
+.rst-content .guilabel {
+border: 1px solid #7fbbe3;
+background: #e7f2fa;
+border-radius: 1px;
+}
+
+/* links */
+a {
+  color: #13736a;
+}
+
+
+
+	</style>
+
 
 
 </body>
