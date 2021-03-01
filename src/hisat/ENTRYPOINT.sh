@@ -21,7 +21,7 @@ second_attempt() {
 	-x $indexdir/$indexname \
 	-U "$line"?.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile $indexdir/$index.splicesites.txt
+	--known-splicesite-infile $indexdir/${gtf}_splicesites.txt
 }
 
 # make index directory and build index if index was not found
@@ -69,7 +69,7 @@ while read -r line; do
 	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile $indexdir/${indexname}_splicesites.txt
+	--known-splicesite-infile ${gtf}_splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
