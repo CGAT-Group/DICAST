@@ -1,4 +1,4 @@
-<img src="https://d1q6f0aelx0por.cloudfront.net/product-logos/library-docker-logo.png" alt="Docker">
+<img src="https://gitlab.lrz.de/ge46ban/dockers/-/blob/develop/docs/source/img/icon.png" alt="DICAST">
 
 This is a list of Dockers made for the Benchmarking pipeline that [exbio](https://www.baumbachlab.net/) will build for Sys_Ca_Re. These dockers would also be a valuable resource for all to use, in Bioinformatics. 
 
