@@ -9,7 +9,7 @@ source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
 #Update PATH
-PATH=$PATH:/docker_main/hisat2-2.0.0-beta
+PATH=$PATH:/docker_main/hisat2-2.2.1
 
 ### Tool-specific functions ###
 
@@ -21,7 +21,7 @@ second_attempt() {
 	-x $indexdir/$indexname \
 	-U "$line"?.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile $indexdir/$index.splicesites.txt
+	--known-splicesite-infile $indexdir/${gtfname}_splicesites.txt
 }
 
 # make index directory and build index if index was not found
@@ -34,9 +34,9 @@ build_index() {
 }
 
 extract_splice_sites() {
-	python /docker_main/hisat2-2.0.0-beta/extract_splice_sites.py $gtf > $indexdir/${gtf}_splicesites.txt
+	python3 /docker_main/hisat2-2.2.1/hisat2_extract_splice_sites.py $gtf > $indexdir/${gtfname}_splicesites.txt
 	chmod -R 777 $indexdir
-	echo "Splicesites are now saved under $indexdir/${gtf}_splicesites.txt"
+	echo "Extracted plicesites are now saved under $indexdir/${gtfname}_splicesites.txt"
 }
 
 ### START here ############################################################################
@@ -48,7 +48,7 @@ test_gtf
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -f $indexdir/${indexname}.4.ht2; then build_index; fi fi
 
-if $recompute_index; then extract_splice_sites; else if ! test -f  $indexdir/${gtf}_splicesites.txt; then extract_splice_sites; fi fi
+if $recompute_index; then extract_splice_sites; else if ! test -f $indexdir/${gtfname}_splicesites.txt; then extract_splice_sites; fi fi
 
 
 #make list of fastq files
@@ -69,7 +69,7 @@ while read -r line; do
 	-x $indexdir/$indexname \
 	-1 "$line"1.fastq -2 "$line"2.fastq \
 	-S $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
-	--known-splicesite-infile $indexdir/${indexname}_splicesites.txt
+	--known-splicesite-infile $indexdir/${gtfname}_splicesites.txt
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
