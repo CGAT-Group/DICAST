@@ -32,7 +32,7 @@ second_attempt() {
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices $(ls -m $indexdir/$indexname) \
+		-indices $indexdir/$indexname \
 		-genome  $contextmap_fastadir
 }
 
@@ -40,7 +40,9 @@ second_attempt() {
 build_index(){
 	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-	for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
+	#for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
+	contextmap_fastadir_index=$(find $mapsplice_fastadir_mapping -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
+	bowtie2-build -f $contextmap_fastadir_index $indexdir/$indexname --threads $ncores ;
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
@@ -62,7 +64,7 @@ mk_fastqlist
 #mk_outdir
 
 # get indices basenames
-indices=$(for line in $(ls -d $indexdir/$indexname/*); do echo $(echo $line | cut -d '.' -f 1-5), ; done)
+indices=$(for line in $(ls -d ${bowtie_fastadir}*.fa); do echo $(echo ${line%.*}), ; done)
 
 ### Start mapping ###
 
@@ -88,7 +90,7 @@ while read -r line; do
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices $indices \
+		-indices $indexdir/$indexname \
 		-genome $contextmap_fastadir
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
