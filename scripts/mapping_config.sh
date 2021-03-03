@@ -23,5 +23,5 @@ indexdir=$workdir/index/${tool:-unspecific}_index 	#directory of index
 # Some tools require chromosome-wise fasta-inputs:
 contextmap_fastadir=$inputdir/fasta_chromosomes			#fasta !directory! for contextmap: chromosome wise fasta files
 mapsplice_fastadir_mapping=$inputdir/fasta_chromosomes		#fasta !directory! for mapsplice mapping: chromosome wise fasta files
-bowtie_fastadir=$inputdir/fasta_chromomes
+bowtie_fastadir=$inputdir/fasta_chromomes/
 
