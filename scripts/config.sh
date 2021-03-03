@@ -28,8 +28,12 @@ gffdir=$inputdir                				#directory for gfffile
 ############################
 
 fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa           #name of the genome reference file (fasta format), directory=$fastadir
+#gtfname=splicing_variants.gtf                                   #name of gtf reference file, directory=$gtffile
+#gffname=splicing_variants.gff3                                  #name of gff reference file, directory=$gfffile
+
 gtfname=example.gtf                                   #name of gtf reference file, directory=$gtffile
-gffname=splicing_variants.gff3                                  #name of gff reference file, directory=$gfffile
+gffname=example.gff3                                  #name of gff reference file, directory=$gfffile
+
 
 fasta=${fastadir:-unspecific}/$fastaname                        #fasta full path
 gtf=${gtfdir:-unspecific}/$gtfname                              #gtf full path

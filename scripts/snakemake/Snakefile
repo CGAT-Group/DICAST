@@ -1,15 +1,27 @@
-final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
-report_out = config["Report"]["Report_file_name"]
+import sys
+import traceback
 
-mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
-as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
-diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
+if len(config) == 0:
+    print("Empty or no config file was specified! Use --configfile snakemake_config.yaml")
+    sys.exit(1)
+
+try:
+    final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+    report_out = config["Report"]["Report_file_name"]
+    mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
+    as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
+    diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
+    asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
+    overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
+    run_asimulator = config["ASimulatoR"]['do']
+except KeyError:
+    print("One or more configuration parameters could not be found! Wrong config file specified?\nSee the following traceback for more information:")
+    traceback.print_exc()
+    sys.exit(1)
 
 working_directory = os.getcwd()
 docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
-run_asimulator = config["ASimulatoR"]['do']
-asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
-overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
+container_version = "0.2"
 
 rule all:
     input:
@@ -32,7 +44,7 @@ rule overwrite_acknowledged_rule:
         fi
         """
 
-rule get_base_os_docker:
+rule get_base_dockers:
     input:
         overwrite_out=rules.overwrite_acknowledged_rule.output
     output:
@@ -40,12 +52,22 @@ rule get_base_os_docker:
     shell:
         """
         mkdir -p output/snakemake/
-        docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/base-image | tee {output}
+        chmod 777 output/snakemake/
+
+        for img in base conda bowtie
+        do
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $img ; then
+                echo "Built $img base image locally. \n" | tee {output}
+            else 
+                echo "\nBuilding $img image locally failed, exiting pipeline!" | tee {output}
+                exit 1
+            fi
+        done
         """
 
 rule run_asimulator_rule:
     input:
-        get_base_out=rules.get_base_os_docker.output
+        get_base_out=rules.get_base_dockers.output
     output:
         "output/snakemake/log_ran_asimulator.txt"
     params:
@@ -80,18 +102,31 @@ rule run_mapping_tools_rule:
             for tool in {params.tools}
             do
                 echo "Started $tool at $(date)" | tee {output}
-                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
-		casedir=output/"$tool"-output/casedir
-		if [ -d "$casedir" ]; then
-                        find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+                
+                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                    echo "Build $tool locally" | tee {output}
+                    container_prefix="dicast/"
+                else 
+                    echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                    docker pull {docker_prefix}$tool:{container_version}
+                    echo "Done" | tee {output}
+                    container_prefix={docker_prefix}
+                fi
+
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
+
+                casedir=output/"$tool"-output/casedir
+                if [ -d "$casedir" ]; then
+                    find "$casedir" -exec chmod 777 {{}} \;
+                    find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
                 else
                         echo "No case directory found, assuming non-differential run"
                 fi
-		find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
-		find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
-		echo "Finished $tool at $(date)" | tee {output}
-		echo -e "\n\n"
+
+                find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+                find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+                echo "Finished $tool at $(date)" | tee {output}
+                echo -e "\n\n"
             done
         fi
         """
@@ -113,8 +148,18 @@ rule run_as_detection_tools:
             for tool in {params.tools}
             do
                 echo "Started $tool at $(date)" | tee {output}
-                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+                
+                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                    echo "Build $tool locally" | tee {output}
+                    container_prefix="dicast/"
+                else 
+                    echo "\nLocal build failed, pulling image from registry" | tee {output}
+                    docker pull {docker_prefix}$tool:{container_version}
+                    echo "Done" | tee {output}
+                    container_prefix={docker_prefix}
+                fi
+                
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
                 echo "Finished $tool at $(date)" | tee {output}
             done
         fi
@@ -137,8 +182,18 @@ rule run_differential_as_tools:
             for tool in {params.tools}
             do
                 echo "Started $tool at $(date)" | tee {output}
-                docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+
+                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                    echo "Build $tool locally" | tee {output}
+                    container_prefix="dicast/"
+                else 
+                    echo "\nLocal build failed, pulling image from registry" | tee {output}
+                    docker pull {docker_prefix}$tool:{container_version}
+                    echo "Done" | tee {output}
+                    container_prefix={docker_prefix}
+                fi
+
+                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
                 echo "Finished $tool at $(date)" | tee {output}
             done
         fi
@@ -163,11 +218,11 @@ rule finished_run_rule:
 onsuccess:
     shell(
         r"""
-	if ! [[ -f Snakefile && -f snakemake_config.yaml ]];
-	then
-		echo "To create the html report, make sure that the Snakefile and snakemake_config.yaml exist in the working directory."
-		exit 0
-	fi
+        if ! [[ -f Snakefile && -f snakemake_config.yaml ]];
+        then
+            echo "To create the html report, make sure that the Snakefile and snakemake_config.yaml exist in the working directory."
+            exit 0
+        fi
         touch {report_out}
         snakemake --configfile snakemake_config.yaml --unlock
         snakemake --configfile snakemake_config.yaml --report {report_out}
