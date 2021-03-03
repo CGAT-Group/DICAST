@@ -32,7 +32,7 @@ second_attempt() {
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices $indexdir/$indexname \
+		-indices $indices \
 		-genome  ${bowtie_fastadir}
 }
 
@@ -64,7 +64,7 @@ mk_fastqlist
 #mk_outdir
 
 # get indices basenames
-indices=$(for line in $(ls -d ${bowtie_fastadir}*.fa); do echo $(echo ${line%.*}), ; done)
+indices=$(for line in $(ls -d ${indexdir}*.bt2); do echo $(echo ${line%.*}), ; done)
 
 ### Start mapping ###
 
@@ -90,7 +90,7 @@ while read -r line; do
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
-		-indices $indexdir/$indexname \
+		-indices $indices \
 		-genome ${bowtie_fastadir}
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
