@@ -22,7 +22,7 @@ second_attempt() {
 	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
 	#			idle and takes little CPU time). 
 	python /opt/conda/bin/mapsplice.py \
-		-c $mapsplice_fastadir_mapping \
+		-c $bowtie_fastadir \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
@@ -34,7 +34,7 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "Build bowtie-index..."
-	mapsplice_fastadir_index=$(find $mapsplice_fastadir_mapping -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
+	bowtie_fastadir_index=$(find $bowtie_fastadir -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
 
 	# Usage: bowtie-build [options]* <reference_in> <ebwt_outfile_base>
 	#    reference_in            comma-separated list of files with ref sequences
@@ -45,7 +45,7 @@ build_index() {
 	bowtie-build \
 		--seed 42 \
 		--threads $ncores \
-		$mapsplice_fastadir_index \
+		$bowtie_fastadir_index \
 		$indexdir/$indexname
 	chmod -R 777 $indexdir
 }
@@ -88,7 +88,7 @@ while read -r line; do
 	# X --gene-gtf <string> 	Gene annotation file in GTF format, used to annotate fusion junctions
 
 	python /opt/conda/bin/mapsplice.py \
-		-c $mapsplice_fastadir_mapping \
+		-c $bowtie_fastadir \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
 		-o $outdir/$(basename $(dirname $line))/${line##*/} \

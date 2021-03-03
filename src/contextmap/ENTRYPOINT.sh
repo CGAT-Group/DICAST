@@ -33,16 +33,16 @@ second_attempt() {
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indexdir/$indexname \
-		-genome  $contextmap_fastadir
+		-genome  ${bowtie_fastadir}
 }
 
 #Build Genome index
 build_index(){
 	mkdir -p $indexdir/$indexname
 	echo "compute index ..."
-	#for line in $(ls $contextmap_fastadir); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f $contextmap_fastadir/$line $indexdir/$indexname/$linebase --threads $ncores; done
-	contextmap_fastadir_index=$(find $mapsplice_fastadir_mapping -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
-	bowtie2-build -f $contextmap_fastadir_index $indexdir/$indexname --threads $ncores ;
+	#for line in $(ls ${bowtie_fastadir}); do linebase=$(printf "%s\n" ${line%.*}); bowtie2-build -f ${bowtie_fastadir}/$line $indexdir/$indexname/$linebase --threads $ncores; done
+	bowtie_fastadir_index=$(find ${bowtie_fastadir} -name "*" | sed -n 'H;${x;s/\n/,/g;s/^,//;p;}')
+	bowtie2-build -f $bowtie_fastadir_index $indexdir/$indexname --threads $ncores ;
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
@@ -52,7 +52,7 @@ build_index(){
 
 
 #get names of chromosome-wise fasta files
-# fasta_filenames=$(for f in $(ls $contextmap_fastadir); do printf "%s\n" ${f%.*}; done)
+# fasta_filenames=$(for f in $(ls ${bowtie_fastadir}); do printf "%s\n" ${f%.*}; done)
 
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -d $indexdir/$indexname; then build_index; fi fi
@@ -91,7 +91,7 @@ while read -r line; do
 		-aligner_bin /home/biodocker/bin/bowtie2 \
 		-indexer_bin /home/biodocker/bin/bowtie2-build \
 		-indices $indexdir/$indexname \
-		-genome $contextmap_fastadir
+		-genome ${bowtie_fastadir}
 
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	#trap 'second_attempt $line' ERR
