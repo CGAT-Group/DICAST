@@ -167,10 +167,10 @@ readfastqs(){
 
 #make the output directory: $output/$tool-output
 #Parameter: the tools name
-# mk_outdir(){
-# 	mkdir -p $outdir
-# 	chmod -R 777 $outdir
-# }
+ mk_outdir(){
+ 	mkdir -p $outdir/{case,control}
+ 	chmod -R 777 $outdir
+ }
 
 
 #make the output folder for the specific sample (BAM-file) and return the folder path
