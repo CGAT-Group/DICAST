@@ -1,13 +1,15 @@
-import argparse, sys, os
+import argparse
+import os
+import sys
+from Event import Event
+from gtf_utils.GTFParser import GTFParser
+from tool_parser.ASGALParser import ASGALParser
+from tool_parser.IRFinderParser import IRFinderParser
 from tool_parser.MAJIQParser import MAJIQParser
 from tool_parser.SpladderParser import SplAdderParser
 from tool_parser.WhippetParser import WhippetParser
-from tool_parser.ASGALParser import ASGALParser
-from tool_parser.IRFinderParser import IRFinderParser
-from gtf_utils.GTFParser import GTFParser
 from unified.EventAnnotationReader import EventAnnotationReader
 from unified.compare_files import compare_with_annotation
-from Event import Event
 
 
 def run_compare(args):
@@ -18,11 +20,8 @@ def run_compare(args):
 
 
 def run_create(args):
-    tools_to_run = []
-
     if args.spladder_dir is not None:
         spladder = SplAdderParser(args.spladder_dir, args.combine_me)
-        tools_to_run.append("spladder")
         run(spladder, args)
 
     if args.majiq_dir is not None:
@@ -38,25 +37,20 @@ def run_create(args):
             exit(1)
 
         majiq = MAJIQParser(psi_filepath, voila_filepath, args.outdir, args.combine_me)
-        tools_to_run.append("majiq")
         run(majiq, args)
 
     if args.whippet_file is not None:
         whippet = WhippetParser(args.whippet_file, args.combine_me)
-        tools_to_run.append("whippet")
         run(whippet, args)
 
     if args.asgal_file is not None:
         gtf = GTFParser(args.gtf)
         asgal = ASGALParser(args.asgal_file, gtf, args.combine_me)
-        tools_to_run.append("asgal")
         run(asgal, args)
 
     if args.irfinder_file is not None:
         irfinder = IRFinderParser(args.irfinder_file)
-        tools_to_run.append("irfinder")
         run(irfinder, args)
-
 
 
 def run(tool, args):
@@ -64,7 +58,6 @@ def run(tool, args):
     outfile = args.outdir + "/" + tool.NAME + ".unified.out"
     if not os.path.exists(args.outdir):
         os.mkdir(args.outdir)
-    #print(outfile)
     with open(outfile, 'w') as f:
         f.write(header)
         while True:
@@ -78,7 +71,6 @@ def run(tool, args):
             else:
                 for event in events:
                     f.write(str(event))
-
 
 
 def main():
@@ -96,7 +88,7 @@ def main():
     create_parser.add_argument("-gtf", "--gtf", help="reference file in gtf format", required=True)
     create_parser.add_argument("-comb", "--combine_me", help="Set this to true if you want MES and MEE events to be counted as ES events "
                                                              "(each skipped exon is one separate ES event)", default=False, action='store_true')
-    #create_args = create_parser.parse_args()
+    # create_args = create_parser.parse_args()
 
     compare_parser = argparse.ArgumentParser(add_help=False)
     compare_parser.add_argument("-a", "--event_annotation", help="Event annotation file for ground truth of events", required=True)
@@ -111,7 +103,7 @@ def main():
                                                        "counted as correct. Otherwise only one of them has to be equal.", default=False, action='store_true')
     compare_parser.add_argument("-t", "--threshold", help="set threshold to allow for events with minimum distance < threshold to still be"
                                                           "counted as correct; default is 0", default=0)
-    #compare_args = compare_parser.parse_args()
+    # compare_args = compare_parser.parse_args()
 
     subparser = parser.add_subparsers(help='')
     subparser.add_parser('create', parents=[create_parser], help="Create unified output file(s) for specified input files of AS tools.").set_defaults(func=run_create)
@@ -127,4 +119,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
