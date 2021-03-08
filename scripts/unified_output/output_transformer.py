@@ -3,10 +3,11 @@ from tool_parser.MAJIQParser import MAJIQParser
 from tool_parser.SpladderParser import SplAdderParser
 from tool_parser.WhippetParser import WhippetParser
 from tool_parser.ASGALParser import ASGALParser
+from tool_parser.IRFinderParser import IRFinderParser
 from gtf_utils.GTFParser import GTFParser
 from unified.EventAnnotationReader import EventAnnotationReader
 from unified.compare_files import compare_with_annotation
-
+from Event import Event
 
 
 def run_compare(args):
@@ -45,12 +46,16 @@ def run_create(args):
         tools_to_run.append("whippet")
         run(whippet, args)
 
-
     if args.asgal_file is not None:
         gtf = GTFParser(args.gtf)
         asgal = ASGALParser(args.asgal_file, gtf, args.combine_me)
         tools_to_run.append("asgal")
         run(asgal, args)
+
+    if args.irfinder_file is not None:
+        irfinder = IRFinderParser(args.irfinder_file)
+        tools_to_run.append("irfinder")
+        run(irfinder, args)
 
 
 
@@ -68,8 +73,11 @@ def run(tool, args):
                 break
             if events is None:
                 continue
-            for event in events:
-                f.write(str(event))
+            if issubclass(type(events), Event):
+                f.write(str(events))
+            else:
+                for event in events:
+                    f.write(str(event))
 
 
 
@@ -82,6 +90,8 @@ def main():
     create_parser.add_argument("-s", "--spladder_dir", help="directory of spladder output confirmed.txt files")
     create_parser.add_argument("-w", "--whippet_file", help="whippet-out.psi file")
     create_parser.add_argument("-a", "--asgal_file", help="asgal ASGAL.csv file")
+    create_parser.add_argument("-i", "--irfinder_file", help="IRFinder-IR-nondir.txt file")
+
     create_parser.add_argument("-out", "--outdir", help="output directory", required=True)
     create_parser.add_argument("-gtf", "--gtf", help="reference file in gtf format", required=True)
     create_parser.add_argument("-comb", "--combine_me", help="Set this to true if you want MES and MEE events to be counted as ES events "

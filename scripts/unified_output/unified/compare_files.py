@@ -86,7 +86,7 @@ def compare_with_annotation(anno: EventAnnotationReader, file, outfile, strict, 
         print("Recall: " + str(recall))
     else:
         with open(outfile, "w") as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f, delimiter='\t')
             writer.writerow(["type", "correct_events", "found_events", "annotation_events", "precision", "recall"])
 
             for ev_type in EVENT_TYPES.keys():
