@@ -114,7 +114,7 @@ rule run_as_detection_tools:
             do
                 echo "Started $tool at $(date)" | tee {output}
                 docker pull gitlab.lrz.de:5005/ge46ban/dockers/develop/$tool
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool
+                ( docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm {docker_prefix}$tool )
                 echo "Finished $tool at $(date)" | tee {output}
             done
         fi

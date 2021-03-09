@@ -3,7 +3,7 @@
 #
 # Overwrite_acknowledge_choice__ = ["Yes", "No"]
 Possible_overwrite_acknowledge:
-    do: false
+    do: true 
 
 #########################################
 # Do you want to run the ASimulatoR?    
@@ -27,7 +27,7 @@ Mapping_tools:
 # Currently we support majiq, spladder, aspli, eventpointer, kissplice, whippet, sgseq, irfinder, asgal
 #
 Alternative_splicing_detection_tools:
-    What_tools_to_run: ''
+    What_tools_to_run: 'asgal majiq spladder aspli eventpointer kissplice whippet sgseq irfinder'
 
 #########################################
 # Enter the name of the differential alternative splicing detection tools you want to run.
