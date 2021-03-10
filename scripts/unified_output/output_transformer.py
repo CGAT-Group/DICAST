@@ -1,7 +1,7 @@
 import argparse
 import os
 import sys
-from Event import Event
+from unified.Event import Event
 from gtf_utils.GTFParser import GTFParser
 from tool_parser.ASGALParser import ASGALParser
 from tool_parser.IRFinderParser import IRFinderParser

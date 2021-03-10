@@ -1,5 +1,5 @@
 from unified.EventAnnotationReader import EventAnnotationReader
-from Event import IrEvent
+from unified.Event import IrEvent
 from gtf_utils.GeneClass import Gene
 from gtf_utils.Interval import Interval
 import GTFParser
