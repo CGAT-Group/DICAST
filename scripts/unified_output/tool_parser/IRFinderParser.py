@@ -1,8 +1,4 @@
-from unified.EventAnnotationReader import EventAnnotationReader
 from unified.Event import IrEvent
-from gtf_utils.GeneClass import Gene
-from gtf_utils.Interval import Interval
-import GTFParser
 
 # init event type dict
 from tool_parser.ASParser import ToolParser
@@ -36,7 +32,6 @@ class IRFinderParser(ToolParser):
         strand = event_line[5]
         symbol = event_line[0]
         event = IrEvent(idx=gene, intron_start=start, intron_end=end, strand=strand, gene=gene, symbol=symbol)
-        print(str(event))
         return event
 
     def nextEventSet(self):
