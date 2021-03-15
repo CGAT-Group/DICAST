@@ -89,6 +89,10 @@ class ASpliParser(ToolParser):
         event_line = event_line.split("\t")
         event_type = event_line[self.discovery_file_header_index["event"]]
         bam_columns = event_line[-2:]
+
+        # Handle * events same as normal events
+        event_type = event_type.replace("*", "")
+
         # Skip event if a BAM column is NA, or the event type is not recognized
         if 'NA' in bam_columns or event_type not in EVENT_TYPES:
             return None
