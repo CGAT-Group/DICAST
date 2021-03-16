@@ -169,7 +169,7 @@ readfastqs(){
 #make the output directory: $output/$tool-output
 #Parameter: the tools name
  mk_outdir(){
- 	mkdir -p $outdir/{case,control}
+ 	mkdir -p $outdir/
  	chmod -R 777 $outdir
  }
 
@@ -210,6 +210,7 @@ cleaner(){
 	rm -f $outdir/fastqlist
 	rm -rf $outdir/tmp
 	echo script is done
+	chmod 777 $outdir -R
 	#exit
 }
 
