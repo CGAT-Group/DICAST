@@ -160,7 +160,7 @@ readfastqs(){
         find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > $outdir/fastqlist
         chmod  777 $outdir/fastqlist
 		while read -r line; do
-			mkdir -p $outdir/$(basename $(dirname $line))/
+			#mkdir -p $outdir/$(basename $(dirname $line))/
 			chmod -R 777 $outdir/	
 		done </tmp/$tool-fastqlist
 }
