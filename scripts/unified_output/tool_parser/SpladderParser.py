@@ -76,9 +76,9 @@ def parseA3(alt_3prime_line, combine_me):
     strand = alt_3prime_line[1]
 
     if strand == "+":
-        return {A3Event(idx, alt_3prime_line[8], alt_3prime_line[6], strand, gene, symbol)}
+        return {A3Event(idx, str(int(alt_3prime_line[8])-1), alt_3prime_line[6], strand, gene, symbol)}
     else:
-        return {A3Event(idx, alt_3prime_line[7], alt_3prime_line[9], strand, gene, symbol)}
+        return {A3Event(idx, alt_3prime_line[7], str(int(alt_3prime_line[9])+1), strand, gene, symbol)}
 
 
 # alt_5prime
@@ -90,9 +90,9 @@ def parseA5(alt_5prime_line, combine_me):
     strand = alt_5prime_line[1]
 
     if strand == "+":
-        return {A5Event(idx, alt_5prime_line[7], alt_5prime_line[9], strand, gene, symbol)}
+        return {A5Event(idx, alt_5prime_line[7], str(int(alt_3prime_line[9])+1), strand, gene, symbol)}
     else:
-        return {A5Event(idx, alt_5prime_line[8], alt_5prime_line[6], strand, gene, symbol)}
+        return {A5Event(idx, str(int(alt_3prime_line[8])-1), alt_5prime_line[6], strand, gene, symbol)}
 
 
 EVENT_PARSING_FUNCTION = {"es": parseES, "mes": parseMES, "mee": parseMEE, "ir": parseIR,

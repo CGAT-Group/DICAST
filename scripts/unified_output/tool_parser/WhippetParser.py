@@ -167,19 +167,19 @@ def handleIR(gen_posi, strand:str, idx, gene, symbol):
 
 # alt_3prime
 def handleA3(gen_posi, strand:str, idx, gene, symbol):
-    if strand == "+":
-        gen_posi[1] += 1
-    else:
-        gen_posi[0] -= 1
+    #if strand == "+":
+    #    gen_posi[1] += 1
+    #else:
+    #    gen_posi[0] -= 1
     return A3Event(idx, gen_posi[0], gen_posi[1], strand, gene, symbol)
 
 
 # alt_5prime
 def handleA5(gen_posi, strand:str, idx, gene, symbol):
-    if strand == "+":
-        gen_posi[0] -= 1
-    else:
-        gen_posi[1] += 1
+    #if strand == "+":
+    #    gen_posi[0] -= 1
+    #else:
+    #    gen_posi[1] += 1
     return A5Event(idx, gen_posi[0], gen_posi[1], strand, gene, symbol)
 
 

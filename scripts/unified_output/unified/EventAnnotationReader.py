@@ -72,15 +72,15 @@ class EventAnnotationReader:
 
                 elif event_type == "a3":
                     if strand == "+":
-                        event = {A3Event(idx, start, str(int(end)+1), strand, gene, symbol)}
+                        event = {A3Event(idx, start, end, strand, gene, symbol)}
                     else:
-                        event = {A3Event(idx, str(int(start)-1), end, strand, gene, symbol)}
+                        event = {A3Event(idx, start, end, strand, gene, symbol)}
 
                 elif event_type == "a5":
                     if strand == "+":
-                        event = {A5Event(idx, str(int(start)-1), end, strand, gene, symbol)}
+                        event = {A5Event(idx, start, end, strand, gene, symbol)}
                     else:
-                        event = {A5Event(idx, start, str(int(end)+1), strand, gene, symbol)}
+                        event = {A5Event(idx, start, end, strand, gene, symbol)}
 
                 elif event_type == "afe":
                     #event2 = anno.readline().strip().split("\t")

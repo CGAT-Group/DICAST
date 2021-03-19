@@ -121,12 +121,14 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
                     alt_part = (str(j_start-1), str(exon.end))
                 #if not (exon.end <= j_start <= next_exon.start):  # check if junction really starts in between two exons; it might cover more than 1 exon
                 #    break
+                start = str(int(alt_part[0])+1)
+                stop = alt_part[1]
                 if j_start == exon.end:                         # alt_part start & stop can be the same -> NaN for alt_start
-                    alt_part = ("nan", str(j_start))
+                    start = "nan"
                 if event_type == "a3":
-                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
+                    return {A3Event(idx, start, stop, strand, gene.feature_id, symbol, count)}
                 else:
-                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
+                    return {A5Event(idx, start, stop, strand, gene.feature_id, symbol, count)}
 
         elif (event_type == "a5" and strand == "-") or (event_type == "a3" and strand == "+"):
             if j_start-1 == exon.end:
@@ -135,12 +137,14 @@ def checkA3A5(event_type, junction, gene: Gene, strand, idx, symbol, combine_me)
                     alt_part = (str(next_exon.start), str(j_end+1))
                 #if not (exon.end <= j_end <= next_exon.start):            # check if junction really ends in between two exons; it might cover more than 1 exon
                 #    break
+                start = alt_part[0]
+                stop = str(int(alt_part[1])-1)
                 if j_end == next_exon.start:                            # alt_part start & stop can be the same -> NaN for alt_start
-                    alt_part = (str(j_end), "nan")
+                    stop = "nan"
                 if event_type == "a3":
-                    return {A3Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
+                    return {A3Event(idx, start, stop, strand, gene.feature_id, symbol, count)}
                 else:
-                    return {A5Event(idx, alt_part[0], alt_part[1], strand, gene.feature_id, symbol, count)}
+                    return {A5Event(idx, start, stop, strand, gene.feature_id, symbol, count)}
 
 
 

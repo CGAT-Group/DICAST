@@ -148,14 +148,14 @@ def handle_a3_a5_complex(event_exons, junctions, idx, strand, gene, symbol, nan_
             junc_end_in_exon = e_start < j_end < e_stop
             if junc_end_in_exon:
                 if strand == "+":
-                    alt_events["a3"].append((e_start, j_end))
+                    alt_events["a3"].append((e_start, j_end-1))
                 if strand == "-":
-                    alt_events["a5"].append((e_start, j_end))
+                    alt_events["a5"].append((e_start, j_end-1))
             if junc_start_in_exon:
                 if strand == "+":
-                    alt_events["a5"].append((j_start, e_stop))
+                    alt_events["a5"].append((j_start+1, e_stop))
                 if strand == "-":
-                    alt_events["a3"].append((j_start, e_stop))
+                    alt_events["a3"].append((j_start+1, e_stop))
 
     counter = counter_start
     out_events = []
