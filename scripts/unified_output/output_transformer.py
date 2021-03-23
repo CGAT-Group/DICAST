@@ -9,6 +9,7 @@ from tool_parser.MAJIQParser import MAJIQParser
 from tool_parser.SpladderParser import SplAdderParser
 from tool_parser.WhippetParser import WhippetParser
 from tool_parser.ASpliParser import ASpliParser
+from tool_parser.EventPointerParser import EventPointerParser
 from unified.EventAnnotationReader import EventAnnotationReader
 from unified.compare_files import compare_with_annotation
 
@@ -61,6 +62,11 @@ def run_create(args):
         aspli = ASpliParser(discovery_file, exon_counts_file, intron_counts_file, gtf)
         run(aspli, args)
 
+    if args.eventpointer_file is not None:
+        gtf = GTFParser(args.gtf)
+        eventpointer = EventPointerParser(args.eventpointer_file, gtf, args.combine_me)
+        run(eventpointer, args)
+
 
 def run(tool, args):
     header = "chr\tgene\tid\tstrand\tevent_type\tcount\tstart_coordinates\tend_coordinates\n"
@@ -93,6 +99,7 @@ def main():
     create_parser.add_argument("-a", "--asgal_file", help="asgal ASGAL.csv file")
     create_parser.add_argument("-i", "--irfinder_file", help="IRFinder-IR-nondir.txt file")
     create_parser.add_argument("--aspli_dir", help="Directory with three ASpli output files: as_discovery.tab, exon.counts.tab and intron.counts.tab")
+    create_parser.add_argument("-e", "--eventpointer_file", help="EventPointer file EventsFound_RNASeq.txt")
 
     create_parser.add_argument("-out", "--outdir", help="output directory", required=True)
     create_parser.add_argument("-gtf", "--gtf", help="reference file in gtf format", required=True)
