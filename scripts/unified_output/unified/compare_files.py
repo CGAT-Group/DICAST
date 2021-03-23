@@ -198,7 +198,7 @@ def equal_multiple(event_starts, event_stops, anno_starts, anno_stops, pseudo=Fa
 
 # check for nan-values -> set nan to 0 for comparison
 def handle_nan_in_list(l):
-    if any(i == "nan" for i in l):
-        nan_index = l.index('nan')
-        l[nan_index] = 0
+    for index, val in enumerate(l):
+        if val == 'nan':
+            l[index] = 0
     return l

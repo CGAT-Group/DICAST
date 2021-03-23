@@ -1,6 +1,7 @@
-from event_utils.EventClasses import *
+from unified.Event import IrEvent, A3Event, A5Event, EsEvent, AfeEvent, AleEvent, MeeEvent
 from gtf_utils.GTFParser import GTFParser
 from gtf_utils.GeneClass import Gene
+from gtf_utils.ExonClass import Exon
 from gtf_utils.Interval import Interval
 import re
 from tool_parser.ASParser import ToolParser
@@ -9,64 +10,201 @@ from tool_parser.ASParser import ToolParser
 
 EVENT_TYPES = {"Cassette Exon": "es", "Mutually Exclusive Exons": "mee", "Retained Intron": "ir",
                "Alternative First Exon": "afe", "Alternative Last Exon": "ale", "Alternative 5' Splice Site": "a5",
-               "Alternative 3' Splice Site": "a3", "Complex Event": "FP"}
+               "Alternative 3' Splice Site": "a3"}
 
 
 # exon_skip
-def checkES(gene, gen_posi):
-    return gen_posi.pseudo_equal(gene.alt_junction)
+def createES(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    skipped = None
+
+    for transcript in gtf_gene.transcripts.values():
+        exons = transcript.getExons()
+        for index, exon in enumerate(exons):
+            if not exon.getEnd() == start:
+                continue
+            try:
+                if exons[index + 2].getStart() == end:
+                    skipped = exons[index + 1]
+                    break
+            except IndexError:
+                continue
+
+        if skipped is not None:
+            break
+
+    if skipped is None:
+        skipped = Exon(None, None, None, "nan", "nan", None, None, None)
+
+    return EsEvent(idx=gene,
+                   start_skipped=skipped.getStart(),
+                   end_skipped=skipped.getEnd(),
+                   strand=strand,
+                   gene=gene,
+                   symbol=chrm)
 
 
 # intron retention
-def checkIR(gene, gen_posi):
-    return gene.junction.pseudo_equal(gen_posi)
+def createIR(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    return IrEvent(idx=gene,
+                   intron_start=start + 1,
+                   intron_end=end - 1,
+                   strand=strand,
+                   gene=gene,
+                   symbol=chrm)
 
 
 # mutex_exons
-def checkMEE(gene, gen_posi):
-    min_exon = min(gene.involved_exons)
-    max_exon = max(gene.involved_exons)
-    if gene.is_on_positive_strand:
-        return gen_posi.pseudo_equal(Interval(gene.exons[min_exon - 1].end, gene.exons[max_exon + 1].start))
+def createMEE(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    exon_1_start = "nan"
+    exon_2_start = "nan"
+    exon_1_end = "nan"
+    exon_2_end = "nan"
+    found_alt_1 = False
+    found_alt_2 = False
+    for transcript in gtf_gene.transcripts.values():
+        exons = transcript.getExons()
+        for index, exon in enumerate(exons):
+            if exon.getEnd() == start and exons[index + 2].getStart() == end:
+                middle_exon_start = exons[index + 1].getStart()
+                middle_exon_end = exons[index + 1].getEnd()
+
+                if not found_alt_1:
+                    exon_1_start = middle_exon_start
+                    exon_1_end = middle_exon_end
+                    found_alt_1 = True
+
+                if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
+                    exon_2_start = middle_exon_start
+                    exon_2_end = middle_exon_end
+                    found_alt_2 = True
+
+        if found_alt_1 and found_alt_2:
+            break
+
+    if combine_me:
+        return [EsEvent(gene, exon_1_start, exon_1_end, strand, gene, chrm, count=1),
+                EsEvent(gene, exon_2_start, exon_2_end, strand, gene, chrm, count=2)]
     else:
-        return gen_posi.pseudo_equal(Interval(gene.exons[max_exon + 1].end, gene.exons[min_exon - 1].start))
+        return MeeEvent(idx=gene,
+                        mee_exons=[(exon_1_start, exon_1_end),
+                                   (exon_2_start, exon_2_end)],
+                        strand=strand,
+                        gene=gene,
+                        symbol=chrm)
 
 
 # alt_3prime
-def checkA3(gene, gen_posi):
-    return gen_posi.pseudo_equal(gene.alt_junction)
+def createA3(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    exon_start = "nan"
+    exon_end = "nan"
+    found_start_exon = False
+    found_end_exon = False
+    for transcript in gtf_gene.transcripts.values():
+        exons = transcript.getExons()
+        for index, exon in enumerate(exons):
+            if exon.getEnd() == start:
+                if not found_start_exon:
+                    # TODO: Negative strand events seem to be broken in EventPointer, coordinates don't match at all for -
+                    if strand == "-":
+                        exon_end = exons[index + 1].getStart()
+                    else:
+                        exon_start = exons[index + 1].getStart()
+                    found_start_exon = True
+
+            if exon.getStart() == end:
+                if strand == "-":
+                    exon_start = end - 1
+                else:
+                    exon_end = end - 1
+                found_end_exon = True
+                break
+
+        if found_start_exon and found_end_exon:
+            break
+
+    return A3Event(idx=gene,
+                   alt_start=exon_start,
+                   alt_end=exon_end,
+                   strand=strand,
+                   gene=gene,
+                   symbol=chrm)
 
 
 # alt_5prime
-def checkA5(gene, gen_posi):
-    return gen_posi.pseudo_equal(gene.alt_junction)
+def createA5(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    exon_start = "nan"
+    exon_end = "nan"
+    found_start_exon = False
+    found_end_exon = False
+    for transcript in gtf_gene.transcripts.values():
+        exons = transcript.getExons()
+        for index, exon in enumerate(exons):
+            if exon.getStart() == end:
+                if not found_start_exon:
+                    # TODO: Negative strand events seem to be broken in EventPointer, coordinates don't match at all for -
+                    if strand == "-":
+                        exon_start = exons[index - 1].getEnd()
+                    else:
+                        exon_end = exons[index - 1].getEnd()
+
+                    found_start_exon = True
+
+            if exon.getEnd() == start:
+                if strand == "-":
+                    exon_end = start + 1
+                else:
+                    exon_start = start + 1
+                found_end_exon = True
+                break
+
+        if found_start_exon and found_end_exon:
+            break
+
+    return A5Event(idx=gene,
+                   alt_start=exon_start,
+                   alt_end=exon_end,
+                   strand=strand,
+                   gene=gene,
+                   symbol=chrm)
 
 
-def checkAFE(gene, gen_posi):
-    return gen_posi.pseudo_equal(gene.junction) or gen_posi.pseudo_equal(gene.alt_junction)
+# TODO: AFE and ALE don't work, the reported coordinates are nonsense
+def createAFE(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    return AfeEvent(idx=gene,
+                    afe_start=start,
+                    afe_end=end,
+                    strand=strand,
+                    gene=gene,
+                    symbol=chrm)
 
 
-def checkALE(gene, gen_posi):
-    return gen_posi.pseudo_equal(gene.junction) or gen_posi.pseudo_equal(gene.alt_junction)
+def createALE(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
+    return AleEvent(idx=gene,
+                    ale_start=start,
+                    ale_end=end,
+                    strand=strand,
+                    gene=gene,
+                    symbol=chrm)
 
 
-EVENT_PARSING_FUNCTION = {"es": checkES, "mee": checkMEE, "ir": checkIR,
-                          "a3": checkA3, "a5": checkA5, "afe": checkAFE, "ale": checkALE}
+EVENT_PARSING_FUNCTION = {"es": createES, "mee": createMEE, "ir": createIR,
+                          "a3": createA3, "a5": createA5, "afe": createAFE, "ale": createALE}
 
 
 class EventPointerParser(ToolParser):
 
     NAME = "EventPointer"
 
-    def __init__(self, filepath, gtf: GTFParser):
+    def __init__(self, filepath, gtf: GTFParser, combine_me):
         super().__init__("EventPointer")
         self.fh = self.openFile(filepath)
         self.gtf = gtf
-        self.known_event_types = ["es", "mee", "ale", "afe", "ir", "a3", "a5", "FP"]
+        self.known_event_types = ["es", "mee", "ale", "afe", "ir", "a3", "a5"]
         self.header = self.fh.readline().strip().split("\t")
         self.header_index = {}
         for i in range(len(self.header)):
             self.header_index[self.header[i]] = i
+        self.combine_me = combine_me
 
     def parseLineToEvent(self, event_line):
         event_line = event_line.split("\t")
@@ -74,38 +212,35 @@ class EventPointerParser(ToolParser):
         if event_type in EVENT_TYPES:
             event_type = EVENT_TYPES.get(event_type)
         else:
-            event_type = "FP"
+            return None
+
         gene = event_line[self.header_index["Gene"]]
-        # skip if gene is unknwon
+        # skip if gene is unknown
         if gene in self.gtf.genes:
-            gene = self.gtf.genes.get(gene)
+            gtf_gene = self.gtf.genes.get(gene)
         else:
-            return None, None, None, True
-        # skip if event type of gene is not known
-        if len(gene.event_types) > 0 and gene.event_types[0] not in self.known_event_types:
-            return None, None, None, True
-        gen_posi = event_line[self.header_index["Genomic Position"]].split(":")
-        chr = gen_posi[0]
-        gen_posi = gen_posi[1].split("-")
-        gen_posi = Interval(gen_posi[0], gen_posi[1])
-        return self.checkEvent(gene, gen_posi, event_type)
+            return None
 
-    def checkEvent(self, gene: Gene, gen_posi: Interval, event_type: str):
-        if len(gene.event_types) == 0:
-            return gene, event_type, False, False
-        if event_type == "FP":
-            return gene, event_type, False, False
-        if event_type != gene.event_types[0]:
-            return gene, event_type, False, False
+        if gtf_gene.is_on_positive_strand():
+            strand = "+"
+        else:
+            strand = "-"
+
+        gene_positions = event_line[self.header_index["Genomic Position"]].split(":")
+        chrm = gene_positions[0]
+        gene_positions = gene_positions[1].split("-")
+        start = int(gene_positions[0])
+        end = int(gene_positions[1])
+
         func = EVENT_PARSING_FUNCTION.get(event_type)
-        ev_correct = func(gene, gen_posi)
-        return gene, event_type, ev_correct, False
+        event = func(gene, chrm, start, end, strand, gtf_gene, self.combine_me)
+        return event
 
-    def nextEvent(self):
+    def nextEventSet(self):
         next_event_line = self.fh.readline()
         if next_event_line == "":
             self.closeFile()
-            return None, None, None, False
+            return False
         next_event_line = next_event_line.strip()
         return self.parseLineToEvent(next_event_line)
 

@@ -105,8 +105,8 @@ class MeeEvent(Event):
         mee_exons_starts = ""
         mee_exons_ends = ""
         for i in range(len(self.mee_exons)-1):
-            mee_exons_starts += str(self.mee_exons[i][0] + ",")
-            mee_exons_ends += str(self.mee_exons[i][1] + ",")
+            mee_exons_starts += str(self.mee_exons[i][0]) + ","
+            mee_exons_ends += str(self.mee_exons[i][1]) + ","
         mee_exons_starts += str(self.mee_exons[len(self.mee_exons)-1][0])
         mee_exons_ends += str(self.mee_exons[len(self.mee_exons)-1][1])
         return "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(self.symbol, self.gene, self.id, self.strand, "MEE", self.count, mee_exons_starts, mee_exons_ends)
