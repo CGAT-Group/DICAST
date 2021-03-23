@@ -34,13 +34,9 @@ def createIR(gene: Gene, start, end, strand):
 
 # alt_3prime
 def createA3(gene: Gene, start, end, strand):
-    if strand == "-":
-        start = start - 1
-        end = end - 1
-
     return A3Event(idx=gene.feature_id,
                    alt_start=start,
-                   alt_end=end+1,
+                   alt_end=end,
                    strand=strand,
                    gene=gene.feature_id,
                    symbol=gene.chr.id)
@@ -48,12 +44,9 @@ def createA3(gene: Gene, start, end, strand):
 
 # alt_5prime
 def createA5(gene: Gene, start, end, strand):
-    if strand == "+":
-        start = start - 1
-        end = end - 1
     return A5Event(idx=gene.feature_id,
                    alt_start=start,
-                   alt_end=end+1,
+                   alt_end=end,
                    strand=strand,
                    gene=gene.feature_id,
                    symbol=gene.chr.id)
