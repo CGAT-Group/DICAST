@@ -64,19 +64,22 @@ def createMEE(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
     for transcript in gtf_gene.transcripts.values():
         exons = transcript.getExons()
         for index, exon in enumerate(exons):
-            if exon.getEnd() == start and exons[index + 2].getStart() == end:
-                middle_exon_start = exons[index + 1].getStart()
-                middle_exon_end = exons[index + 1].getEnd()
+            try:
+                if exon.getEnd() == start and exons[index + 2].getStart() == end:
+                    middle_exon_start = exons[index + 1].getStart()
+                    middle_exon_end = exons[index + 1].getEnd()
 
-                if not found_alt_1:
-                    exon_1_start = middle_exon_start
-                    exon_1_end = middle_exon_end
-                    found_alt_1 = True
+                    if not found_alt_1:
+                        exon_1_start = middle_exon_start
+                        exon_1_end = middle_exon_end
+                        found_alt_1 = True
 
-                if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
-                    exon_2_start = middle_exon_start
-                    exon_2_end = middle_exon_end
-                    found_alt_2 = True
+                    if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
+                        exon_2_start = middle_exon_start
+                        exon_2_end = middle_exon_end
+                        found_alt_2 = True
+            except IndexError:
+                continue
 
         if found_alt_1 and found_alt_2:
             break
