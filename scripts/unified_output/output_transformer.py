@@ -10,6 +10,8 @@ from tool_parser.SpladderParser import SplAdderParser
 from tool_parser.WhippetParser import WhippetParser
 from tool_parser.ASpliParser import ASpliParser
 from tool_parser.EventPointerParser import EventPointerParser
+from tool_parser.SGSeqReader import SGSeqReader
+from tool_parser.SGSeqAnnoReader import SGSeqAnnoReader
 from unified.EventAnnotationReader import EventAnnotationReader
 from unified.compare_files import compare_with_annotation
 
@@ -67,6 +69,16 @@ def run_create(args):
         eventpointer = EventPointerParser(args.eventpointer_file, gtf, args.combine_me)
         run(eventpointer, args)
 
+    if args.sgseq_denovo is not None:
+        gtf = GTFParser(args.gtf)
+        sgseq_denovo = SGSeqReader(args.sgseq_denovo, gtf, args.combine_me)
+        run(sgseq_denovo, args)
+
+    if args.sgseq_anno is not None:
+        gtf = GTFParser(args.gtf)
+        sgseq_anno = SGSeqAnnoReader(args.sgseq_anno, gtf, args.combine_me)
+        run(sgseq_anno, args)
+
 
 def run(tool, args):
     header = "chr\tgene\tid\tstrand\tevent_type\tcount\tstart_coordinates\tend_coordinates\n"
@@ -85,7 +97,11 @@ def run(tool, args):
                 f.write(str(events))
             else:
                 for event in events:
-                    f.write(str(event))
+                    if issubclass(type(event), list):
+                        for ev in event:
+                            f.write(str(ev))
+                    else:
+                        f.write(str(event))
 
 
 def main():
@@ -100,6 +116,10 @@ def main():
     create_parser.add_argument("-i", "--irfinder_file", help="IRFinder-IR-nondir.txt file")
     create_parser.add_argument("--aspli_dir", help="Directory with three ASpli output files: as_discovery.tab, exon.counts.tab and intron.counts.tab")
     create_parser.add_argument("-e", "--eventpointer_file", help="EventPointer file EventsFound_RNASeq.txt")
+    create_parser.add_argument("--sgseq_denovo", help="Tab separated SGSeq file found by de novo analysis, formatted with columns 'from', 'to' and the third one containing the "
+                                                      "gene ID and event type.")
+    create_parser.add_argument("--sgseq_anno", help="Tab separated SGSeq file based on existing annotation, formatted with columns 'from', 'to' and the third one containing the"
+                                                    "gene ID and event type.")
 
     create_parser.add_argument("-out", "--outdir", help="output directory", required=True)
     create_parser.add_argument("-gtf", "--gtf", help="reference file in gtf format", required=True)
