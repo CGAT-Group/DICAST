@@ -214,8 +214,8 @@ def handle_a35_es_mes_complex(event_exons, junctions, event_types, idx, strand, 
                 continue
             #if e_start < j_check < e_stop and not found_alt:        # exon is part of alternative a3/5; only take first exon, which fits
             if e_start < j_check < e_stop:
-                if case1: alt_part = (e_start, j_end)
-                if case2: alt_part = (j_start, e_stop)
+                if case1: alt_part = (e_start, j_end-1)
+                if case2: alt_part = (j_start+1, e_stop)
                 alt_junctions.append(alt_part)                      # save alt-part
                 #found_alt = True
             # this exon is spanned by current junction -> part of es or mes
