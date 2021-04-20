@@ -10,7 +10,7 @@ source /MOUNT/scripts/asevent_func.sh
 ### START here ###################
 
 #tests
-mk_outdirtest_gtf $gtf
+test_gtf $gtf
 
 
 #handle sam files
@@ -19,7 +19,8 @@ handlesamfiles 0
 
 #build bamlist
 readbamfiles
-
+#Make output directories
+mk_outdir
 ### Start AS event detection ###
 
 echo compute ${tool} AS event detection...

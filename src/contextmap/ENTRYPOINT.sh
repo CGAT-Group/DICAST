@@ -64,7 +64,7 @@ mk_fastqlist
 #mk_outdir
 
 # get indices basenames
-indices=$(for line in $(ls -d ${bowtie_fastadir}*.fa); do echo $(echo ${line%.*}), ; done)
+#indices=$(for line in $(ls -d ${indexdir}*.bt2); do echo $(echo ${line%.*}), ; done)
 
 ### Start mapping ###
 

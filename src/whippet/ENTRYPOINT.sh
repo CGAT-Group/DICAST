@@ -5,8 +5,10 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
-
-mk_outdirtest_gtf $gtf
+#make output directory
+mk_outdir
+#test reference files
+test_gtf $gtf
 test_fasta $fasta
 
 #handle sam files
