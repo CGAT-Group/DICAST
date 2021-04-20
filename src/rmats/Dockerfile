@@ -1,4 +1,4 @@
-FROM ubuntu:bioconda
+FROM ubuntu:conda
 LABEL description="Image for rMATS"
 LABEL maintainer="Tim Faro"
 
