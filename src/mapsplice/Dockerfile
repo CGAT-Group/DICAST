@@ -1,4 +1,4 @@
-FROM ubuntu:conda
+FROM dicast/base:conda0.1
 LABEL description="Image for mapsplice"
 LABEL maintainer="Amit Fenn"
 

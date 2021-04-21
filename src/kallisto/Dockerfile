@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM dicast/base:0.1
 ENV tool=kallisto
 LABEL description="Image for $tool"
 LABEL maintainer="Amit Fenn"

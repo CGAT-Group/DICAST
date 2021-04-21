@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM dicast/base:0.1
 ENV tool=subjunc
 LABEL description="Image for subjunc"
 LABEL maintainer="Amit Fenn"

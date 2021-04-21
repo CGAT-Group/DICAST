@@ -1,4 +1,4 @@
-FROM ubuntu:base 
+FROM dicast/base:conda0.1 
 LABEL description="Image for spladder" 
 LABEL maintainer="Alexander Dietrich"
 
@@ -8,8 +8,8 @@ RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y py
 RUN python3 -m pip install pip --upgrade
 
 #install setuptools & spladder packages 
-RUN pip3 install --no-cache-dir -U setuptools
-RUN pip3 install --no-cache-dir -U spladder
+RUN pip3 install --no-cache-dir setuptools
+RUN pip3 install --no-cache-dir spladder
 
 
 

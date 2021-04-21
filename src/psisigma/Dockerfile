@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM dicast/base:0.1
 LABEL description="Image for PSI-Sigma"
 LABEL maintainer="Tim Faro"
 

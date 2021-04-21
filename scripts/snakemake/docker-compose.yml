@@ -1,0 +1,178 @@
+version: '3.3'
+
+services:
+
+#################################################### Base images
+    base:
+      build:
+        context: ../../src/BASE-IMAGE/
+      image: dicast/base:0.1
+
+    conda:
+      build:
+        context: ../../src/conda/
+      image: dicast/base:conda0.1
+
+    bowtie:
+      build:
+        context: ../../src/bowtie/
+      image: dicast/bowtie:0.1
+
+#################################################### Mapping tools
+    star:
+      build:
+        context: ../../src/star
+      image: dicast/star:0.1
+
+    bbmap:
+      build:
+        context: ../../src/bbmap
+      image: dicast/bbmap:0.1
+
+
+    contextmap2:
+      build:
+        context: ../../src/contextmap
+      image: dicast/contextmap:0.1
+
+
+    dart:
+      build:
+        context: ../../src/dart
+      image: dicast/dart:0.1
+
+
+    gsnap:
+      build:
+        context: ../../src/gsnap
+      image: dicast/gsnap:0.1
+
+
+    crac:
+      build:
+        context: ../../src/crac
+      image: dicast/crac:0.1
+
+
+    subjunc:
+      build:
+        context: ../../src/subjunc
+      image: dicast/subjunc:0.1
+
+
+    minimap:
+      build:
+        context: ../../src/minimap
+      image: dicast/minimap2:0.1
+
+
+    hisat2:
+      build:
+        context: ../../src/hisat
+      image: dicast/hisat2:0.1
+
+
+    segemehl:
+      build:
+        context: ../../src/segemehl
+      image: dicast/segemehl:0.1
+
+
+    mapsplice2:
+      build:
+        context: ../../src/mapsplice
+      image: dicast/mapsplice2:0.1
+
+
+######################################################### AS event detection tools
+
+# ONLY BUILDS ON DOCKER 19
+#    asgal:
+#      build:
+#        context: ../../src/asgal/
+#      image: dicast/asgal:0.1
+
+#    cash:
+#      build:
+#        context: ../../src/cash/
+#      image: dicast/cash:0.1
+      
+    majiq:
+      build: 
+        context: ../../src/majiq/
+      image: dicast/majiq:0.1
+
+    spladder:
+      build: 
+        context: ../../src/spladder/
+      image: dicast/spladder:0.1    
+
+    aspli:
+      build: 
+        context: ../../src/aspli/
+      image: dicast/aspli:0.1
+
+    eventpointer:
+      build: 
+        context: ../../src/eventpointer/
+      image: dicast/eventpointer:0.1
+
+    kissplice:
+      build: 
+        context: ../../src/kissplice/
+      image: dicast/kissplice:0.1
+
+    whippet:
+      build: 
+        context: ../../src/whippet/
+      image: dicast/whippet:0.1
+
+    sgseq:
+      build: 
+        context: ../../src/sgseq/
+      image: dicast/sgseq:0.1
+
+    irfinder:
+      build: 
+        context: ../../src/irfinder/
+      image: dicast/irfinder:0.1
+
+
+
+#### Diff Splicing tools
+#    :
+#      build: 
+#        context: ../../src//
+#      image: dicast/ :0.1
+#       dockerfile: Dockerfile
+        
+
+
+######################################################### AS diff tools
+
+    rmats:
+      build: 
+        context: ../../src/rmats/
+      image: dicast/rmats:0.1
+
+
+    dsplicetype:
+      build: 
+        context: ../../src/dsplicetype/
+      image: dicast/dsplicetype:0.1
+
+    psisigma:
+      build: 
+        context: ../../src/psisigma/
+      image: dicast/psisigma:0.1
+
+    leafcutter:
+      build: 
+        context: ../../src/leafcutter/
+      image: dicast/leafcutter:0.1
+
+
+#    jum:
+#      build: 
+#        context: ../../src/jum/
+#      image: dicast/jum:0.1

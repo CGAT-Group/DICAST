@@ -1,4 +1,4 @@
-FROM ubuntu:base as builder1
+FROM dicast/base:0.1 as builder1
 #this is a temp docker image
 LABEL description="Builder image for STAR"
 LABEL maintainer="Alexander Dietrich"

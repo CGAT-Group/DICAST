@@ -1,4 +1,4 @@
-FROM ubuntu:base as builder1
+FROM dicast/base:0.1 as builder1
 #this is a temp docker image
 LABEL description="Builder image for STAR"
 LABEL maintainer="Alexander Dietrich"
@@ -11,7 +11,7 @@ RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-c
 
 
 #this is the final docker image
-FROM ubuntu:base
+FROM dicast/base:0.1
 LABEL description="Image for IRFinder"
 LABEL maintainer="Alexander Dietrich"
 

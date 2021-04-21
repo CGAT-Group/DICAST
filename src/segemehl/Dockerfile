@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM dicast/base:0.1
 ENV tool=segemehl
 LABEL description="Image for segemehl"
 LABEL maintainer="Amit Fenn"

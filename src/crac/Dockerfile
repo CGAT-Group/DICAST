@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM dicast/base:0.1
 LABEL description="Image for crac"
 LABEL maintainer="Amit Fenn"
    
