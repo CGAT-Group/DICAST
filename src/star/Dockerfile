@@ -1,4 +1,4 @@
-FROM dicast/base:0.1 as builder
+FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1 as builder
 LABEL description="Image for STAR aligner version 2.7.5c"
 LABEL maintainer="Amit Fenn"
 

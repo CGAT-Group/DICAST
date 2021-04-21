@@ -1,4 +1,4 @@
-FROM dicast/base:0.1
+FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1
 LABEL description="Image for crac"
 LABEL maintainer="Amit Fenn"
    

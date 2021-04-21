@@ -1,4 +1,4 @@
-FROM dicast/base:conda0.1
+FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base-conda:0.1
 LABEL description="Image for " #insert name here
 LABEL maintainer="Amit Fenn"
 

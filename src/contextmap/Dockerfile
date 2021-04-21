@@ -1,4 +1,4 @@
-FROM dicast/bowtie:0.1
+FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/dicast-bowtie:0.1
 
 LABEL software="ContextMap"
 LABEL maintainer="Amit Fenn"
