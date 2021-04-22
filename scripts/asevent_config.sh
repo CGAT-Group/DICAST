@@ -2,9 +2,9 @@
 #  values for standard AS event detection  #
 ############################################
 
-star_index=$inputdir/index/star_index                                   #folder containing a star index built with the $gtf and $fasta files in config.sh (used by: IRFinder, KisSplice, rMATS)
-transcript=$inputdir/custom_transcripts.fasta                           #fasta file for gene transcripts
-star_alignment_files=$workdir/output/star-output                        #path to the folder containing star alignment files (*.SJ.)
+star_index=$workdir/index/star_index                                   #folder containing a star index built with the $gtf and $fasta files in config.sh (used by: IRFinder, KisSplice, rMATS)
+transcript=$fasta #$inputdir/custom_transcripts.fasta                  #fasta file for gene transcripts
+star_alignment_files=$workdir/output/star-output                       #path to the folder containing star alignment files (*.SJ.)
 
 #fastq files have to present as pairs; the next two fields contain the suffixes (including the file extension) all fastq-pairs present need to have (e.g. "_1.fastq" & "_2.fastq")
 fastqpair1suffix="_1.fastq"                                             #suffix for first file of fastq-pair

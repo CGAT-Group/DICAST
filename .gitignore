@@ -5,11 +5,6 @@ template/slurmsubmit.sh
 index/*
 template/*
 input
-output
+output*/
 .snakemake
 short_input
-test/
-contextmap2/jre*
-*asgal.tar
-template/slurmsubmit.sh
-.snakemake

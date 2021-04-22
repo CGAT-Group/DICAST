@@ -7,7 +7,7 @@ source /MOUNT/scripts/asevent_func.sh
 
 #make output directory
 mk_outdir
-
+handlesamfiles
 #one asgal run needs a pair of fastq-files; in the config file the user gave the suffixes which correspond to the partnered fastq-files
 #save all partners with same suffix in array
 partner1fastqlist=($(ls -1p $fastqdir/*$fastqpair1suffix | xargs echo | sed 's/ / /g' | uniq))

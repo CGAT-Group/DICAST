@@ -35,7 +35,7 @@ test_fasta(){
 test_bam(){
 	if [[ ! -f $1  ]]
 	then
-		echo File not found. Check path for the bam file(s): is it in ${bamdir}?
+		echo "File not found. Check path for the bam file(s): is it in ${bamdir}?"
 		exit 1
 	else
 		echo found bam file, moving on...
@@ -113,6 +113,7 @@ makebamfromsam(){
 				#		sortnindexbam "${2:-$bamdir}/${samfileprefix}.bam"
 				#fi
 		fi
+readbamfiles
 } 
 
 #function to handle sam files in either bamdir (for as_tools) or case/control-bamdir (for ds_tools)
@@ -159,7 +160,7 @@ readfastqs(){
         find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > $outdir/fastqlist
         chmod  777 $outdir/fastqlist
 		while read -r line; do
-			mkdir -p $outdir/$(basename $(dirname $line))/
+			#mkdir -p $outdir/$(basename $(dirname $line))/
 			chmod -R 777 $outdir/	
 		done </tmp/$tool-fastqlist
 }
@@ -167,10 +168,10 @@ readfastqs(){
 
 #make the output directory: $output/$tool-output
 #Parameter: the tools name
-# mk_outdir(){
-# 	mkdir -p $outdir
-# 	chmod -R 777 $outdir
-# }
+ mk_outdir(){
+ 	mkdir -p $outdir/
+ 	chmod -R 777 $outdir
+ }
 
 
 #make the output folder for the specific sample (BAM-file) and return the folder path
@@ -209,6 +210,7 @@ cleaner(){
 	rm -f $outdir/fastqlist
 	rm -rf $outdir/tmp
 	echo script is done
+	chmod 777 $outdir -R
 	#exit
 }
 
