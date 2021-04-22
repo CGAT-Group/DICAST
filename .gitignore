@@ -10,3 +10,4 @@ output
 short_input
 scripts/unified_output/data
 .idea
+**__pycache__
