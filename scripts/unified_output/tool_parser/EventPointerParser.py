@@ -65,21 +65,24 @@ def createMEE(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
         exons = transcript.getExons()
         for index, exon in enumerate(exons):
             try:
-                if exon.getEnd() == start and exons[index + 2].getStart() == end:
-                    middle_exon_start = exons[index + 1].getStart()
-                    middle_exon_end = exons[index + 1].getEnd()
-
-                    if not found_alt_1:
-                        exon_1_start = middle_exon_start
-                        exon_1_end = middle_exon_end
-                        found_alt_1 = True
-
-                    if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
-                        exon_2_start = middle_exon_start
-                        exon_2_end = middle_exon_end
-                        found_alt_2 = True
+                if exon.getEnd() != start or exons[index + 2].getStart() != end:
+                    continue
             except IndexError:
                 continue
+
+            middle_exon_start = exons[index + 1].getStart()
+            middle_exon_end = exons[index + 1].getEnd()
+
+            if not found_alt_1:
+                exon_1_start = middle_exon_start
+                exon_1_end = middle_exon_end
+                found_alt_1 = True
+
+            if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
+                exon_2_start = middle_exon_start
+                exon_2_end = middle_exon_end
+                found_alt_2 = True
+
 
         if found_alt_1 and found_alt_2:
             break
@@ -105,22 +108,32 @@ def createA3(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
     for transcript in gtf_gene.transcripts.values():
         exons = transcript.getExons()
         for index, exon in enumerate(exons):
-            if exon.getEnd() == start:
-                if not found_start_exon:
-                    # TODO: Negative strand events seem to be broken in EventPointer, coordinates don't match at all for -
-                    if strand == "-":
-                        exon_end = exons[index + 1].getStart()
-                    else:
-                        exon_start = exons[index + 1].getStart()
-                    found_start_exon = True
+            if strand == "+":
+                if exon.getEnd() == start:
+                    if not found_start_exon:
+                        try:
+                            exon_start = exons[index + 1].getStart()
+                        except IndexError:
+                            continue
+                        found_start_exon = True
 
-            if exon.getStart() == end:
-                if strand == "-":
-                    exon_start = end - 1
-                else:
+                if exon.getStart() == end:
                     exon_end = end - 1
-                found_end_exon = True
-                break
+                    found_end_exon = True
+                    break
+            else:
+                if exon.getStart() == start:
+                    if exons[index - 1].getEnd() == end:
+                        continue
+                    try:
+                        exon_end = exons[index - 1].getEnd()
+                    except IndexError:
+                        continue
+                    found_start_exon = True
+                if exon.getEnd() == end:
+                    exon_start = end + 1
+                    found_end_exon = True
+                    break
 
         if found_start_exon and found_end_exon:
             break
@@ -142,23 +155,31 @@ def createA5(gene, chrm, start, end, strand, gtf_gene: Gene, combine_me):
     for transcript in gtf_gene.transcripts.values():
         exons = transcript.getExons()
         for index, exon in enumerate(exons):
-            if exon.getStart() == end:
-                if not found_start_exon:
-                    # TODO: Negative strand events seem to be broken in EventPointer, coordinates don't match at all for -
-                    if strand == "-":
-                        exon_start = exons[index - 1].getEnd()
-                    else:
-                        exon_end = exons[index - 1].getEnd()
-
-                    found_start_exon = True
-
-            if exon.getEnd() == start:
-                if strand == "-":
-                    exon_end = start + 1
-                else:
+            if strand == "+":
+                if exon.getStart() == end:
+                    if not found_start_exon:
+                        try:
+                            exon_end = exons[index - 1].getEnd()
+                        except IndexError:
+                            continue
+                        found_start_exon = True
+                if exon.getEnd() == start:
                     exon_start = start + 1
-                found_end_exon = True
-                break
+                    found_end_exon = True
+                    break
+            else:
+                if exon.getEnd() == end:
+                    if exons[index + 1].getStart() == start:
+                        continue
+                    try:
+                        exon_start = exons[index + 1].getStart()
+                    except IndexError:
+                        continue
+                    found_start_exon = True
+                if exon.getStart() == start:
+                    exon_end = start - 1
+                    found_end_exon = True
+                    break
 
         if found_start_exon and found_end_exon:
             break

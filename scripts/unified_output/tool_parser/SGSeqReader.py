@@ -3,6 +3,8 @@ from gtf_utils.Interval import Interval
 from tool_parser.ASParser import ToolParser
 from itertools import product, chain
 from . import EventPointerParser
+from unified.Event import IrEvent, EsEvent, MeeEvent
+from gtf_utils.ExonClass import Exon
 
 # init event type dict
 EVENT_TYPES = {"SE": "es", "RI": "ir", "MXE": "mee", "A5SS": "a5", "A3SS": "a3", "AFE": "afe",
@@ -17,7 +19,36 @@ def checkES(events):
         if gene is None or event_type is not "es":
             continue
         if current_event_index == 1:
-            result.add(EventPointerParser.createES(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
+            if strand == "+":
+                result.add(
+                    EventPointerParser.createES(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
+            else:
+                skipped = None
+                for transcript in gene.transcripts.values():
+                    exons = transcript.getExons()
+                    for index, exon in enumerate(exons):
+                        if not exon.getEnd() == gen_posi.end:
+                            continue
+                        try:
+                            if exons[index + 2].getStart() == gen_posi.start:
+                                skipped = exons[index + 1]
+                                break
+                        except IndexError:
+                            continue
+
+                    if skipped is not None:
+                        break
+
+                if skipped is None:
+                    skipped = Exon(None, None, None, "nan", "nan", None, None, None)
+
+                es_event = EsEvent(idx=gene.feature_id,
+                                   start_skipped=skipped.getStart(),
+                                   end_skipped=skipped.getEnd(),
+                                   strand=strand,
+                                   gene=gene.feature_id,
+                                   symbol=chrm)
+                result.add(es_event)
 
     return result
 
@@ -30,7 +61,21 @@ def checkIR(events):
         if gene is None or event_type is not "ir":
             continue
         if current_event_index == 1:
-            result.add(EventPointerParser.createIR(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
+            if strand == "+":
+                start = gen_posi.start + 1
+                end = gen_posi.end - 1
+            else:
+                start = gen_posi.end + 1
+                end = gen_posi.start - 1
+
+            ir_event = IrEvent(idx=gene.feature_id,
+                               intron_start=start,
+                               intron_end=end,
+                               strand=strand,
+                               gene=gene.feature_id,
+                               symbol=chrm)
+
+            result.add(ir_event)
 
     return result
 
@@ -43,7 +88,54 @@ def checkMEE(events):
         if gene is None or event_type is not "mee":
             continue
         if current_event_index == 1:
-            result.append(EventPointerParser.createMEE(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
+            # if exon.getEnd() != end or exons[index + 2].getStart() != start:
+
+            if strand == "+":
+                result.append(
+                    EventPointerParser.createMEE(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
+            else:
+                exon_1_start = "nan"
+                exon_2_start = "nan"
+                exon_1_end = "nan"
+                exon_2_end = "nan"
+                found_alt_1 = False
+                found_alt_2 = False
+                for transcript in gene.transcripts.values():
+                    exons = transcript.getExons()
+                    for index, exon in enumerate(exons):
+                        try:
+                            if exon.getEnd() != gen_posi.end or exons[index + 2].getStart() != gen_posi.start:
+                                continue
+                        except IndexError:
+                            continue
+                        middle_exon_start = exons[index + 1].getStart()
+                        middle_exon_end = exons[index + 1].getEnd()
+
+                        if not found_alt_1:
+                            exon_1_start = middle_exon_start
+                            exon_1_end = middle_exon_end
+                            found_alt_1 = True
+
+                        if not found_alt_2 and middle_exon_start != exon_1_start and middle_exon_end != exon_1_end:
+                            exon_2_start = middle_exon_start
+                            exon_2_end = middle_exon_end
+                            found_alt_2 = True
+
+                    if found_alt_1 and found_alt_2:
+                        break
+
+                if combine_me:
+                    es_events = [EsEvent(gene.feature_id, exon_1_start, exon_1_end, strand, gene.feature_id, chrm, count=1),
+                                 EsEvent(gene.feature_id, exon_2_start, exon_2_end, strand, gene.feature_id, chrm, count=2)]
+                    result.append(es_events)
+                else:
+                    mee_event = MeeEvent(idx=gene.feature_id,
+                                         mee_exons=[(exon_1_start, exon_1_end),
+                                                    (exon_2_start, exon_2_end)],
+                                         strand=strand,
+                                         gene=gene.feature_id,
+                                         symbol=chrm)
+                    result.append(mee_event)
 
     return result
 
@@ -151,10 +243,11 @@ class SGSeqReader(ToolParser):
 
         start_column_split = event_line[self.header_index["from"]].split(":")
         end_column_split = event_line[self.header_index["to"]].split(":")
-        gen_posi = Interval(start_column_split[2], end_column_split[2])
-        chr = start_column_split[1]
+        gen_posi = Interval(start_column_split[2].strip(), end_column_split[2].strip())
+        chr = start_column_split[1].strip()
         genes = event_line[2].split("_")[0].split(",")
-        strand = start_column_split[3]
+        genes = [gene.strip() for gene in genes]
+        strand = start_column_split[3].strip()
 
         return chr, genes, strand, gen_posi, event_types, current_event_index, corresponding_events_number
 
