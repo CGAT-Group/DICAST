@@ -87,10 +87,10 @@ services:
 ######################################################### AS event detection tools
 
 # ONLY BUILDS ON DOCKER 19
-#    asgal:
-#      build:
-#        context: ../../src/asgal/
-#      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/asgal:0.1
+    asgal:
+      build:
+        context: ../../src/asgal/
+      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/asgal:0.1
 
 #    cash:
 #      build:
