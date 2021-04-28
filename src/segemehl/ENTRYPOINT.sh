@@ -30,6 +30,7 @@ second_attempt() {
 	segemehl.x \
 		-d $fasta \
 		-q ${line}?.fastq \
+		--splits \
 		-i $indexdir/$indexname \
 		-t $ncores \
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam
@@ -83,6 +84,7 @@ while read -r line; do
 		-d $fasta \
 		-q ${line}1.fastq  \
 		-p ${line}2.fastq \
+		--splits \
 		-i $indexdir/$indexname \
 		-t $ncores \
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam
