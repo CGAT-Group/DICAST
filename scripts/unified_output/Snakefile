@@ -1,0 +1,100 @@
+#### This does not work ####
+
+#tools=["MAJIQ","SplAdder","Whippet","ASGAL"]
+tools=["ASGAL"]
+#tools=["Whippet"]
+#reads=["50","100","200"]
+reads=["50"]
+combine = ["combined","separate"]
+cutoff=["0","1","5","20"]
+outdir="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified"
+gtf="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/input/splicing_variants.gtf"
+annotation="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/input/event_annotation.tsv"
+
+
+rule all:
+    input:
+        out=expand("/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
+                   "unifyASOutputs/data/unified/{c}/{r}/{t}_{x}_loose.stats.out", r=reads, t=tools, c=combine,x = cutoff)
+
+rule compare_combined:
+    input:
+        anno=annotation,
+        gtf=gtf,
+        file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/"
+             "FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/combined/{r}/{t}.unified.out"
+    output:
+        file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
+                   "unifyASOutputs/data/unified/combined/{r}/{t}_{x}_loose.stats.out"
+    params:
+        x="{x}"
+    shell:
+        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} --combine_me"
+
+rule compare_separate:
+    input:
+        anno=annotation,
+        gtf=gtf,
+        file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/"
+             "FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/separate/{r}/{t}.unified.out"
+    output:
+        file="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/"
+                   "unifyASOutputs/data/unified/separate/{r}/{t}_{x}_loose.stats.out"
+    params:
+        x="{x}"
+    shell:
+        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf} -stats {output.file} -t {params.x} "
+
+
+'''
+
+rule all:
+    input:
+        out=expand("/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/"
+                   "FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/{c}/{r}/", r=reads, c=combine)
+
+rule create_combined:
+    input:
+        dir_majiq="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/majiq-output/{r}/",
+        dir_spladder="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/spladder-output/{r}/",
+        file_asgal="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/asgal-output/{r}/ASGAL.csv",
+        file_whippet="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/whippet-output/{r}/whippet-out.psi",
+        gtf=gtf
+    output:
+        outdir=directory("/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/combined/{r}/")
+    benchmark:
+        "/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/combined/{r}/benchmark.txt"
+    shell:
+        "python3 output_transformer.py create -m {input.dir_majiq} -w {input.file_whippet} -s {input.dir_spladder}"
+        " -a {input.file_asgal} -gtf {input.gtf} -out {output.outdir} --combine_me "
+        
+rule create_separate:
+    input:
+        dir_majiq="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/majiq-output/{r}/",
+        dir_spladder="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/spladder-output/{r}/",
+        file_asgal="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/asgal-output/{r}/ASGAL.csv",
+        file_whippet="/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/whippet-output/{r}/whippet-out.psi",
+        gtf=gtf
+    output:
+        outdir=directory("/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/separate/{r}/")
+    benchmark:
+        "/home/alex/Documents/Studium_Bioinformatik/Master/Semester3/FortgeschrittenenPrakitkum/unifyASOutputs/data/unified/separate/{r}/benchmark.txt"
+    shell:
+        "python3 output_transformer.py create -m {input.dir_majiq} -w {input.file_whippet} -s {input.dir_spladder}"
+        " -a {input.file_asgal} -gtf {input.gtf} -out {output.outdir}"
+
+
+'''
+
+
+
+
+
+
+#rule compare:
+#    input:
+#        anno=annotation,
+#        file=expand(outdir+"{tool}.unified.out", tool=tools),
+#        gtf=gtf
+#    shell:
+#        "python3 output_transformer.py compare -a {input.anno} -c {input.file} -gtf {input.gtf}"
