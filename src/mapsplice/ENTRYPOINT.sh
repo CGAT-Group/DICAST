@@ -74,7 +74,7 @@ mk_fastqlist
 echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
-    mkdir -p $outdir/$(basename $(dirname $line))/${line##*/}
+    mkdir -p $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}
 
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
@@ -91,7 +91,7 @@ while read -r line; do
 		-c $bowtie_fastadir \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/$(basename $(dirname $line))/${line##*/} \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/} \
 		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq

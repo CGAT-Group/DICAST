@@ -89,7 +89,7 @@ while read -r line; do
 	--dir $indexdir \
 	--output-file $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 	--format sam \
-	--force-xs-dir
+	--force-xs-dir \
 	--nthreads $ncores \
 	${line}1.fastq ${line}2.fastq
 

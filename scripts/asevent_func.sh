@@ -53,16 +53,16 @@ test_bam(){
 #Parameter1: folder to check for bam files; 
 #Parameter2: optional output filename (standard is bamlist)
 readbamfiles(){
-	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> $outdir/${2:-bamlist}
-	chmod  777 $outdir/${2:-bamlist}
+	find ${1:-$bamdir} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> /tmp/${2:-bamlist}
+	chmod  777 /tmp/${2:-bamlist}
 }
 
 #just as readbamfiles, but for SAM-files
 #parameter1: optional different bamdirectory
 readsamfiles(){
 	#touch $wd/$output/${tool:-unspecific}-output/samlist
-	find ${1:-$bamdir} -maxdepth 1 -name "*.sam" -nowarn -not -empty >> $outdir/samlist
-	chmod  777 $outdir/samlist
+	find ${1:-$bamdir} -maxdepth 1 -name "*.sam" -nowarn -not -empty >> /tmp/samlist
+	chmod  777 /tmp/samlist
 }
 
 
@@ -120,13 +120,13 @@ readbamfiles
 #parameter: 0 to use for as_tools; 1 to use in ds_tools
 handlesamfiles(){
 	#clear samlist file first
-	rm -f $outdir/samlist
+	rm -f /tmp/samlist
 	if [[ $1 = 0 ]]
 	then
 		echo "Looking for SAM files in $bamdir and converting them to BAM-files..."
 		readsamfiles $bamdir
 		#make bam file out of all samfiles in samlist
-		for filename in $(cat $outdir/samlist)
+		for filename in $(cat /tmp/samlist)
 		do
 		        makebamfromsam $filename $bamdir
 		done  		
@@ -135,16 +135,16 @@ handlesamfiles(){
 		echo "Looking for SAM files in $casebam and $controlbam and converting them to BAM-files..."
 		readsamfiles $casebam
 		#make bam file out of all samfiles in samlist
-                for filename in $(cat $outdir/samlist)
+                for filename in $(cat /tmp/samlist)
                 do
                         makebamfromsam $filename $casebam
                 done
 		echo "-------------------"
 		#clear samlist again
-		rm -f $outdir/samlist
+		rm -f /tmp/samlist
 		readsamfiles $controlbam
                 #make bam file out of all samfiles in samlist
-                for filename in $(cat $outdir/samlist)
+                for filename in $(cat /tmp/samlist)
                 do
                         makebamfromsam $filename $controlbam
                 done
@@ -157,8 +157,8 @@ handlesamfiles(){
 	
 # read fastq files in fastqfolder and save paths ins fastqlist file
 readfastqs(){
-        find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > $outdir/fastqlist
-        chmod  777 $outdir/fastqlist
+        find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > /tmp/fastqlist
+        chmod  777 /tmp/fastqlist
 		while read -r line; do
 			#mkdir -p $outdir/$(basename $(dirname $line))/
 			chmod -R 777 $outdir/	
