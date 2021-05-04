@@ -73,22 +73,25 @@ if(differential){
   PathToSamples <- opt$bamfolder
 
   for (i in range(1:length(Samples))){
-    bam_file = Samples[i]	
-    print(paste("Preparing BAM file",i,":",bam_file,"..." ))
+      tryCatch({
+      bam_file = Samples[i]	
+      print(paste("Preparing BAM file",i,":",bam_file,"..." ))
 
-    TxtPath<-paste0(opt$output,"/",bam_file,"_output")
-    if(!dir.exists(TxtPath)){
-      dir.create(TxtPath)
-    }
+      TxtPath<-paste0(opt$output,"/",bam_file,"_output")
+      if(!dir.exists(TxtPath)){
+        dir.create(TxtPath)
+      }
 
-    SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
- 		  	     SamplePath=PathToSamples,
- 			     Ref_Transc="GTF",
- 			     fileTransc=PathToGTF,
-			     cores=cores)
+      SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
+              SamplePath=PathToSamples,
+            Ref_Transc="GTF",
+            fileTransc=PathToGTF,
+            cores=cores)
 
 
-    print("Looking for AS events...")
-    AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+      print("Looking for AS events...")
+      AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+
+    }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
   }
 }
