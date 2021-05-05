@@ -25,7 +25,7 @@ mk_outdir
 
 echo compute ${tool} AS event detection...
 
-for filename in $(cat $outdir/bamlist)
+for filename in $(cat /tmp/bamlist)
 do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)

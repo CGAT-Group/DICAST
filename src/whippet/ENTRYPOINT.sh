@@ -16,11 +16,11 @@ handlesamfiles $differential
 
 #echo "Merging and indexing BAM files of $bamdir to use for splice graph building..."
 readbamfiles
-bamlist=$(cat $outdir/bamlist | xargs echo)
+bamlist=$(cat /tmp/bamlist | xargs echo)
 mkdir -p $outdir/tmp
 
 if [ $differential = 0  ]; then
-	for filename in $(cat $outdir/bamlist)
+	for filename in $(cat /tmp/bamlist)
 	do
 		# no need to index each BAM file --> index should already exist!
 		#samtools sort $filename -o $outdir/tmp/$filename.sorted.bam

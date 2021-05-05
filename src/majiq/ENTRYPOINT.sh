@@ -31,7 +31,7 @@ then
 	#list .bam files, remove last file extension (.bam), list them in one line with comma seperated, no comma after last file
 	#(sed commands from here: https://unix.stackexchange.com/questions/313791/how-to-list-only-files-in-a-directory-separated-by-commas)
 	#bamlist=$(cd $bamdir && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
-	for filename in $(cat $outdir/bamlist)
+	for filename in $(cat /tmp/bamlist)
 	do
 		# build sperate config file for each BAM file
 		basename=$(basename $filename)
