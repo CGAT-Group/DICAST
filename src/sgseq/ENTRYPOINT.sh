@@ -18,14 +18,14 @@ handlesamfiles 0
 
 
 #build bamlist
-readbamfiles
+readbamfiles $controlbam controlbamlist
 #Make output directories
 mk_outdir
 ### Start AS event detection ###
 
 echo compute ${tool} AS event detection...
 
-for filename in $(cat /tmp/bamlist)
+for filename in $(cat /tmp/controlbamlist)
 do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)

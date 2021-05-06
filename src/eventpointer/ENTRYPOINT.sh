@@ -20,7 +20,7 @@ handlesamfiles $differential
 #### AS event detection mode ####
 if [ $differential = 0 ]; then
 	echo Starting EventPointer in AS event detection mode...
-	Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores --out $outdir --bamfolder $bamdir --differential $differential
+	Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores --out $outdir --bamfolder $controlbam --differential $differential
 	wait
 	cleaner
 fi

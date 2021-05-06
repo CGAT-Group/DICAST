@@ -14,13 +14,12 @@ test_fasta $fasta
 #handle sam files
 handlesamfiles $differential
 
-#echo "Merging and indexing BAM files of $bamdir to use for splice graph building..."
-readbamfiles
-bamlist=$(cat /tmp/bamlist | xargs echo)
+#echo "Merging and indexing BAM files of $controldir to use for splice graph building..."
+bamlist=$(cat /tmp/casebamlist /tmp/controlbamlist | xargs echo)
 mkdir -p $outdir/tmp
 
 if [ $differential = 0  ]; then
-	for filename in $(cat /tmp/bamlist)
+	for filename in $(cat /tmp/controlbamlist)
 	do
 		# no need to index each BAM file --> index should already exist!
 		#samtools sort $filename -o $outdir/tmp/$filename.sorted.bam
@@ -39,7 +38,7 @@ if [ $differential = 0  ]; then
 fi
 
 if [ $differential = 1  ]; then
-	echo "Merging and indexing BAM files of $bamdir to use for splice graph building..."
+	echo "Merging and indexing BAM files of $controldir to use for splice graph building..."
 	samtools merge $outdir/tmp/merged_bam.bam $bamlist
 	samtools sort $outdir/tmp/merged_bam.bam -o $outdir/tmp/merged_bam_sorted.bam
 	samtools rmdup -S $outdir/tmp/merged_bam_sorted.bam $outdir/tmp/merged_bam_sorted_rmdup.bam

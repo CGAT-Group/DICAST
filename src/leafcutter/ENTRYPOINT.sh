@@ -22,7 +22,7 @@ handlesamfiles 1
 #also create grouping txt file 
 mkdir -p $outdir/junc_files
 readbamfiles $casebam casebamlist
-for filename in $(cat $outdir/casebamlist)
+for filename in $(cat /tmp/casebamlist)
 do 
 	name=$(basename -s .bam $filename)
 	touch $outdir/junc_files/$name.junc
@@ -33,7 +33,7 @@ do
 done
 
 readbamfiles $controlbam controlbamlist
-for filename in $(cat $outdir/controlbamlist) 
+for filename in $(cat /tmp/controlbamlist) 
 do 
         name=$(basename -s .bam $filename)
 	touch $outdir/junc_files/$name.junc
@@ -64,7 +64,7 @@ rm -f $outdir/junc_all.txt
 rm -f $outdir/groups_file.txt
 rm -f $outdir/casejunc.txt
 rm -f $outdir/controljunc.txt
-rm -f $outdir/casebamlist
-rm -f $outdir/controlbamlist
+rm -f /tmp/casebamlist
+rm -f /tmp/controlbamlist
 rm -f $outdir/gtf.gz
 cleaner

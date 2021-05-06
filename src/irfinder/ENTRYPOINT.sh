@@ -87,7 +87,7 @@ then
 elif [[ $use_bam_input_files -eq 1  ]]
 then
 	readbamfiles
-	bams=$(cat /tmp/bamlist)
+	bams=$(cat /tmp/controlbamlist)
 	for bam in $bams
 	do
        		IRFinder -m BAM -r $outdir/irfinder_index -d $outdir $bam
