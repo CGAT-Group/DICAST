@@ -55,7 +55,7 @@ while read -r line; do
 		ref=$fasta \
 		path=$indexdir/$indexname \
 		intronlen=20 \
-		xstag=fs \
+		xstag=us \
 		outm=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		outu=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}_unmapped.sam
 
