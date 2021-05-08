@@ -71,13 +71,13 @@ if(differential){
 
   samplelist <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
   PathToSamples <- opt$bamfolder
-  print(paste("Run Eventpointer for found samples:", samplelist,range(1:length(samplelist))))
+  print(paste("Run Eventpointer for found samples:", samplelist))
 
   for (sampleindex in 1:length(samplelist)){
-      print(cat("Samples iteration", sampleindex, ":", samplelist, "\n Start:", samplelist[sampleindex]))
+      cat("\n[",sampleindex,"] Start:", samplelist[sampleindex]))
       tryCatch({
       bam_file = samplelist[sampleindex]
-      print(paste("Preparing BAM file",sampleindex,":",bam_file,"..." ))
+      cat("Preparing BAM file",sampleindex,":",bam_file,"..." )
 
       TxtPath<-paste0(opt$output,"/",bam_file,"_output")
       if(!dir.exists(TxtPath)){
@@ -97,7 +97,7 @@ if(differential){
     },
     error=function(e){cat("\nERROR at sample",sampleindex,"->", conditionMessage(e), "\n")},
     warning= function(w){cat("\nWARNING at sample",sampleindex,"->", conditionMessage(w), "\n")},
-    finally= {print(cat("\nEnd run for sample",samplelist[sampleindex]))}
+    finally= {cat("\nEnd run for sample",samplelist[sampleindex],"\n###############################################\n")}
     )
   }
 }
