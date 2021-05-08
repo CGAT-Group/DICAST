@@ -34,7 +34,7 @@ RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt:/opt/htslib-1.9
 
 WORKDIR /docker_main
-RUN mkdir /tmp
+RUN mkdir /tmp && chmod 777 /tmp
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
