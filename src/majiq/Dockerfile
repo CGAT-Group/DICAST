@@ -25,8 +25,7 @@ RUN git clone https://bitbucket.org/biociphers/majiq_academic.git
 WORKDIR /tmp/majiq_academic
 RUN pip3.6 install --no-cache-dir -r requirements.txt
 RUN python3.6 setup.py install
-RUN rm -rfv /tmp
-RUN mkdir /tmp
+RUN rm -rf /tmp
 WORKDIR /opt
 
 #download and add script to convert GTF file to GFF3 format
@@ -35,6 +34,7 @@ RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt:/opt/htslib-1.9
 
 WORKDIR /docker_main
+RUN mkdir /tmp
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
