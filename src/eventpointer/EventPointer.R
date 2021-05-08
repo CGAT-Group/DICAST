@@ -73,11 +73,11 @@ if(differential){
   PathToSamples <- opt$bamfolder
   print(paste("Run Eventpointer for found samples:", samplelist))
 
-  for (i in range(1:length(samplelist))){
-      print(cat("Samples iteration", i, ":", samplelist, samplelist[i], "\n"))
+  for (sampleindex in range(1:length(samplelist))){
+      print(cat("Samples iteration", sampleindex, ":", samplelist, "\n Start:", samplelist[sampleindex]))
       tryCatch({
-      bam_file = samplelist[i]
-      print(paste("Preparing BAM file",i,":",bam_file,"..." ))
+      bam_file = samplelist[sampleindex]
+      print(paste("Preparing BAM file",sampleindex,":",bam_file,"..." ))
 
       TxtPath<-paste0(opt$output,"/",bam_file,"_output")
       if(!dir.exists(TxtPath)){
@@ -95,9 +95,9 @@ if(differential){
       AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
 
     },
-    error=function(e){cat("\nERROR at sample",i, conditionMessage(e), "\n")},
-    warning= function(w){cat("\nWARNING at sample ",i, conditionMessage(w), "\n")},
-    finally= {print(cat("\n",samplelist[i], "\n"))}
+    error=function(e){cat("\nERROR at sample",sampleindex,"->", conditionMessage(e), "\n")},
+    warning= function(w){cat("\nWARNING at sample",sampleindex,"->", conditionMessage(w), "\n")},
+    finally= {print(cat("\nEnd run for sample",samplelist[sampleindex]))}
     )
   }
 }
