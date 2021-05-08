@@ -93,6 +93,10 @@ if(differential){
       print("Looking for AS events...")
       AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
 
-    }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+    },
+    error=function(e){cat("ERROR at sample",i, conditionMessage(e), "\n")},
+    warning= function(w){cat("WARNING at sample ",i, message(w), "\n")},
+    finally= {print(Sample[i])}
+    )
   }
 }
