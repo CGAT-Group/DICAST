@@ -8,7 +8,7 @@ option_list = list(make_option(c("--gtf"), type='character', default = NULL, hel
 		   make_option(c("--differential"),type='integer',default=0,help="0:only AS event detection using file from --bamfile;1: differential analysis using files from --casefolder & --controlfolder"),
 		   make_option(c("--casefolder"),type='character',default=NULL,help="path to folder with BAMs considered case (only use with --differential 1)"),
 		   make_option(c("--controlfolder"),type='character',default=NULL,help="path to folder with BAMs considered control (only use with --differential 1)"),
-		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"), 
+		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"),
 		   make_option(c("--output"),type='character',default=NULL, help="output folder"),
 		   make_option(c("--cores"), type='integer',default=1,help="Number of cores",metavar="integer"))
 opt_parser = OptionParser(option_list=option_list)
@@ -39,8 +39,8 @@ cores = as.numeric(opt$cores)
 PathToGTF<- opt$gtf
 
 if(differential){
-  
-  # read combined folder	
+
+  # read combined folder
   Samples <- basename(list.files(opt$combined,pattern="\\.bam$"))
   PathToSamples <- opt$combined
 
@@ -71,10 +71,11 @@ if(differential){
 
   Samples <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
   PathToSamples <- opt$bamfolder
+  print("Run Eventpointer for found samples:", Samples)
 
   for (i in range(1:length(Samples))){
       tryCatch({
-      bam_file = Samples[i]	
+      bam_file = Samples[i]
       print(paste("Preparing BAM file",i,":",bam_file,"..." ))
 
       TxtPath<-paste0(opt$output,"/",bam_file,"_output")
