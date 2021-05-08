@@ -14,7 +14,7 @@ RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y py
 RUN python3.6 -m pip install pip --upgrade
 
 #install majiq dependencies
-RUN pip3.6 install --no-cache-dir -U wheel setuptools 
+RUN pip3.6 install --no-cache-dir -U wheel setuptools
 RUN pip3.6 install --no-cache-dir -U numpy cython
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y git
 
@@ -25,7 +25,7 @@ RUN git clone https://bitbucket.org/biociphers/majiq_academic.git
 WORKDIR /tmp/majiq_academic
 RUN pip3.6 install --no-cache-dir -r requirements.txt
 RUN python3.6 setup.py install
-RUN rm -rf /tmp
+RUN rm -rfv /tmp
 WORKDIR /opt
 
 #download and add script to convert GTF file to GFF3 format
@@ -38,4 +38,3 @@ WORKDIR /docker_main
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
-
