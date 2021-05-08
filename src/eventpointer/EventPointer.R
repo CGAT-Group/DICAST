@@ -96,7 +96,7 @@ if(differential){
     },
     error=function(e){cat("ERROR at sample",i, conditionMessage(e), "\n")},
     warning= function(w){cat("WARNING at sample ",i, message(w), "\n")},
-    finally= {print(Sample[i])}
+    finally= {cat(Samples[i], "\n")}
     )
   }
 }
