@@ -74,6 +74,7 @@ if(differential){
   print(paste("Run Eventpointer for found samples:", Samples))
 
   for (i in range(1:length(Samples))){
+      print(cat(Samples[i], "\n"))
       tryCatch({
       bam_file = Samples[i]
       print(paste("Preparing BAM file",i,":",bam_file,"..." ))
