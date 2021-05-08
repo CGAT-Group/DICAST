@@ -71,9 +71,9 @@ if(differential){
 
   samplelist <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
   PathToSamples <- opt$bamfolder
-  print(paste("Run Eventpointer for found samples:", samplelist))
+  print(paste("Run Eventpointer for found samples:", samplelist,range(1:length(samplelist))))
 
-  for (sampleindex in range(1:length(samplelist))){
+  for (sampleindex in 1:length(samplelist)){
       print(cat("Samples iteration", sampleindex, ":", samplelist, "\n Start:", samplelist[sampleindex]))
       tryCatch({
       bam_file = samplelist[sampleindex]
