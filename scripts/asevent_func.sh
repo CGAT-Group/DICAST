@@ -1,11 +1,11 @@
-#!/bin/bash 
+#!/bin/bash
 
 #Read gtf file and test if its available
 #Parameter: Full path to gtf file
 
 test_gtf(){
 	if [[ ! -f $1 ]]
-	then 
+	then
 		echo File not found. Check the path for the ${gtf} gtf file.
 		exit 1
 	else
@@ -50,9 +50,11 @@ test_bam(){
 
 
 #take all BAM & BAM-index files from bamfolder(or case-/controlfolder) and store paths in the new bamlist contained in the tool-output folder
-#Parameter1: folder to check for bam files; 
+#Parameter1: folder to check for bam files;
 #Parameter2: optional output filename (standard is bamlist)
 readbamfiles(){
+	#if bamlist exists: delete
+	rm /tmp/${2:-bamlist}
 	find ${1:-$controlbam} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> /tmp/${2:-bamlist}
 	chmod  777 /tmp/${2:-bamlist}
 }
@@ -67,7 +69,7 @@ readsamfiles(){
 
 
 indexbam(){
-	if [ ! -s ${1}.bai ] ; then 
+	if [ ! -s ${1}.bai ] ; then
 		samtools index $1  -@ 4
 	fi
 }
@@ -89,7 +91,7 @@ makebamfromsam(){
 	local sampath=$(dirname $1)
 	local samfileprefix=$(basename -s .sam $1)
 
-		if [[ ! -e ${sampath}/${samfileprefix}.bam ]] 
+		if [[ ! -e ${sampath}/${samfileprefix}.bam ]]
 			then
 				if [[ ! -e ${2:-$controlbam}/${samfileprefix}.bam ]]
 					then
@@ -101,14 +103,14 @@ makebamfromsam(){
 						echo sorting and indexing bam file $samfileprefix.bam
 							sortnindexbam "${2:-$controlbam}/$samfileprefix.bam"
 					}
-				else 
+				else
 					echo bam file for $1 exists in ${2:-$controlbam}
-						sortnindexbam "${2:-$controlbam}/$samfileprefix.bam"				
+						sortnindexbam "${2:-$controlbam}/$samfileprefix.bam"
 				fi
 		else
 			echo bam file for $1 exists in $sampath
 				#if [[ ! -e ${2:-$controlbam}/${samfileprefix}.bam ]] ; then
-				#	mv $1 "${2:-$controlbam}" 
+				#	mv $1 "${2:-$controlbam}"
 				#		echo "moved $1 to :" ${2:-$controlbam}
 				#		sortnindexbam "${2:-$controlbam}/${samfileprefix}.bam"
 				#fi
@@ -116,7 +118,7 @@ makebamfromsam(){
 #readbamfiles
 readbamfiles $controlbam controlbamlist
 readbamfiles $casebam casebamlist
-} 
+}
 
 #function to handle sam files in either bamdir (for as_tools) or case/control-bamdir (for ds_tools)
 #parameter: 0 to use for as_tools; 1 to use in ds_tools
@@ -131,7 +133,7 @@ handlesamfiles(){
 		for filename in $(cat /tmp/samlist)
 		do
 		        makebamfromsam $filename $controlbam
-		done  		
+		done
 
 	else
 		echo "Looking for SAM files in $casebam and $controlbam and converting them to BAM-files..."
@@ -150,20 +152,20 @@ handlesamfiles(){
                 do
                         makebamfromsam $filename $controlbam
                 done
-		
+
 	fi
 
 }
 
 
-	
+
 # read fastq files in fastqfolder and save paths ins fastqlist file
 readfastqs(){
         find ${1:-$fastqdir} -maxdepth 2 -name "*.fastq" -nowarn > /tmp/fastqlist
         chmod  777 /tmp/fastqlist
 		while read -r line; do
 			#mkdir -p $outdir/$(basename $(dirname $line))/
-			chmod -R 777 $outdir/	
+			chmod -R 777 $outdir/
 		done </tmp/$tool-fastqlist
 }
 
@@ -180,7 +182,7 @@ readfastqs(){
 #Parameter: BAM filename of sample
 mk_sample_out(){
 	tmp="${1##*/}"	#get basename of file
-    sample_out="${tmp%%.*}"	#remove all file extensions after first . 
+    sample_out="${tmp%%.*}"	#remove all file extensions after first .
     mkdir -p $outdir/$sample_out-output
 	chmod -R 777 $outdir/$sample_out-output
 	echo $outdir/$sample_out-output
