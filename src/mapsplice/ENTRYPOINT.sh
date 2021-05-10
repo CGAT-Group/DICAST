@@ -16,11 +16,11 @@ second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
 	# Parameters
-	# -a 		Generate CIGAR and output alignments in the SAM format. Minimap2 outputs in PAF by default. 
-	# -o FILE 	Output alignments to FILE [stdout]. 
-	#-t INT 	Number of threads [3]. Minimap2 uses at most three threads when indexing target sequences, 
-	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently 
-	#			idle and takes little CPU time). 
+	# -a 		Generate CIGAR and output alignments in the SAM format. Minimap2 outputs in PAF by default.
+	# -o FILE 	Output alignments to FILE [stdout].
+	#-t INT 	Number of threads [3]. Minimap2 uses at most three threads when indexing target sequences,
+	#			and uses up to INT+1 threads when mapping (the extra thread is for I/O, which is frequently
+	#			idle and takes little CPU time).
 	python /opt/conda/bin/mapsplice.py \
 		-c $bowtie_fastadir \
 		-x $indexdir/$indexname \
@@ -40,7 +40,7 @@ build_index() {
 	#    reference_in            comma-separated list of files with ref sequences
 	#    ebwt_outfile_base       write Ebwt data to files with this dir/basename
 	# Parameters:
-	# --seed <int>            seed for random number generator 
+	# --seed <int>            seed for random number generator
 
 	bowtie-build \
 		--seed 42 \
@@ -91,7 +91,7 @@ while read -r line; do
 		-c $bowtie_fastadir \
 		-x $indexdir/$indexname \
 		--gene-gtf $gtf \
-		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/} \
+		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		-p $ncores \
 		-1 ${line}1.fastq  \
 		-2 ${line}2.fastq
