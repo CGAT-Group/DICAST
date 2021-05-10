@@ -74,8 +74,8 @@ if(differential){
   print(paste("Run Eventpointer for found samples:", samplelist))
 
   for (sampleindex in 1:length(samplelist)){
-      cat("\n[",sampleindex,"] Start:", samplelist[sampleindex])
-      
+      cat("\n[",sampleindex,"] Start:", samplelist[sampleindex],"\n")
+
       tryCatch({
       bam_file = samplelist[sampleindex]
       cat("Preparing BAM file",sampleindex,":",bam_file,"..." )
@@ -97,7 +97,7 @@ if(differential){
 
     },
     error=function(e){cat("\nERROR at sample",sampleindex,"->", conditionMessage(e), "\n")},
-    warning= function(w){cat("\nWARNING at sample",sampleindex,"->", conditionMessage(w), "\n")},
+    #warning= function(w){cat("\nWARNING at sample",sampleindex,"->", conditionMessage(w), "\n")},
     finally= {cat("\nEnd run for sample",samplelist[sampleindex],"\n###############################################\n")}
     )
   }
