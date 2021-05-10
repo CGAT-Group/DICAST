@@ -74,7 +74,7 @@ mk_fastqlist
 echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
-    mkdir -p $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}
+    mkdir -p $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}
 
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
