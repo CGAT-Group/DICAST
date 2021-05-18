@@ -15,34 +15,33 @@ VOLUME ["/MOUNT"]
 # Base OS install.
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
 build-essential \
+    autoconf \
+    automake \
+    apt-utils \
     bzip2 \
     cmake \
     default-jdk \
     git \
+    git-all \
+    gcc-multilib \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libhdf5-dev \
+    liblzma-dev\
     libnss-sss \
     libtbb2 \
     libtbb-dev \
     ncurses-dev \
     python-dev \
     python-pip \
+    samtools \
     tzdata \
     unzip \
+    unar\
+    vim\
     wget \
     zlib1g \
-    zlib1g-dev\
-    libbz2-dev \
-    liblzma-dev\
-    tmux\
-    vim\
-    unar\
-    gcc-multilib \
-    apt-utils \
-    zlib1g-dev \
-    libhdf5-dev \
-    git-all \
-    autoconf \
-    automake \
-    libcurl4-openssl-dev
+    zlib1g-dev 
     
 #Adding a signature
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \

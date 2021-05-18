@@ -1,4 +1,4 @@
-FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1
+FROM ubuntu:base
 ENV tool=dart
 LABEL description="Image for dart "
 LABEL maintainer="Amit Fenn"
