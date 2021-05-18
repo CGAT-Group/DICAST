@@ -91,10 +91,10 @@ services:
         context: ../../src/asgal/
       image: dicast/asgal:0.2
 
-    cash:
-      build:
-        context: ../../src/cash/
-      image: dicast/cash:0.2
+    # cash:
+    #   build:
+    #     context: ../../src/cash/
+    #   image: dicast/cash:0.2
       
     majiq:
       build: 
