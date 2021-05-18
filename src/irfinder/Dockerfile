@@ -39,6 +39,7 @@ ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/
 
 WORKDIR /docker_main
 
-COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/
+COPY [--chown=nobody:nogroup] ./gtf_for_irfinder.py /docker_main/
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]

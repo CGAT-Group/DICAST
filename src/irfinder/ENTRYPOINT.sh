@@ -29,10 +29,18 @@ handlesamfiles 0
 #	echo "IRFinder index folder already present in $outdir/irfinder_index; no need to build new index"
 #fi
 
-#move both files into tmp folder
+#move both files into output folder
 echo linking annotation files into reference folder...
 mkdir -p $outdir/irfinder_index
-ln -sf $gtf $outdir/irfinder_index/transcripts.gtf
+
+#check if GTF is for IRFinder, else attempt to 'fix' issue
+if grep biotype $gtf ; then
+	ln -sf $gtf $outdir/irfinder_index/transcripts.gtf
+else
+	echo Attempting to \'fix\' gtf by adding \'biotype\' like IRFinder wants...
+	python /docker_main/gtf_for_irfinder.py $gtf $outdir/irfinder_index/transcripts.gtf
+fi
+
 ln -sf $fasta $outdir/irfinder_index/genome.fa
 
 
