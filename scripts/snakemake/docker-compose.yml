@@ -5,7 +5,7 @@ services:
 #################################################### Base images
     base:
       build:
-        context: ../../src/BASE-IMAGE/
+        context: ../../src/dicast-base/
       image: ubuntu:base
 
     conda:
