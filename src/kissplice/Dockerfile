@@ -37,7 +37,7 @@ RUN pip3 install biopython intervaltree intervaltree-bio
 WORKDIR /opt
 RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/tools/kissplice2refgenome-2.0.0.tar.gz && tar -xvf /opt/kissplice2refgenome-2.0.0.tar.gz && rm -f /opt/kissplice2refgenome-2.0.0.tar.gz && cd /opt/kissplice2refgenome-2.0.0 && python3 setup.py install --user 
 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-2.0.0:/opt/STAR-${star_version}/bin/Linux_x86_64
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-2.0.0:/opt/STAR-${star_version}/bin/Linux_x86_64/
 #add Kissplice & Kissplice2refgenome & STAR to path
 
 #############
