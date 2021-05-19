@@ -26,12 +26,10 @@ COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}
 #install bedtools
 RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y bedtools 
 
-#install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/1.10/samtools-1.10.tar.bz2 && tar -xjvf samtools-1.10.tar.bz2 && cd /opt/samtools-1.10 && ./configure --prefix=/opt/ && make && make install
-
-
 #install IRFinder from github
-RUN wget https://github.com/williamritchie/IRFinder/archive/v1.3.1.tar.gz && tar -zxvf v1.3.1.tar.gz && cd /opt/IRFinder-1.3.1/src/irfinder && make clean && make 
+RUN wget https://github.com/williamritchie/IRFinder/archive/v1.3.1.tar.gz && tar -zxvf v1.3.1.tar.gz && cd /opt/IRFinder-1.3.1/src/irfinder && \
+ echo "#include <cmath>" > includedefine.h1 && cat includedefine.h >> includedefine.h1 && mv includedefine.h1 includedefine.h && \
+ make clean && make 
 RUN chmod -R 777 IRFinder-1.3.1/bin
 
 #configure PATH variable

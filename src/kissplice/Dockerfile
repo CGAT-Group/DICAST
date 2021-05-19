@@ -27,10 +27,9 @@ COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}
 #############
 
 #install python3
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python3 python3-dev python3-pip
+RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python3 python3-dev python3-pip cmake zlib1g samtools
 
 #download and install KisSplice in /opt
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y cmake zlib1g
 WORKDIR /opt
 RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/download/kissplice-2.5.1.tar.gz && tar -xzf /opt/kissplice-2.5.1.tar.gz && rm -f /opt/kissplice-2-5-1.tar.gz &&cd /opt/kissplice-2.5.1 && cmake . && make
 

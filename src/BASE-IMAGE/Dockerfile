@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:18.04
 LABEL description="Image for project base OS"
 LABEL maintainer="Amit Fenn"
 
