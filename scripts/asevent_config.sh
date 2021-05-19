@@ -2,7 +2,6 @@
 #  values for standard AS event detection  #
 ############################################
 
-star_index=$workdir/index/star_index                                   #folder containing a star index built with the $gtf and $fasta files in config.sh (used by: IRFinder, KisSplice, rMATS)
 transcript=$fasta #$inputdir/custom_transcripts.fasta                  #fasta file for gene transcripts
 star_alignment_files=$workdir/output/star-output                       #path to the folder containing star alignment files (*.SJ.)
 
@@ -19,11 +18,11 @@ differential=0                                                          #1: tool
 
 casebam=$casefolder/bamdir                                              #path of folder with BAMs used as case for DS analysis; needs to be filled when differential=1; filled like bamfolder
 casefastq=$casefolder/fastqdir                                          #path of folder with fastq files used as case for DS analysis
-caseprefix="subsample_0"                                                #all files in the casefastq folder must have this by the user specified prefix
+caseprefix="sample_01"                                                #all files in the casefastq folder must have this by the user specified prefix
 
 controlbam=$controlfolder/bamdir                                        #path of folder with BAMs used as control for DS analysis; needs to be filled when differential=1; filled like bamfolder
 controlfastq=$controlfolder/fastqdir                                    #path of folder with fastq files used as control for DS analysis
-controlprefix="subsample_1"                                             #add files in the controlfastq folder must have this by the user specified prefix
+controlprefix="sample_01"                                             #add files in the controlfastq folder must have this by the user specified prefix
 
 #########################################
 # Paths to renamed files for PSI-Sigma  #

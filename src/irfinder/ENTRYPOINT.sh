@@ -17,19 +17,7 @@ test_fasta $fasta
 #handle SAM files
 handlesamfiles 0
 
-# did not work with our STAR index version; error: unrecognized parameter name "genomeType" in input "genomeParameters.txt"
-#if [ ! -d $outdir/irfinder-index ]; then
-#	#build reference
-#	check_star_index
-#	echo building custom IRFinder reference...
-#	IRFinder -m BuildRefFromSTARRef -r $outdir/irfinder_index -x $star_index -f $fasta -g $gtf
-#	wait
-#	echo reference built, moving on...
-#else 
-#	echo "IRFinder index folder already present in $outdir/irfinder_index; no need to build new index"
-#fi
-
-#move both files into output folder
+#link/move gtf and fasta files into output folder
 echo linking annotation files into reference folder...
 mkdir -p $outdir/irfinder_index
 

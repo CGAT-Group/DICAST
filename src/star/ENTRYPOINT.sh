@@ -9,18 +9,18 @@ source /MOUNT/scripts/mapping_func.sh
 
 #Build Genome index
 build_index() {
-	mkdir -p $indexdir/$indexname
+	mkdir -p $star_index/$indexname
 	echo "compute index ..."
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 		--runMode genomeGenerate \
-		--genomeDir $indexdir/$indexname \
+		--genomeDir $star_index/$indexname \
 		--genomeFastaFiles $fasta \
 		--runThreadN $ncores \
 		--sjdbGTFfile $gtf \
 		-sjdbOverhang 100 \
 		--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}_${tool}
-	chmod -R 777 $indexdir
-	echo "Index is now saved under $indexdir/$indexname"
+	chmod -R 777 $star_index
+	echo "Index is now saved under $star_index/$indexname"
 }
 
 #Unpaired mapping command (EXPERIMENTAL)
@@ -28,7 +28,7 @@ second_attempt() {
 for line1 in $(ls ${line}*.fastq| sed s/.fastq// );
 do
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
-	--genomeDir $indexdir/$indexname \
+	--genomeDir $star_index/$indexname \
 	--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line1##*/}_${tool} \
 	--sjdbGTFfile $gtf  \
 	--twopassMode Basic \
@@ -51,7 +51,7 @@ echo $gtf
 
 
 # Build Genome index if not already available
-if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname/genomeParameters.txt; then build_index; fi fi
+if $recompute_index; then build_index; else if ! test -f $star_index/$indexname/genomeParameters.txt; then build_index; fi fi
 
 #make list of fastq files
 mk_fastqlist
@@ -67,7 +67,7 @@ while read -r line; do
 	#First attempt: Paired end mapping
 	echo mapping paired
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
-		--genomeDir $indexdir/$indexname \
+		--genomeDir $star_index/$indexname \
 		--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}_${tool} \
 		--sjdbGTFfile $gtf  \
 		--twopassMode Basic \
