@@ -28,7 +28,7 @@ chmod -R 777 $outdir/tmp
 
 echo counting reads in case-folder...
 readbamfiles $casebam casebamlist
-for filename in $(cat $outdir/casebamlist)
+for filename in $(cat /tmp/casebamlist)
 do
 	out_name=$(basename $filename .bam).g1.txt
 	python3 $python_script_paths/dexseq_count.py -f bam $outdir/$gffname $filename $outdir/tmp/$out_name
@@ -37,7 +37,7 @@ done
 #count read for bamfiles in control-folder
 echo counting read in control-folder
 readbamfiles $controlbam controlbamlist
-for filename in $(cat $outdir/controlbamlist)
+for filename in $(cat /tmp/controlbamlist)
 do
         out_name=$(basename $filename .bam).g2.txt
         python3 $python_script_paths/dexseq_count.py -f bam $outdir/$gffname $filename $outdir/tmp/$out_name

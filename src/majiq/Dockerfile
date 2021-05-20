@@ -14,7 +14,7 @@ RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y py
 RUN python3.6 -m pip install pip --upgrade
 
 #install majiq dependencies
-RUN pip3.6 install --no-cache-dir -U wheel setuptools 
+RUN pip3.6 install --no-cache-dir -U wheel setuptools
 RUN pip3.6 install --no-cache-dir -U numpy cython
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y git
 
@@ -34,8 +34,8 @@ RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt:/opt/htslib-1.9
 
 WORKDIR /docker_main
+RUN mkdir /tmp && chmod 777 /tmp
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
-

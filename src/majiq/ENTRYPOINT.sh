@@ -30,8 +30,8 @@ if [ $differential = 0 ]
 then
 	#list .bam files, remove last file extension (.bam), list them in one line with comma seperated, no comma after last file
 	#(sed commands from here: https://unix.stackexchange.com/questions/313791/how-to-list-only-files-in-a-directory-separated-by-commas)
-	#bamlist=$(cd $bamdir && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
-	for filename in $(cat $outdir/bamlist)
+	#bamlist=$(cd $controlbam && ls -1p *.bam | grep -Po '.*(?=\.)' | grep -v / | xargs echo | sed 's/ /,/g')
+	for filename in $(cat /tmp/controlbamlist)
 	do
 		# build sperate config file for each BAM file
 		basename=$(basename $filename)
@@ -42,7 +42,7 @@ then
 		echo "[info]" > $config
 		echo "readlen=$read_length" >> $config
 		#bam-directory depending on type of run
-		echo "bamdirs=$bamdir" >> $config
+		echo "bamdirs=$controlbam" >> $config
 		echo "genome=hg38" >> $config
 		echo "strandness=None" >> $config
 		echo "[experiments]" >> $config

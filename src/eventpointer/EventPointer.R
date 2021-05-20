@@ -8,7 +8,7 @@ option_list = list(make_option(c("--gtf"), type='character', default = NULL, hel
 		   make_option(c("--differential"),type='integer',default=0,help="0:only AS event detection using file from --bamfile;1: differential analysis using files from --casefolder & --controlfolder"),
 		   make_option(c("--casefolder"),type='character',default=NULL,help="path to folder with BAMs considered case (only use with --differential 1)"),
 		   make_option(c("--controlfolder"),type='character',default=NULL,help="path to folder with BAMs considered control (only use with --differential 1)"),
-		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"), 
+		   make_option(c("--combined"),type="character",default=NULL,help="path to folder where files from case & control are located"),
 		   make_option(c("--output"),type='character',default=NULL, help="output folder"),
 		   make_option(c("--cores"), type='integer',default=1,help="Number of cores",metavar="integer"))
 opt_parser = OptionParser(option_list=option_list)
@@ -39,8 +39,8 @@ cores = as.numeric(opt$cores)
 PathToGTF<- opt$gtf
 
 if(differential){
-  
-  # read combined folder	
+
+  # read combined folder
   Samples <- basename(list.files(opt$combined,pattern="\\.bam$"))
   PathToSamples <- opt$combined
 
@@ -69,26 +69,36 @@ if(differential){
 
 }else{
 
-  Samples <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
+  samplelist <- basename(list.files(opt$bamfolder,pattern="\\.bam$"))
   PathToSamples <- opt$bamfolder
+  print(paste("Run Eventpointer for found samples:", samplelist))
 
-  for (i in range(1:length(Samples))){
-    bam_file = Samples[i]	
-    print(paste("Preparing BAM file",i,":",bam_file,"..." ))
+  for (sampleindex in 1:length(samplelist)){
+      cat("\n[",sampleindex,"] Start:", samplelist[sampleindex],"\n")
 
-    TxtPath<-paste0(opt$output,"/",bam_file,"_output")
-    if(!dir.exists(TxtPath)){
-      dir.create(TxtPath)
-    }
+      tryCatch({
+      bam_file = samplelist[sampleindex]
+      cat("Preparing BAM file",sampleindex,":",bam_file,"..." )
 
-    SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
- 		  	     SamplePath=PathToSamples,
- 			     Ref_Transc="GTF",
- 			     fileTransc=PathToGTF,
-			     cores=cores)
+      TxtPath<-paste0(opt$output,"/",bam_file,"_output")
+      if(!dir.exists(TxtPath)){
+        dir.create(TxtPath)
+      }
+
+      SG_RNASeq<-PrepareBam_EP(Samples=bam_file,
+              SamplePath=PathToSamples,
+            Ref_Transc="GTF",
+            fileTransc=PathToGTF,
+            cores=cores)
 
 
-    print("Looking for AS events...")
-    AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+      print("Looking for AS events...")
+      AllEvents_RNASeq<-EventDetection(SG_RNASeq, cores=cores, Path=TxtPath)
+
+    },
+    error=function(e){cat("\nERROR at sample",sampleindex,"->", conditionMessage(e), "\n")},
+    #warning= function(w){cat("\nWARNING at sample",sampleindex,"->", conditionMessage(w), "\n")},
+    finally= {cat("\nEnd run for sample",samplelist[sampleindex],"\n###############################################\n")}
+    )
   }
 }

@@ -5,7 +5,7 @@ services:
 #################################################### Base images
     base:
       build:
-        context: ../../src/BASE-IMAGE/
+        context: ../../src/dicast-base/
       image: ubuntu:base
 
     conda:
@@ -91,10 +91,10 @@ services:
         context: ../../src/asgal/
       image: dicast/asgal:0.2
 
-    cash:
-      build:
-        context: ../../src/cash/
-      image: dicast/cash:0.2
+    # cash:
+    #   build:
+    #     context: ../../src/cash/
+    #   image: dicast/cash:0.2
       
     majiq:
       build: 
@@ -149,37 +149,37 @@ services:
 
 ######################################################### AS diff tools
 
-    dexseq:
-        build: 
-          context: ../../src/dexseq/
-        image: dicast/dexseq:0.2
-
-    edger:
-        build: 
-          context: ../../src/edger/
-        image: dicast/edger:0.2
-
-    rmats:
-      build: 
-        context: ../../src/rmats/
-      image: dicast/rmats:0.2
-
-    dsplicetype:
-      build: 
-        context: ../../src/dsplicetype/
-      image: dicast/dsplicetype:0.2
-
-    psisigma:
-      build: 
-        context: ../../src/psisigma/
-      image: dicast/psisigma:0.2
-
-    leafcutter:
-      build: 
-        context: ../../src/leafcutter/
-      image: dicast/leafcutter:0.2
-
-
+#    dexseq:
+#        build: 
+#          context: ../../src/dexseq/
+#        image: dicast/dexseq:0.2
+#
+#    edger:
+#        build: 
+#          context: ../../src/edger/
+#        image: dicast/edger:0.2
+#
+#    rmats:
+#      build: 
+#        context: ../../src/rmats/
+#      image: dicast/rmats:0.2
+#
+#    dsplicetype:
+#      build: 
+#        context: ../../src/dsplicetype/
+#      image: dicast/dsplicetype:0.2
+#
+#    psisigma:
+#      build: 
+#        context: ../../src/psisigma/
+#      image: dicast/psisigma:0.2
+#
+#    leafcutter:
+#      build: 
+#        context: ../../src/leafcutter/
+#      image: dicast/leafcutter:0.2
+#
+#
 #    jum:
 #      build: 
 #        context: ../src/jum/

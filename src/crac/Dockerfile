@@ -12,7 +12,7 @@ VOLUME /MOUNT
 
 #Installing tool
 #	RUN wget https://gforge.inria.fr/frs/download.php/file/35191/crac_2.4.0_amd64.deb -p /docker_main/ && dpkg -i /docker_main/crac_2.4.0_amd64.deb && apt-get install -f
-RUN wget https://gforge.inria.fr/frs/download.php/file/35190/crac-2.4.0.tar.gz && unar crac-2.4.0.tar.gz && cd crac-2.4.0 && ./configure && make && make install
+RUN wget https://gforge.inria.fr/frs/download.php/file/38073/crac-2.5.2.tar.gz && unar crac-2.5.2.tar.gz && cd crac-2.5.2 && ./configure && make && make install
 
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/

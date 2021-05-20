@@ -1,4 +1,4 @@
-FROM ubuntu:base as builder
+FROM ubuntu:base
 LABEL description="Image for STAR aligner version 2.7.5c"
 LABEL maintainer="Amit Fenn"
 
@@ -10,7 +10,7 @@ VOLUME /MOUNT
 
 # Installing STAR
 
-COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
+COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
 ENTRYPOINT ["/docker_main/ENTRYPOINT.sh"]
 

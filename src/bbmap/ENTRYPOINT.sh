@@ -15,7 +15,7 @@ source /MOUNT/scripts/mapping_func.sh
 second_attempt() {
 	# tag outputs with this flag to name it per fastqfile 	"${line##*/}"
 	echo "paired mapping failed for ${line}. Try unpaired mapping."
-	/bbmap/bbmap.sh \
+ 	/bbmap/bbmap.sh \
 		in=${line}?.fastq \
 		outm=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		outu=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}_unmapped.sam
@@ -54,6 +54,8 @@ while read -r line; do
 		in2=${line}2.fastq \
 		ref=$fasta \
 		path=$indexdir/$indexname \
+		intronlen=20 \
+		xstag=us \
 		outm=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam \
 		outu=$outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}_unmapped.sam
 
@@ -64,4 +66,3 @@ done </tmp/$tool-fastqlist
 # wait for all processes to end
 wait
 cleaner
-
