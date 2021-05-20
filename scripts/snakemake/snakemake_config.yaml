@@ -43,14 +43,6 @@ Output_unification:
     Combine_me: false
 
 #########################################
-# The output file will be created once the run was complete. Snakemake checks if this is the same name as from the run before. If that's the case, it won't run again.
-#
-# So make sure to enter a new name when you want to run the pipeline again or delete the old output!
-#
-Output:
-    Log_file_name: sample_out
-
-#########################################
 # Snakemake creates a run report after finishing successfully. Here, you can set the file name (must end in .html!)
 # You can also enter a full or relative path (e.g. output/snakemake/report.html).
 #

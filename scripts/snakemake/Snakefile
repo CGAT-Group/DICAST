@@ -8,7 +8,7 @@ if len(config) == 0:
     sys.exit(1)
 
 try:
-    final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+    final_out = "output/snakemake/final_out.txt"
     report_out = config["Report"]["Report_file_name"]
     mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
     as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
@@ -1245,7 +1245,7 @@ rule finished_run_rule:
         spladder=rules.run_spladder.output,
         whippet=rules.run_whippet.output
     output:
-        final_out
+        temp(final_out)
     shell:
         """
         dt_format=$(date +"%d_%m_%Y_%H_%M")
