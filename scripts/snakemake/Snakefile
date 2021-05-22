@@ -1,19 +1,24 @@
 import sys
 import traceback
+import os
+import subprocess
 
 if len(config) == 0:
     print("Empty or no config file was specified! Use --configfile snakemake_config.yaml")
     sys.exit(1)
 
 try:
-    final_out = expand("output/snakemake/{out_name}.txt", out_name=config["Output"]["Log_file_name"])
+    final_out = "output/snakemake/final_out.txt"
     report_out = config["Report"]["Report_file_name"]
     mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
     as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
-    diff_as_tools = config["Differential_alternative_splicing_detection_tools"]["What_tools_to_run"]
     asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
     overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
     run_asimulator = config["ASimulatoR"]['do']
+    unification_tools = config["Output_unification"]["Create_unified_output_for"]
+    unification_gtf = config["Output_unification"]["GTF_file"]
+    combine_me = config["Output_unification"]["Combine_me"]
+
 except KeyError:
     print("One or more configuration parameters could not be found! Wrong config file specified?\nSee the following traceback for more information:")
     traceback.print_exc()
@@ -29,7 +34,7 @@ rule all:
 
 rule overwrite_acknowledged_rule:
     output:
-        "output/snakemake/log_acknowledged_possible_overwrite.txt"
+        temp("output/snakemake/log_acknowledged_possible_overwrite.txt")
     params:
         overwrite=overwrite_acknowledged
     shell:
@@ -48,7 +53,7 @@ rule get_base_dockers:
     input:
         overwrite_out=rules.overwrite_acknowledged_rule.output
     output:
-        "output/snakemake/log_pulled_base_os.txt"
+        temp("output/snakemake/log_pulled_base_os.txt")
     shell:
         """
         mkdir -p output/snakemake/
@@ -69,7 +74,7 @@ rule run_asimulator_rule:
     input:
         get_base_out=rules.get_base_dockers.output
     output:
-        "output/snakemake/log_ran_asimulator.txt"
+        temp("output/snakemake/log_ran_asimulator.txt")
     params:
         run_asim=run_asimulator
     shell:
@@ -84,126 +89,1163 @@ rule run_asimulator_rule:
         fi
         """
 
-
-rule run_mapping_tools_rule:
+rule run_contextmap:
     input:
         asim_out=rules.run_asimulator_rule.output
     output:
-        "output/snakemake/log_ran_mapping.txt"
+        temp("output/snakemake/log_contextmap.txt")
     params:
         tools=mapping_tools
     shell:
         """
-        cat {input.asim_out} >> {output}
-        if [[ -z "{params.tools}" ]]
+        map_arr=({params.tools})
+        tool="contextmap"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
-            echo "No mapping tools selected." | tee {output}
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
         else
-            for tool in {params.tools}
-            do
-                echo "Started $tool at $(date)" | tee {output}
-                
-                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
-                    echo "Build $tool locally" | tee {output}
-                    container_prefix="dicast/"
-                else 
-                    echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                    docker pull {docker_prefix}$tool:{container_version}
-                    echo "Done" | tee {output}
-                    container_prefix={docker_prefix}
-                fi
-
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
-
-                casedir=output/"$tool"-output/casedir
-                if [ -d "$casedir" ]; then
-                    find "$casedir" -exec chmod 777 {{}} \;
-                    find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
-                else
-                        echo "No case directory found, assuming non-differential run"
-                fi
-
-                find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
-                find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
-                echo "Finished $tool at $(date)" | tee {output}
-                echo -e "\n\n"
-            done
+            echo "Didn't run $tool." | tee {output}
         fi
         """
 
-rule run_as_detection_tools:
+rule run_crac:
     input:
-        mapping_out=rules.run_mapping_tools_rule.output
+        asim_out=rules.run_asimulator_rule.output
     output:
-        "output/snakemake/log_ran_as_detection.txt"
+        temp("output/snakemake/log_crac.txt")
     params:
-        tools=as_tools
+        tools=mapping_tools
     shell:
         """
-        cat {input.mapping_out} >> {output}
-        if [[ -z "{params.tools}" ]]
+        map_arr=({params.tools})
+        tool="crac"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
-            echo "No AS tools selected." | tee {output}
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
         else
-            for tool in {params.tools}
-            do
-                echo "Started $tool at $(date)" | tee {output}
-                
-                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
-                    echo "Build $tool locally" | tee {output}
-                    container_prefix="dicast/"
-                else 
-                    echo "\nLocal build failed, pulling image from registry" | tee {output}
-                    docker pull {docker_prefix}$tool:{container_version}
-                    echo "Done" | tee {output}
-                    container_prefix={docker_prefix}
-                fi
-                
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
-                echo "Finished $tool at $(date)" | tee {output}
-            done
+            echo "Didn't run $tool." | tee {output}
         fi
         """
 
-rule run_differential_as_tools:
+rule run_dart:
     input:
-        as_out=rules.run_as_detection_tools.output
+        asim_out=rules.run_asimulator_rule.output
     output:
-        "output/snakemake/log_ran_differential_as_detection.txt"
+        temp("output/snakemake/log_dart.txt")
     params:
-        tools=diff_as_tools
+        tools=mapping_tools
     shell:
         """
-        cat {input.as_out} >> {output}
-        if [[ -z "{params.tools}" ]]
+        map_arr=({params.tools})
+        tool="dart"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
-            echo "No differential AS tools selected." | tee {output}
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
         else
-            for tool in {params.tools}
-            do
-                echo "Started $tool at $(date)" | tee {output}
-
-                if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
-                    echo "Build $tool locally" | tee {output}
-                    container_prefix="dicast/"
-                else 
-                    echo "\nLocal build failed, pulling image from registry" | tee {output}
-                    docker pull {docker_prefix}$tool:{container_version}
-                    echo "Done" | tee {output}
-                    container_prefix={docker_prefix}
-                fi
-
-                docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}
-                echo "Finished $tool at $(date)" | tee {output}
-            done
+            echo "Didn't run $tool." | tee {output}
         fi
+        """
+
+rule run_gsnap:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_gsnap.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="gsnap"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_hisat:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_hisat.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="hisat"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_mapslice:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_mapslice.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="mapslice"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_minimap:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_minimap.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="miniamp"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_segemehl:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_segemehl.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="segemehl"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_star:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_star.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="star"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+            echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_subjunc:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_subjunc.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="subjunc"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+                echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule run_bbmap:
+    input:
+        asim_out=rules.run_asimulator_rule.output
+    output:
+        temp("output/snakemake/log_bbmap.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        map_arr=({params.tools})
+        tool="bbmap"
+        if [[ "${{map_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Started $tool at $(date)" | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry..." | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+
+            casedir=output/"$tool"-output/casedir
+            if [ -d "$casedir" ]; then
+                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
+            else
+                    echo "No case directory found, assuming non-differential run"
+            fi
+
+            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else
+                echo "Didn't run $tool." | tee {output}
+        fi
+        """
+
+rule finished_mapping_tools_rule:
+    input:
+        contextmap=rules.run_contextmap.output,
+        crac=rules.run_crac.output,
+        dart=rules.run_dart.output,
+        gsnap=rules.run_gsnap.output,
+        hisat=rules.run_hisat.output,
+        mapslice=rules.run_mapslice.output,
+        minimap=rules.run_minimap.output,
+        segemehl=rules.run_segemehl.output,
+        star=rules.run_star.output,
+        subjunc=rules.run_subjunc.output,
+        bbmap=rules.run_bbmap.output
+    output:
+        temp("output/snakemake/log_ran_mapping.txt")
+    params:
+        tools=mapping_tools
+    shell:
+        """
+        cat {input.bbmap} >> {output}
+        cat {input.contextmap} >> {output}
+        cat {input.crac} >> {output}
+        cat {input.dart} >> {output}
+        cat {input.gsnap} >> {output}
+        cat {input.hisat} >> {output}
+        cat {input.mapslice} >> {output}
+        cat {input.minimap} >> {output}
+        cat {input.segemehl} >> {output}
+        cat {input.star} >> {output}
+        cat {input.subjunc} >> {output}
+        """
+
+rule run_kissplice:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_kissplice.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="kissplice"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi              
+        """
+
+rule run_cash:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_cash_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="cash"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+        """
+
+rule run_dexseq:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_dexseq_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="dexseq"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                 
+        """
+
+rule run_dsplicetype:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_dsplicetype_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="dsplicetype"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                 
+        """
+
+rule run_edger:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_edger_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="edger"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                   
+        """
+
+rule run_leafcutter:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_leafcutter_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="leafcutter"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                    
+        """
+
+rule run_psisigma:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_psisigma_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="psisigma"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                   
+        """
+
+rule run_rmats:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_rmats_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="rmats"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi                   
+        """
+
+rule run_majiq:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_majiq.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="majiq"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+
+        uni_arr=({params.uni_tools})
+        if [[ "${{uni_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run $tool unification." | tee {output}
+        fi                     
+        """
+
+rule run_aspli:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_ASpli_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="aspli"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running aspli unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run aspli unification." | tee {output}
+        fi
+        """
+
+rule run_eventpointer:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_EventPointer_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="eventpointer"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running eventpointer unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run eventpointer unification." | tee {output}
+        fi                     
+        """
+
+rule run_asgal:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_asgal_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="asgal"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running asgal unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run asgal unification." | tee {output}
+        fi                     
+        """
+
+rule run_irfinder:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_irfinder_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="irfinder"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+        
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running irfinder unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt.txt/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run irfinder unification." | tee {output}
+        fi                     
+        """
+
+rule run_sgseq:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_sgseq_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="sgseq"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+        
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running sgseq unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run sgseq unification." | tee {output}
+        fi                     
+        """
+
+rule run_spladder:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_spladder_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="spladder"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+        
+        uni_tools=({params.tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
+        then
+            echo "Running spladder unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run spladder unification." | tee {output}
+        fi                     
+        """
+
+rule run_whippet:
+    input:
+        coodinate_out=rules.finished_mapping_tools_rule.output
+    output:
+        temp("output/snakemake/log_ran_whippet_unification.txt")
+    params:
+        tools=as_tools,
+        uni_tools=unification_tools,
+        gtf=unification_gtf,
+        combine=combine_me
+    shell:
+        """
+        as_arr=({params.tools})
+        tool="whippet"
+        if [[ "${{as_arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running $tool." | tee {output}
+            if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
+                echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
+            else 
+                echo "\nLocal build failed, pulling image from registry" | tee {output}
+                docker pull {docker_prefix}$tool:{container_version}
+                echo "Done" | tee {output}
+                container_prefix={docker_prefix}
+            fi
+
+            docker run -v {working_directory}:/MOUNT --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            echo "Finished $tool at $(date)" | tee {output}
+
+        else 
+            echo "Didnt run $tool." | tee {output}
+        fi
+        
+        arr=({params.tools})
+        if [[ "${{arr[@]}}" =~ $tool ]]; 
+        then
+            echo "Running whippet unification." | tee {output}
+            python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+        else 
+            echo "Didnt run whippet unification." | tee {output}
+        fi                     
         """
 
 rule finished_run_rule:
     input:
-        diff_as_out=rules.run_differential_as_tools.output
+        kissplice=rules.run_kissplice.output,
+        cash=rules.run_cash.output,
+        dexseq=rules.run_dexseq.output,
+        dsplicetype=rules.run_dsplicetype.output,
+        edger=rules.run_edger.output,
+        leafcutter=rules.run_leafcutter.output,
+        psisigma=rules.run_psisigma.output,
+        rmats=rules.run_rmats.output,
+        majiq=rules.run_majiq.output,
+        aspli=rules.run_aspli.output,
+        eventpointer=rules.run_eventpointer.output,
+        asgal=rules.run_asgal.output,
+        irfinder=rules.run_irfinder.output,
+        sgseq=rules.run_sgseq.output,
+        spladder=rules.run_spladder.output,
+        whippet=rules.run_whippet.output
     output:
-        final_out
+        temp(final_out)
     shell:
         """
         dt_format=$(date +"%d_%m_%Y_%H_%M")
@@ -211,7 +1253,23 @@ rule finished_run_rule:
         cp scripts/config.sh output/snakemake/log_config_"$dt_format"_"$base_output_name".sh
         cp scripts/mapping_config.sh output/snakemake/log_mapping_config_"$dt_format"_"$base_output_name".sh
         cp scripts/asevent_config.sh output/snakemake/log_asevent_config_"$dt_format"_"$base_output_name".sh
-        cat {input.diff_as_out} >> {output}
+        cat {input.kissplice} >> {output}
+        cat {input.cash} >> {output}
+        cat {input.dexseq} >> {output}
+        cat {input.dsplicetype} >> {output}
+        cat {input.edger} >> {output}
+        cat {input.leafcutter} >> {output}
+        cat {input.psisigma} >> {output}
+        cat {input.rmats} >> {output}
+        cat {input.majiq} >> {output}
+        cat {input.aspli} >> {output}
+        cat {input.eventpointer} >> {output}
+        cat {input.asgal} >> {output}
+        cat {input.irfinder} >> {output}
+        cat {input.sgseq} >> {output}
+        cat {input.spladder} >> {output}
+        cat {input.whippet} >> {output}
+
         echo "Finished run at $(date)" | tee {output}
         """
 

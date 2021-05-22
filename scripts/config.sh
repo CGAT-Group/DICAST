@@ -12,7 +12,7 @@ read_length=76                                          	#length of reads inside
 #############################
 
 
-inputdir=$workdir/input
+inputdir=$workdir/short_input
 controlfolder=$inputdir/controldir         			#base directory for all needed input files (when no differential comparison, control inputs when differential AS Event Detection)
 casefolder=$inputdir/casedir					#base directory for only case files (for AS Event detection)
 fastqdir=$controlfolder/fastqdir       				#directory for fastqfiles
