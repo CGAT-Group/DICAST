@@ -8,9 +8,10 @@ ARG star_version=2.7.5c
 #Copying STAR from builder docker
 COPY --from=builder /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/STAR-${star_version}/bin/Linux_x86_64
-
+RUN apt update && apt install -y libcurl4-openssl-dev libxml2-dev libssl-dev
 RUN R -e "install.packages(c('BiocManager','optparse'),dependencies=TRUE,repos='http://cran.rstudio.com/')"
-RUN R -e "BiocManager::install('SGSeq',update=TRUE,ask=FALSE)" 
+RUN R -e "BiocManager::install(c('SGSeq','GenomicFeatures'),update=TRUE,ask=FALSE)" 
+RUN chmod 777 /usr/local/ -R 
 
 WORKDIR /docker_main
 

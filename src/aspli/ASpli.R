@@ -62,6 +62,7 @@ print(paste0("Building TxDB with ",opt$gtf,"..."))
 TxDb <- makeTxDbFromGFF(file=opt$gtf, format="gtf") #the gtf file
 
 # extract features from annotation
+dir.create(paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y")))
 features <- binGenome(TxDb,logTo=paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y"),"/ASpli_binFeatures.log"))
 
 print("loading BAM-file(s)...")
