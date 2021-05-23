@@ -113,7 +113,7 @@ rule run_contextmap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -156,7 +156,7 @@ rule run_crac:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -199,7 +199,7 @@ rule run_dart:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -242,7 +242,7 @@ rule run_gsnap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -285,7 +285,7 @@ rule run_hisat:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -328,7 +328,7 @@ rule run_mapslice:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -371,7 +371,7 @@ rule run_minimap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -414,7 +414,7 @@ rule run_segemehl:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -457,7 +457,7 @@ rule run_star:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -500,7 +500,7 @@ rule run_subjunc:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -543,7 +543,7 @@ rule run_bbmap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -621,7 +621,7 @@ rule run_kissplice:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -656,7 +656,7 @@ rule run_cash:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -691,7 +691,7 @@ rule run_dexseq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -726,7 +726,7 @@ rule run_dsplicetype:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -761,7 +761,7 @@ rule run_edger:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -796,7 +796,7 @@ rule run_leafcutter:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -831,7 +831,7 @@ rule run_psisigma:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -866,7 +866,7 @@ rule run_rmats:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -901,7 +901,7 @@ rule run_majiq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -945,7 +945,7 @@ rule run_aspli:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -989,7 +989,7 @@ rule run_eventpointer:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1033,7 +1033,7 @@ rule run_asgal:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1077,7 +1077,7 @@ rule run_irfinder:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1121,7 +1121,7 @@ rule run_sgseq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1165,7 +1165,7 @@ rule run_spladder:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1209,7 +1209,7 @@ rule run_whippet:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast/${tool} --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
