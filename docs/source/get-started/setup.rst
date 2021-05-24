@@ -4,7 +4,7 @@ Setup
 Please follow these steps carefully to set up your working environment.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    setup/git
    setup/docker

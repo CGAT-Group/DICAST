@@ -1,23 +1,35 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Setup docker &mdash; DICAST 1.0 documentation</title>
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+
   
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -29,11 +41,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Install Snakemake" href="snakemake.html" />
@@ -56,7 +63,7 @@
 
           
             
-            <img src="../../_static/dicast_logo.png" class="logo" alt="Logo"/>
+            <img src="../../_static/dicast_logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -77,6 +84,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -102,7 +110,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../run/runscript.html">Use our runscript</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/runscript.html">Use multiple tools at once</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool</a><ul class="simple">
@@ -120,7 +128,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/mapping.html">Mapping tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/bbmap.html">BBMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/contextmap.html">ContextMap 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/crac.html">Crac</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/dart.html">Dart</a></li>
@@ -169,6 +176,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -203,11 +211,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../setup.html">Setup</a> &raquo;</li>
         
@@ -216,7 +226,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/get-started/setup/docker.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -250,56 +260,56 @@
 </div>
 </div>
 <div class="section" id="build-docker-images">
-<h2>2. Build docker Images<a class="headerlink" href="#build-docker-images" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="use-our-run-script">
-<h3>Use our run script<a class="headerlink" href="#use-our-run-script" title="Permalink to this headline">¶</a></h3>
-<p>If you intend to use multiple dockers at once you can use our run script, which will take care of building the docker images.</p>
+<h2>2. Build docker images<a class="headerlink" href="#build-docker-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-all-images">
+<h3>Build all images<a class="headerlink" href="#build-all-images" title="Permalink to this headline">¶</a></h3>
+<p>If you intend to use multiple dockers at once you can use our snakemake pipeline, which will take care of building the docker images.</p>
 <p>&#64;Amit</p>
 </div>
 <div class="section" id="build-one-image">
 <h3>Build one image<a class="headerlink" href="#build-one-image" title="Permalink to this headline">¶</a></h3>
 <p>If you only want to build one specific docker image run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">&lt;</span><span class="n">directory</span> <span class="n">level</span> <span class="n">path</span> <span class="n">to</span> <span class="n">Dockerfile</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tag</span><span class="o">=&lt;</span><span class="n">tool</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">tag</span><span class="o">&gt;</span>
-
-<span class="c1"># for example if you are inside of the base directory (&quot;dockers&quot;) and want to build gsnap:</span>
-<span class="n">docker</span> <span class="n">build</span> <span class="o">./</span><span class="n">gsnap</span><span class="o">/</span> <span class="o">--</span><span class="n">tag</span><span class="o">=</span><span class="n">gsnap</span><span class="p">:</span><span class="mf">0.1</span>
-<span class="c1"># if you are already inside the dockers/gsnap directory::</span>
-<span class="n">docker</span> <span class="n">build</span> <span class="o">./</span> <span class="o">--</span><span class="n">tag</span><span class="o">=</span><span class="n">gsnap</span><span class="p">:</span><span class="mf">0.1</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
+span.prompt1:before {
+  content: "$ ";
+}
+</style><span class="prompt1">docker build &lt;directory level path to Dockerfile&gt; --tag<span class="o">=</span>&lt;tool&gt;:&lt;tag&gt;</span>
+<span class="prompt1"></span>
+<span class="prompt1"><span class="c1"># Examples:</span></span>
+<span class="prompt1"><span class="c1"># If you are inside of the base directory (&quot;dockers&quot;) and want to build gsnap:</span></span>
+<span class="prompt1">docker build ./gsnap/ --tag<span class="o">=</span>gsnap:0.1</span>
+<span class="prompt1"></span>
+<span class="prompt1"><span class="c1"># If you are already inside the dockers/gsnap directory::</span></span>
+<span class="prompt1">docker build ./ --tag<span class="o">=</span>gsnap:0.1</span>
+</pre></div></div></div>
 </div>
 <div class="section" id="run-docker-images">
-<h2>3. Run docker Images<a class="headerlink" href="#run-docker-images" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Use our run script<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h2>3. Run docker images<a class="headerlink" href="#run-docker-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-our-run-script">
+<h3>Use our run script<a class="headerlink" href="#use-our-run-script" title="Permalink to this headline">¶</a></h3>
 <p>If you intend to use multiple dockers at once you can use our run script, which will take care of running the docker images.
 &#64;Amit</p>
 </div>
 <div class="section" id="run-one-image">
 <h3>Run one image<a class="headerlink" href="#run-one-image" title="Permalink to this headline">¶</a></h3>
 <p>If you have already built the image with &lt;tool&gt;:&lt;tag&gt; you can run the following command to run the image and start the tool:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -v &lt;your mounted folder&gt;:/MOUNT --user $(id -u):$(id -g) &lt;tool&gt;:&lt;tag&gt;
-
-# for example if you are using our directory structure for your input and are in the dockers directory:
-docker run -v ./:/MOUNT --user $(id -u):$(id -g) gsnap:0.1
-# add the --rm flag to clean up after yourself
-docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
-</pre></div>
-</div>
-</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker run -v &lt;your mounted folder&gt;:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> &lt;tool&gt;:&lt;tag&gt;</span>
+<span class="prompt1"></span>
+<span class="prompt1"><span class="c1"># Examples:</span></span>
+<span class="prompt1"><span class="c1"># If you are using our directory structure for your input and are in the dockers directory:</span></span>
+<span class="prompt1">docker run -v ./:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> gsnap:0.1</span>
+<span class="prompt1"></span>
+<span class="prompt1"><span class="c1"># Add the --rm flag to clean up after yourself</span></span>
+<span class="prompt1">docker run -v ./:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> --rm gsnap:0.1</span>
+</pre></div></div></div>
 </div>
 <div class="section" id="other-helpful-commands">
 <h2>4. Other helpful commands<a class="headerlink" href="#other-helpful-commands" title="Permalink to this headline">¶</a></h2>
-<p>Get image id:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">images</span>
-</pre></div>
-</div>
-<p>Remove an image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">rmi</span> <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">image</span> <span class="nb">id</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</div>
+<p>List docker images (for example to get image ids):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker images</span>
+</pre></div></div><p>Remove an image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker rmi -f &lt;image id&gt;</span>
+</pre></div></div></div>
 </div>
 
 
@@ -307,29 +317,29 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="snakemake.html" class="btn btn-neutral float-right" title="Install Snakemake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="git.html" class="btn btn-neutral float-left" title="Clone Git Repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="snakemake.html" class="btn btn-neutral float-right" title="Install Snakemake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="git.html" class="btn btn-neutral float-left" title="Clone Git Repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020
+        &#169; Copyright 2021.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -337,7 +347,6 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -350,12 +359,11 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
     
     
   <head>
-	<link rel="icon" href="img/icon.png" type="image/x-icon">
-
-	/*<link rel="stylesheet" type="text/css" href="../_static/custom.css">*/
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
 	</head>
 	<style>
+
+
 /* Sidebar header (and topbar for mobile) */
 .wy-side-nav-search, .wy-nav-top {
 	background: #60cdbf;
@@ -369,7 +377,6 @@ docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
 /*headings*/
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
-	font-size: 200%
 }
 
 .rst-content .sidebar .sidebar-title {
@@ -417,6 +424,12 @@ div .highlight {
 border: 1px solid #7fbbe3;
 background: #e7f2fa;
 border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
 }
 
 /* links */
