@@ -7,7 +7,7 @@ Install Snakemake
 
 .. note::
 
-	If you do not plan on running dicast as a pipeline but only want to run one tool at a time you do not need snakemake.
+	If you do not plan on running DICAST as a pipeline but only want to run one tool at a time you do not need snakemake.
 
 You can set up snakemake in a conda environment.
 If you have never worked with anaconda before you might want to check out their documentation first: `conda`_.
