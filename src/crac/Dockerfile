@@ -10,6 +10,8 @@ RUN wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10
 # Name of mounted folder
 VOLUME /MOUNT
 
+ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
 #Installing tool
 #	RUN wget https://gforge.inria.fr/frs/download.php/file/35191/crac_2.4.0_amd64.deb -p /docker_main/ && dpkg -i /docker_main/crac_2.4.0_amd64.deb && apt-get install -f
 ARG crac_version="2.5.2"
