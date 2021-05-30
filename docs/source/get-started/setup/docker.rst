@@ -32,13 +32,19 @@ Build all images
 ::::::::::::::::::
 
 If you intend to use multiple dockers at once you can use our snakemake pipeline, which will take care of building the docker images.
+If you want to build the dockers manually, we provide a ``docker-compose.yml`` file which will let you build them yourself. You can use the command 
 
+.. prompt:: bash
+
+  docker-compose -f path/to/docker-compose.yml build
+
+to build all images. For more information, see the  `docker compose documentation <https://docs.docker.com/compose/>`_.
 @Amit
 
 Build one image
 :::::::::::::::
 
-If you only want to build one specific docker image run the following command:
+If you only want to build one specific docker image, run the following command:
 
 .. prompt:: bash
 
@@ -51,33 +57,13 @@ If you only want to build one specific docker image run the following command:
   # If you are already inside the dockers/gsnap directory::
   docker build ./ --tag=gsnap:0.1
 
-3. Run docker images
-^^^^^^^^^^^^^^^^^^^^
+or use the ``docker-compose.yml`` file and specify which image to build: 
 
-Use our run script
-::::::::::::::::::
+.. prompt:: bash
 
-If you intend to use multiple dockers at once you can use our run script, which will take care of running the docker images.
-@Amit
+  docker-compose -f path/to/docker-compose.yml build <tool>
 
-Run one image
-:::::::::::::
-
-If you have already built the image with <tool>:<tag> you can run the following command to run the image and start the tool:
-
-.. prompt:: bash $
-
-  docker run -v <your mounted folder>:/MOUNT --user $(id -u):$(id -g) <tool>:<tag>
-
-  # Examples:
-  # If you are using our directory structure for your input and are in the dockers directory:
-  docker run -v ./:/MOUNT --user $(id -u):$(id -g) gsnap:0.1
-
-  # Add the --rm flag to clean up after yourself
-  docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
-
-
-4. Other helpful commands
+3. Other helpful commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 List docker images (for example to get image ids):
 

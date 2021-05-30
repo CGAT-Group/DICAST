@@ -11,3 +11,4 @@ short_input
 scripts/unified_output/data
 .idea
 **__pycache__
+docs/build
