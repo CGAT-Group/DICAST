@@ -34,11 +34,15 @@ Alternative_splicing_detection_tools:
 #
 # Enter the name of the alternative splicing detection tools for which their output should be unified.
 #
+# Specify the base input directory which contains folders for each tool you want the unification to run for. Those tool folders have to contain all the necessary files. 
+#
 # Currently we support asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
 #
 # Combine_me_choice__ = ["Yes", "No"]
 Output_unification:
     Create_unified_output_for: ''
+    Base_input_directory: ''
+    Unification_output_directory: ''
     GTF_file: ''
     Combine_me: false
 

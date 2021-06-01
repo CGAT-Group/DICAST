@@ -15,12 +15,18 @@ try:
     asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
     overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
     run_asimulator = config["ASimulatoR"]['do']
+    unification_input = config["Output_unification"]["Base_input_directory"]
+    unification_output = config["Output_unification"]["Unification_output_directory"]
     unification_tools = config["Output_unification"]["Create_unified_output_for"]
     unification_gtf = config["Output_unification"]["GTF_file"]
     combine_me = config["Output_unification"]["Combine_me"]
+    if asimulator_config_folder is '' and run_asimulator is True:
+        raise KeyError("ASimulatoR config folder has to be specified.")
+    if (unification_gtf is '' or unification_input is '' or unification_output is '' or unification_output is '') and unification_tools is not "":
+        raise KeyError("Unification GTF file, Unification input folder and Unification output folder have to be specified.")
 
 except KeyError:
-    print("One or more configuration parameters could not be found! Wrong config file specified?\nSee the following traceback for more information:")
+    print("One or more configuration parameters could not be found! Wrong config file specified?\n")
     traceback.print_exc()
     sys.exit(1)
 
@@ -857,6 +863,8 @@ rule run_majiq:
         temp("output/snakemake/log_ran_majiq.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -890,9 +898,9 @@ rule run_majiq:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then 
-                python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -m {params.uni_input}/majiq/ -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -m {params.uni_input}/majiq/ -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
 
@@ -908,6 +916,8 @@ rule run_aspli:
         temp("output/snakemake/log_ran_ASpli_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -941,10 +951,10 @@ rule run_aspli:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then 
-                python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create --aspli_dir {params.uni_input}/aspli/ -out {params.uni_out} -gtf {params.gtf} -comb
 
             else
-                python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create --aspli_dir {params.uni_input}/aspli/ -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
         else 
@@ -959,6 +969,8 @@ rule run_eventpointer:
         temp("output/snakemake/log_ran_EventPointer_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -992,9 +1004,9 @@ rule run_eventpointer:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then 
-                python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -e {params.uni_input}/eventpointer/EventsFound_RNASeq.txt -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -e {params.uni_input}/eventpointer/EventsFound_RNASeq.txt -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
         else 
@@ -1009,6 +1021,8 @@ rule run_asgal:
         temp("output/snakemake/log_ran_asgal_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -1042,9 +1056,9 @@ rule run_asgal:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then 
-                python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -a {params.uni_input}/asgal/ASGAL.csv -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -a {params.uni_input}/asgal/ASGAL.csv -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
         else 
@@ -1059,6 +1073,8 @@ rule run_irfinder:
         temp("output/snakemake/log_ran_irfinder_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -1092,9 +1108,9 @@ rule run_irfinder:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then
-                python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -i {params.uni_input}/irfinder/IRFinder-IR-nondir.txt -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -i {params.uni_input}/irfinder/IRFinder-IR-nondir.txt -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
         else 
@@ -1109,6 +1125,8 @@ rule run_sgseq:
         temp("output/snakemake/log_ran_sgseq_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -1142,9 +1160,9 @@ rule run_sgseq:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then
-                python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create --sgseq_denovo {params.uni_input}/sgseq/SGSeq_denovo_formatted.csv -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create --sgseq_denovo {params.uni_input}/sgseq/SGSeq_denovo_formatted.csv -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
         else 
@@ -1159,6 +1177,8 @@ rule run_spladder:
         temp("output/snakemake/log_ran_spladder_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -1192,9 +1212,9 @@ rule run_spladder:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then
-                python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -s {params.uni_input}/spladder -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -s {params.uni_input}/spladder -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
 
@@ -1210,6 +1230,8 @@ rule run_whippet:
         temp("output/snakemake/log_ran_whippet_unification.txt")
     params:
         tools=as_tools,
+        uni_input=unification_input,
+        uni_out=unification_output,
         uni_tools=unification_tools,
         gtf=unification_gtf,
         combine=combine_me
@@ -1243,9 +1265,9 @@ rule run_whippet:
             echo "Running $tool unification." | tee {output}
             if [ "{{params.combine}}" = "True" ]; 
             then
-                python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+                python scripts/unified_output/output_transformer.py create -w {params.uni_input}/whippet/whippet-out.psi -out {params.uni_out} -gtf {params.gtf} -comb
             else
-                python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf {params.gtf}
+                python scripts/unified_output/output_transformer.py create -w {params.uni_input}/whippet/whippet-out.psi -out {params.uni_out} -gtf {params.gtf}
             fi
             echo "Finished $tool unification at $(date)" | tee {output}
 
