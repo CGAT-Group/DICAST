@@ -600,10 +600,7 @@ rule run_kissplice:
     output:
         temp("output/snakemake/log_ran_kissplice.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -635,10 +632,7 @@ rule run_cash:
     output:
         temp("output/snakemake/log_ran_cash_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -670,10 +664,7 @@ rule run_dexseq:
     output:
         temp("output/snakemake/log_ran_dexseq_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -705,10 +696,7 @@ rule run_dsplicetype:
     output:
         temp("output/snakemake/log_ran_dsplicetype_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -740,10 +728,7 @@ rule run_edger:
     output:
         temp("output/snakemake/log_ran_edger_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -775,10 +760,7 @@ rule run_leafcutter:
     output:
         temp("output/snakemake/log_ran_leafcutter_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -810,10 +792,7 @@ rule run_psisigma:
     output:
         temp("output/snakemake/log_ran_psisigma_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -845,10 +824,7 @@ rule run_rmats:
     output:
         temp("output/snakemake/log_ran_rmats_unification.txt")
     params:
-        tools=as_tools,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -908,11 +884,18 @@ rule run_majiq:
             echo "Didnt run $tool." | tee {output}
         fi
 
-        uni_arr=({params.uni_tools})
-        if [[ "${{uni_arr[@]}}" =~ $tool ]]; 
+        uni_tools=({params.uni_tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            if [ "{{params.combine}}" = "True" ]; 
+            then 
+                python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -m scripts/unified_output/data/50M/majiq/ -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
+
         else 
             echo "Didnt run $tool unification." | tee {output}
         fi                     
@@ -952,13 +935,20 @@ rule run_aspli:
             echo "Didnt run $tool." | tee {output}
         fi
 
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running aspli unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then 
+                python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+
+            else
+                python scripts/unified_output/output_transformer.py create --aspli_dir scripts/unified_output/data/50M/aspli/ -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
         else 
-            echo "Didnt run aspli unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi
         """
 
@@ -996,13 +986,19 @@ rule run_eventpointer:
             echo "Didnt run $tool." | tee {output}
         fi
 
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running eventpointer unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then 
+                python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -e scripts/unified_output/data/50M/eventpointer/EventsFound_RNASeq.txt -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
         else 
-            echo "Didnt run eventpointer unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -1040,13 +1036,19 @@ rule run_asgal:
             echo "Didnt run $tool." | tee {output}
         fi
 
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running asgal unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then 
+                python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -a scripts/unified_output/data/50M/asgal/ASGAL.csv -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
         else 
-            echo "Didnt run asgal unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -1084,13 +1086,19 @@ rule run_irfinder:
             echo "Didnt run $tool." | tee {output}
         fi
         
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running irfinder unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt.txt/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then
+                python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -i scripts/unified_output/data/50M/irfinder/IRFinder-IR-nondir.txt -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
         else 
-            echo "Didnt run irfinder unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -1128,13 +1136,19 @@ rule run_sgseq:
             echo "Didnt run $tool." | tee {output}
         fi
         
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running sgseq unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then
+                python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create --sgseq_denovo scripts/unified_output/data/50M/sgseq/SGSeq_denovo_formatted.csv -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
         else 
-            echo "Didnt run sgseq unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -1172,13 +1186,20 @@ rule run_spladder:
             echo "Didnt run $tool." | tee {output}
         fi
         
-        uni_tools=({params.tools})
+        uni_tools=({params.uni_tools})
         if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running spladder unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder/ -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then
+                python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -s scripts/unified_output/data/50M/spladder -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
+
         else 
-            echo "Didnt run spladder unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -1216,13 +1237,20 @@ rule run_whippet:
             echo "Didnt run $tool." | tee {output}
         fi
         
-        arr=({params.tools})
-        if [[ "${{arr[@]}}" =~ $tool ]]; 
+        uni_tools=({params.uni_tools})
+        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
         then
-            echo "Running whippet unification." | tee {output}
-            python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf scripts/unified_output/data/splicing_variants.gtf
+            echo "Running $tool unification." | tee {output}
+            if [ "{{params.combine}}" = "True" ]; 
+            then
+                python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf {params.gtf} -comb
+            else
+                python scripts/unified_output/output_transformer.py create -w scripts/unified_output/data/50M/whippet/whippet-out.psi -out scripts/unified_output/data/output/ -gtf {params.gtf}
+            fi
+            echo "Finished $tool unification at $(date)" | tee {output}
+
         else 
-            echo "Didnt run whippet unification." | tee {output}
+            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
