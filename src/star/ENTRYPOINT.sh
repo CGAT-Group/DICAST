@@ -40,6 +40,8 @@ done
 }
 
 ### START here ############################################################################
+#cleaning up
+trap cleaner EXIT
 
 # test filepaths
 test_fasta
@@ -82,5 +84,3 @@ done < /tmp/$tool-fastqlist
 #wait for all processes to end
 wait
 
-#cleaning up
-trap cleaner EXIT

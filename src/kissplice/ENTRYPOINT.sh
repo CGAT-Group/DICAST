@@ -5,6 +5,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+#cleaning up
+trap cleaner EXIT
+
 
 #make output directory
 mk_outdir
@@ -47,8 +50,3 @@ then
 	Rscript /docker_main/kissDE.R --counts $outdir/events.tsv --cores $ncores --caseprefix $caseprefix --controlprefix $controlprefix --casefastq $casefastq --controlfastq $controlfastq --out $outdir
 
 fi
-
-
-cleaner
-
-

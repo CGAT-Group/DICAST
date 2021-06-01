@@ -8,6 +8,9 @@ source /MOUNT/scripts/asevent_func.sh
 
 ##### START here ###############
 
+#cleaning up
+trap cleaner EXIT
+
 
 #test filepath for gtf and BAM+BAM-index
 test_gtf $gtf
