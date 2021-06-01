@@ -50,6 +50,9 @@ build_index(){
 
 ### START here ############################################################################
 
+#cleaning up
+trap cleaner EXIT
+
 
 #get names of chromosome-wise fasta files
 # fasta_filenames=$(for f in $(ls ${bowtie_fastadir}); do printf "%s\n" ${f%.*}; done)
@@ -99,4 +102,3 @@ done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
-cleaner

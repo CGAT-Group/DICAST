@@ -5,6 +5,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+#cleaning up
+trap cleaner EXIT
+
 
 #make output directory
 mk_outdir

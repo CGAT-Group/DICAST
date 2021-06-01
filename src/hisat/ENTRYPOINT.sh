@@ -41,6 +41,9 @@ extract_splice_sites() {
 
 ### START here ############################################################################
 
+#cleaning up
+trap cleaner EXIT
+
 # test filepaths
 test_fasta
 test_gtf
@@ -78,4 +81,3 @@ done </tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
-cleaner

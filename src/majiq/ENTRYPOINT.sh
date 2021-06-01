@@ -7,6 +7,9 @@ source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
 
+#cleaning up
+trap cleaner EXIT
+
 #make output directory 
 mk_outdir
 
@@ -96,9 +99,3 @@ then
 	voila tsv $outdir/build/splicegraph.sql $outdir/deltapsi/*.voila -f $outdir/voila.tsv
 	cleaner
 fi
-
-
-cleaner
-
-
-

@@ -44,6 +44,9 @@ build_index() {
 
 ### START here ############################################################################
 
+#cleaning up
+trap cleaner EXIT
+
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname.ssa; then build_index; fi fi
 
@@ -85,4 +88,3 @@ done < /tmp/$tool-fastqlist
 
 # wait for all processes to end
 wait
-cleaner
