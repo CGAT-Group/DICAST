@@ -6,6 +6,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
 
 #Build Genome index
 build_index() {
@@ -65,7 +67,7 @@ echo "compute ${tool} mapping..."
 #Iterate list with paired end map command first
 while read -r line; do
 	trap 'second_attempt $line' ERR
-	
+
 	#First attempt: Paired end mapping
 	echo mapping paired
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
@@ -83,4 +85,3 @@ done < /tmp/$tool-fastqlist
 
 #wait for all processes to end
 wait
-

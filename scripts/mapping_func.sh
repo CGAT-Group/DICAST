@@ -94,7 +94,7 @@ recompute_index:$recompute_index
 
 start_logging() {
 	mkdir -p $outdir/logs
-	current_time=$(date "+%Y.%m.%d_%H.%M.%S")
+	current_time=$(date "+%Y.%m.%d_%H:%M:%S")
 	log_file=$outdir/logs/${tool}_${current_time}.log
 	touch $log_file
 	echo -e "\nlogs will be stored in ${log_file}\n"

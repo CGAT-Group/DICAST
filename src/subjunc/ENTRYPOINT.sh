@@ -8,6 +8,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
 
 ### Tool-specific functions ###
 
@@ -19,13 +21,13 @@ second_attempt() {
 	# -r	Give the name of an input file (multiple files are allowed tobe provided toalignandsubjuncfunctions inRsubread).
 	#		For paired-end read data, this gives the first read file andthe other read file should be provided via the -R option.
 	#		Supported input formats include FASTQ/FASTA (uncom-pressed or gzip compressed)(default), SAM and BAM.
-	# -R	Provide name of the second read file from paired-end data.The program will switch to paired-end read mapping modeif  this  file  is  provided.   
+	# -R	Provide name of the second read file from paired-end data.The program will switch to paired-end read mapping modeif  this  file  is  provided.
 	#		(multiple  files  are  allowed  to  beprovided toalignandsubjuncfunctions inRsubread)
-	# -i	Specify  the  base  name  of  the  index.   The  index  used  by sublong aligner must be a full index and has only one block,ie.  
+	# -i	Specify  the  base  name  of  the  index.   The  index  used  by sublong aligner must be a full index and has only one block,ie.
 	#		‘-F’ and ‘-B’ options must be specified when buildingindex with subread-buildindex.
 	# -T	Specify  the  number  of  threads/CPUs  used  for  mapping.The value should be between 1 and 32.  1 by default
 	# --SAMoutput	Specify that mapping results are saved into a SAM formatfile.
-	# -o	Give the name of output file.  The default output format isBAM. All reads are included in mapping output, includingboth  mapped  and  unmapped  reads,  
+	# -o	Give the name of output file.  The default output format isBAM. All reads are included in mapping output, includingboth  mapped  and  unmapped  reads,
 	#		and  they  are  in  the same order as in the input file.
 
 	subjunc \
@@ -40,7 +42,7 @@ second_attempt() {
 build_index() {
 	mkdir -p $indexdir
 	echo "compute index ..."
-	subread-buildindex $fasta -o $indexdir/$indexname -F -B 
+	subread-buildindex $fasta -o $indexdir/$indexname -F -B
 	chmod -R 777 $indexdir
 	echo "Index is now saved under $indexdir/$indexname"
 }
@@ -52,9 +54,9 @@ trap cleaner EXIT
 
 # test filepaths
 test_fasta
-	
+
 #Update PATH variable
-PATH=$PATH:/opt/subread-2.0.0-Linux-x86_64/bin/ 
+PATH=$PATH:/opt/subread-2.0.0-Linux-x86_64/bin/
 
 # Build Genome index if not already available
 if $recompute_index; then build_index; else if ! test -f $indexdir/$indexname.reads; then build_index; fi fi
@@ -77,13 +79,13 @@ while read -r line; do
 # -r	Give the name of an input file (multiple files are allowed tobe provided toalignandsubjuncfunctions inRsubread).
 #		For paired-end read data, this gives the first read file andthe other read file should be provided via the -R option.
 #		Supported input formats include FASTQ/FASTA (uncom-pressed or gzip compressed)(default), SAM and BAM.
-# -R	Provide name of the second read file from paired-end data.The program will switch to paired-end read mapping modeif  this  file  is  provided.   
+# -R	Provide name of the second read file from paired-end data.The program will switch to paired-end read mapping modeif  this  file  is  provided.
 #		(multiple  files  are  allowed  to  beprovided toalignandsubjuncfunctions inRsubread)
-# -i	Specify  the  base  name  of  the  index.   The  index  used  by sublong aligner must be a full index and has only one block,ie.  
+# -i	Specify  the  base  name  of  the  index.   The  index  used  by sublong aligner must be a full index and has only one block,ie.
 #		‘-F’ and ‘-B’ options must be specified when buildingindex with subread-buildindex.
 # -T	Specify  the  number  of  threads/CPUs  used  for  mapping.The value should be between 1 and 32.  1 by default
 # --SAMoutput	Specify that mapping results are saved into a SAM formatfile.
-# -o	Give the name of output file.  The default output format isBAM. All reads are included in mapping output, includingboth  mapped  and  unmapped  reads,  
+# -o	Give the name of output file.  The default output format isBAM. All reads are included in mapping output, includingboth  mapped  and  unmapped  reads,
 #		and  they  are  in  the same order as in the input file.
 
 
