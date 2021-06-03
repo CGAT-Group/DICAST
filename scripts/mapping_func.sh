@@ -60,14 +60,47 @@ cleaner() {
 #    Logging    #
 #################
 
+echo_vars() {
+	echo "############################################"
+	echo "VARIABLE SETTINGS"
+	echo -e """
+
+tool:\t\t$tool
+
+DIRECTORIES
+workdir:\t$workdir
+outdir: \t$outdir
+inputdir:\t$inputdir
+fastqdir:\t$fastqdir
+
+FILES
+fasta:\t\t$fasta
+bowtie_fastadir:$bowtie_fastadir	# only for contextmap & mapsplice
+gtfname:\t$gtfname	# only for hisat
+gtf:\t\t$gtf # only for hisat mapsplice and star
+
+INDEX
+indexdir:\t$indexdir
+indexname:\t$indexname
+star_index:\t$star_index	# only for star
+
+PARAMETERS
+ncores: \t$ncores	# only for applicable tools
+recompute_index:$recompute_index
+"""
+	echo "############################################"
+	echo
+}
+
 start_logging() {
-	mkdir $outdir/logs
+	mkdir -p $outdir/logs
 	current_time=$(date "+%Y.%m.%d_%H.%M.%S")
 	log_file=$outdir/logs/${tool}_${current_time}.log
 	touch $log_file
-	echo "logs will be stored in ${log_file}"
-	#exec &> >(tee -a "$log_file")
-	exec 2> >(tee -a -i "${log_file}")
-	exec >> "${log_file}"
+	echo -e "\nlogs will be stored in ${log_file}\n"
+	exec &> >(tee -a -i "$log_file")
+	echo_vars
+	#exec 2> >(tee -a -i "${log_file}")
+	#exec >> "${log_file}"
 
 }
