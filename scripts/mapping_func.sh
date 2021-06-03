@@ -4,17 +4,17 @@
 
 # test if fasta is available
 test_fasta(){
-	if ! test -f $fasta; 
+	if ! test -f $fasta;
 		then echo "Fasta file not found. Is it under $fasta? \nCheck fasta variable config.sh and mapping_config.sh file! Parameters set in mapping_config.sh do overwrite config.sh!";
-		exit; 
+		exit;
 	fi ;
 }
-	
+
 # test if gtf is available (only tested if gtf is used for the mapping)
 test_gtf(){
-	if ! test -f $gtf; 
+	if ! test -f $gtf;
 		then echo "gtf file not found. Is it under $gtf? \nCheck gtf variable in config.sh and mapping_config.sh file! Parameters set in mapping_config.sh do overwrite config.sh!";
-		exit; 
+		exit;
 	fi
 }
 
@@ -29,7 +29,7 @@ mk_fastqlist(){
 	while read -r line; do
 		# mkdir -p $outdir/$(basename $(dirname $line))/
 		mkdir -p $outdir/$(basename $(dirname $(dirname $line)))
-		chmod -R 777 $outdir/	
+		chmod -R 777 $outdir/
 	done </tmp/$tool-fastqlist
 }
 
@@ -54,4 +54,20 @@ cleaner() {
 	rm /tmp/$tool-fastqlist
 	echo "Script is done.";
 	exit;
+}
+
+#################
+#    Logging    #
+#################
+
+start_logging() {
+	mkdir $outdir/logs
+	current_time=$(date "+%Y.%m.%d_%H.%M.%S")
+	log_file=$outdir/logs/${tool}_${current_time}.log
+	touch $log_file
+	echo "logs will be stored in ${log_file}"
+	#exec &> >(tee -a "$log_file")
+	exec 2> >(tee -a -i "${log_file}")
+	exec >> "${log_file}"
+
 }
