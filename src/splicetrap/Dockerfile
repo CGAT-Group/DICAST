@@ -4,7 +4,7 @@ LABEL maintainer="Alexander Dietrich"
 
 
 #install unzip & python (needed for Bowtie I guess...)
-RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y unzip python-dev 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y unzip python-dev samtools
 
 WORKDIR /opt
 #install Bowtie

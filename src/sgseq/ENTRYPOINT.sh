@@ -9,6 +9,9 @@ source /MOUNT/scripts/asevent_func.sh
 
 ### START here ###################
 
+#cleaning up
+trap cleaner EXIT
+
 #tests
 test_gtf $gtf
 
@@ -32,9 +35,3 @@ do
 	Rscript /docker_main/SGSeq.R --gtf $gtf --path_to_bam $filename --out $sample_out --cores $ncores
 	wait
 done
-
-
-cleaner
-
-
-

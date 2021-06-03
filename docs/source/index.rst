@@ -29,7 +29,7 @@ Contact
 =======
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 3
 	:hidden:
 	:caption: Get started
 
@@ -39,7 +39,7 @@ Contact
 
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 3
 	:hidden:
 	:caption: Tools
 
@@ -49,7 +49,7 @@ Contact
 
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 3
 	:hidden:
 	:caption: Further information
 

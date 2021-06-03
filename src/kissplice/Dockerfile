@@ -1,24 +1,13 @@
-FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1 as builder1
-#this is a temp docker image
-LABEL description="Builder image for STAR"
-LABEL maintainer="Alexander Dietrich"
-
-ARG star_version=2.7.4a
-
-
-#install STAR
-RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-check-certificate -P /docker_main && tar -xzf /docker_main/${star_version}.tar.gz && cd STAR-${star_version}/source && make STAR && rm -rf /docker_main/${star_version}.tar.gz && apt autoremove && apt clean
-
-
+FROM  dicast/star:0.2 as builder
 #this is the final docker image
 FROM rocker/r-base:4.0.0
 LABEL description="Image for KisSplice and KissDE"
 LABEL maintainer="Alexander Dietrich"
 
 
-ARG star_version=2.7.4a
+ARG star_version=2.7.5c
 #Copying STAR from builder docker
-COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
+COPY --from=builder /docker_main/STAR-${star_version} /opt/STAR-${star_version}/
 
 
 
@@ -27,10 +16,9 @@ COPY --from=builder1 /docker_main/STAR-${star_version} /opt/STAR-${star_version}
 #############
 
 #install python3
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python3 python3-dev python3-pip
+RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y python3 python3-dev python3-pip cmake zlib1g samtools
 
 #download and install KisSplice in /opt
-RUN apt-get update && apt-get --no-install-recommends --fix-broken install -y cmake zlib1g
 WORKDIR /opt
 RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/download/kissplice-2.5.1.tar.gz && tar -xzf /opt/kissplice-2.5.1.tar.gz && rm -f /opt/kissplice-2-5-1.tar.gz &&cd /opt/kissplice-2.5.1 && cmake . && make
 
@@ -49,8 +37,8 @@ RUN pip3 install biopython intervaltree intervaltree-bio
 WORKDIR /opt
 RUN wget ftp://pbil.univ-lyon1.fr/pub/logiciel/kissplice/tools/kissplice2refgenome-2.0.0.tar.gz && tar -xvf /opt/kissplice2refgenome-2.0.0.tar.gz && rm -f /opt/kissplice2refgenome-2.0.0.tar.gz && cd /opt/kissplice2refgenome-2.0.0 && python3 setup.py install --user 
 
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-2.0.0:/opt/STAR-${star_version}/bin/Linux_x86_64/
 #add Kissplice & Kissplice2refgenome & STAR to path
-ENV PATH=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kissplice-2.5.1/bin:/opt/kissplice2refgenome-2.0.0:/opt/STAR-${star_version}/bin/Linux_x86_64
 
 #############
 #  KissDE   #

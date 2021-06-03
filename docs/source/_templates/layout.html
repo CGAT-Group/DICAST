@@ -1,12 +1,11 @@
 {% extends "!layout.html" %}
   {% block footer %} {{ super() }}
   <head>
-	<link rel="icon" href="img/icon.png" type="image/x-icon">
-
-	/*<link rel="stylesheet" type="text/css" href="../_static/custom.css">*/
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
 	</head>
 	<style>
+
+
 /* Sidebar header (and topbar for mobile) */
 .wy-side-nav-search, .wy-nav-top {
 	background: #60cdbf;
@@ -20,7 +19,6 @@
 /*headings*/
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
-	font-size: 200%
 }
 
 .rst-content .sidebar .sidebar-title {
@@ -68,6 +66,12 @@ div .highlight {
 border: 1px solid #7fbbe3;
 background: #e7f2fa;
 border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
 }
 
 /* links */

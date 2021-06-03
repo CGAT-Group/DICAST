@@ -1,4 +1,4 @@
-FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base-conda:0.1
+FROM ubuntu:conda
 LABEL description="Image for rMATS"
 LABEL maintainer="Tim Faro"
 

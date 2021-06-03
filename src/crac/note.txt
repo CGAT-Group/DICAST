@@ -1,0 +1,1 @@
+This dockerfile doesn't work anymore. We can still pull this from dicast's repositories.

@@ -1,4 +1,4 @@
-FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1
+FROM ubuntu:base
 ENV tool=subjunc
 LABEL description="Image for subjunc"
 LABEL maintainer="Amit Fenn"

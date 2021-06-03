@@ -12,7 +12,7 @@ read_length=76                                          	#length of reads inside
 #############################
 
 
-inputdir=$workdir/input
+inputdir=$workdir/short_input
 controlfolder=$inputdir/controldir         			#base directory for all needed input files (when no differential comparison, control inputs when differential AS Event Detection)
 casefolder=$inputdir/casedir					#base directory for only case files (for AS Event detection)
 fastqdir=$controlfolder/fastqdir       				#directory for fastqfiles
@@ -21,6 +21,7 @@ samdir=$controlfolder/bamdir           				#directory for samfiles
 fastadir=$inputdir              				#directory for fastafile (might vary for specific tools -> see mapping or as-specific config file)
 gtfdir=$inputdir                				#directory for gtffile
 gffdir=$inputdir                				#directory for gfffile
+star_index=$workdir/index/star_index                                   #folder containing a star index built with the $gtf and $fasta files (used by: IRFinder, KisSplice, rMATS)
 
 
 ############################

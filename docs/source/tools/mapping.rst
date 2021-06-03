@@ -1,8 +1,14 @@
 Mapping tools
 =============
 
-Index building takes time
-Use mapping config file
+.. note::
+
+	Most mapping tools need an index file of the reference genome for mapping. The computation of these files can take a long time.
+	Our mapping tool scripts check if there already is an index for the respective tool and only build it, if it is not found.
+	If you face any index related errors, either set the parameter ``$recompute_index=True`` or delete the old index to recalculate it.
+
+* Index building takes time
+* Use mapping config file
 
 =========================  ===============  ==========================
 Tool                       Git			   			Comment
@@ -13,8 +19,8 @@ Tool                       Git			   			Comment
 :doc:`mapping/dart`
 :doc:`mapping/gsnap`
 :doc:`mapping/hisat`
-:doc:`mapping/mapsplice`
-:doc:`mapping/minimap`
+:doc:`mapping/mapsplice`                    ``Requires special input``
+:doc:`mapping/minimap`                      ``Requires special input``
 :doc:`mapping/segemehl`
 :doc:`mapping/star`
 =========================  ===============  ==========================
@@ -22,8 +28,9 @@ Tool                       Git			   			Comment
 1. Mapping Input Files
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-	The paths assume you are using our suggested :doc:`../setup/input`. For example input files see :doc:`examples`.
+.. tip::
+	The paths assume you are using our suggested :doc:`input structure <../get-started/setup/input>`.
+	Example input files you can find in our :doc:`examples section<../further-information/example-files>`.
 
 If not stated otherwise the mapping tools require the following input files:
 
@@ -37,13 +44,31 @@ If not stated otherwise the mapping tools require the following input files:
 		. . .
 
 * Fasta Reference:
-	* input/*yourFastaFile*.fa
+	.. code-block:: bash
 
-* Optional: Index (if there is no index it will be built)
-	* index/*yourIndexBaseName*
+		input/*yourFastaFile*.fa
 
-2. Mapping Config Scripts
-^^^^^^^^^^^^^^^^^^^^^^^^^
+* Gtf File:
+	.. code-block:: bash
+
+		input/*yourGtf*.gtf
+
+* Optional: Index
+  Tool specific index file(s).
+	If you want to provide your own index please make sure it is in the correct format and file names.
+	If no index file is found in the index folder it will be built the first time you run the tool.
+	.. code-block:: bash
+
+		index/*yourIndexBaseName*
+
+2. Special input files
+^^^^^^^^^^^^^^^^^^^^^^
+
+Some mapping tools require special input files as indicated in the table above.
+For more information please consult the respective documentation page.
+
+3. Parameters
+^^^^^^^^^^^^^^
 
 
 

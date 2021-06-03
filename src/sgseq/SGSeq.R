@@ -1,6 +1,6 @@
 suppressMessages(library(optparse))
-suppressMessages(library(GenomicFeatures))
-suppressMessages(library(SGSeq))
+suppressMessages(library("GenomicFeatures"))
+suppressMessages(library("SGSeq"))
 
 #Parsing parameters
 option_list = list(make_option(c("--gtf"), type='character', default = NULL, help="the annotation gtf file", metavar='character'),

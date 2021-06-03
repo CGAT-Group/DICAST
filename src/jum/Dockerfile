@@ -1,13 +1,12 @@
-FROM gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1 as builder1
+FROM ubuntu:base as builder1
 #this is a temp docker image
 LABEL description="Image for JUM"
 LABEL maintainer="Alexander Dietrich"
 
-ARG star_version=2.7.3a
-
-
 #install STAR
+ARG star_version=2.7.3a
 RUN wget https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz --no-check-certificate -P /docker_main && tar -xzf /docker_main/${star_version}.tar.gz && cd STAR-${star_version}/source && make STAR && rm -rf /docker_main/${star_version}.tar.gz && apt autoremove && apt clean
+
 
 #get R into image
 FROM rocker/r-base:3.6.3

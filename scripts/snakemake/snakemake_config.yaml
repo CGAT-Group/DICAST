@@ -1,5 +1,5 @@
 #########################################
-# When running the pipeline again with the same input file names, the output will be also called the same and overwrite the existing files!
+# When running the pipeline again with the same input file names or report name, the output will be also called the same and overwrite the existing files!
 #
 # Overwrite_acknowledge_choice__ = ["Yes", "No"]
 Possible_overwrite_acknowledge:
@@ -30,20 +30,21 @@ Alternative_splicing_detection_tools:
     What_tools_to_run: ''
 
 #########################################
-# Enter the name of the differential alternative splicing detection tools you want to run as a space separated list.
+# Set Combine_me if you want the event types MEE and MSE to be converted to multiple single ES events.
 #
-# Currently we support cash dexseq, dsplicetype, edger, leafcutter, psisigma, rmats
+# Enter the name of the alternative splicing detection tools for which their output should be unified.
 #
-Differential_alternative_splicing_detection_tools:
-    What_tools_to_run: ''
-
-#########################################
-# The output file will be created once the run was complete. Snakemake checks if this is the same name as from the run before. If that's the case, it won't run again.
+# Specify the base input directory which contains folders for each tool you want the unification to run for. Those tool folders have to contain all the necessary files. 
 #
-# So make sure to enter a new name when you want to run the pipeline again or delete the old output!
+# Currently we support asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
 #
-Output:
-    Log_file_name: sample_out
+# Combine_me_choice__ = ["Yes", "No"]
+Output_unification:
+    Create_unified_output_for: ''
+    Base_input_directory: ''
+    Unification_output_directory: ''
+    GTF_file: ''
+    Combine_me: false
 
 #########################################
 # Snakemake creates a run report after finishing successfully. Here, you can set the file name (must end in .html!)

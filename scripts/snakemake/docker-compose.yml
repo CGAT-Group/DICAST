@@ -5,174 +5,182 @@ services:
 #################################################### Base images
     base:
       build:
-        context: ../../src/BASE-IMAGE/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/base:0.1
+        context: ../../src/dicast-base/
+      image: ubuntu:base
 
     conda:
       build:
         context: ../../src/conda/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/base-conda:0.1
+      image: ubuntu:conda
 
     bowtie:
       build:
         context: ../../src/bowtie/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/dicast-bowtie:0.1
+      image: bowtie:0.2
 
 #################################################### Mapping tools
     star:
       build:
         context: ../../src/star
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/star:0.1
+      image: dicast/star:0.2
 
     bbmap:
       build:
         context: ../../src/bbmap
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/bbmap:0.1
+      image: dicast/bbmap:0.2
 
 
-    contextmap2:
+    contextmap:
       build:
         context: ../../src/contextmap
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/contextmap:0.1
+      image: dicast/contextmap:0.2
 
 
     dart:
       build:
         context: ../../src/dart
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/dart:0.1
+      image: dicast/dart:0.2
 
 
     gsnap:
       build:
         context: ../../src/gsnap
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/gsnap:0.1
+      image: dicast/gsnap:0.2
 
 
     crac:
       build:
         context: ../../src/crac
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/crac:0.1
+      image: dicast/crac:0.2
 
 
     subjunc:
       build:
         context: ../../src/subjunc
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/subjunc:0.1
+      image: dicast/subjunc:0.2
 
 
     minimap:
       build:
         context: ../../src/minimap
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/minimap2:0.1
+      image: dicast/minimap:0.2
 
 
-    hisat2:
+    hisat:
       build:
         context: ../../src/hisat
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/hisat2:0.1
+      image: dicast/hisat:0.2
 
 
     segemehl:
       build:
         context: ../../src/segemehl
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/segemehl:0.1
+      image: dicast/segemehl:0.2
 
 
-    mapsplice2:
+    mapsplice:
       build:
         context: ../../src/mapsplice
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/mapsplice2:0.1
+      image: dicast/mapsplice:0.2
 
 
 ######################################################### AS event detection tools
 
-# ONLY BUILDS ON DOCKER 19
     asgal:
       build:
         context: ../../src/asgal/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/asgal:0.1
+      image: dicast/asgal:0.2
 
-#    cash:
-#      build:
-#        context: ../../src/cash/
-#      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/cash:0.1
+    # cash:
+    #   build:
+    #     context: ../../src/cash/
+    #   image: dicast/cash:0.2
       
     majiq:
       build: 
         context: ../../src/majiq/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/majiq:0.1
+      image: dicast/majiq:0.2
 
     spladder:
       build: 
         context: ../../src/spladder/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/spladder:0.1    
+      image: dicast/spladder:0.2    
 
     aspli:
       build: 
         context: ../../src/aspli/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/aspli:0.1
+      image: dicast/aspli:0.2
 
     eventpointer:
       build: 
         context: ../../src/eventpointer/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/eventpointer:0.1
+      image: dicast/eventpointer:0.2
 
     kissplice:
       build: 
         context: ../../src/kissplice/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/kissplice:0.1
+      image: dicast/kissplice:0.2
 
     whippet:
       build: 
         context: ../../src/whippet/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/whippet:0.1
+      image: dicast/whippet:0.2
 
     sgseq:
       build: 
         context: ../../src/sgseq/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/sgseq:0.1
+      image: dicast/sgseq:0.2
 
     irfinder:
       build: 
         context: ../../src/irfinder/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/irfinder:0.1
+      image: dicast/irfinder:0.2
 
 
 
 #### Diff Splicing tools
 #    :
 #      build: 
-#        context: ../../src//
-#      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/ :0.1
+#        context: ../src//
+#      image: dicast/ :0.2
 #       dockerfile: Dockerfile
         
 
 
 ######################################################### AS diff tools
 
-    rmats:
-      build: 
-        context: ../../src/rmats/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/rmats:0.1
-
-
-    dsplicetype:
-      build: 
-        context: ../../src/dsplicetype/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/dsplicetype:0.1
-
-    psisigma:
-      build: 
-        context: ../../src/psisigma/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/psisigma:0.1
-
-    leafcutter:
-      build: 
-        context: ../../src/leafcutter/
-      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/leafcutter:0.1
-
-
+#    dexseq:
+#        build: 
+#          context: ../../src/dexseq/
+#        image: dicast/dexseq:0.2
+#
+#    edger:
+#        build: 
+#          context: ../../src/edger/
+#        image: dicast/edger:0.2
+#
+#    rmats:
+#      build: 
+#        context: ../../src/rmats/
+#      image: dicast/rmats:0.2
+#
+#    dsplicetype:
+#      build: 
+#        context: ../../src/dsplicetype/
+#      image: dicast/dsplicetype:0.2
+#
+#    psisigma:
+#      build: 
+#        context: ../../src/psisigma/
+#      image: dicast/psisigma:0.2
+#
+#    leafcutter:
+#      build: 
+#        context: ../../src/leafcutter/
+#      image: dicast/leafcutter:0.2
+#
+#
 #    jum:
 #      build: 
-#        context: ../../src/jum/
-#      image: gitlab.lrz.de:5005/ge46ban/dockers/develop/jum:0.1
+#        context: ../src/jum/
+#      image: proj/jum:0.01
