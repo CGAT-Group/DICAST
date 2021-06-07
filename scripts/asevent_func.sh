@@ -98,7 +98,7 @@ makebamfromsam(){
 					{
 #Make a Bam file
 						echo making bam of $1, in ${2:-$controlbam}/$samfileprefix.bam.  This may take a while..
-							samtools view -bS $1 > ${2:-$controlbam}/${samfileprefix}.bam
+							samtools view -b -S -T $fasta $1 > ${2:-$controlbam}/${samfileprefix}.bam
 #Sort bam file
 						echo sorting and indexing bam file $samfileprefix.bam
 							sortnindexbam "${2:-$controlbam}/$samfileprefix.bam"
