@@ -5,6 +5,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
+
 #cleaning up
 trap cleaner EXIT
 
@@ -23,7 +26,7 @@ then
 	exit 1
 fi
 
-#get number of partners 
+#get number of partners
 nPartners=${#partner2fastqlist[@]}
 
 #iterate over fastqlists and run asgal for each fastq-pair
@@ -38,4 +41,3 @@ for ((i=0;i<nPartners;++i)); do
 	/galig/asgal --multi -g $fasta -a $gtf -t $transcript -s $fastq1 -s2 $fastq2 -o $sample_out -@ $ncores
 	wait
 done
-

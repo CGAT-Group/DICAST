@@ -6,6 +6,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
+
 #cleaning up
 trap cleaner EXIT
 

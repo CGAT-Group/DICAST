@@ -244,3 +244,61 @@ cleaner_diff(){
        	echo script is done.
 	exit
 }
+
+#################
+#    Logging    #
+#################
+
+echo_vars() {
+	echo "############################################"
+	echo "VARIABLE SETTINGS"
+	echo -e """
+
+tool:\t\t$tool
+
+DIRECTORIES
+workdir:\t$workdir
+outdir: \t$outdir
+inputdir:\t$inputdir
+fastqdir:\t$fastqdir	# only for asgal, irfinder, kissplice, whippet
+star_index:\t$star_index	# only for kissplice
+
+FILES
+fasta:\t\t$fasta	# only for asgal, irfinder, whippet
+gtf:\t\t$gtf	# not for majiq
+gff:\t$gff	# only for majiq
+
+PARAMETERS
+ncores: \t$ncores	# only for applicable tools
+read_length:\t$read_length	# only for applicable as_tools
+use_bam_input_files:\t$use_bam_input_files	# only for irfinder
+differential:\t$differential	# 0 = non differential; 1 = differential
+
+CONTROL (Default for NON DIFFERENTIAL)
+controlfolder:\t$controlfolder
+controlbam:\t$controlbam
+controlfastq:\t$controlfastq
+controlprefix:\t$controlprefix	# only for kissplice
+
+CASE
+casefolder:\t$casefolder
+casebam:\t$casebam
+casefastq:\t$casefastq
+caseprefix:\t$caseprefix	# only for kissplice
+"""
+	echo "############################################"
+	echo
+}
+
+start_logging() {
+	mkdir -p $outdir/logs
+	current_time=$(date "+%Y.%m.%d_%H:%M:%S")
+	log_file=$outdir/logs/${tool}_${current_time}.log
+	touch $log_file
+	echo -e "\nlogs will be stored in ${log_file}\n"
+	exec &> >(tee -a -i "$log_file")
+	echo_vars
+	#exec 2> >(tee -a -i "${log_file}")
+	#exec >> "${log_file}"
+
+}

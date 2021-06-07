@@ -5,6 +5,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
+
 #cleaning up
 trap cleaner EXIT
 
@@ -22,14 +25,14 @@ then
 	fastqlist=$(ls -1p $fastqdir/*.fastq | xargs echo | sed 's/ / -r /g')
 	echo Finding AS events...
 	kissplice -r $fastqlist -o $outdir/kissplice
-fi 
+fi
 if [ $differential = 1 ]
 then
 	casefastqlist=$(ls -1p $casefastq/*.fastq | xargs echo | sed 's/ / -r /g')
 	controlfastqlist=$(ls -1p $controlfastq/*.fastq | xargs echo | sed 's/ / -r /g')
 	echo Finding AS events...
 	kissplice -r $casefastqlist -r $controlfastqlist -o $outdir/kissplice
-fi	
+fi
 
 
 #aligning AS events back to reference genome
@@ -41,7 +44,7 @@ echo mapping AS event file back onto reference...
 STAR --genomeDir $star_index --readFilesIn $outdir/kissplice/*_type_1.fa --outFileNamePrefix $outdir/ --runThreadN $ncores
 
 echo classify events of KisSplice aligned to reference with kissplice2refgenome...
-kissplice2refgenome -a $gtf -o $outdir/events --readLength $read_length $outdir/Aligned.out.sam 
+kissplice2refgenome -a $gtf -o $outdir/events --readLength $read_length $outdir/Aligned.out.sam
 
 
 if [ $differential = 1 ]
