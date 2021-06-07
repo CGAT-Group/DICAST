@@ -8,6 +8,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
+
 #To call contextmap as a command.
 PATH="$PATH":/home/biodocker/ContextMap_Source_v2.7.9/:/home/biodocker/jre1.8.0_241/
 
@@ -85,7 +88,7 @@ while read -r line; do
 	#-indices 		A comma separated list of paths to basenames of indices, which can be used by the chosen aligner.
 	#-genome 		The path to a folder with reference sequences in fasta format (for each chromosome a separate file). It is important that the chromosome names contained in the index of the chosen unspliced alignment program (see 2. Obtaining ContextMap) are equal to the filenames of the files contained in the genome folder (for instance if the index contains a chromosome called "chr1", the genome folder must contain a file called "chr1.fa").
 	#-o 			The path to the output directory.
-	
+
 	java -jar /home/biodocker/ContextMap_Source_v2.7.9/ContextMap_v2.7.9.jar \
 		mapper \
 		-reads ${line}1.fastq,${line}2.fastq \

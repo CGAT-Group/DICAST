@@ -8,6 +8,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
 
 ### Tool-specific functions ###
 

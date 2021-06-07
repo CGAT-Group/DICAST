@@ -8,6 +8,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
 
 ### Tool-specific functions ###
 
@@ -76,7 +78,7 @@ echo "compute ${tool} mapping..."
 while read -r line; do
 	#First attempt: Paired end mapping
 	#...tag outputs with this flag to name it per fastqfile         "${line##*/}"
- 
+
 	# Usage: gsnap [OPTIONS...] <FASTA file>
 	# Parameters (X means that the parameter is currently not used)
 	# --db	Genome database

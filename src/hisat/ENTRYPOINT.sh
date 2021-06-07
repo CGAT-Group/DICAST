@@ -8,6 +8,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
+
 #Update PATH
 PATH=$PATH:/docker_main/hisat2-2.2.1
 

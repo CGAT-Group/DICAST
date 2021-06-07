@@ -8,6 +8,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/mapping_config.sh
 source /MOUNT/scripts/mapping_func.sh
 
+### logging ###
+start_logging
 
 ### Tool-specific functions ###
 
@@ -60,7 +62,7 @@ while read -r line; do
 		-f ${line}1.fastq \
 		-f2 ${line}2.fastq \
 		-o $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool}.sam
-		
+
 	#If paired end mapping fails, run unpaired mapping. (EXPERIMENTAL)
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
