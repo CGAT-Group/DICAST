@@ -41,7 +41,7 @@ fi
 check_star_index
 
 echo mapping AS event file back onto reference...
-STAR --genomeDir $star_index --readFilesIn $outdir/kissplice/*_type_1.fa --outFileNamePrefix $outdir/ --runThreadN $ncores
+STAR --genomeDir $star_index/${fastaname}_index --readFilesIn $outdir/kissplice/*_type_1.fa --outFileNamePrefix $outdir/ --runThreadN $ncores
 
 echo classify events of KisSplice aligned to reference with kissplice2refgenome...
 kissplice2refgenome -a $gtf -o $outdir/events --readLength $read_length $outdir/Aligned.out.sam

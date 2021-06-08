@@ -310,17 +310,17 @@ rule run_hisat:
         fi
         """
 
-rule run_mapslice:
+rule run_mapsplice:
     input:
         asim_out=rules.run_asimulator_rule.output
     output:
-        temp("output/snakemake/log_mapslice.txt")
+        temp("output/snakemake/log_mapsplice.txt")
     params:
         tools=mapping_tools
     shell:
         """
         map_arr=({params.tools})
-        tool="mapslice"
+        tool="mapsplice"
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
@@ -363,7 +363,7 @@ rule run_minimap:
     shell:
         """
         map_arr=({params.tools})
-        tool="miniamp"
+        tool="minimap"
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
@@ -575,7 +575,7 @@ rule finished_mapping_tools_rule:
         dart=rules.run_dart.output,
         gsnap=rules.run_gsnap.output,
         hisat=rules.run_hisat.output,
-        mapslice=rules.run_mapslice.output,
+        mapsplice=rules.run_mapsplice.output,
         minimap=rules.run_minimap.output,
         segemehl=rules.run_segemehl.output,
         star=rules.run_star.output,
@@ -593,11 +593,12 @@ rule finished_mapping_tools_rule:
         cat {input.dart} >> {output}
         cat {input.gsnap} >> {output}
         cat {input.hisat} >> {output}
-        cat {input.mapslice} >> {output}
+        cat {input.mapsplice} >> {output}
         cat {input.minimap} >> {output}
         cat {input.segemehl} >> {output}
         cat {input.star} >> {output}
         cat {input.subjunc} >> {output}
+	    docker run --rm --name  dicast-handlingsamfiles -v /nfs/proj/AS_dockers/amit/dockers:/MOUNT -u $(id -u):$(id -g) ubuntu:base -c 'source /MOUNT/scripts/config.sh && source  /MOUNT/scripts/asevent_func.sh && source /MOUNT/scripts/asevent_config.sh && handlesamfiles 0'
         """
 
 rule run_kissplice:
