@@ -1,4 +1,4 @@
-FROM ubuntu:base
+FROM ubuntu:conda
 LABEL description="Image for MAJIQ"
 LABEL maintainer="Alexander Dietrich"
 

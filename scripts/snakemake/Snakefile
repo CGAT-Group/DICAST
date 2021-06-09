@@ -130,7 +130,7 @@ rule run_contextmap:
             fi
 
             find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
-            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            for i in $(find output/"$tool"-output/controldir/ -name "*.sam"  ); do j=$(basename $(dirname $i)); mv $i input/controldir/bamdir/$j.sam; done ;
             echo "Finished $tool at $(date)" | tee {output}
 
         else
@@ -345,7 +345,7 @@ rule run_mapsplice:
             fi
 
             find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
-            find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            for i in $(find output/"$tool"-output/controldir/ -name "*.sam"  ); do j=$(basename $(dirname $i)); mv $i input/controldir/bamdir/$j.sam; done ;
             echo "Finished $tool at $(date)" | tee {output}
 
         else

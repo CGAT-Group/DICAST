@@ -2,7 +2,7 @@ FROM  dicast/star:0.2 as builder
 
 
 #this is the final docker image
-FROM ubuntu:base
+FROM ubuntu:conda
 LABEL description="Image for IRFinder"
 LABEL maintainer="Alexander Dietrich"
 
