@@ -29,6 +29,9 @@ RUN R -e "install.packages(c('optparse','BiocManager'),dependencies=TRUE,repos='
 RUN R -e "BiocManager::install('rtracklayer',update=TRUE,ask=FALSE)"
 RUN R -e "BiocManager::install('ASpli',update=TRUE,ask=FALSE)"
 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+ python3.8 python3-pip
+
 WORKDIR /docker_main
 
 COPY [--chown=nobody:nogroup] ./ASpli.R /docker_main/ASpli.R

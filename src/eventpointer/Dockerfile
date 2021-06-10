@@ -27,6 +27,9 @@ conda config --add channels conda-forge "
 RUN R -e "install.packages(c('BiocManager','optparse'),dependencies=TRUE,repos='http://cran.rstudio.com/')"  
 RUN R -e "BiocManager::install('EventPointer',update=TRUE,ask=FALSE)" 
 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+ python3.8 python3-pip
+
 WORKDIR /docker_main
 
 COPY [--chown=nobody:nogroup] ./EventPointer.R /docker_main/EventPointer.R
