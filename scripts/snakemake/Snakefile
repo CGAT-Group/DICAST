@@ -598,7 +598,7 @@ rule finished_mapping_tools_rule:
         cat {input.segemehl} >> {output}
         cat {input.star} >> {output}
         cat {input.subjunc} >> {output}
-	    docker run --rm --name  dicast-handlingsamfiles -v /nfs/proj/AS_dockers/amit/dockers:/MOUNT -u $(id -u):$(id -g) ubuntu:base -c 'source /MOUNT/scripts/config.sh && source  /MOUNT/scripts/asevent_func.sh && source /MOUNT/scripts/asevent_config.sh && handlesamfiles 0'
+	    docker run --rm --name  dicast-handlingsamfiles -v {working_directory}:/MOUNT -u $(id -u):$(id -g) ubuntu:base -c 'source /MOUNT/scripts/config.sh && source  /MOUNT/scripts/asevent_func.sh && source /MOUNT/scripts/asevent_config.sh && handlesamfiles 0'
         """
 
 rule run_kissplice:
