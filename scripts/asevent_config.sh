@@ -10,6 +10,7 @@ fastqpair1suffix="_1.fastq"                                             #suffix 
 fastqpair2suffix="_2.fastq"                                             #suffix for second file of fastq-pair
 use_bam_input_files=0                                                   #determines what kind of input to use: 1 for bam files, 0 for fastq files
 
+combine_events=0                                                        #For some tools, a unified output format is available. This sets wether or not the unification should combine multiple events into one event type. See documentation for more information.
 #####################################
 # values for differential analysis  #
 #####################################

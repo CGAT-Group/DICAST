@@ -82,7 +82,7 @@ def run_create(args):
 
 def run(tool, args):
     header = "chr\tgene\tid\tstrand\tevent_type\tcount\tstart_coordinates\tend_coordinates\n"
-    outfile = args.outdir + "/" + tool.NAME + ".unified.out"
+    outfile = args.outdir + "/" + os.path.basename(os.path.normpath(args.outdir)) + ".out"
     if not os.path.exists(args.outdir):
         os.mkdir(args.outdir)
     with open(outfile, 'w') as f:

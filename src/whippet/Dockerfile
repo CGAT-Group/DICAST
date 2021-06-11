@@ -24,6 +24,8 @@ RUN julia -e 'Pkg.init(); Pkg.resolve(); Pkg.add("Whippet"); using Whippet'
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
  python3.8 python3-pip
 
+RUN pip3 install --no-cache-dir pandas
+
 WORKDIR /docker_main
 #create link to whippet scripts
 RUN ln -s /opt/.julia/v0.6/Whippet/bin /docker_main/
