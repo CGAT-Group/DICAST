@@ -36,6 +36,9 @@ RUN R -e "install.packages(c('BiocManager','optparse'),dependencies=TRUE,repos='
 RUN R -e "BiocManager::install(c('SGSeq','GenomicFeatures'),update=TRUE,ask=FALSE)" 
 RUN chmod 777 /usr/local/ -R 
 
+RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
+ python3.8 python3-pip
+
 WORKDIR /docker_main
 
 COPY [--chown=nobody:nogroup] ./SGSeq.R /docker_main/SGSeq.R
