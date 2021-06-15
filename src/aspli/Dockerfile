@@ -30,7 +30,8 @@ RUN R -e "BiocManager::install('rtracklayer',update=TRUE,ask=FALSE)"
 RUN R -e "BiocManager::install('ASpli',update=TRUE,ask=FALSE)"
 
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
- python3.8 python3-pip
+  python3-pip
+RUN pip3 install --no-cache-dir pandas
 
 WORKDIR /docker_main
 

@@ -62,8 +62,8 @@ print(paste0("Building TxDB with ",opt$gtf,"..."))
 TxDb <- makeTxDbFromGFF(file=opt$gtf, format="gtf") #the gtf file
 
 # extract features from annotation
-dir.create(paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y")))
-features <- binGenome(TxDb,logTo=paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y"),"/ASpli_binFeatures.log"))
+dir.create(paste0(opt$out))
+features <- binGenome(TxDb,logTo=paste0(opt$out,"/ASpli_binFeatures.log"))
 
 print("loading BAM-file(s)...")
 #loading bam
@@ -72,17 +72,17 @@ bam <- loadBAM(targets,cores=cores)
 print("counting reads...")
 #Reads counting
 counts <- readCounts (features, bam, targets, cores = cores, readLength = readLength, maxISize = 50000, minAnchor = 10 ) #cores, readLength
-writeCounts(counts=counts, output.dir = paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y"),"/ASpli_counts"))
+writeCounts(counts=counts, output.dir = paste0(opt$out,"/ASpli_counts"))
 
 print("discovering as events...")
 #AS discovery
 
 as <- AsDiscover( counts, targets, features, bam, readLength=readLength, threshold = 5, cores = cores)
-writeAS(as=as, output.dir=paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y"),"/ASpli_as"))
+writeAS(as=as, output.dir=paste0(opt$out,"/ASpli_as"))
 
 #Differential Analysis
 if(differential){
 	print("differential analysis starting...")
 	du <- DUreport( counts, targets)
-	writeDU(du, output.dir=paste0(opt$out,'/',format(Sys.time(), "%b-%d-%a-%Y"),"/ASpli_du"))
+	writeDU(du, output.dir=paste0(opt$out,"/ASpli_du"))
 }
