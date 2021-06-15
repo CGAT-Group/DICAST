@@ -18,6 +18,8 @@ RUN pip3.6 install --no-cache-dir -U wheel setuptools
 RUN pip3.6 install --no-cache-dir -U numpy cython
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y git
 
+# Install unification dependencies
+RUN pip3.6 install --no-cache-dir -U pandas
 
 #download and install majiq from source
 WORKDIR /tmp

@@ -63,6 +63,33 @@ then
 		# create voila.tsv outputfiles
 		voila tsv $outdir/$outdir_name/build/splicegraph.sql $outdir/$outdir_name/psi/*.voila -f $outdir/$outdir_name/voila.tsv
 		wait
+
+		echo "Running $tool unificiation..."
+
+		echo "Looking for whippet files in $outdir/$outdir_name"
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+
+		if [[ -f "$outdir/$outdir_name/psi/BAM.psi.tsv" && -f "$outdir/$outdir_name/voila.tsv" ]]; then
+
+			# Save all majiq output files to the same new tmp directory
+			uni_tmp="/tmp/unification_tmpdir"
+			mkdir $uni_tmp
+			ln -sf $outdir/$outdir_name/psi/BAM.psi.tsv $uni_tmp/BAM.psi.tsv
+			ln -sf $outdir/$outdir_name/voila.tsv $uni_tmp/voila.tsv
+			mkdir $unified_outdir_name
+
+			if [ $combine_events = 0 ];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf
+			else
+				python3 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf -comb
+			fi
+		else 
+			echo "Couldn't find necessary input files for unification."
+		fi
+
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 	cleaner
 fi
