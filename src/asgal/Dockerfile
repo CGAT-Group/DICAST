@@ -57,7 +57,7 @@ RUN cd galig ; make prerequisites
 #RUN cd galig ; make
 
 VOLUME ["/data"]
-COPY ENTRYPOINT.sh /galig/ENTRYPOINT.sh
+COPY ENTRYPOINT.sh /docker_main/galig/ENTRYPOINT.sh
 RUN chmod 777 /galig/ENTRYPOINT.sh
 ENV PATH $PATH:/galig/asgal
-ENTRYPOINT ["/galig/ENTRYPOINT.sh"]
+ENTRYPOINT ["/docker_main/galig/ENTRYPOINT.sh"]
