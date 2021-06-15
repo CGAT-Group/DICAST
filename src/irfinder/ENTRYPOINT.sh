@@ -79,6 +79,24 @@ then
 		#run irdinder
 		IRFinder -r $outdir/irfinder_index -d $sample_out $fastq1 $fastq2
 		wait
+
+		echo "Running $tool unificiation..."
+		
+		tmp="${fastq1##*/}"
+		fastq_name="${tmp%%.*}"
+		outdir_name="${fastq_name}_output"
+		echo "Looking for $tool files in $outdir/$outdir_name"
+		
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+			
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+		fi
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 
 
@@ -89,7 +107,27 @@ then
 	bams=$(cat /tmp/controlbamlist)
 	for bam in $bams
 	do
-       		IRFinder -m BAM -r $outdir/irfinder_index -d $outdir $bam
+		sample_out=$(mk_sample_out $bam)
+		IRFinder -m BAM -r $outdir/irfinder_index -d $sample_out $bam
        		wait
+		
+		echo "Running $tool unificiation..."
+
+		tmp="${bam##*/}"
+                bam_name="${tmp%%.*}"
+                outdir_name="${bam_name}_output"
+
+		echo "Looking for $tool files in $outdir/$outdir_name"
+		
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+			
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+		fi
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 fi

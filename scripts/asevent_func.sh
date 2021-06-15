@@ -182,10 +182,10 @@ readfastqs(){
 #Parameter: BAM filename of sample
 mk_sample_out(){
 	tmp="${1##*/}"	#get basename of file
-    sample_out="${tmp%%.*}"	#remove all file extensions after first .
-    mkdir -p $outdir/$sample_out-output
-	chmod -R 777 $outdir/$sample_out-output
-	echo $outdir/$sample_out-output
+	sample_out="${tmp%%.*}"	#remove all file extensions after first .
+	mkdir -p $outdir/${sample_out}_output
+	chmod -R 777 $outdir/${sample_out}_output
+	echo $outdir/${sample_out}_output
 }
 
 
