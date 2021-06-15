@@ -50,9 +50,9 @@ if [ $differential = 0  ]; then
 
 		if [ $combine_events = 0 ]; 
 		then
-			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf {params.gtf}
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf
 		else
-			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf {params.gtf} -comb
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf -comb
 		fi
 		echo "Finished $tool unification for ${outdir_name}."
 	done
