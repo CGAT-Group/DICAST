@@ -1,4 +1,4 @@
-FROM ubuntu:conda
+FROM ubuntu:base
 LABEL description="Image for Whippet"
 LABEL maintainer="Alexander Dietrich"
 
