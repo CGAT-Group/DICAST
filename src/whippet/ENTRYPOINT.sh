@@ -29,7 +29,7 @@ if [ $differential = 0  ]; then
 		#samtools rmdup -S $outdir/tmp/$filename.sorted.bam $outdir/tmp/$filename.sorted.rmdup.bam
 		#samtools index $outdir/tmp/$filename.sorted.rmdup.bam 
 
-		echo "Buildiung splice graph for $filename ..."
+		echo "Building splice graph for $filename ..."
 		outdir_name=$(basename -s .bam $filename)_output
 		mkdir -p $outdir/$outdir_name
 		julia /docker_main/bin/whippet-index.jl --fasta $fasta --gtf $gtf --bam $filename -x $outdir/$outdir_name/graph
