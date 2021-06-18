@@ -16,7 +16,7 @@ def checkES(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "es":
+        if gene is None or event_type != "es":
             continue
         if current_event_index == 1:
             if strand == "+":
@@ -58,7 +58,7 @@ def checkIR(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "ir":
+        if gene is None or event_type != "ir":
             continue
         if current_event_index == 1:
             if strand == "+":
@@ -85,7 +85,7 @@ def checkMEE(events):
     result = []
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "mee":
+        if gene is None or event_type != "mee":
             continue
         if current_event_index == 1:
             # if exon.getEnd() != end or exons[index + 2].getStart() != start:
@@ -145,7 +145,7 @@ def checkA3(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "a3":
+        if gene is None or event_type != "a3":
             continue
         if current_event_index == 1:
             result.add(EventPointerParser.createA3(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
@@ -157,7 +157,7 @@ def checkA5(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "a5":
+        if gene is None or event_type != "a5":
             continue
         if current_event_index == 1:
             result.add(EventPointerParser.createA5(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
@@ -168,7 +168,7 @@ def checkAFE(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "afe" or gen_posi is None:
+        if gene is None or event_type != "afe" or gen_posi is None:
             continue
         result.add(EventPointerParser.createAFE(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
 
@@ -179,7 +179,7 @@ def checkALE(events):
     result = set()
     for event in events:
         chrm, gene, strand, gen_posi, event_type, current_event_index, corresponding_events_number, combine_me = event
-        if gene is None or event_type is not "ale" or gen_posi is None:
+        if gene is None or event_type != "ale" or gen_posi is None:
             continue
         result.add(EventPointerParser.createALE(gene=gene.feature_id, chrm=chrm, start=gen_posi.start, end=gen_posi.end, strand=strand, gtf_gene=gene, combine_me=combine_me))
 

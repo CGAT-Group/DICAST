@@ -14,7 +14,9 @@ RUN R -e "BiocManager::install(c('SGSeq','GenomicFeatures'),update=TRUE,ask=FALS
 RUN chmod 777 /usr/local/ -R 
 
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
- python3.8 python3-pip
+ python3 python3-pip
+
+RUN pip3 install --no-cache-dir pandas
 
 WORKDIR /docker_main
 
