@@ -68,18 +68,14 @@ readsamfiles(){
 }
 
 
-indexbam(){
-	if [ ! -s ${1}.bai ] ; then
-		samtools index $1  -@ 4
-	fi
-}
 
 #sort bams if unsorted
 sortnindexbam(){
-	if [[ ! "$(samtools view -H $1 | grep SO: | cut -f 3 | cut -d ":" -f2)" == "coordinate" ]]; then
+	if [ ! -s ${1}.bai ]
+	#if [[ ! "$(samtools view -H $1 | grep SO: | cut -f 3 | cut -d ":" -f2)" == "coordinate" ]]; then
 		#local bamname=$(basename -s .bam $1)
-			samtools sort $1 -o $1 && \
-			indexbam $1
+		then	samtools sort $1 -o $1 && \
+			samtools index $1  -@ 4 ;
 	fi
 }
 
