@@ -1,4 +1,5 @@
-FROM ubuntu:base
+FROM ubuntu:20.04  
+#do not change
 
 ## for apt to be noninteractive
 ENV DEBIAN_FRONTEND noninteractive
@@ -24,40 +25,21 @@ RUN apt-get install -qqy \
     python3-biopython-sql \
     python3-pandas \
     python3-pip \
-#    python3-pysam \
+    python3-pysam \
     python3-setuptools \
     samtools \
+    util-linux \
     wget \
     zlib1g-dev
 RUN apt-get clean
-RUN pip3 install gffutils pysam
+RUN pip3 install gffutils
 
-
-# Install gosu
-ENV GOSU_VERSION 1.12
-RUN set -eux; \
-# save list of currently installed packages for later so we can clean up
-	dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
-	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
-	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	#gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
-	#gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
-	command -v gpgconf && gpgconf --kill all || :; \
-	rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc; \
-	\
-# clean up fetch dependencies
-	chmod +x /usr/local/bin/gosu; \
-# verify that the binary works
-	gosu --version; \
-	gosu nobody true
-
-RUN git clone --recursive https://github.com/AlgoLab/galig.git
+RUN git clone --depth=1 --recursive https://github.com/AlgoLab/galig.git
 RUN cd galig ; make prerequisites
-#RUN cd galig ; make
+RUN cd galig ; make
 
-VOLUME ["/data"]
-COPY ENTRYPOINT.sh /docker_main/galig/
-RUN chmod 777 /docker_main/galig/ENTRYPOINT.sh
-ENV PATH $PATH:/docker_main/galig/asgal
-ENTRYPOINT ["/docker_main/galig/ENTRYPOINT.sh"]
+COPY ENTRYPOINT.sh /galig/
+RUN chmod 777 /galig/ENTRYPOINT.sh
+RUN chmod og+rw /galig/ -R
+ENV PATH $PATH:/galig/asgal
+ENTRYPOINT ["/galig/ENTRYPOINT.sh"]
