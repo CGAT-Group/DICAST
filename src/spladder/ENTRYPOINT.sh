@@ -21,9 +21,11 @@ handlesamfiles $differential
 if [ $differential = 0 ]
 then
 	#list all .bam files in bamfolder with comma seperated
-	bamlist=$(ls -1p $controlbam/*.bam | xargs echo | sed 's/ /,/g')
-	echo Starting spladder in event detection mode ...
-	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length --output-txt-conf
+	for bamfile in $bamlist do
+		bam_specific_out= $outdir/$(basename -- $bamfile)
+		mkdir -p bam_specific_out
+		echo Starting spladder in event detection mode for bamfile ...
+		spladder build -b $bamfile -o $bam_specific_out -a $gtf --parallel $ncores -n $read_length --output-txt-conf
 	cleaner
 fi
 
