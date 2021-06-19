@@ -5,6 +5,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
 
 ##### START here ###############
 
@@ -37,4 +39,3 @@ if [ $differential = 1 ]; then
 	wait
 	cleaner_diff
 fi
-
