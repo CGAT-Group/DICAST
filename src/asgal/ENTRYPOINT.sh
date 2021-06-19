@@ -35,7 +35,7 @@ for ((i=0;i<nPartners;++i)); do
 	#create output folder for fastq-pair (named by first file)
 	sample_out=$(mk_sample_out $fastq1)
 	#run ASGAL
-	/docker_main/galig/asgal --multi -g $fasta -a $gtf -t $transcript -s $fastq1 -s2 $fastq2 -o $sample_out -@ $ncores
+	/galig/asgal --multi -g $fasta -a $gtf -t $transcript -s $fastq1 -s2 $fastq2 -o $sample_out -@ $ncores --allevents
 	wait
 done
 
