@@ -22,7 +22,7 @@ if [ $differential = 0 ]
 then
 	#list all .bam files in bamfolder with comma seperated
 	for bamfile in $bamlist do
-		bam_specific_out= $outdir/$(basename -- $bamfile)
+		bam_specific_out=$outdir/$(basename -- $bamfile)
 		mkdir -p bam_specific_out
 		echo Starting spladder in event detection mode for bamfile ...
 		spladder build -b $bamfile -o $bam_specific_out -a $gtf --parallel $ncores -n $read_length --output-txt-conf
