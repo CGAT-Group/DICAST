@@ -12,7 +12,7 @@ read_length=76                                          	#length of reads inside
 #############################
 
 
-inputdir=$workdir/short_input
+inputdir=$workdir/input
 controlfolder=$inputdir/controldir         			#base directory for all needed input files (when no differential comparison, control inputs when differential AS Event Detection)
 casefolder=$inputdir/casedir					#base directory for only case files (for AS Event detection)
 fastqdir=$controlfolder/fastqdir       				#directory for fastqfiles
@@ -28,53 +28,12 @@ star_index=$workdir/index/star_index                                   #folder c
 #     Input Parameters     #
 ############################
 
+asimulator_gtf=Homo_sapiens.GRCh38.104.gtf			#name of the GTF file used to generate simulated data within ASimulatoR R library.
 fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa           #name of the genome reference file (fasta format), directory=$fastadir
-gtfname=splicing_variants.gtf                                   #name of gtf reference file, directory=$gtffile
-gffname=splicing_variants.gff3                                  #name of gff reference file, directory=$gfffile
-
-fasta=${fastadir:-unspecific}/$fastaname                        #fasta full path
-gtf=${gtfdir:-unspecific}/$gtfname                              #gtf full path
-gff=${gffdir:-unspecific}/$gffname                              #gff full path
-
-#################################
-#     ASimulatoR Parameters     #
-#################################
-
-asimulator_inputdir=/nfs/home/students/tfaro/dockers/src/ASimulatoR/in
-asimulator_outputdir=/nfs/home/students/tfaro/dockers/src/ASimulatoR/out
+gtfname=ASimulatoR.gtf        	       	                #name of gtf reference file, directory=$gtffile; set to ASimulatoR_gtf.gtf, when ASimulator is true
+gffname=ASimulatoR.gff3					#set to ASimulatoR_gff.gff3, when ASimulator is true
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+fasta=${fastadir}/$fastaname                        #fasta full path
+gtf=${gtfdir}/$gtfname                              #gtf full path
+gff=${gffdir}/$gffname                              #gff full path

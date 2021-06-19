@@ -31,7 +31,7 @@ for line1 in $(ls ${line}*.fastq| sed s/.fastq// );
 do
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 	--genomeDir $star_index/$indexname \
-	--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line1##*/}_${tool} \
+	--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line1##*/}${tool} \
 	--sjdbGTFfile $gtf  \
 	--twopassMode Basic \
 	--runThreadN $ncores \
@@ -72,7 +72,7 @@ while read -r line; do
 	echo mapping paired
 	/docker_main/STAR-2.7.5c/bin/Linux_x86_64/STAR \
 		--genomeDir $star_index/$indexname \
-		--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}_${tool} \
+		--outFileNamePrefix $outdir/$(basename $(dirname $(dirname $line)))/${line##*/}${tool} \
 		--sjdbGTFfile $gtf  \
 		--twopassMode Basic \
 		--runThreadN $ncores \

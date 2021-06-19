@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:base
 
 ## for apt to be noninteractive
 ENV DEBIAN_FRONTEND noninteractive
@@ -24,13 +24,13 @@ RUN apt-get install -qqy \
     python3-biopython-sql \
     python3-pandas \
     python3-pip \
-    python3-pysam \
+#    python3-pysam \
     python3-setuptools \
     samtools \
     wget \
     zlib1g-dev
 RUN apt-get clean
-RUN pip3 install gffutils
+RUN pip3 install gffutils pysam
 
 
 # Install gosu
@@ -57,7 +57,7 @@ RUN cd galig ; make prerequisites
 #RUN cd galig ; make
 
 VOLUME ["/data"]
-COPY ENTRYPOINT.sh /galig/ENTRYPOINT.sh
-RUN chmod 777 /galig/ENTRYPOINT.sh
-ENV PATH $PATH:/galig/asgal
-ENTRYPOINT ["/galig/ENTRYPOINT.sh"]
+COPY ENTRYPOINT.sh /docker_main/galig/
+RUN chmod 777 /docker_main/galig/ENTRYPOINT.sh
+ENV PATH $PATH:/docker_main/galig/asgal
+ENTRYPOINT ["/docker_main/galig/ENTRYPOINT.sh"]

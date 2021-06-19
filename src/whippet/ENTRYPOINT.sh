@@ -37,9 +37,27 @@ if [ $differential = 0  ]; then
 		mkdir -p $outdir/$outdir_name
 		julia /docker_main/bin/whippet-index.jl --fasta $fasta --gtf $gtf --bam $filename -x $outdir/$outdir_name/graph
 		echo Starting Whippet in AS event detection mode...
-	        julia /docker_main/bin/whippet-quant.jl <(cat $fastqdir/*) -x $outdir/$outdir_name/graph -o $outdir/$outdir_name/whippet-out
-        	cleaner
+		julia /docker_main/bin/whippet-quant.jl <(cat $fastqdir/*) -x $outdir/$outdir_name/graph -o $outdir/$outdir_name/whippet-out
+		cleaner
 
+		echo "Running $tool unificiation..."
+
+		echo "Looking for whippet files in $outdir/$outdir_name"
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+
+		# Unzip whippet output files and save to new tmp directory 
+		uni_tmp="/tmp/unification_tmpdir"
+		mkdir $uni_tmp
+		gunzip -c $outdir/$outdir_name/whippet-out.psi.gz > $uni_tmp/whippet-out.psi
+
+		if [ $combine_events = 0 ]; 
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf -comb
+		fi
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 fi
 

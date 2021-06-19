@@ -3,15 +3,15 @@
 #
 # Overwrite_acknowledge_choice__ = ["Yes", "No"]
 Possible_overwrite_acknowledge:
-    do: false
+    do: true
 
 #########################################
 # Do you want to run the ASimulatoR?    
 #
 # Start_ASimulatoR_with_run_choice__ = ["Yes", "No"]
 ASimulatoR:
-    do: false
-    ASimulatoR_config_directory: /home/tmf/Science/snake_mock/scripts
+    do: true
+#    ASimulatoR_config_directory: ../../scripts
 
 #########################################
 # Enter the name of the mapping tools you want to run as a space separated list.
@@ -24,7 +24,7 @@ Mapping_tools:
 #########################################
 # Enter the name of the alternative splicing detection tools you want to run as a space separated list.
 #
-# Currently we support asgal, aspli, eventpointer, irfinder, kissplice, majiq, sgseq, spladder, whippet
+# Currently we support asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
 #
 Alternative_splicing_detection_tools:
     What_tools_to_run: ''
@@ -54,4 +54,4 @@ Output_unification:
 # The file name has to be the same as the config parameter.
 #
 Report:
-    Report_file_name: sample_report.html
+    Report_file_name: dicast_snakemake_report.html
