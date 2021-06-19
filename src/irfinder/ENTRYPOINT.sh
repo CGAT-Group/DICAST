@@ -5,6 +5,9 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
+
 #cleaning up
 trap cleaner EXIT
 
@@ -37,7 +40,7 @@ ln -sf $fasta $outdir/irfinder_index/genome.fa
 
 #build reference
 echo building reference...
-IRFinder -m BuildRefProcess -r $outdir/irfinder_index 
+IRFinder -m BuildRefProcess -r $outdir/irfinder_index
 wait
 echo reference built, moving on...
 
@@ -60,13 +63,13 @@ then
 
 
 	#check if both arrays are of same size
-	if [ ${#partner1fastqlist[@]} != ${#partner2fastqlist[@]} ] 
-	then 	
-		echo Did not find a pair for each fastq-file! Please check that each fastq file has a forward and reverse version and they share the suffixed, given in the config file. 	
-		exit 1 
+	if [ ${#partner1fastqlist[@]} != ${#partner2fastqlist[@]} ]
+	then
+		echo Did not find a pair for each fastq-file! Please check that each fastq file has a forward and reverse version and they share the suffixed, given in the config file.
+		exit 1
 	fi
 
-	
+
 	nPartners=${#partner2fastqlist[@]}
 	#iterate over fastqlists and run irfinder for each fastq-pair
 	for ((i=0;i<nPartners;++i)); do

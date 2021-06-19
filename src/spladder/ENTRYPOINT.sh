@@ -1,9 +1,12 @@
 #!/bin/bash
 
 tool=spladder
-source /MOUNT/scripts/config.sh 
+source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
+
+### logging ###
+start_logging
 
 #cleaning up
 trap cleaner EXIT
@@ -18,9 +21,13 @@ handlesamfiles $differential
 if [ $differential = 0 ]
 then
 	#list all .bam files in bamfolder with comma seperated
-	bamlist=$(ls -1p $controlbam/*.bam | xargs echo | sed 's/ /,/g')
-	echo Starting spladder in event detection mode ...
-	spladder build -b $bamlist -o $outdir -a $gtf --parallel $ncores -n $read_length --output-txt-conf
+	while read -r bamfile; do
+		bam_specific_out=$outdir/$(basename -- $bamfile)
+		mkdir -p $bam_specific_out/
+		chmod -R 777 $bam_specific_out/
+		echo Starting spladder in event detection mode for $(basename -- $bamfile) ...
+		spladder build -b $bamfile -o $bam_specific_out -a $gtf --parallel $ncores -n $read_length --output-txt-conf
+	done < /tmp/controlbamlist
 	cleaner
 fi
 

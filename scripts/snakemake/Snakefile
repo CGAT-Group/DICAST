@@ -12,7 +12,7 @@ try:
     report_out = config["Report"]["Report_file_name"]
     mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
     as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
-    asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
+    #asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
     overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
     run_asimulator = config["ASimulatoR"]['do']
     unification_input = config["Output_unification"]["Base_input_directory"]
@@ -20,10 +20,10 @@ try:
     unification_tools = config["Output_unification"]["Create_unified_output_for"]
     unification_gtf = config["Output_unification"]["GTF_file"]
     combine_me = config["Output_unification"]["Combine_me"]
-    if asimulator_config_folder is '' and run_asimulator is True:
-        raise KeyError("ASimulatoR config folder has to be specified.")
-    if (unification_gtf is '' or unification_input is '' or unification_output is '' or unification_output is '') and unification_tools is not "":
-        raise KeyError("Unification GTF file, Unification input folder and Unification output folder have to be specified.")
+#    if asimulator_config_folder is '' and run_asimulator is True:
+#        raise KeyError("ASimulatoR config folder has to be specified.")
+#    if (unification_gtf is '' or unification_input is '' or unification_output is '' or unification_output is '') and unification_tools is not "":
+#        raise KeyError("Unification GTF file, Unification input folder and Unification output folder have to be specified.")
 
 except KeyError:
     print("One or more configuration parameters could not be found! Wrong config file specified?\n")
@@ -89,7 +89,7 @@ rule run_asimulator_rule:
         if [[ "{params.run_asim}" == "True" ]]
         then
             echo "Running ASimulatoR"
-            ./src/ASimulatoR/run_asimulator.sh -c {asimulator_config_folder} | tee {output}
+            ./src/ASimulatoR/run_asimulator.sh -c {working_directory}/scripts | tee {output}
         else
             echo "Didn't run ASimulatoR." | tee {output}
         fi
