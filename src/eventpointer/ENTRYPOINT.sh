@@ -5,6 +5,8 @@ source /MOUNT/scripts/config.sh
 source /MOUNT/scripts/asevent_config.sh
 source /MOUNT/scripts/asevent_func.sh
 
+### logging ###
+start_logging
 
 ##### START here ###############
 
@@ -26,17 +28,14 @@ if [ $differential = 0 ]; then
 	Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores --out $outdir --bamfolder $controlbam --differential $differential
 	for i in $(cat /tmp/controlbamlist)
 		do outdir_name=$(basename $i)
-		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
-		mkdir -p /tmp/bams/$outdir_name 
-		ln -s $i /tmp/bams/$outdir_name/$outdir_name 
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast-unified"
 		if [ $combine_events = 0 ];
 	            then 
-                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e /tmp/bams/$outdir_name/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
+                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
 
 	            else
-                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e /tmp/bams/$outdir_name/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
+                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
 	            fi
-		rm -r /tmp/bams/$outdir_name
 		echo Finished Eventpointer run for $outdir_name -----------------------
 	done
 	wait
@@ -52,4 +51,3 @@ if [ $differential = 1 ]; then
 	wait
 	cleaner_diff
 fi
-

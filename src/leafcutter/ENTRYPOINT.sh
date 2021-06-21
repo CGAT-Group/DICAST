@@ -17,6 +17,7 @@ mk_outdir
 #handle samfiles
 handlesamfiles 1
 
+trap cleaner EXIT
 
 #convert bam to junc files:
 #also create grouping txt file 
@@ -67,4 +68,3 @@ rm -f $outdir/controljunc.txt
 rm -f /tmp/casebamlist
 rm -f /tmp/controlbamlist
 rm -f $outdir/gtf.gz
-cleaner
