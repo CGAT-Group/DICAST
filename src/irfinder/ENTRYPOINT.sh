@@ -25,22 +25,22 @@ handlesamfiles 0
 
 #link/move gtf and fasta files into output folder
 echo linking annotation files into reference folder...
-mkdir -p $outdir/irfinder_index
+mkdir -p $indexdir/irfinder_index
 
 #check if GTF is for IRFinder, else attempt to 'fix' issue
 if grep biotype $gtf ; then
-	ln -sf $gtf $outdir/irfinder_index/transcripts.gtf
+	ln -sf $gtf $indexdir/irfinder_index/transcripts.gtf
 else
 	echo Attempting to \'fix\' gtf by adding \'biotype\' like IRFinder wants...
-	python /docker_main/gtf_for_irfinder.py $gtf $outdir/irfinder_index/transcripts.gtf
+	python /docker_main/gtf_for_irfinder.py $gtf $indexdir/irfinder_index/transcripts.gtf
 fi
 
-ln -sf $fasta $outdir/irfinder_index/genome.fa
+ln -sf $fasta $indexdir/irfinder_index/genome.fa
 
 
 #build reference
 echo building reference...
-IRFinder -m BuildRefProcess -r $outdir/irfinder_index
+IRFinder -m BuildRefProcess -r $indexdir/irfinder_index
 wait
 echo reference built, moving on...
 
@@ -80,7 +80,7 @@ then
 		#create output folder for fastq-pair (named by first file)
 		sample_out=$(mk_sample_out $fastq1)
 		#run irdinder
-		IRFinder -r $outdir/irfinder_index -d $sample_out $fastq1 $fastq2
+		IRFinder -r $indexdir/irfinder_index -d $sample_out $fastq1 $fastq2
 		wait
 
 		echo "Running $tool unificiation..."
@@ -111,7 +111,7 @@ then
 	for bam in $bams
 	do
 		sample_out=$(mk_sample_out $bam)
-		IRFinder -m BAM -r $outdir/irfinder_index -d $sample_out $bam
+		IRFinder -m BAM -r $indexdir/irfinder_index -d $sample_out $bam
        		wait
 		
 		echo "Running $tool unificiation..."
