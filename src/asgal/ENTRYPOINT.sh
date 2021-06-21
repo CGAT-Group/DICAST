@@ -12,7 +12,7 @@ start_logging
 trap cleaner EXIT
 
 #make output directory
-mk_outdir
+#mk_outdir
 handlesamfiles
 #one asgal run needs a pair of fastq-files; in the config file the user gave the suffixes which correspond to the partnered fastq-files
 #save all partners with same suffix in array
@@ -36,8 +36,20 @@ for ((i=0;i<nPartners;++i)); do
 	fastq2=${partner2fastqlist[i]}
 	echo "Starting ASGAL run for $fastq1 and $fastq2 ..."
 	#create output folder for fastq-pair (named by first file)
-	sample_out=$(mk_sample_out $fastq1)
+	fastqname=$(basename $fastq1 .fastq | sed 's/..$//')
+	sample_out=$(mk_sample_out $fastqname)
+	unified_outdir_name="${sample_out}_${tool}_unified"
+
 	#run ASGAL
 	/galig/asgal --multi -g $fasta -a $gtf -t $transcript -s $fastq1 -s2 $fastq2 -o $sample_out -@ $ncores --allevents
+	cat $sample_out/ASGAL/*.events.csv | head -n1 > $sample_out/ASGAL/all.events.csv
+	cat $sample_out/ASGAL/*.events.csv | grep -v 'Type,Start' >> $sample_out/ASGAL/all.events.csv
+	mkdir -p $unified_outdir_name
+	if [ $combine_events = 0 ]; 
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL/all.events.csv -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL/all.events.csv -out $unified_outdir_name -gtf $gtf -comb
+		fi
 	wait
 done
