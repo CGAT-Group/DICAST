@@ -43,6 +43,8 @@ class ASGALParser(ToolParser):
         transcripts = event_line[4].split("/")
         gene = transcripts[0].split("_")[0]
         gene = self.gtf.genes.get(gene)
+        if gene is None:
+            return None
         chromosome = gene.chr.id
         idx = str(gene.feature_id + "_" + str(event_line[1]) + "_" + str(event_line[2]))
 
