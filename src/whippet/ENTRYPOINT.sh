@@ -42,7 +42,7 @@ if [ $differential = 0  ]; then
 
 		echo "Running $tool unificiation..."
 
-		echo "Looking for whippet files in $outdir/$outdir_name"
+		echo "Looking for $tool files in $outdir/$outdir_name"
 		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
 		echo "Saving unified output to $unified_outdir_name"
 
