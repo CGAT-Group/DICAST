@@ -22,15 +22,8 @@ event_probs = rep(1/(length(as_combs) + 1), length(as_combs))
 names(event_probs) = as_combs
 
 outdir = sprintf(
-    'run_result',
-    output,
-	gsub('[ ]+?', '-', Sys.time()),
-    ifelse(is.null(max_genes), 0, max_genes),
-    seq_depth,
-    error_rate,
-    readlen,
-    multi_events_per_exon,
-    probs_as_freq
+    '%s/',
+    output
   )
 
 params = list(
