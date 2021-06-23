@@ -22,7 +22,7 @@ event_probs = rep(1/(length(as_combs) + 1), length(as_combs))
 names(event_probs) = as_combs
 
 outdir = sprintf(
-    '%s/%s_maxGenes%d_SeqDepth%g_errRate%g_readlen%d_multiEventsPerExon%s_probsAsFreq%s',
+    'run_result',
     output,
 	gsub('[ ]+?', '-', Sys.time()),
     ifelse(is.null(max_genes), 0, max_genes),

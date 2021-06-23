@@ -30,7 +30,7 @@ star_index=$workdir/index/star_index                                   #folder c
 
 asimulator_gtf=Homo_sapiens.GRCh38.104.gtf			#name of the GTF file used to generate simulated data within ASimulatoR R library.
 fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa           #name of the genome reference file (fasta format), directory=$fastadir
-gtfname=ASimulatoR.gtf        	       	                #name of gtf reference file, directory=$gtffile; set to ASimulatoR_gtf.gtf, when ASimulator is true
+gtfname=splicing_variants1.gtf        	       	                #name of gtf reference file, directory=$gtffile; set to ASimulatoR_gtf.gtf, when ASimulator is true
 gffname=ASimulatoR.gff3					#set to ASimulatoR_gff.gff3, when ASimulator is true
 
 
