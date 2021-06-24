@@ -51,11 +51,23 @@ if [ $differential = 0  ]; then
 		mkdir $uni_tmp
 		gunzip -c $outdir/$outdir_name/whippet-out.psi.gz > $uni_tmp/whippet-out.psi
 
-		if [ $combine_events = 0 ]; 
+		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
+
+		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 		echo "Finished $tool unification for ${outdir_name}."
 	done

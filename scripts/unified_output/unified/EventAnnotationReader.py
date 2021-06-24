@@ -32,6 +32,8 @@ class EventAnnotationReader:
                 gene = event_line[2].split("_")[0]
                 idx = gene + "_" + str(idx_number)
                 gtf_gene = gtf.genes.get(gene)
+                if gtf_gene is None:
+                    continue
                 strand = "+" if gtf_gene.is_on_positive_strand() else "-"
                 symbol = gtf_gene.chr.id
                 start = event_line[3]
@@ -99,3 +101,4 @@ class EventAnnotationReader:
 
 
                 idx_number += 1
+
