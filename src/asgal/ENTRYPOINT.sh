@@ -51,5 +51,4 @@ for ((i=0;i<nPartners;++i)); do
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL/all.events.csv -out $unified_outdir_name -gtf $gtf -comb
 		fi
-	wait
 done
