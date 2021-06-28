@@ -8,18 +8,9 @@
 outname=$tool	# basename of output file (will usually be prefixed with the fastq file name and suffixed with .sam)
 
 
-#################
-#     Index     #
-#################
-
-recompute_index=false		#force index to be computed even if index with $indexname already exists
-indexname=${fastaname}_index	#basename of index (without eg. .1.bt2 for bowtie index)
-indexdir=$workdir/index/${tool:-unspecific}_index 	#directory of index
-
 ####################################
 #     Tool specific parameters     #
 ####################################
 
 # Some tools require chromosome-wise fasta-inputs:
 bowtie_fastadir=$inputdir/fasta_chromosomes/
-

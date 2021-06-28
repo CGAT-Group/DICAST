@@ -25,22 +25,22 @@ handlesamfiles 0
 
 #link/move gtf and fasta files into output folder
 echo linking annotation files into reference folder...
-mkdir -p $outdir/irfinder_index
+mkdir -p $indexdir/irfinder_index
 
 #check if GTF is for IRFinder, else attempt to 'fix' issue
 if grep biotype $gtf ; then
-	ln -sf $gtf $outdir/irfinder_index/transcripts.gtf
+	ln -sf $gtf $indexdir/irfinder_index/transcripts.gtf
 else
 	echo Attempting to \'fix\' gtf by adding \'biotype\' like IRFinder wants...
-	python /docker_main/gtf_for_irfinder.py $gtf $outdir/irfinder_index/transcripts.gtf
+	python /docker_main/gtf_for_irfinder.py $gtf $indexdir/irfinder_index/transcripts.gtf
 fi
 
-ln -sf $fasta $outdir/irfinder_index/genome.fa
+ln -sf $fasta $indexdir/irfinder_index/genome.fa
 
 
 #build reference
 echo building reference...
-IRFinder -m BuildRefProcess -r $outdir/irfinder_index
+IRFinder -m BuildRefProcess -r $indexdir/irfinder_index
 wait
 echo reference built, moving on...
 
@@ -80,8 +80,25 @@ then
 		#create output folder for fastq-pair (named by first file)
 		sample_out=$(mk_sample_out $fastq1)
 		#run irdinder
-		IRFinder -r $outdir/irfinder_index -d $sample_out $fastq1 $fastq2
-		wait
+		IRFinder -r $indexdir/irfinder_index -d $sample_out $fastq1 $fastq2
+
+		echo "Running $tool unificiation..."
+		
+		tmp="${fastq1##*/}"
+		fastq_name="${tmp%%.*}"
+		outdir_name="${fastq_name}_output"
+		echo "Looking for $tool files in $outdir/$outdir_name"
+		
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+			
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+		fi
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 
 
@@ -92,7 +109,26 @@ then
 	bams=$(cat /tmp/controlbamlist)
 	for bam in $bams
 	do
-       		IRFinder -m BAM -r $outdir/irfinder_index -d $outdir $bam
-       		wait
+		sample_out=$(mk_sample_out $bam)
+		IRFinder -m BAM -r $indexdir/irfinder_index -d $sample_out $bam
+		
+		echo "Running $tool unificiation..."
+
+		tmp="${bam##*/}"
+                bam_name="${tmp%%.*}"
+                outdir_name="${bam_name}_output"
+
+		echo "Looking for $tool files in $outdir/$outdir_name"
+		
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+			
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${outdir}/${outdir_name}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+		fi
+		echo "Finished $tool unification for ${outdir_name}."
 	done
 fi

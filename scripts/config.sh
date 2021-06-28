@@ -21,7 +21,16 @@ samdir=$controlfolder/bamdir           				#directory for samfiles
 fastadir=$inputdir              				#directory for fastafile (might vary for specific tools -> see mapping or as-specific config file)
 gtfdir=$inputdir                				#directory for gtffile
 gffdir=$inputdir                				#directory for gfffile
-star_index=$workdir/index/star_index                                   #folder containing a star index built with the $gtf and $fasta files (used by: IRFinder, KisSplice, rMATS)
+
+#################
+#     Index     #
+#################
+
+recompute_index=false						#force index to be computed even if index with $indexname already exists
+indexname=${fastaname}_index					#basename of index (without eg. .1.bt2 for bowtie index)
+star_index=$workdir/index/star_index                            #folder containing a star index built with the $gtf and $fasta files (used by: IRFinder, KisSplice, rMATS)
+indexdir=$workdir/index/${tool:-unspecific}_index 		#directory of index
+
 
 
 ############################

@@ -32,7 +32,7 @@ if [ $differential = 0  ]; then
 		#samtools rmdup -S $outdir/tmp/$filename.sorted.bam $outdir/tmp/$filename.sorted.rmdup.bam
 		#samtools index $outdir/tmp/$filename.sorted.rmdup.bam
 
-		echo "Buildiung splice graph for $filename ..."
+		echo "Building splice graph for $filename ..."
 		outdir_name=$(basename -s .bam $filename)_output
 		mkdir -p $outdir/$outdir_name
 		julia /docker_main/bin/whippet-index.jl --fasta $fasta --gtf $gtf --bam $filename -x $outdir/$outdir_name/graph
@@ -42,7 +42,7 @@ if [ $differential = 0  ]; then
 
 		echo "Running $tool unificiation..."
 
-		echo "Looking for whippet files in $outdir/$outdir_name"
+		echo "Looking for $tool files in $outdir/$outdir_name"
 		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
 		echo "Saving unified output to $unified_outdir_name"
 
@@ -51,11 +51,23 @@ if [ $differential = 0  ]; then
 		mkdir $uni_tmp
 		gunzip -c $outdir/$outdir_name/whippet-out.psi.gz > $uni_tmp/whippet-out.psi
 
-		if [ $combine_events = 0 ]; 
+		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
+
+		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -w $uni_tmp/whippet-out.psi -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 		echo "Finished $tool unification for ${outdir_name}."
 	done

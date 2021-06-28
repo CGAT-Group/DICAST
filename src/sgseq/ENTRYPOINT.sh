@@ -35,5 +35,35 @@ do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)
 	Rscript /docker_main/SGSeq.R --gtf $gtf --path_to_bam $filename --out $sample_out --cores $ncores
-	wait
+	
+	
+	echo "Running $tool unificiation..."
+
+	tmp="${filename##*/}"
+	bam_name="${tmp%%.*}"
+	outdir_name="${bam_name}_output"
+	echo "Looking for $tool files in $outdir/$outdir_name"
+
+	if [[ -f "$outdir/$outdir_name/SGSeq_denovo.csv" ]]; 
+	then
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		echo "Saving unified output to $unified_outdir_name"
+		
+		uni_tmp="/tmp/unification_tmpdir"
+		mkdir $uni_tmp
+		
+		#Reformat SGSeq output to work with unification script
+		awk -F '"' '{print $4 "\t" $6 "\t" $(NF-1)}' < ${outdir}/${outdir_name}/SGSeq_denovo.csv > $uni_tmp/SGSeq_denovo_formatted.csv
+
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create --sgseq_denovo $uni_tmp/SGSeq_denovo_formatted.csv -out $unified_outdir_name -gtf $gtf
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create --sgseq_denovo $uni_tmp/SGSeq_denovo_formatted.csv -out $unified_outdir_name -gtf $gtf -comb
+		fi
+	else 
+		echo "Couldn't find necessary input files for unification."
+	fi
+
+	echo "Finished $tool unification for ${outdir_name}."
 done

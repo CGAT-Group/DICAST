@@ -22,7 +22,10 @@ cp $config_path/ASimulatoR_config.R $asimulator_inputdir/runASS.R
 
 #clearing output dir for ASimulator @ src/ASimulator/out
 echo Removing old ASimulatoR runs from $asimulator_outputdir
-rm $asimulator_outputdir/* -R
+if [ ! -z "$asimulator_outputdir" ]
+    then rm $asimulator_outputdir/* -R
+    else echo asimulator_outputdir variable unset. Please correct src/run_asimulator.sh . && exit 1
+fi
 
 # checking if ASimulatoR docker exists.
 if [[ "$(docker inspect --type=image biomedbigdata/asimulator 2>/dev/null)" == "[]" ]]; then
@@ -35,7 +38,7 @@ fi
 docker run --rm --name dicast-$tool --user $(id -u):$(id -g) -v $asimulator_inputdir:/input -v $asimulator_outputdir:/output biomedbigdata/asimulator
 
 # Bringing the outputs to inputdir.
-
-ln $asimulator_outputdir/*/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
-ln $asimulator_outputdir/*/*fastq $( echo $fastqdir| sed 's/\/MOUNT\///g')
-ln $asimulator_outputdir/*/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3
+set +e
+mv $asimulator_outputdir/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
+mv $asimulator_outputdir/*fastq $( echo $fastqdir| sed 's/\/MOUNT\///g')
+mv $asimulator_outputdir/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3

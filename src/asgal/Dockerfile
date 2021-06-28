@@ -42,4 +42,5 @@ COPY ENTRYPOINT.sh /galig/
 RUN chmod 777 /galig/ENTRYPOINT.sh
 RUN chmod og+rw /galig/ -R
 ENV PATH $PATH:/galig/asgal
+WORKDIR /galig
 ENTRYPOINT ["/galig/ENTRYPOINT.sh"]

@@ -121,10 +121,12 @@ readbamfiles $casebam casebamlist
 handlesamfiles(){
 	#clear samlist file first
 	rm -f /tmp/samlist
+	rm -f /tmp/bamlist 
 	if [[ $1 = 0 ]]
 	then
 		echo "Looking for SAM files in $controlbam and converting them to BAM-files..."
 		readsamfiles $controlbam
+		readbamfiles $controlbam
 		#make bam file out of all samfiles in samlist
 		for filename in $(cat /tmp/samlist)
 		do
@@ -134,6 +136,7 @@ handlesamfiles(){
 	else
 		echo "Looking for SAM files in $casebam and $controlbam and converting them to BAM-files..."
 		readsamfiles $casebam
+		readbamfiles $casebam
 		#make bam file out of all samfiles in samlist
                 for filename in $(cat /tmp/samlist)
                 do
@@ -178,10 +181,10 @@ readfastqs(){
 #Parameter: BAM filename of sample
 mk_sample_out(){
 	tmp="${1##*/}"	#get basename of file
-    sample_out="${tmp%%.*}"	#remove all file extensions after first .
-    mkdir -p $outdir/$sample_out-output
-	chmod -R 777 $outdir/$sample_out-output
-	echo $outdir/$sample_out-output
+	sample_out="${tmp%%.*}"	#remove all file extensions after first .
+	mkdir -p $outdir/${sample_out}_output
+	chmod -R 777 $outdir/${sample_out}_output
+	echo $outdir/${sample_out}_output
 }
 
 
@@ -256,6 +259,7 @@ DIRECTORIES
 workdir:\t$workdir
 outdir: \t$outdir
 inputdir:\t$inputdir
+indexdir:\t$indexdir
 fastqdir:\t$fastqdir	# only for asgal, irfinder, kissplice, whippet
 star_index:\t$star_index	# only for kissplice
 

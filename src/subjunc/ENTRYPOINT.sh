@@ -101,5 +101,3 @@ while read -r line; do
 	trap 'second_attempt $line' ERR
 done </tmp/$tool-fastqlist
 
-# wait for all processes to end
-wait

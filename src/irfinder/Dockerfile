@@ -26,6 +26,8 @@ RUN chmod -R 777 IRFinder-1.3.1/bin
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y \
  python3.8 python3-pip
 
+RUN pip3 install --no-cache-dir pandas
+
 #configure PATH variable
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/IRFinder-1.3.1/bin/:/opt/STAR-${star_version}/bin/Linux_x86_64/
 
