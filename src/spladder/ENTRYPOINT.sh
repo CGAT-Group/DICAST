@@ -54,7 +54,7 @@ then
 		fi
 		echo "Finished $tool unification for ${bam_specific_out}."
 	done < /tmp/controlbamlist
-	cleaner
+	
 fi
 
 if [ $differential = 1 ]

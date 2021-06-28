@@ -27,6 +27,7 @@ if [ $differential = 0 ]; then
 	echo Starting ASpli in AS event detection mode...
 	for i in $(cat /tmp/controlbamlist)
 		do j=$(basename $i)
+		echo Starting ASpli run for $j -----------------------
 		outdir_name=$(basename $i .bam)
 		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
 		mkdir -p /tmp/bams/$j 
@@ -50,6 +51,3 @@ if [ $differential = 1 ]; then
 	echo Starting Aspli in DS analysis mode...
 	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --casefolder $casebam --controlfolder $controlbam --differential $differential
 fi
-
-
-wait

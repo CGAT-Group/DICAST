@@ -81,7 +81,6 @@ then
 		sample_out=$(mk_sample_out $fastq1)
 		#run irdinder
 		IRFinder -r $indexdir/irfinder_index -d $sample_out $fastq1 $fastq2
-		wait
 
 		echo "Running $tool unificiation..."
 		
@@ -112,7 +111,6 @@ then
 	do
 		sample_out=$(mk_sample_out $bam)
 		IRFinder -m BAM -r $indexdir/irfinder_index -d $sample_out $bam
-       		wait
 		
 		echo "Running $tool unificiation..."
 

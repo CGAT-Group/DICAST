@@ -38,8 +38,6 @@ if [ $differential = 0 ]; then
 	            fi
 		echo Finished Eventpointer run for $outdir_name -----------------------
 	done
-	wait
-	cleaner
 fi
 
 
@@ -48,6 +46,4 @@ if [ $differential = 1 ]; then
         echo Starting EventPointer in DS analysis mode...
 	combined=$(combine_case_control $casebam $controlbam) #combine case and control folder into single folder
         Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores  --out $outdir --casefolder $casefolder --controlfolder $controlfolder --differential $differential --combined $combined
-	wait
-	cleaner_diff
 fi

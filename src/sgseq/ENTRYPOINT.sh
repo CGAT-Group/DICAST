@@ -35,7 +35,7 @@ do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)
 	Rscript /docker_main/SGSeq.R --gtf $gtf --path_to_bam $filename --out $sample_out --cores $ncores
-	wait
+	
 	
 	echo "Running $tool unificiation..."
 
