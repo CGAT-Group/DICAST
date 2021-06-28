@@ -17,6 +17,7 @@ import argparse
 import matplotlib
 pd.options.mode.chained_assignment = None
 from pandas.errors import EmptyDataError
+plt.ioff()
 
 def arg_parser():
     parser = argparse.ArgumentParser('DICAST plots')
@@ -257,7 +258,6 @@ if __name__=="__main__":
                 plot_this_df = make_plots(paths)
                 up.plot(plot_this_df, sort_by="cardinality")
                 plt.savefig(os.path.join(args.outputdir,sample,sample1,maptool,"upset_plot.png"), bbox_inches="tight")
-                plt.show()
                 plt.close()
                 print('done')
 
