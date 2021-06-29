@@ -1,5 +1,6 @@
 suppressMessages(library(EventPointer))
 suppressMessages(library(optparse))
+suppressMessages(library(tools))
 
 #Parsing arguments
 option_list = list(make_option(c("--gtf"), type='character', default = NULL, help="the annotation gtf file", metavar='character'),
@@ -80,7 +81,7 @@ if(differential){
       bam_file = samplelist[sampleindex]
       cat("Preparing BAM file",sampleindex,":",bam_file,"..." )
 
-      TxtPath<-paste0(opt$output,"/",bam_file,"_output")
+      TxtPath<-paste0(opt$output,"/",file_path_sans_ext(bam_file),"_output")
       if(!dir.exists(TxtPath)){
         dir.create(TxtPath)
       }

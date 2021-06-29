@@ -27,8 +27,8 @@ if [ $differential = 0 ]; then
 	echo Starting EventPointer in AS event detection mode...
 	Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores --out $outdir --bamfolder $controlbam --differential $differential
 	for i in $(cat /tmp/controlbamlist)
-		do outdir_name=$(basename $i)
-		unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast-unified"
+		do outdir_name=$(basename ${i%%.*})
+		unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast-unified"
 		if [ $combine_events = 0 ];
 	            then 
                 python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb

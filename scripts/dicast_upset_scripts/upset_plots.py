@@ -15,6 +15,7 @@ matplotlib_axes_logger.setLevel('ERROR')
 import os 
 import argparse
 import matplotlib
+import re
 pd.options.mode.chained_assignment = None
 from pandas.errors import EmptyDataError
 plt.ioff()
@@ -31,35 +32,35 @@ def find_all_unified(dir):
     return a dict of paths for upset plot
     e.g. 
      {'S1': defaultdict(list,
-                         {'50M': ['/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/SplAdder_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/MAJIQ_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/EventPointer_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/IRFinder_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/SGSeq_Anno_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/Whippet_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/50M/unified/unified.out/SGSeq_denovo_filtered.unified.out'],
-                          '200M': ['/nfs/scratch/AS_benchmarking/S1/AS_results/200M/unified/unified.out/SplAdder_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/200M/unified/unified.out/MAJIQ_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/200M/unified/unified.out/EventPointer_filtered.unified.out',
-                           '/nfs/scratch/AS_benchmarking/S1/AS_results/200M/unified/unified.out/Whippet.unified.out',
+                         {'50M': ['/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/SplAdder_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/MAJIQ_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/EventPointer_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/IRFinder_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/SGSeq_Anno_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/Whippet_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/50M/unified/unified.out/SGSeq_denovo_filtered.unified.out'],
+                          '200M': ['/nfs.../.../.../../S1/AS_results/200M/unified/unified.out/SplAdder_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/200M/unified/unified.out/MAJIQ_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/200M/unified/unified.out/EventPointer_filtered.unified.out',
+                           '/nfs.../.../.../../S1/AS_results/200M/unified/unified.out/Whippet.unified.out',
                            ......
     '''
     unified_paths = []
     for dirname,_,z in os.walk(dir):
         if any("unified.out" in filename for filename in z):
-            for filename1 in z:
-                unified_paths.append(os.path.join(dirname,filename1)) 
+            for filename in z:
+                if "unified.out" in filename:
+                    unified_paths.append(os.path.join(dirname,filename)) 
 
-    unified_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    unified_dict = defaultdict(list)
     for path in unified_paths:
         if "unmapped" in path:
             continue
         sample = "_".join(path.split("/")[-1].split("_")[:2])
-        sample1 = path.split("/")[-1].split("_")[2]
-        maptool = path.split("/")[-1].split("_")[3]
-        if len(maptool)==0:
-            maptool = path.split("/")[-1].split("_")[4]
-        unified_dict[sample][sample1][maptool].append(path)
+        #maptool = path.split("/")[-1].split("_")[3]
+        # if len(maptool)==0:
+        #     maptool = path.split("/")[-1].split("_")[4]
+        unified_dict[sample].append(path)
 
     return unified_dict
 
@@ -119,18 +120,19 @@ def find_all_overlaps(mergin):
 
 def make_plots(target_paths):
     unified = defaultdict(lambda: defaultdict(list))
-    tools = []
+    tools = ["asgal", "aspli", "eventpointer", "irfinder", "majiq", "sgseq", "spladder", "whippet"]
     evs = []
     #def unified_upset():
     for file in target_paths:
         if "unified.out" in file:
-            if len(file.split("/")[-1].split(".")) > 2:
-                tool = file.split("/")[-1].split(".")[1].split("_")[-2]
-            else:
-                tool = file.split("/")[-1].split(".")[0].split("_")[-2]
+            # if len(file.split("/")[-1].split(".")) > 2:
+            #     tool = file.split("/")[-1].split(".")[1].split("_")[-2]
+            # else:
+            #     tool = file.split("/")[-1].split(".")[0].split("_")[-2]
+            tool = tools[np.where(list(map(lambda x: x in file, tools)))[0][0]]
             if "_filtered" in tool:
                 tool = tool.replace("_filtered","")
-            tools.append(tool)
+
             try:
                 tmp = pd.read_csv(file, sep="\t")
             except EmptyDataError as e:
@@ -239,27 +241,21 @@ if __name__=="__main__":
 
     unified_dict = find_all_unified(args.dir)
 
-    for sample, v in unified_dict.items():
-        for sample1, vv in v.items():
-            for maptool, paths in vv.items():
-                
-                if not os.path.exists(os.path.join(args.outputdir,sample)):
-                    os.mkdir(os.path.join(args.outputdir,sample))
-                if not os.path.exists(os.path.join(args.outputdir,sample,sample1)):
-                    os.mkdir(os.path.join(args.outputdir,sample,sample1))
-                if not os.path.exists(os.path.join(args.outputdir,sample,sample1,maptool)):
-                    os.mkdir(os.path.join(args.outputdir,sample,sample1,maptool))
+    for sample, paths in unified_dict.items():                
+      if not os.path.exists(os.path.join(args.outputdir,sample)):
+          os.mkdir(os.path.join(args.outputdir,sample))
 
 
-                print(f"Preparing upset plot for {sample}, {sample1}, {maptool}")
-                if len(paths) < 2:
-                    print("Not enough unified output. Skipping this.")
-                    continue
-                plot_this_df = make_plots(paths)
-                up.plot(plot_this_df, sort_by="cardinality")
-                plt.savefig(os.path.join(args.outputdir,sample,sample1,maptool,"upset_plot.png"), bbox_inches="tight")
-                plt.close()
-                print('done')
+
+      print(f"Preparing upset plot for {sample}")
+      if len(paths) < 2:
+          print("Not enough unified output. Skipping this.")
+          continue
+      plot_this_df = make_plots(paths)
+      up.plot(plot_this_df, sort_by="cardinality")
+      plt.savefig(os.path.join(args.outputdir,sample,"upset_plot.png"), bbox_inches="tight")
+      plt.close()
+      print('done')
 
 
     

@@ -29,7 +29,7 @@ if [ $differential = 0 ]; then
 		do j=$(basename $i)
 		echo Starting ASpli run for $j -----------------------
 		outdir_name=$(basename $i .bam)
-		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_unified"
 		mkdir -p /tmp/bams/$j 
 		ln -s $i /tmp/bams/$j/$j && ln -s $i /tmp/bams/$j/$(basename $i .bam)1.bam
 		Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir/$j --bamfolder /tmp/bams/$j --differential $differential

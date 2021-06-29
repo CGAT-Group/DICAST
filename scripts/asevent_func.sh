@@ -54,7 +54,7 @@ test_bam(){
 #Parameter2: optional output filename (standard is bamlist)
 readbamfiles(){
 	#if bamlist exists: delete
-	rm /tmp/${2:-bamlist}
+	rm /tmp/${2:-bamlist} 2>/dev/null
 	find ${1:-$controlbam} -maxdepth 1 -name "*.bam" -nowarn -not -empty >> /tmp/${2:-bamlist}
 	chmod  777 /tmp/${2:-bamlist}
 }
@@ -120,8 +120,8 @@ readbamfiles $casebam casebamlist
 #parameter: 0 to use for as_tools; 1 to use in ds_tools
 handlesamfiles(){
 	#clear samlist file first
-	rm -f /tmp/samlist
-	rm -f /tmp/bamlist 
+	rm -f /tmp/samlist 2>/dev/null
+	rm -f /tmp/bamlist 2>/dev/null
 	if [[ $1 = 0 ]]
 	then
 		echo "Looking for SAM files in $controlbam and converting them to BAM-files..."
@@ -144,7 +144,7 @@ handlesamfiles(){
                 done
 		echo "-------------------"
 		#clear samlist again
-		rm -f /tmp/samlist
+		rm -f /tmp/samlist 2>/dev/null
 		readsamfiles $controlbam
                 #make bam file out of all samfiles in samlist
                 for filename in $(cat /tmp/samlist)
@@ -208,10 +208,10 @@ check_star_index(){
 
 #cleaning up
 cleaner(){
-	rm -f $outdir/bamlist
-	rm -f $outdir/samlist
-	rm -f $outdir/fastqlist
-	rm -rf $outdir/tmp
+	rm -f $outdir/bamlist 2>/dev/null
+	rm -f $outdir/samlist 2>/dev/null
+	rm -f $outdir/fastqlist 2>/dev/null
+	rm -rf $outdir/tmp 2>/dev/null
 	echo script is done
 	chmod 777 $outdir -R
 	#exit
@@ -238,8 +238,8 @@ combine_case_control(){
 
 
 cleaner_diff(){
-	rm -rf $outdir/case_control
-	rm -f $outdir/bamlist
+	rm -rf $outdir/case_control 2>/dev/null
+	rm -f $outdir/bamlist 2>/dev/null
        	echo script is done.
 	exit
 }

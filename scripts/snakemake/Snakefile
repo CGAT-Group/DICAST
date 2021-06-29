@@ -475,6 +475,7 @@ rule run_star:
 
             find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            for i in $(find input/controldir/bamdir/ -type f -name '*starAligned*'); do mv $i $(echo $i | sed 's/starAligned\.out/star/g'); done
             echo "Finished $tool at $(date)" | tee {output}
 
         else
