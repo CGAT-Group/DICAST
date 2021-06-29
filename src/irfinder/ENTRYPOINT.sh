@@ -145,6 +145,7 @@ then
 
 			if [[ -f "$anno_file" ]];
 			then
+				echo "Running unified comparison..."
 				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
 			fi
 		else
@@ -152,6 +153,7 @@ then
 
 			if [[ -f "$anno_file" ]];
 			then
+				echo "Running unified comparison..."
 				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
