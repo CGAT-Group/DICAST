@@ -35,8 +35,7 @@ do
 	echo Starting SGSeq for $filename ...
 	sample_out=$(mk_sample_out $filename)
 	Rscript /docker_main/SGSeq.R --gtf $gtf --path_to_bam $filename --out $sample_out --cores $ncores
-	
-	
+
 	echo "Running $tool unificiation..."
 
 	tmp="${filename##*/}"
@@ -55,11 +54,27 @@ do
 		#Reformat SGSeq output to work with unification script
 		awk -F '"' '{print $4 "\t" $6 "\t" $(NF-1)}' < ${outdir}/${outdir_name}/SGSeq_denovo.csv > $uni_tmp/SGSeq_denovo_formatted.csv
 
+		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
+
 		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create --sgseq_denovo $uni_tmp/SGSeq_denovo_formatted.csv -out $unified_outdir_name -gtf $gtf
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
+
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create --sgseq_denovo $uni_tmp/SGSeq_denovo_formatted.csv -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 	else 
 		echo "Couldn't find necessary input files for unification."
