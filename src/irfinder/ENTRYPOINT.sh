@@ -90,12 +90,25 @@ then
 		
 		unified_outdir_name="${sample_out}_${tool}_unified"
 		echo "Saving unified output to $unified_outdir_name"
+
+		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
 			
 		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i $sample_out/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i $sample_out/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 		echo "Finished $tool unification for ${sample_out}."
 	done
@@ -121,12 +134,27 @@ then
 		
 		unified_outdir_name="${sample_out}_${tool}_unified"
 		echo "Saving unified output to $unified_outdir_name"
-			
+
+		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
+
 		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i $sample_out/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i $sample_out/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 		echo "Finished $tool unification for ${sample_out}."
 	done
