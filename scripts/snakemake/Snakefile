@@ -475,6 +475,7 @@ rule run_star:
 
             find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
+            for i in $(find input/controldir/bamdir/ -type f -name '*starAligned*'); do mv $i $(echo $i | sed 's/starAligned\.out/star/g'); done
             echo "Finished $tool at $(date)" | tee {output}
 
         else
@@ -1276,8 +1277,7 @@ rule run_whippet:
             echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
-
-rule finished_run_rule:
+rule dicast_plots:
     input:
         kissplice=rules.run_kissplice.output,
         cash=rules.run_cash.output,
@@ -1295,6 +1295,35 @@ rule finished_run_rule:
         sgseq=rules.run_sgseq.output,
         spladder=rules.run_spladder.output,
         whippet=rules.run_whippet.output
+    output:
+       temp("output/snakemake/log_dicast_plots.txt")
+    conda:
+        "dicast-plots.yml"
+    shell:
+        """
+        set +e
+        python scripts/dicast_upset_scripts/upset_plots.py --dir output --outputdir plots | tee {output}
+        set -e
+        """
+rule finished_full_run_rule:
+    input:
+        kissplice=rules.run_kissplice.output,
+        cash=rules.run_cash.output,
+        dexseq=rules.run_dexseq.output,
+        dsplicetype=rules.run_dsplicetype.output,
+        edger=rules.run_edger.output,
+        leafcutter=rules.run_leafcutter.output,
+        psisigma=rules.run_psisigma.output,
+        rmats=rules.run_rmats.output,
+        majiq=rules.run_majiq.output,
+        aspli=rules.run_aspli.output,
+        eventpointer=rules.run_eventpointer.output,
+        asgal=rules.run_asgal.output,
+        irfinder=rules.run_irfinder.output,
+        sgseq=rules.run_sgseq.output,
+        spladder=rules.run_spladder.output,
+        whippet=rules.run_whippet.output,
+        dicastplots=rules.dicast_plots.output
     output:
         temp(final_out)
     shell:
