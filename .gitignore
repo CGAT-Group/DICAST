@@ -13,3 +13,5 @@ scripts/unified_output/data
 .idea
 **__pycache__
 docs/build
+older_runs/*
+src/ASimulatoR/out/
