@@ -1,0 +1,7 @@
+name: dicast-snakemake
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - snakemake
+  - samtools

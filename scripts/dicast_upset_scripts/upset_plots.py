@@ -15,6 +15,7 @@ matplotlib_axes_logger.setLevel('ERROR')
 import os 
 import argparse
 import matplotlib
+matplotlib.use('Agg')
 import re
 pd.options.mode.chained_assignment = None
 from pandas.errors import EmptyDataError
