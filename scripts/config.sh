@@ -21,6 +21,7 @@ samdir=$controlfolder/bamdir           				#directory for samfiles
 fastadir=$inputdir              				#directory for fastafile (might vary for specific tools -> see mapping or as-specific config file)
 gtfdir=$inputdir                				#directory for gtffile
 gffdir=$inputdir                				#directory for gfffile
+bowtie_fastadir=$inputdir/fasta_chromosomes/
 
 #################
 #     Index     #
@@ -46,19 +47,11 @@ gffname=ASimulatoR.gff3					#set to ASimulatoR_gff.gff3, when ASimulator is true
 fasta=${fastadir}/$fastaname                        #fasta full path
 gtf=${gtfdir}/$gtfname                              #gtf full path
 gff=${gffdir}/$gffname                              #gff full path
-#####################
-#    Mapping tool Parameters    #
-#####################
 
-### Uncomment to overwrite parameters set in the global config.sh ###
-### which sets parameters for all tools (mapping and alternative splicing) ###
+
+#################################
+#    Mapping tool Parameters    #
+#################################
+### used only in mapping tools ###
 
 outname=$tool	# basename of output file (will usually be prefixed with the fastq file name and suffixed with .sam)
-
-
-####################################
-#     Tool specific parameters     #
-####################################
-
-# Some tools require chromosome-wise fasta-inputs:
-bowtie_fastadir=$inputdir/fasta_chromosomes/
