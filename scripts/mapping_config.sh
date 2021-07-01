@@ -1,5 +1,5 @@
 #####################
-#     Parameters    #
+#    Mapping tool Parameters    #
 #####################
 
 ### Uncomment to overwrite parameters set in the global config.sh ###

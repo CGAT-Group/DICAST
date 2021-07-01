@@ -46,3 +46,19 @@ gffname=ASimulatoR.gff3					#set to ASimulatoR_gff.gff3, when ASimulator is true
 fasta=${fastadir}/$fastaname                        #fasta full path
 gtf=${gtfdir}/$gtfname                              #gtf full path
 gff=${gffdir}/$gffname                              #gff full path
+#####################
+#    Mapping tool Parameters    #
+#####################
+
+### Uncomment to overwrite parameters set in the global config.sh ###
+### which sets parameters for all tools (mapping and alternative splicing) ###
+
+outname=$tool	# basename of output file (will usually be prefixed with the fastq file name and suffixed with .sam)
+
+
+####################################
+#     Tool specific parameters     #
+####################################
+
+# Some tools require chromosome-wise fasta-inputs:
+bowtie_fastadir=$inputdir/fasta_chromosomes/
