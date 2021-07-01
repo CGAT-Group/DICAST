@@ -1,7 +1,8 @@
 name: dicast-snakemake
 channels:
+  - conda-forge
   - bioconda
-  - defaults
 dependencies:
   - snakemake
   - samtools
+  - mamba

@@ -40,5 +40,7 @@ docker run --rm --name dicast-$tool --user $(id -u):$(id -g) -v $asimulator_inpu
 # Bringing the outputs to inputdir.
 set +e
 mv $asimulator_outputdir/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
-mv $asimulator_outputdir/*fastq $( echo $fastqdir| sed 's/\/MOUNT\///g')
 mv $asimulator_outputdir/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3
+for i in $(ls ${asimulator_outputdir})
+  do mv ${asimulator_outputdir}/$i $( echo $fastqdir| sed 's/\/MOUNT\///g')/simulated_$( basename $i )
+  done
