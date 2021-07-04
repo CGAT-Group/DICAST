@@ -82,7 +82,7 @@ def expand_coord(df1):
 
     return d1
 
-def create_row(x):
+def create_row(x, tools):
     countdict = {}
     for t in tools:
         countdict.setdefault(t, 0)
@@ -91,7 +91,7 @@ def create_row(x):
         countdict[xx]+=1
     return list(countdict.values())    
 
-def find_overlaps(event1, event2):
+def find_overlaps(event1, event2, combi):
     complete_event1 = pd.DataFrame(event1)
     complete_event2 = pd.DataFrame(event2)
     thisdict = {combi[0]:complete_event1.to_dict(), combi[1]:complete_event2.to_dict()}
@@ -112,9 +112,9 @@ def find_overlaps(event1, event2):
     return MATCHED
 
 
-def find_all_overlaps(mergin):
+def find_all_overlaps(mergin, merged1, merged2, combi):
     #compare tool0 event to all other event from other tool
-    mergin0_res = [find_overlaps(merged1[mergin], merged2[x]) for x in merged2.keys()]
+    mergin0_res = [find_overlaps(merged1[mergin], merged2[x], combi) for x in merged2.keys()]
     #mergin1_res = [find_overlaps(merged1[x], merged2[mergin[1]]) for x in merged1.keys()]       
 
     return mergin0_res#, mergin1_res
@@ -177,20 +177,20 @@ def make_plots(target_paths):
                 
                 matched_index = []
                 for mergin in merged1.keys():
-                    mergin0_res = find_all_overlaps(mergin) 
+                    mergin0_res = find_all_overlaps(mergin, merged1, merged2, combi) 
 
                     if any(mergin0_res):
-                        row1 = create_row([combi[0], combi[1]])
+                        row1 = create_row([combi[0], combi[1]], tools)
                         matched_index.append(np.where(mergin0_res)[0][0]) #keep track which index of event is found overlapped, so that doesn't duplicate
                     #realcount.loc[realcount.shape[0]] = ["chr", 0, 0] +
                     else:
-                        row1 = create_row([combi[0]])
+                        row1 = create_row([combi[0]], tools)
                     
                     
                     realcount.loc[realcount.shape[0]] = ["chr",0,0]+row1
                 
                 #add the events in tool 2 that doesn't have overlaps
-                row2 = create_row([combi[1]])
+                row2 = create_row([combi[1]], tools)
                 for _ in range(len(merged2)-len(matched_index)):
                     realcount.loc[realcount.shape[0]] = ["chr",0,0]+row2
         
