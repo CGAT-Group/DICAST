@@ -36,11 +36,13 @@ RUN pip3 install gffutils
 
 RUN git clone --depth=1 --recursive https://github.com/AlgoLab/galig.git
 RUN cd galig ; make prerequisites
-RUN cd galig ; make
+RUN cd galig ; make 
+RUN cd /galig/ ; git clone https://github.com/gpertea/gffread ; cd gffread; make release
+
 
 COPY ENTRYPOINT.sh /galig/
 RUN chmod 777 /galig/ENTRYPOINT.sh
 RUN chmod og+rw /galig/ -R
-ENV PATH $PATH:/galig/asgal
+ENV PATH $PATH:/galig/asgal:/galig/gffread/
 WORKDIR /galig
 ENTRYPOINT ["/galig/ENTRYPOINT.sh"]

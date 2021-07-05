@@ -5,7 +5,7 @@ tool=dart
 
 # use confic and function file
 source /MOUNT/scripts/config.sh
-source /MOUNT/scripts/mapping_config.sh
+
 source /MOUNT/scripts/mapping_func.sh
 
 ### logging ###

@@ -41,6 +41,6 @@ docker run --rm --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) -v $a
 set +e
 mv $asimulator_outputdir/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
 mv $asimulator_outputdir/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3
-for i in $(ls ${asimulator_outputdir})
-  do mv ${asimulator_outputdir}/$i $( echo $fastqdir| sed 's/\/MOUNT\///g')/simulated_$( basename $i )
+for i in $(ls ${asimulator_outputdir}/*fastq)
+  do mv ${asimulator_outputdir}/$i $( echo $fastqdir| sed 's/\/MOUNT\///g')/Simulated-$( basename $i )
   done

@@ -2,7 +2,7 @@
 #  values for standard AS event detection  #
 ############################################
 
-transcript=$inputdir/new_transcripts.fa #$inputdir/custom_transcripts.fasta                  #fasta file for gene transcripts
+transcript=$inputdir/Transcripts.fa #$inputdir/custom_transcripts.fasta                  #fasta file for gene transcripts
 	#gffread input/splicing_variants.gff3 -g input/Homo_sapiens.GRCh38.dna.primary_assembly.fa -w input/new_transcripts.fasta
 star_alignment_files=$workdir/output/star-output                       #path to the folder containing star alignment files (*.SJ.)
 
