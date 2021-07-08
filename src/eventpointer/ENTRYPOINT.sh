@@ -26,18 +26,44 @@ handlesamfiles $differential
 if [ $differential = 0 ]; then
 	echo Starting EventPointer in AS event detection mode...
 	Rscript /docker_main/EventPointer.R --gtf $gtf --cores $ncores --out $outdir --bamfolder $controlbam --differential $differential
+
+	# run unification
+	echo "Running $tool unificiation..."
+	anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
 	for i in $(cat /tmp/controlbamlist)
 		do outdir_name=$(basename $i)
-		unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast-unified"
-		if [ $combine_events = 0 ];
-	            then 
-                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
+		echo "Looking for $tool files in $outdir/$outdir_name"
 
-	            else
-                python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
-	            fi
-		echo Finished Eventpointer run for $outdir_name -----------------------
+		if [[ -f "${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt" ]];
+		then
+			unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast_unify"
+			echo "Saving unified output to $unified_outdir_name"
+			stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify_comparison.txt"
+			mkdir -p $unified_outdir_name
+
+			if [ $combine_events = 0 ];
+      then
+        python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
+
+				if  [[ -f "$anno_file" ]];
+				then
+					echo "Running unified comparison..."
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
+				fi
+     	else
+        python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
+				if  [[ -f "$anno_file" ]];
+				then
+					echo "Running unified comparison..."
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				fi
+			fi
+
+		else
+			echo "Couldn't find necessary input files for unification: ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt"
+		fi
 	done
+
 fi
 
 

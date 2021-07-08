@@ -31,12 +31,13 @@ then
 		echo "Running $tool unificiation..."
 
 		echo "Looking for $tool files in $bam_specific_out"
-		unified_outdir_name="${bam_specific_out}_${tool}_unified"
+		unified_outdir_name="${bam_specific_out}_${tool}_dicast_unify"
+		mkdir -p $unified_outdir_name
 		echo "Saving unified output to $unified_outdir_name"
 
 		# Unzip spladder output files and save to new tmp directory
 		uni_tmp="/tmp/unification_tmpdir"
-		mkdir $uni_tmp
+		mkdir -p $uni_tmp
 
 		for file in $bam_specific_out/*.confirmed.txt.gz ;
 		do
@@ -46,15 +47,31 @@ then
 			fi
 		done
 
+		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unify_comparison.txt"
+
+
 		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -s $uni_tmp -out $unified_outdir_name -gtf $gtf
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -s $uni_tmp -out $unified_outdir_name -gtf $gtf -comb
+
+			if [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
 		fi
 		echo "Finished $tool unification for ${bam_specific_out}."
 	done < /tmp/controlbamlist
-	
+
 fi
 
 if [ $differential = 1 ]

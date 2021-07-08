@@ -43,19 +43,20 @@ do
 	outdir_name="${bam_name}_output"
 	echo "Looking for $tool files in $outdir/$outdir_name"
 
-	if [[ -f "$outdir/$outdir_name/SGSeq_denovo.csv" ]]; 
+	if [[ -f "$outdir/$outdir_name/SGSeq_denovo.csv" ]];
 	then
-		unified_outdir_name="${outdir}/${outdir_name}_${tool}_unified"
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast_unify"
 		echo "Saving unified output to $unified_outdir_name"
-		
+
 		uni_tmp="/tmp/unification_tmpdir"
-		mkdir $uni_tmp
-		
+		mkdir -p $uni_tmp
+
 		#Reformat SGSeq output to work with unification script
 		awk -F '"' '{print $4 "\t" $6 "\t" $(NF-1)}' < ${outdir}/${outdir_name}/SGSeq_denovo.csv > $uni_tmp/SGSeq_denovo_formatted.csv
 
-		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_unified_comparison.txt"
+		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify_comparison.txt"
+		mkdir -p $unified_outdir_name
 
 		if [ $combine_events = 0 ];
 		then
@@ -64,7 +65,7 @@ do
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
 			fi
 
 		else
@@ -73,11 +74,11 @@ do
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
-	else 
-		echo "Couldn't find necessary input files for unification."
+	else
+		echo "Couldn't find necessary input files for unification: $outdir/$outdir_name/SGSeq_denovo.csv"
 	fi
 
 	echo "Finished $tool unification for ${outdir_name}."
