@@ -30,23 +30,6 @@ Alternative_splicing_detection_tools:
     What_tools_to_run: 'asgal aspli eventpointer irfinder majiq sgseq spladder whippet'
 
 #########################################
-# Set Combine_me if you want the event types MEE and MSE to be converted to multiple single ES events.
-#
-# Enter the name of the alternative splicing detection tools for which their output should be unified.
-#
-# Specify the base input directory which contains folders for each tool you want the unification to run for. Those tool folders have to contain all the necessary files. 
-#
-# Currently we support asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
-#
-# Combine_me_choice__ = ["Yes", "No"]
-Output_unification:
-    Create_unified_output_for: ''
-    Base_input_directory: ''
-    Unification_output_directory: ''
-    GTF_file: ''
-    Combine_me: false
-
-#########################################
 # Snakemake creates a run report after finishing successfully. Here, you can set the file name (must end in .html!)
 # You can also enter a full or relative path (e.g. output/snakemake/report.html).
 #
