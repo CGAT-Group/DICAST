@@ -1,0 +1,2 @@
+conda install matplotlib pandas numpy pyranges seaborn
+

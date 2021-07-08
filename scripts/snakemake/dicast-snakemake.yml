@@ -1,0 +1,8 @@
+name: dicast-snakemake
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake
+  - samtools
+  - mamba

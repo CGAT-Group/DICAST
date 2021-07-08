@@ -15,11 +15,6 @@ try:
     #asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
     overwrite_acknowledged = config["Possible_overwrite_acknowledge"]['do']
     run_asimulator = config["ASimulatoR"]['do']
-    unification_input = config["Output_unification"]["Base_input_directory"]
-    unification_output = config["Output_unification"]["Unification_output_directory"]
-    unification_tools = config["Output_unification"]["Create_unified_output_for"]
-    unification_gtf = config["Output_unification"]["GTF_file"]
-    combine_me = config["Output_unification"]["Combine_me"]
 #    if asimulator_config_folder is '' and run_asimulator is True:
 #        raise KeyError("ASimulatoR config folder has to be specified.")
 #    if (unification_gtf is '' or unification_input is '' or unification_output is '' or unification_output is '') and unification_tools is not "":
@@ -119,7 +114,7 @@ rule run_contextmap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -162,7 +157,7 @@ rule run_crac:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -205,7 +200,7 @@ rule run_dart:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -248,7 +243,7 @@ rule run_gsnap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -291,7 +286,7 @@ rule run_hisat:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -334,7 +329,7 @@ rule run_mapsplice:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -377,7 +372,7 @@ rule run_minimap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -420,7 +415,7 @@ rule run_segemehl:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -463,7 +458,7 @@ rule run_star:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -507,7 +502,7 @@ rule run_subjunc:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -550,7 +545,7 @@ rule run_bbmap:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -626,7 +621,7 @@ rule run_kissplice:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -638,7 +633,7 @@ rule run_cash:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_cash_unification.txt")
+        temp("output/snakemake/log_ran_cash.txt")
     params:
         tools=as_tools
     shell:
@@ -658,7 +653,7 @@ rule run_cash:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -670,7 +665,7 @@ rule run_dexseq:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_dexseq_unification.txt")
+        temp("output/snakemake/log_ran_dexseq.txt")
     params:
         tools=as_tools
     shell:
@@ -690,7 +685,7 @@ rule run_dexseq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -702,7 +697,7 @@ rule run_dsplicetype:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_dsplicetype_unification.txt")
+        temp("output/snakemake/log_ran_dsplicetype.txt")
     params:
         tools=as_tools
     shell:
@@ -722,7 +717,7 @@ rule run_dsplicetype:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -734,7 +729,7 @@ rule run_edger:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_edger_unification.txt")
+        temp("output/snakemake/log_ran_edger.txt")
     params:
         tools=as_tools
     shell:
@@ -754,7 +749,7 @@ rule run_edger:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -766,7 +761,7 @@ rule run_leafcutter:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_leafcutter_unification.txt")
+        temp("output/snakemake/log_ran_leafcutter.txt")
     params:
         tools=as_tools
     shell:
@@ -786,7 +781,7 @@ rule run_leafcutter:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -798,7 +793,7 @@ rule run_psisigma:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_psisigma_unification.txt")
+        temp("output/snakemake/log_ran_psisigma.txt")
     params:
         tools=as_tools
     shell:
@@ -818,7 +813,7 @@ rule run_psisigma:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -830,7 +825,7 @@ rule run_rmats:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_rmats_unification.txt")
+        temp("output/snakemake/log_ran_rmats.txt")
     params:
         tools=as_tools
     shell:
@@ -850,7 +845,7 @@ rule run_rmats:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -864,12 +859,7 @@ rule run_majiq:
     output:
         temp("output/snakemake/log_ran_majiq.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -887,27 +877,11 @@ rule run_majiq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
-
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then 
-                python scripts/unified_output/output_transformer.py create -m {params.uni_input}/majiq/ -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -m {params.uni_input}/majiq/ -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-
-        else 
-            echo "Didnt run $tool unification." | tee {output}
         fi                     
         """
 
@@ -915,14 +889,9 @@ rule run_aspli:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_ASpli_unification.txt")
+        temp("output/snakemake/log_ran_ASpli.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -940,27 +909,11 @@ rule run_aspli:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
-
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then 
-                python scripts/unified_output/output_transformer.py create --aspli_dir {params.uni_input}/aspli/ -out {params.uni_out} -gtf {params.gtf} -comb
-
-            else
-                python scripts/unified_output/output_transformer.py create --aspli_dir {params.uni_input}/aspli/ -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-        else 
-            echo "Didnt run $tool unification." | tee {output}
         fi
         """
 
@@ -968,14 +921,9 @@ rule run_eventpointer:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_EventPointer_unification.txt")
+        temp("output/snakemake/log_ran_EventPointer.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -993,41 +941,21 @@ rule run_eventpointer:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then 
-                python scripts/unified_output/output_transformer.py create -e {params.uni_input}/eventpointer/EventsFound_RNASeq.txt -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -e {params.uni_input}/eventpointer/EventsFound_RNASeq.txt -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
 
 rule run_asgal:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_asgal_unification.txt")
+        temp("output/snakemake/log_ran_asgal.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -1045,41 +973,21 @@ rule run_asgal:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then 
-                python scripts/unified_output/output_transformer.py create -a {params.uni_input}/asgal/ASGAL.csv -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -a {params.uni_input}/asgal/ASGAL.csv -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
 
 rule run_irfinder:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_irfinder_unification.txt")
+        temp("output/snakemake/log_ran_irfinder.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -1097,41 +1005,21 @@ rule run_irfinder:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-        
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then
-                python scripts/unified_output/output_transformer.py create -i {params.uni_input}/irfinder/IRFinder-IR-nondir.txt -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -i {params.uni_input}/irfinder/IRFinder-IR-nondir.txt -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
 
 rule run_sgseq:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_sgseq_unification.txt")
+        temp("output/snakemake/log_ran_sgseq.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -1149,41 +1037,21 @@ rule run_sgseq:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-        
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then
-                python scripts/unified_output/output_transformer.py create --sgseq_denovo {params.uni_input}/sgseq/SGSeq_denovo_formatted.csv -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create --sgseq_denovo {params.uni_input}/sgseq/SGSeq_denovo_formatted.csv -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
 
 rule run_spladder:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_spladder_unification.txt")
+        temp("output/snakemake/log_ran_spladder.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -1201,42 +1069,21 @@ rule run_spladder:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-        
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then
-                python scripts/unified_output/output_transformer.py create -s {params.uni_input}/spladder -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -s {params.uni_input}/spladder -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
 
 rule run_whippet:
     input:
         coodinate_out=rules.finished_mapping_tools_rule.output
     output:
-        temp("output/snakemake/log_ran_whippet_unification.txt")
+        temp("output/snakemake/log_ran_whippet.txt")
     params:
-        tools=as_tools,
-        uni_input=unification_input,
-        uni_out=unification_output,
-        uni_tools=unification_tools,
-        gtf=unification_gtf,
-        combine=combine_me
+        tools=as_tools
     shell:
         """
         as_arr=({params.tools})
@@ -1254,29 +1101,14 @@ rule run_whippet:
                 container_prefix={docker_prefix}
             fi
 
-            docker run -v {working_directory}:/MOUNT --name dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
         fi
-        
-        uni_tools=({params.uni_tools})
-        if [[ "${{uni_tools[@]}}" =~ $tool ]]; 
-        then
-            echo "Running $tool unification." | tee {output}
-            if [ "{{params.combine}}" = "True" ]; 
-            then
-                python scripts/unified_output/output_transformer.py create -w {params.uni_input}/whippet/whippet-out.psi -out {params.uni_out} -gtf {params.gtf} -comb
-            else
-                python scripts/unified_output/output_transformer.py create -w {params.uni_input}/whippet/whippet-out.psi -out {params.uni_out} -gtf {params.gtf}
-            fi
-            echo "Finished $tool unification at $(date)" | tee {output}
-
-        else 
-            echo "Didnt run $tool unification." | tee {output}
-        fi                     
         """
+
 rule dicast_plots:
     input:
         kissplice=rules.run_kissplice.output,
@@ -1305,6 +1137,7 @@ rule dicast_plots:
         python scripts/dicast_upset_scripts/upset_plots.py --dir output --outputdir plots | tee {output}
         set -e
         """
+
 rule finished_full_run_rule:
     input:
         kissplice=rules.run_kissplice.output,
@@ -1331,7 +1164,6 @@ rule finished_full_run_rule:
         dt_format=$(date +"%d_%m_%Y_%H_%M")
         base_output_name=$(basename {final_out} .txt)
         cp scripts/config.sh output/snakemake/log_config_"$dt_format"_"$base_output_name".sh
-        cp scripts/mapping_config.sh output/snakemake/log_mapping_config_"$dt_format"_"$base_output_name".sh
         cp scripts/asevent_config.sh output/snakemake/log_asevent_config_"$dt_format"_"$base_output_name".sh
         cat {input.kissplice} >> {output}
         cat {input.cash} >> {output}

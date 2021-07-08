@@ -31,12 +31,12 @@ if [ $differential = 0 ]; then
 	echo "Running $tool unificiation..."
 	anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
 	for i in $(cat /tmp/controlbamlist)
-		do outdir_name=$(basename $i)
+		do outdir_name=$(basename ${i%%.*})
 		echo "Looking for $tool files in $outdir/$outdir_name"
 
 		if [[ -f "${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt" ]];
 		then
-			unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast_unify"
+			unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast_unify"
 			echo "Saving unified output to $unified_outdir_name"
 			stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify_comparison.txt"
 			mkdir -p $unified_outdir_name
@@ -62,6 +62,8 @@ if [ $differential = 0 ]; then
 		else
 			echo "Couldn't find necessary input files for unification: ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt"
 		fi
+
+		echo Finished Eventpointer run for $outdir_name -----------------------
 	done
 
 fi

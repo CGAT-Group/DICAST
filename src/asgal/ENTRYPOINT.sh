@@ -11,6 +11,18 @@ start_logging
 #cleaning up
 trap cleaner EXIT
 
+
+#make sure the $transcript file exists
+if [[ ! -s $transcript ]]
+then gffread $gff -g $fasta -w $transcript; new transcript file generated at $transcript
+	else for i in $(seq 1 9999) 
+		do if ! ls ${transcript}$i 2>/dev/null 
+			then mv $transcript ${transcript}$i && break
+		fi
+	done ;	echo older transcript file found at $transcript, renamed to: ${transcript}$i
+fi
+
+
 #make output directory
 #mk_outdir
 handlesamfiles
