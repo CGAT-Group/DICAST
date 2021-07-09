@@ -30,7 +30,7 @@ if [ $differential = 0 ]; then
 		echo Starting ASpli run for $j -----------------------
 		outdir_name=$(basename $i .bam)
 
-		unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast_unify"
+		unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast_unified"
 		mkdir -p /tmp/bams/$j
 
 		ln -s $i /tmp/bams/$j/$j && ln -s $i /tmp/bams/$j/$(basename $i .bam)1.bam
@@ -40,7 +40,7 @@ if [ $differential = 0 ]; then
 		# run unification
 		echo "Running $tool unificiation..."
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify_comparison.txt"
+		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified_comparison.txt"
 
 		mkdir -p $unified_outdir_name
 		if [ $combine_events = 0 ];
@@ -49,14 +49,14 @@ if [ $differential = 0 ]; then
 				if [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 				fi
       else
         python3 /MOUNT/scripts/unified_output/output_transformer.py create --aspli_dir $outdir/$j -out $unified_outdir_name -gtf $gtf -comb
 				if [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 				fi
 			fi
 		rm -r /tmp/bams/$j

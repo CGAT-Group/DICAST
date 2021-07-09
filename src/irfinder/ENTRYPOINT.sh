@@ -97,7 +97,7 @@ then
 
 
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify_comparison.txt"
+		stats_file="${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified_comparison.txt"
 
 		if [[ -f "${sample_out}/IRFinder-IR-nondir.txt" ]];
 		then
@@ -111,14 +111,14 @@ then
 
 				if [[ -f "$anno_file" ]];
 				then
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 				fi
 			else
 				python3 /MOUNT/scripts/unified_output/output_transformer.py create -i ${sample_out}/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
 
 				if [[ -f "$anno_file" ]];
 				then
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 				fi
 			fi
 		else
@@ -146,11 +146,11 @@ then
 
 		echo "Looking for $tool files in $sample_out"
 
-		unified_outdir_name="${sample_out}_${tool}_dicast_unify"
+		unified_outdir_name="${sample_out}_${tool}_dicast_unified"
 		echo "Saving unified output to $unified_outdir_name"
 
 		anno_file="/MOUNT/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify_comparison.txt"
+		stats_file="${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified_comparison.txt"
 
 		if [ $combine_events = 0 ];
 		then
@@ -159,7 +159,7 @@ then
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -i $sample_out/IRFinder-IR-nondir.txt -out $unified_outdir_name -gtf $gtf -comb
@@ -167,7 +167,7 @@ then
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unify.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastq_name}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
 		echo "Finished $tool unification for ${sample_out}."

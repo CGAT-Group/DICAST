@@ -42,5 +42,5 @@ set +e
 mv $asimulator_outputdir/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
 mv $asimulator_outputdir/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3
 for i in $(ls ${asimulator_outputdir}/*fastq)
-  do mv ${asimulator_outputdir}/$i $( echo $fastqdir| sed 's/\/MOUNT\///g')/Simulated-$( basename $i )
+  do mv $i $( echo $fastqdir| sed 's/\/MOUNT\///g')/Simulated-$( basename $i )
   done
