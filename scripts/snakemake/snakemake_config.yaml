@@ -10,7 +10,7 @@ Possible_overwrite_acknowledge:
 #
 # Start_ASimulatoR_with_run_choice__ = ["Yes", "No"]
 ASimulatoR:
-    do: true
+    do: True
 #    ASimulatoR_config_directory: ../../scripts
 
 #########################################
