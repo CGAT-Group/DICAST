@@ -48,9 +48,9 @@ then
 		done
 
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unified_comparison.txt"
-
-
+		dicast_output_for_bam=$unified_outdir_name/$(basename $bamfile .bam)
+		stats_file="${dicast_output_for_bam}_output_${tool}_dicast_unified_comparison.txt"
+		
 		if [ $combine_events = 0 ];
 		then
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -s $uni_tmp -out $unified_outdir_name -gtf $gtf
@@ -58,7 +58,7 @@ then
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${dicast_output_for_bam}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -s $uni_tmp -out $unified_outdir_name -gtf $gtf -comb
@@ -66,7 +66,7 @@ then
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${bam_specific_out}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				echo python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${dicast_output_for_bam}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
 		echo "Finished $tool unification for ${bam_specific_out}."

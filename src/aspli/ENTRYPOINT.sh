@@ -19,7 +19,7 @@ test_gtf $gtf
 #making outdir
 mk_outdir
 #checking for SAM files and building BAM-files with index with them
-handlesamfiles $differential
+handlesamfiles $differential 2>/dev/null
 
 echo starting ASpli...
 
@@ -30,13 +30,12 @@ if [ $differential = 0 ]; then
 		echo Starting ASpli run for $j -----------------------
 		outdir_name=$(basename $i .bam)
 
-		unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast_unified"
+		unified_outdir_name="${outdir}/${outdir_name}_${tool}_dicast_unified"
 		mkdir -p /tmp/bams/$j
 
 		ln -s $i /tmp/bams/$j/$j && ln -s $i /tmp/bams/$j/$(basename $i .bam)1.bam
 		Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir/$j --bamfolder /tmp/bams/$j --differential $differential
-		for k in $(find $outdir/$j/ -type f -name '*'); do mv $k $outdir/$j/$(basename $k); rmdir $outdir/$j/*/* 2>/dev/null; rmdir $outdir/$j/* 2>/dev/null ; done
-
+		for k in $(find $outdir/$j/ -type f -name '*'); do mv $k $outdir/$j/$(basename $k) 2>/dev/null; rmdir $outdir/$j/*/* 2>/dev/null; rmdir $outdir/$j/* 2>/dev/null ; done
 		# run unification
 		echo "Running $tool unificiation..."
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
@@ -62,10 +61,10 @@ if [ $differential = 0 ]; then
 		rm -r /tmp/bams/$j
 		echo Finished ASpli run for $j -----------------------
 	done
-
-	#Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --bamfolder $controlbam --differential $differential
+	rmdir $outdir/* 2>/dev/null
 fi
 if [ $differential = 1 ]; then
 	echo Starting Aspli in DS analysis mode...
 	Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --casefolder $casebam --controlfolder $controlbam --differential $differential
+	#Rscript /docker_main/ASpli.R --gtf $gtf --cores $ncores --readLength $read_length --out $outdir --bamfolder $controlbam --differential $differential
 fi

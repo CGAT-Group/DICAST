@@ -18,10 +18,10 @@ If you have never worked with anaconda before you might want to check out their 
 	cd dockers
 
 	# create conda environment from .yml file
-	conda env create -f scripts/snakemake/snakemake_conda_env.yml
+	conda env create -f scripts/snakemake/dicast-snakemake.yml
 	
 	# if you want to use it: activate environment
-	conda activate snakemake
+	conda activate dicast-snakemake
 
 If you want to learn more about snakemake, you can check out the snakemake documentation: `snakemake`_.
 
