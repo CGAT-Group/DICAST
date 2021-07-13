@@ -1,5 +1,5 @@
 
-![DICAST](docs/source/img/icon.png)
+![DICAST](docs/source/img/logo (3).png )
 
 This is a list of Dockers made for the Benchmarking pipeline that [exbio](https://www.baumbachlab.net/) will build for Sys_Ca_Re. These dockers would also be a valuable resource for all to use, in Bioinformatics. 
 
