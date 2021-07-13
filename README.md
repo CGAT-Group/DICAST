@@ -10,24 +10,24 @@ DICAST closes this gap by offering a modular and extensible alternative splicing
 https://dicast.readthedocs.io/en/latest/index.html
 
 #### Mapping tools
-BBmap
-Contextmap2
-Crac
-dart
-gsnap
-hisat2
-mapsplice2
-minimap2
-segemehl
-star
-subjunc
+- bb- map
+- contextmap2
+- crac
+- dart
+- gsnap
+- hisat2
+- mapsplice2
+- minimap2
+- segemehl
+- star
+- subjunc
 
 #### Alternative Splicing Event Detection Tools
-Asgal
-aspli
-eventpointer
-irfinder
-majiq
-sgseq
-spladder
-whippet
+- asgal
+- aspli
+- eventpointer
+- irfinder
+- majiq
+- sgseq
+- spladder
+- whippet
