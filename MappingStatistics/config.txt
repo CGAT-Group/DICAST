@@ -1,0 +1,5 @@
+bam_path: /nfs/scratch/AS_benchmarking/Mapping/error_0/BBmap-output/subsample_01_10mln__mapped_sorted.bam
+fastq_path: /nfs/scratch/AS_benchmarking/Test/input/subsample_01_10mln_1.fastq
+gtf_path: /nfs/scratch/AS_benchmarking/Test/input/splicing_variants.gtf
+genomic_reads: error_0_genomic_reads.RData
+output_folder: error_0_BBmap_subsample_01
