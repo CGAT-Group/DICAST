@@ -2,7 +2,7 @@
 contextmap2/jre*
 docs/build
 index/*
-input
+input/*
 older_runs/*
 output*/
 **__pycache__
