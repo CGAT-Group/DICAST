@@ -4,7 +4,7 @@
 #read update_tools.txt
 file="update_tools.txt"
 branch="develop"
-container_version="0.2"
+container_version="0.3"
 
 while read tool
 do	

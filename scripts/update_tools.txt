@@ -5,7 +5,6 @@ eventpointer
 hisat
 dart
 sgseq
-kissplice
 spladder
 star
 crac
