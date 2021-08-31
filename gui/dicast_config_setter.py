@@ -29,7 +29,11 @@ def on_button_get_folder_path_clicked(label, path_restriction):
     if path_restriction == "/":
         dialog.setDirectory(".")
     else:
-        dialog.setDirectory(path_restriction)
+        if os.path.exists(path_restriction):
+            dialog.setDirectory(path_restriction)
+        else:
+            show_popup("Error - Folder not found", f'This folder has to be located in "{path_restriction}", however, this folder couldn\'t be found.')
+            return ""
     dialog.directoryEntered.connect(lambda p: dir_changed(p, path_restriction, dialog))
     dialog.exec_()
     if len(dialog.selectedFiles()) == 0:
@@ -65,7 +69,11 @@ def on_button_get_file_path_clicked(label, path_restriction):
     if path_restriction == "/":
         dialog.setDirectory(".")
     else:
-        dialog.setDirectory(path_restriction)
+        if os.path.exists(path_restriction):
+            dialog.setDirectory(path_restriction)
+        else:
+            show_popup("Error - Folder not found", f'This file has to be located in "{path_restriction}", however, this folder couldn\'t be found.')
+            return ""
     dialog.directoryEntered.connect(lambda p: dir_changed(p, path_restriction, dialog))
     dialog.exec_()
     if len(dialog.selectedFiles()) == 0:
@@ -431,13 +439,13 @@ class ConfigSetter(object):
         move(backup_config_file, backup_path)
 
     def set_fasta(self, path):
-        self.fasta_full_path = on_button_get_file_path_clicked(path, self.wd)
+        self.fasta_full_path = on_button_get_file_path_clicked(path, os.path.join(self.wd, "input"))
 
     def set_gtf(self, path):
-        self.gtf_full_path = on_button_get_file_path_clicked(path, self.wd)
+        self.gtf_full_path = on_button_get_file_path_clicked(path, os.path.join(self.wd, "input"))
 
     def set_gff(self, path):
-        self.gff_full_path = on_button_get_file_path_clicked(path, self.wd)
+        self.gff_full_path = on_button_get_file_path_clicked(path, os.path.join(self.wd, "input"))
 
     def set_out_dir(self, path):
         self.out_dir_full_path = on_button_get_folder_path_clicked(path, self.wd)
