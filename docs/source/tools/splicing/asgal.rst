@@ -1,107 +1,78 @@
 .. Links
+.. _manual: https://asgal.algolab.eu/documentation
+.. |tool| replace:: ASGAL
 
-.. _manual: *not available*
-.. |tool| replace:: Asgal
-
-Asgal
+ASGAL
 =====
 
 .. warning::
-
-	Asgal requires the variables ``$fastqpair1suffix`` and ``$fastqpair2suffix`` to be set in the :guilabel:`scripts/asevent_config.sh` file.
+ 
+ |tool| requires the variables ``$fastqpair1suffix`` and ``$fastqpair2suffix`` to be set in the :guilabel:`scripts/asevent_config.sh` file.
 
 .. sidebar:: |tool| Factsheet
-
-	=============  =================
-	**Toolname:**  *asgal*
-	**Version:**   *v1.1.1*
-	=============  =================
-
-	**Required files:**
-
-	.. code-block:: bash
-
-		# config.sh
-		$fastqdir/*$fastqpair1suffix
-		$fastqdir/*$fastqpair2suffix
-		$fasta
-		$transcript
-		$gtf
-
-|tool|
+ 
+ ============  ==============================================================================================
+ **Toolname**  *asgal*                                                                                       
+ **Version**   *1.1.1*                                                                                       
+ **License**   `GNU General Public License version 3 <https://github.com/AlgoLab/galig/blob/master/LICENSE>`_
+ ============  ==============================================================================================
+ 
+ **Required Files**
+  * :ref:`fastq<fastqSplicing>` , :ref:`fasta<fastaSplicing>` , :ref:`gtf<gtfSplicing>`
+ **Links**
+  * |tool| `manual`_
+  * |tool| publication: `ASGAL: aligning RNA-Seq data to a splicing graph to detect novel alternative splicing events <https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2436-3>`_
+ 
 
 
-Default parameters:
-^^^^^^^^^^^^^^^^^^^
-The following parameters are set in the ENTRYPOINT.sh script in our docker to run |tool|. The variables can be changed in
-:guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`
-If you want to specify your analysis with different parameters you will have to change the ENTRYPOINT script.
-For further information please consult the |tool| `manual`_.
+Parameters
+^^^^^^^^^^
 
-	--multi
+These are the default parameters set in the :guilabel:`src/asgal/ENTRYPOINT.sh` script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the |tool| `manual`_.
 
-
-		.. code-block:: bash
-
-			--multi
-
-	-g
-		Fasta reference file.
-
-		.. code-block:: bash
-
-			-g $fasta
-
-	-a
-		Gtf annotation file.
-
-		.. code-block:: bash
-
-			-a $gtf
-
-	-t
-		Gene transcripts in fasta format
-
-		.. code-block:: bash
-
-			-t $transcript
-
-	-s
-		Fastq filename of paired end read 1.
-
-		.. code-block:: bash
-
-			-f *yourFastqFile1_*1.fastq
-
-	-s2
-		Fastq filename of paired end read 2.
-
-		.. code-block:: bash
-
-			-f2 *yourFastqFile1_*2.fastq
-
-	-o
-		The path to the output directory for the according fastq file pair. The file will be named after the fastq file basename.
-
-		.. code-block:: bash
-
-			-o $outdir/*yourFastqFile1*-output
-
-	-@
-		Set number of threads to be used during the computation.
-
-		.. code-block:: bash
-
-			# If you use our default parameters and folder structure:
-			#    $ncores=4
-
-			-@ $ncores
-
-3. Other comments:
-^^^^^^^^^^^^^^^^^^
-
-
-4. Important links:
-^^^^^^^^^^^^^^^^^^^
-	- |tool| `manual`_
-	- |tool| publication:
+ --multi
+  Set multi option.
+ -g
+  Reference genome in fasta format.
+  
+  .. code-block::
+  
+   -g $fasta
+ -a
+  The path to the gene annotation file in GTF format for annotation of fusion junctions.
+  
+  .. code-block::
+  
+   -a $gtf
+ -t
+  Transcript file.
+  
+  .. code-block::
+  
+   -t $transcript
+ -s
+  Fastq filename of paired end read 1.
+  
+  .. code-block::
+  
+   -s *yourFastqFile1_*1.fastq
+ -s2
+  Fastq filename of paired end read 2.
+  
+  .. code-block::
+  
+   -s2 *yourFastqFile1_*2.fastq
+ -o
+  Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file. 
+  
+  .. code-block::
+  
+   -o $outdir
+ -@
+  Number of threads to be used during the computation
+  
+  .. code-block::
+  
+   -@ $ncores
+ --allevents
+  Report all events, not only novel ones.

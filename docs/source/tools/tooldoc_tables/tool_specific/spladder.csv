@@ -1,0 +1,7 @@
+tag	use
+-b	bamfile
+-o	out_as_bam
+-a	gtf
+--parallel	threads
+-n	readlength
+--output-txt-conf	out_txt

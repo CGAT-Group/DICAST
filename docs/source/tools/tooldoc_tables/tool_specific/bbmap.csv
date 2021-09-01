@@ -1,0 +1,9 @@
+tag	use
+-in	fastq_r1
+-in2	fastq_r2
+-ref	fasta
+-path	index_base
+-intronlen	intronlen
+-xstag	xstag
+-outm	out_mapped
+-outu	out_unmapped

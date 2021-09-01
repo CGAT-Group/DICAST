@@ -1,45 +1,50 @@
-
 .. Links
+.. _manual: https://github.com/williamritchie/IRFinder/wiki
+.. |tool| replace:: IRFinder
 
-.. _manual: *not available*
-.. |tool| replace:: Irfinder
-
-Irfinder
+IRFinder
 ========
 
-.. note::
-
-  |tool| can be used with bam files or fastq files as reference. Set in :guilabel:`/scripts/asevent_config.sh` the parameter ``use_bam_input_files=1``
-  to use bam files and ``use_bam_input_files=0`` to use fastq files.
-
 .. sidebar:: |tool| Factsheet
+ 
+ ============  ===============================================================================
+ **Toolname**  *irfinder*                                                                     
+ **Version**   *1.3.0*                                                                        
+ **License**   `MIT Licence <https://github.com/williamritchie/IRFinder/blob/master/LICENSE>`_
+ ============  ===============================================================================
+ 
+ **Required Files**
+  * :ref:`fastq<fastqSplicing>` , :ref:`fasta<fastaSplicing>` , :ref:`gtf<gtfSplicing>`
+ **Links**
+  * |tool| `manual`_
+  * |tool| publication: `IRFinder: assessing the impact of intron retention on mammalian gene expression <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1184-4>`_
+ 
 
-  =============  =================
-  **Toolname:**  *irfinder*
-  **Version:**   *v*
-  **License**    *L*
-  =============  =================
+.. note::
+ 
+ |tool| can use both fastq and bam files. To use bamfiles please set the parameter $use_bam_input_files=1, and =0 to use fastq files in the as_config.sh script.
 
-  **Required files:**
 
-  .. code-block:: bash
+Parameters
+^^^^^^^^^^
 
-    # config.sh
-    $gtf
-    $fasta
-    # use fastq reference
-    $fastqdir/*$fastqpair1suffix
-    $fastqdir/*$fastqpair2suffix
-    #usebamreference
-    ???
+These are the default parameters set in the :guilabel:`src/irfinder/ENTRYPOINT.sh` script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the |tool| `manual`_.
 
-  **Used parameters**
-
-  .. code-block:: bash
-
-    # config.sh
-    $outdir
-    # asevent_config.sh
-    $use_bam_input_files
-
-|tool|
+ -r
+  Base folder of the index files.
+  
+  .. code-block::
+  
+   -r $indexdir
+ -d
+  Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file. 
+  
+  .. code-block::
+  
+   -d $outdir
+ reads
+  After all other options call space separated list of file paths to reads in fastq format. One pair of fastq files for paired-end reads.
+  
+  .. code-block::
+  
+   *yourFastqFile1_*1.fastq *yourFastqFile1_*2.fastq

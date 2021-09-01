@@ -1,0 +1,8 @@
+tag	use
+-d	fasta
+-q	fastq_r1
+-q	fastq_r2
+-i	index_base
+--splits	splits
+-o	out_mapped
+-t	threads

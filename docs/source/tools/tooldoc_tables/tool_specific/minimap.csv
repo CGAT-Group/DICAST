@@ -1,0 +1,6 @@
+tag	use
+-a	cigar
+-o	out_mapped
+-t	threads
+index	index_base
+reads	fastq_end

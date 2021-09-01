@@ -1,147 +1,101 @@
 .. Links
+.. _manual: https://www.bioinf.uni-leipzig.de/Software/segemehl/
+.. |tool| replace:: segemehl
 
-.. _manual: 
-.. |tool| replace:: Segemehl
-
-Segemehl
-=========
-
-
+segemehl
+========
 
 .. sidebar:: |tool| Factsheet
+ 
+ ============  ======================================================================================
+ **Toolname**  *segemehl*                                                                            
+ **Version**   *0.3.4*                                                                               
+ **License**   `GNU General Public License version 3 <https://www.gnu.org/licenses/gpl-3.0.en.html>`_
+ ============  ======================================================================================
+ 
+ **Required Files**
+  * *For mapping:* :ref:`fastq<fastqMapping>`, :ref:`fasta<fastaMapping>`
+ **Compatible splicing tools**
+  * :doc:`../splicing/aspli`
+  * :doc:`../splicing/eventpointer`
+  * :doc:`../splicing/irfinder`
+  * :doc:`../splicing/majiq`
+  * :doc:`../splicing/sgseq`
+  * :doc:`../splicing/spladder`
+  * :doc:`../splicing/whippet`
+ **Links**
+  * |tool| `manual`_
+  * |tool| publication: `Fast Mapping of Short Sequences with Mismatches, Insertions and Deletions Using Index Structures <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000502>`_
+ 
 
-	=============  =========================
-	**Toolname:**  *minimap*
-	**Version:**   `latest conda version`_
-	=============  =========================
 
-	**Required files:**
-
-	.. code-block:: bash
-
-		# config.sh
-		$fastq
-		$fasta
-
-
-Segemehl
-
-1. Input Files
-^^^^^^^^^^^^^^
-
-The following files are required to run |tool|.
+Indexing
+^^^^^^^^
 
 .. note::
-	The filepaths assume you are using our :doc:`folder structure</setup/input>`.
-	Make sure to read the comments (#) as well.
+ 
+ **Indexing might take some time** but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.
 
-$fastq
-	Fastq files for paired end mapping. The path variable can be found in :guilabel:`scripts/config.sh`.
-	If you want to perform a non differential analysis put your files inside the :guilabel:`controldir/fastqir/` directory.
-	If you want to compare two different experimental settings (case and control), put your fastq files in the :guilabel:`controldir/fastqir/`
-	and :guilabel:`casedir/fastqir/` folders respectively.
-
-	.. code-block:: bash
-
-		# Fastq file paths
-		# Replace the text between the stars *...* with your file names
-
-		input/controldir/fastqir/*yourFastqFile1_*1.fastq
-		input/controldir/fastqir/*yourFastqFile1_*2.fastq
-		input/controldir/fastqir/*yourFastqFile2_*1.fastq
-		input/controldir/fastqir/*yourFastqFile2_*2.fastq
-		. . .
-
-$fasta:
-	The name of the reference fasta file to be used (only used for building the index). The path variable can be found in :guilabel:`scripts/config.sh`.
-
-	.. code-block:: bash
-
-		# Fasta files paths
-		# Replace the text between the stars *...* with your file name
-
-		input/*yourFastaFile*.fa
-
-Optional: Index
-	If there is no index it will be automatically built with Segemehl. If you want to rebuild the index anyway set ``$recompute_index=true`` in :guilabel:`scripts/mapping_config.sh`.
-
-	.. code-block:: bash
-
-		# Index files paths
-		# Replace the text between the stars *...* with your file names
-		# Default variable settings in mapping_config.sh:
-		# 	indexdir=|tool|_index
-		#	indexname=$fasta_index
-		# $fasta to make sure we have the right index for the used fasta file
-
-		index/*your $indexdir variable*/*your $indexname variable*
-
-2. Default parameters:
-^^^^^^^^^^^^^^^^^^^^^^
-The following parameters are set in the ENTRYPOINT.sh script in our docker to run |tool|. The variables can be changed in
-:guilabel:`scripts/config.sh` and :guilabel:`scripts/mapping_config.sh`
-If you want to specify your analysis with different parameters you will have to change the ENTRYPOINT script.
-For further information please consult the |tool| `manual`_.
-
-	-d
-		Fasta reference file(s).
-		
-		.. code-block:: bash
-
-			-c $inputdir/$fasta
-
-	-q
-		Fastq filename of paired end read 1.
-
-		.. code-block:: bash
-
-			-1 *yourFastqFile1_*1.fastq
-
-	-p
-		Fastq filename of paired end read 2.
-
-		.. code-block:: bash
-
-			-2 *yourFastqFile1_*2.fastq
-			
-	-i
-		Segemehl index file
-
-   		
-		.. code-block:: bash
-
-   			-i $indexdir/$indexname
-   	
-   	--splits
-   		Use split reads alignment
-		
-
-	-o
-		The path to the output file in sam format.
-		For differential analysis the output will be separated into case and control folder based on the basefolder of the according fastq files.
-
-		.. code-block:: bash
-
-			-o $outdir/controldir/*yourFastqFile1_*|tool|.sam
-
-	-t
-		Set number of threads to be used during the computation
-
-		.. code-block:: bash
-
-			# If you use our default parameters and folder structure:
-			# 	$t=4
-
-			-t $ncores
+DICAST will check if :guilabel:`$indexdir/$indexname` exists. If there is no index it will be automatically built. If you want to rebuild the index anyway set ``$recompute_index=true`` in :guilabel:`scripts/mapping_config.sh`.
+If you want to use your own precomputed index file copy it to :guilabel:`index/segemehl-index/` and make sure the index is complete and named appropriately and according to the parameters set in the config files.
+We recommend including the name of the fasta file in the index name to avoid overwriting. Per default this is already the case and **no parameter changes are needed**.
 
 
+Parameters
+^^^^^^^^^^
 
-3. Other comments:
-^^^^^^^^^^^^^^^^^^
+These are the default parameters set in the :guilabel:`src/segemehl/ENTRYPOINT.sh` script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the |tool| `manual`_.
 
+ -d
+  Reference genome in fasta format.
+  
+  .. code-block::
+  
+   -d $fasta
+  
 
+ -q
+  Fastq filename of paired end read 1.
+  
+  .. code-block::
+  
+   -q *yourFastqFile1_*1.fastq
+  
 
-4. Important links:
-^^^^^^^^^^^^^^^^^^^
-	- |tool| `manual`_
-	- |tool| publication: 
+ -q
+  Fastq filename of paired end read 2.
+  
+  .. code-block::
+  
+   -q *yourFastqFile1_*2.fastq
+  
+
+ -i
+  Base name of the index folder and files.
+  
+  .. code-block::
+  
+   -i $indexdir/$indexname
+  
+
+ --splits
+  Use split reads alignment
+  
+  
+
+ -o
+  The path to the **mapped** output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file. 
+  
+  .. code-block::
+  
+   -o $outdir/$controlfolder/*yourFastqFile1_*segemehl.sam
+  
+
+ -t
+  Number of threads to be used during the computation
+  
+  .. code-block::
+  
+   -t $ncores
+  
+

@@ -1,20 +1,26 @@
 Splicing tools
 ==============
 
-Differential splicing vs alternative splicing
-Use asevent config file
+.. warning::
+	Currently **only alternative splicing is supported**. Differential splicing tools are coming soon. The differential splicing function of tools which are able to compute both alternative and differential splicing the differential mode is still in beta.
 
-Input Files
-^^^^^^^^^^^^^^^^^^^^^^
+For splicing tools we differentiate between alternative and differential splicing tools. Some tools are able to compute both.
+Differential splicing tools compute alternative splicing for two conditions (e.g. case and control) and the files should be separated as indicated by our input folder structure. For alternative splicing analysis "control" is the default.
 
-.. note::
+Splicing Input Files
+^^^^^^^^^^^^^^^^^^^^^^^
 
-	Not all tools need the same input files.
-	Check out the respective tool documentation sites to find out which files are needed to run the tool.
+.. tip::
+  The paths assume you are using our suggested :doc:`input structure <../get-started/setup/input>`.
+  Example input files you can find in our :doc:`examples section<../further-information/example-files>`.
 
-$fastqdir/.\*$fastqpair1suffix
-	Fastq files for pair 1 fastq files stored in ``$fastqdir``, identified by the suffix ``$fastqpair1suffix``.
-	The path variables can be found in :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`.
+You can find the required input files in the tool-specific documentation.
+
+.. _fastqSplicing:
+
+fastq
+	Fastq files for pair 1 and 2 fastq files stored in ``$fastqdir``, identified by the suffix ``$fastqpair1suffix`` and ``$fastqpair2suffix`` respectively. Not all splicing tools work with fastq files.
+	The path variables can be found in :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`. For differential splicing the files need to be separated in ``controldir`` and ``casedir``
 
 	.. code-block:: bash
 
@@ -22,34 +28,27 @@ $fastqdir/.\*$fastqpair1suffix
 		# Assumed variable settings:
 		#    $fastqdir=input/fastq   ## in config.sh
 		#    $fastqpair1suffix="_1.fastq"   ## in asevent_config.sh
-		# Replace the text between the stars *...* with your file names
-
-		input/fastq/*yourFastqFile1*_1.fastq
-		input/fastq/*yourFastqFile2*_1.fastq
-		. . .
-
-
-$fastqdir/.\*$fastqpair2suffix
-	Fastq files for pair 1 fastq files stored in ``$fastqdir``, identified by the suffix ``$fastqpair2suffix``.
-	The path variables can be found in :guilabel:`scripts/config.sh` and :guilabel:`scripts/asevent_config.sh`.
-
-	.. code-block:: bash
-
-		# Fastq file paths
-		# Assumed variable settings:
-		#    $fastqdir=input/fastq   ## in config.sh
 		#    $fastqpair2suffix="_2.fastq"   ## in asevent_config.sh
 		# Replace the text between the stars *...* with your file names
 
-		input/fastq/*yourFastqFile1*_2.fastq
-		input/fastq/*yourFastqFile2*_2.fastq
+		input/controldir/fastq/*yourFastqFile1*_1.fastq
+		input/controldir/fastq/*yourFastqFile1*_2.fastq
+		input/controldir/fastq/*yourFastqFile2*_1.fastq
+		input/controldir/fastq/*yourFastqFile2*_2.fastq
 		. . .
 
-$controlbam
+.. _bamSplicing:
 
-casebam
+bam
+	Bam files created by a mapping tool of your choice. When DICAST is run as a pipeline, these will be created by the selected mapping tool(s).
 
-$fasta:
+	.. code-block:: bash
+
+		input/controldir/fastq/*yourFastqFile1*_1.fastq
+
+.. _fastaSplicing:
+
+fasta:
 	The name of the reference fasta file. The path variable can be found in :guilabel:`scripts/config.sh`.
 
 	.. code-block:: bash
@@ -59,7 +58,9 @@ $fasta:
 
 		input/*yourFastaFile*.fa
 
-$transcript
+.. _transcriptSplicing:
+
+transcript
 	The name of the fasta file for gene transcripts. The path variable can be found in :guilabel:`scripts/asevent_config.sh`.
 
 	.. code-block:: bash
@@ -67,9 +68,11 @@ $transcript
 		# Assumed variable settings:
 		#    $inputdir=input   ## in config.sh
 
-		index/*yourTranscriptFasta*.fasta
+		input/*yourTranscriptFasta*.fasta
 
-$gtf
+.. _gtfSplicing:
+
+gtf
 	Gene annotation file in GTF format.
 
 	.. code-block:: bash
@@ -78,7 +81,9 @@ $gtf
 
 		input/*yourGTFfile*.gtf
 
-$gff
+.. _gffSplicing:
+
+gff
 	Gene annotation file in GFF format.
 
 	.. code-block:: bash
@@ -87,27 +92,10 @@ $gff
 
 		input/*yourGFFfile*.gff
 
-Input Parameters
-^^^^^^^^^^^^^^^^^^^^^^
+Parameters
+^^^^^^^^^^^^^
 
-.. note::
-
-	Not all tools use all the parameters
-	Check out the respective tool documentation sites to find out which parameters are used by a tool.
-
-
-$ncores
-	Number of threads to be used during the computation. Set to ``ncores=4`` per default.
-
-$differential
-  Some tools can be used to calculate differential splicing as well as only alternative-splicing events.
-  If you want to perform differential analysis set ``differential=1`` in the :guilabel:`/scripts/asevent_config.sh` config file.
-  It is set to ``differential=0`` per default, which indicates AS event detection.
-
-$read_length
-  Read length of reads in your fastq files.
-
-
+To provide a fair baseline while maintaining easy usability, per default we run the tools with their default variables. The default parameters can be changed by editing the ENTRYPOINT.sh scripts of each tool. The variables used by mapping ENTRYPOINT.sh scripts can be set in the ``config.sh`` and ``asevent_config.sh`` files in the ``scripts`` folder. For a usual analysis you should not need to change these parameters.
 
 
 
@@ -117,21 +105,10 @@ $read_length
 
    splicing/asgal
    splicing/aspli
-   splicing/cash
-   splicing/dartsbht
-   splicing/dexseq
-   splicing/dsplicetype
    splicing/eventpointer
    splicing/irfinder
-   splicing/jum
-   splicing/juncbase
    splicing/kissplice
-   splicing/leafcutter
    splicing/majiq
-   splicing/miso
-   splicing/psisigma
-   splicing/rmats
-   splicing/sajr
    splicing/sgseq
    splicing/spladder
    splicing/whippet

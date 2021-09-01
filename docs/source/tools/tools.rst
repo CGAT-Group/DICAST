@@ -1,24 +1,11 @@
+.. _Tools:
+
 General Information
 ===================
 
-Mapping
-^^^^^^^
+Not all mapping and splicing tools are compatible with each other. Please refer to the table below to see which tools you can use together successfully. ``fastq only`` tools do only work with fastq files and not with bam files and therefore don't depend on a mapping tool.
 
-===============================  ===============  ==========================
-Tool				 			 Git			  Comment
-===============================  ===============  ==========================
-:doc:`mapping/bbmap`
-:doc:`mapping/contextmap`            	   	  ``Requires special input``
-:doc:`mapping/crac`
-:doc:`mapping/dart`
-:doc:`mapping/gsnap`
-:doc:`mapping/hisat`
-:doc:`mapping/mapsplice`
-:doc:`mapping/minimap`
-:doc:`mapping/segemehl`
-:doc:`mapping/star`
-===============================  ===============  ==========================
-
-
-.. toctree::
-   :maxdepth: 1
+.. csv-table:: Compatibility
+   :file: tooldoc_tables/compatibility_table_comma.csv
+   :header-rows: 1
+   :stub-columns: 1

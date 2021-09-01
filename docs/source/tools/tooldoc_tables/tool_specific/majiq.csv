@@ -1,0 +1,9 @@
+tag	use
+build reference	gff
+-c	config
+-j	threads
+-o	out_maj_build
+maqiq psi	majiq
+-j	threads
+-o	out_maj_psi
+-n	bammode

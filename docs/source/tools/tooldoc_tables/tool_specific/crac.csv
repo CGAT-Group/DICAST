@@ -1,0 +1,7 @@
+tag	use
+-i	index_base
+-k	kmers
+-r	fastq_space
+-o	out_mapped
+--detailed-sam	detailed_sam
+--stranded	stranded

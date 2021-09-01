@@ -1,124 +1,78 @@
 .. Links
-
 .. _manual: https://github.com/hsinnan75/Dart
 .. |tool| replace:: Dart
-.. _bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
-.. _license: https://github.com/hsinnan75/Dart/blob/master/LICENSE
 
 Dart
 ====
 
 .. sidebar:: |tool| Factsheet
+ 
+ ============  ===============================================================================================
+ **Toolname**  *dart*                                                                                         
+ **Version**   *1.4.0*                                                                                        
+ **License**   `GNU General Public License version 2 <https://github.com/hsinnan75/Dart/blob/master/LICENSE>`_
+ ============  ===============================================================================================
+ 
+ **Required Files**
+  * *For mapping:* :ref:`fastq<fastqMapping>`, :ref:`fasta<fastaMapping>`
+ **Compatible splicing tools**
+  * :doc:`../splicing/aspli`
+  * :doc:`../splicing/irfinder`
+  * :doc:`../splicing/majiq`
+  * :doc:`../splicing/spladder`
+  * :doc:`../splicing/whippet`
+ **Links**
+  * |tool| `manual`_
+  * |tool| publication: `DART: a fast and accurate RNA-seq mapper with a partitioning strategy <https://academic.oup.com/bioinformatics/article/34/2/190/4104410>`_
+ 
 
-	=============  =================
-	**Toolname:**  *dart*
-	**Version:**   *v1.4.0*
-	=============  =================
 
-	**Required files:**
-
-	.. code-block:: bash
-
-		# config.sh
-		$fastq
-		$fasta
-
-
-Dart is a RNA-Seq transcript aligner using a divide and conquer strategy. For more information look up the tools 'manual'_.
-
-
-1. Input Files
-^^^^^^^^^^^^^^
-The following files are required to run |tool|.
+Indexing
+^^^^^^^^
 
 .. note::
-	The filepaths assume you are using our :doc:`folder structure</setup/input>`.
-	Make sure to read the comments (#) as well.
+ 
+ **Indexing might take some time** but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.
 
-$fastq
-	Fastq files for paired end mapping. The path variable can be found in :guilabel:`scripts/config.sh`.
+DICAST will check if :guilabel:`$indexdir/$indexname.sa` exists. If there is no index it will be automatically built. If you want to rebuild the index anyway set ``$recompute_index=true`` in :guilabel:`scripts/mapping_config.sh`.
+If you want to use your own precomputed index file copy it to :guilabel:`index/dart-index/` and make sure the index is complete and named appropriately and according to the parameters set in the config files.
+We recommend including the name of the fasta file in the index name to avoid overwriting. Per default this is already the case and **no parameter changes are needed**.
 
-	.. code-block:: bash
 
-		# Fastq file paths
-		# Replace the text between the stars *...* with your file names
+Parameters
+^^^^^^^^^^
 
-		input/fastq/*yourFastqFile1_*1.fastq
-		input/fastq/*yourFastqFile1_*2.fastq
-		input/fastq/*yourFastqFile2_*1.fastq
-		input/fastq/*yourFastqFile2_*2.fastq
-		. . .
+These are the default parameters set in the :guilabel:`src/dart/ENTRYPOINT.sh` script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the |tool| `manual`_.
 
-$fasta:
-	The name of the reference fasta file to be used. The path variable can be found in :guilabel:`scripts/config.sh`.
+ -i
+  Base name of the index folder and files.
+  
+  .. code-block::
+  
+   -i $indexdir/$indexname
+  
 
-	.. code-block:: bash
+ -f
+  Fastq filename of paired end read 1.
+  
+  .. code-block::
+  
+   -f *yourFastqFile1_*1.fastq
+  
 
-		# Fasta files paths
-		# Replace the text between the stars *...* with your file name
+ -f2
+  Fastq filename of paired end read 2.
+  
+  .. code-block::
+  
+   -f2 *yourFastqFile1_*2.fastq
+  
 
-		input/*yourFastaFile*.fa
+ -o
+  The path to the **mapped** output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file. 
+  
+  .. code-block::
+  
+   -o $outdir/$controlfolder/*yourFastqFile1_*dart.sam
+  
 
-Optional: Index
-	|tool| requires a bwt or bwa based index. If there is no index it will be automatically built with our ENTRYPOINT.sh script. If you want to rebuild the index anyway set ``$recompute_index=true`` in :guilabel:`scripts/mapping_config.sh`.
-
-	.. code-block:: bash
-
-		# Index files paths
-		# Replace the text between the stars *...* with your file names
-		# Default variable settings in mapping_config.sh:
-		# 	indexdir=dart_index
-		#	indexname=$fasta_index
-		# $fasta to make sure we have the right index for the used fasta file
-
-		index/*your $indexdir variable*/*your $indexname variable*.amb
-		index/*your $indexdir variable*/*your $indexname variable*.ann
-		index/*your $indexdir variable*/*your $indexname variable*.bwt
-		index/*your $indexdir variable*/*your $indexname variable*.pac
-		index/*your $indexdir variable*/*your $indexname variable*.sa
-
-2. Default parameters:
-^^^^^^^^^^^^^^^^^^^^^^
-The following parameters are set in the ENTRYPOINT.sh script in our docker to run |tool|. The variables can be changed in
-:guilabel:`scripts/config.sh` and :guilabel:`scripts/mapping_config.sh`
-If you want to specify your analysis with different parameters you will have to change the ENTRYPOINT script.
-For further information please consult the |tool| `manual`_.
-
-	-i
-		Prefix of the index to be used.
-
-		.. code-block:: bash
-
-			-i $indexdir/$indexname
-
-	-f
-		Fastq filename of paired end read 1.
-
-		.. code-block:: bash
-
-			-f *yourFastqFile1_*1.fastq
-
-	-f2
-		Fastq filename of paired end read 2.
-
-		.. code-block:: bash
-
-			-f2 *yourFastqFile1_*2.fastq
-
-	-o
-		Output file in sam format.
-		For differential analysis the output will be separated into case and control folder based on the basefolder of the according fastq file.
-
-		.. code-block:: bash
-
-			-o $outdir/*yourFastqFile1_*dart.sam
-
-3. Other comments:
-^^^^^^^^^^^^^^^^^^
-
-Make sure to use a bwt/bwa based index. Other than that, |tool| has no special requirements.
-
-4. Important links:
-^^^^^^^^^^^^^^^^^^^
-	- |tool| `manual`_
-	- |tool| publication: `DART: a fast and accurate RNA-seq mapper with a partitioning strategy <https://academic.oup.com/bioinformatics/article/34/2/190/4104410>`_
