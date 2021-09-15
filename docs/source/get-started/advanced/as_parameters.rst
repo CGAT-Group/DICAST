@@ -16,8 +16,8 @@ star_alignment_files
     | Default: ``$workdir/output/star-output``
 
 .. note::
-    | Fastq files have to be in pairs.
-    | Set the suffixe parameters (including the file extension) for all fastq pairs (e.g. ``_1.fastq`` and ``_2.fastq``).
+    | We support only paired RNA-Seq - fastq files have to be in pairs.
+    | Set the suffixes parameters (including the file extension) for all fastq pairs (e.g. ``_1.fastq`` and ``_2.fastq``).
 
 fastqpair1suffix
     | Suffix for the first file of the fastq pair.
@@ -31,7 +31,7 @@ use_bam_input_files
     | Determines what kind of input to use: ``1`` for bam files, ``0`` for fastq files.
     | Default: ``0``
 
-Differential analysis parameters
+Differential analysis parameters (test mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
