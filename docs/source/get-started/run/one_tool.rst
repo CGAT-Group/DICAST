@@ -4,6 +4,8 @@ Run one specific tool
 .. toctree::
    :maxdepth: 2
 
+Change config.sh according to your run (see :doc:`How to change your config.sh file <../run/config>`)
+
 If you have already built the image with <tool>:<tag> (see the :doc:`docker setup <../setup/docker>`) you can run the following command to run the image and start the tool:
 
 .. prompt:: bash $
