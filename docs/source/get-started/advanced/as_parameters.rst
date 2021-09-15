@@ -65,23 +65,3 @@ controlfastq
 controlprefix
     | Add files in the ``controlfastq`` folder must have this prefix.
     | Example: ``sample_01``
-
-PSI-Sigma specific parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. _psisigma_parameters:
-
-.. Warning::
-    PSI-Sigma needs files that have a special file name ending. If you want to use it, rename the files accordingly. 
-
-renamed_casebam
-    | Like ``$casebam``, but file names need to end with ``.Aligned.sortedByCoord.out.bam``.
-    | Default: ``$casebam/renamed_psi_sigma/``
-
-renamed_controlbam
-    | Like ``$controlbam``, but file names need to end with ``.Aligned.sortedByCoord.out.bam``.
-    | Default: ``$controlbam/renamed_psi_sigma/``
-
-renamed_star_alignment_files
-    | Like ``$star_alignment_files``, but file names need to end with ``.SJ.out.tab``.
-    | Default: ``$star_alignment_files/renamed_psi_sigma/``
