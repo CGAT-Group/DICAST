@@ -6,7 +6,7 @@ Basic parameters
 ^^^^^^^^^^^^^^^^
 
 ncores
-   | Number of cores or threads that each tool will use. 
+   | Number of cores or threads that each tool will use. Note when using a snakemake pipeline: the resulting number of cores used is a result of multiplication of ncores and snakemake -j parameter. 
    | Default: ``16``
 
 workdir
