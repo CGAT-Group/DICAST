@@ -159,7 +159,7 @@ In the `snakemake_config.yaml` file edit the following lines:
 
 This command will start the mapping tools indicated in the `snakemake_config.yaml` (E.g. MAJIQ, Whippet).
 
-First, the pipeline will build all necessary dockers. Second, the pipeline will create a `/path/to/DICAST/output` folder with the alignment results inside the dedicated folders (e.g., majiq-output, hisat-output, whippet-output).
+First, the pipeline will build all necessary dockers. Second, the pipeline will create a `/path/to/DICAST/output` folder with the event detecton results inside the dedicated folders (e.g., majiq-output, hisat-output, whippet-output).
 
 .. toctree::
    :maxdepth: 2
