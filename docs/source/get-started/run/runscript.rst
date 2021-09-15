@@ -47,7 +47,7 @@ Troubleshooting
 ^^^^^^^^^^^^^^^
 
 - Check Logger tab if something isn't working
-- If a run was canceled/exited unexpectetly and the directory is still locked, try running the same snakemake command again with ``--unlock`` (or use the Unlock button in the GUI) or remove the files from ``working_directory/.snakemake/locks/``
+- If a run was canceled/exited unexpectetly and the directory is still locked, try running the same snakemake command again with ``--unlock`` or remove the files from ``working_directory/.snakemake/locks/``
 - Snakemake itself creates some logging files, they can be found in ``working_directory/.snakemake/log/``
 
 .. toctree::
