@@ -5,6 +5,8 @@ In this section we will explain how to use DICAST to run a whole pipeline.
 
 Make sure you followed the steps described in the :doc:`setup <../setup>` section carefully.
 
+Change config.sh according to your run (see :doc:`How to change your config.sh file <../run/config>`)
+
 Before getting started make sure to activate the snakemake conda environment:
 
 .. prompt:: bash
