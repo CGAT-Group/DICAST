@@ -39,7 +39,6 @@ If you want to build the dockers manually, we provide a ``docker-compose.yml`` f
   docker-compose -f path/to/docker-compose.yml build
 
 to build all images. For more information, see the  `docker compose documentation <https://docs.docker.com/compose/>`_.
-@Amit
 
 Build one image
 :::::::::::::::
