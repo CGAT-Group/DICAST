@@ -31,7 +31,7 @@ use_bam_input_files
     | Determines what kind of input to use: ``1`` for bam files, ``0`` for fastq files.
     | Default: ``0``
 
-Differential analysis parameters (test mode)
+Differential analysis parameters (beta mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
