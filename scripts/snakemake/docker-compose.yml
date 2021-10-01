@@ -116,10 +116,10 @@ services:
         context: ../../src/eventpointer/
       image: dicast/eventpointer:0.2
 
-    kissplice:
-      build: 
-        context: ../../src/kissplice/
-      image: dicast/kissplice:0.2
+    # kissplice:
+    #   build: 
+    #     context: ../../src/kissplice/
+    #   image: dicast/kissplice:0.2
 
     whippet:
       build: 
