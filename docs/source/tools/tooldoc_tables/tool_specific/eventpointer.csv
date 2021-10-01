@@ -1,0 +1,6 @@
+tag	use
+--gtf	gtf
+--cores	threads
+--out	out_as_bam
+--bamfolder	bamfolder
+--differential	differential

@@ -1,0 +1,51 @@
+parameter	description	code
+aligner_bin	Path to the used aligner. If you use our docker you will not have to wolly about it.	/home/biodocker/bin/bowtie2
+aligner_name	Used aligner (index tool). We use bowtie2.	bowtie2
+allevents	Report all events, not only novel ones.	
+bamfile	Name of bamfile.	$controlfolder/*filename*.bam
+bamfolder	Location of bam files.	$controlfolder
+bammode	Run with bam files as input.	“BAM”
+cigar	Generate CIGAR and provide output in sam format.	
+config	MAJIQ config file (built based on DICAST config parameters in ENTRYPOINT.sh)	$config
+detailed_sam	Return a detailed sam file as output.	
+differential	1 to run differential analysis, 0 otherwise.	$differential
+fasta	Reference genome in fasta format.	$fasta
+fasta_chromosomewise	Directory path with chromosome-wise fasta files.	$bowtie_fastadir
+fastq_comma	Comma separated list of file paths to reads in fastq format. One pair of fastq files for paired-end mapping	*yourFastqFile1_*1.fastq,*yourFastqFile1_*2.fastq
+fastq_end	After all other options call space separated list of file paths to reads in fastq format. One pair of fastq files for paired-end reads.	*yourFastqFile1_*1.fastq *yourFastqFile1_*2.fastq
+fastq_r	List of fastq files seperated by “ -r “	*yourFastqFile1_*1.fastq -r *yourFastqFile1_*2.fastq
+fastq_r1	Fastq filename of paired end read 1.	*yourFastqFile1_*1.fastq
+fastq_r2	Fastq filename of paired end read 2.	*yourFastqFile1_*2.fastq
+fastq_space	Space separated list of file paths to reads in fastq format. One pair of fastq files for paired-end mapping	*yourFastqFile1_*1.fastq *yourFastqFile1_*2.fastq
+gff	The path to the gene annotation file in GFF format.	$gff
+gtf	The path to the gene annotation file in GTF format for annotation of fusion junctions.	$gtf
+index_base	Base name of the index folder and files.	$indexdir/$indexname
+index_bin	Path to the indexing tool of the aligner.	/home/biodocker/bin/bowtie2-build
+index_comma	Comma separated list to your index files base names.	*IndexChromosome1*,*IndexChromosomes2*,*IndexChromosome3*, . . . 
+index_dir	Base folder of the index files.	$indexdir
+index_name	Base name of the index  files.	$indexname
+intronlen	Length of introns.	20
+kmers	Number of k-mers to be used. 22 is the recommended number for human genome.	22
+majiq	Run MAJIQ in psi mode with files built from gff as input.	
+multi	Set multi option.	
+out_as_bam	Output directory. The output will be separated into case and control folder based on the basefolder of the according bam file. If you are running the DICAST pipeline to compare different mapping tools this will include the name of the mapping tool of the used bam file.	$outdir
+out_as_fastq	Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file. 	$outdir
+out_dir	The path to the directory for the **mapped** output in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file. 	$outdir/$controlfolder/*yourFastqFile1_*tool
+out_format	Define output format (one of sam,  m8).	sam
+out_graph	Output directory for whippet index.	$outdir/*bamfilename*/graph
+out_maj_build	Output directory with majiq build output. 	$outdir/$outdir_name/build
+out_maj_psi	Output directory with psi output. Used to build splicegraph with voila.	$outdir/$outdir_name/psi
+out_mapped	The path to the **mapped** output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file. 	$outdir/$controlfolder/*yourFastqFile1_*tool.sam
+out_unmapped	The path to the **unmapped** output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file.	$outdir/$controlfolder/*yourFastqFile1_*.tool_unmapped.sam
+quiet	Activate quiet mode so only error messages are printed.	
+readlength	Length of reads.	$read_length
+sam	Return a sam file as output.	
+splicesites	Provide a list of known splice sites.	$indexdir/$indexname/splicesites.txt
+splits	Use split reads alignment	
+strand	Add strand derived from the intron motif.	intronMotif
+stranded	Reads are from a strand specific RNA-seq protocol.	
+threads	Number of threads to be used during the computation	$ncores
+twopassmode	Basic 2-pass mapping,  with all 1st pass junctions inserted into the genome indices on the fly	Basic
+xstag	Add sam flags to improve compatibility with alternative splicing tools.	us
+out_txt	Output in txt format.	
+transcript	Transcript file.	$transcript

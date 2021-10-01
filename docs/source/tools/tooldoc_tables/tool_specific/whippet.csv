@@ -1,0 +1,6 @@
+tag	use
+--fasta	fasta
+--gtf	gtf
+--bam	bamfile
+-x	out_graph
+-o	out_as_bam

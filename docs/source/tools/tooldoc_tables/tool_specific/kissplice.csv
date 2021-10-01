@@ -1,0 +1,3 @@
+tag	use
+-r	fastq_r
+-o	out_as_fastq

@@ -1,0 +1,5 @@
+tag	use
+--gtf	gtf
+--path_to_bam	bamfile
+--out	out_as_bam
+--cores	threads

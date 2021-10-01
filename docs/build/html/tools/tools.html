@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>General Information &mdash; DICAST 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/_templates/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/_templates/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mapping tools" href="mapping.html" />
+    <link rel="prev" title="AS detection parameters" href="../get-started/advanced/as_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/dicast_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/docker.html">Setup docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/setup/input.html">Folder Structure</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/run.html">Run your analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/one_tool.html">Run one specific tool</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/runscript.html">Use multiple tools at once</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/config.html">Config files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/run/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/advanced.html">Config Files (advanced)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/advanced/general_parameters.html">General parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/advanced/mapping_parameters.html">Mapping parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/advanced/as_parameters.html">AS detection parameters</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tools</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">General Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mapping/bbmap.html">BBMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/contextmap.html">ContextMap 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/crac.html">CRAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/dart.html">Dart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/gsnap.html">GSNAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/hisat.html">HISAT2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/mapsplice.html">MapSplice 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/minimap.html">Minimap2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/segemehl.html">segemehl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/star.html">STAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping/subjunc.html">Subjunc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="splicing.html">Splicing tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="splicing/asgal.html">ASGAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/aspli.html">Aspli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/eventpointer.html">EventPointer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/irfinder.html">IRFinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/kissplice.html">kisSplice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/majiq.html">MAJIQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/sgseq.html">SGSeq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/spladder.html">SplAdder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="splicing/whippet.html">Whippet</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Further information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../further-information/faq.html">FAQ</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DICAST</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>General Information</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tools/tools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="general-information">
+<span id="tools"></span><h1>General Information<a class="headerlink" href="#general-information" title="Permalink to this headline">¶</a></h1>
+<p>Not all mapping and splicing tools are compatible with each other. Please refer to the table below to see which tools you can use together successfully. <code class="docutils literal notranslate"><span class="pre">fastq</span> <span class="pre">only</span></code> tools do only work with fastq files and not with bam files and therefore don’t depend on a mapping tool.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Compatibility</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>asgal</p></th>
+<th class="head"><p>aspli</p></th>
+<th class="head"><p>eventpointer</p></th>
+<th class="head"><p>kissplice</p></th>
+<th class="head"><p>irfinder</p></th>
+<th class="head"><p>majiq</p></th>
+<th class="head"><p>sgseq</p></th>
+<th class="head"><p>spladder</p></th>
+<th class="head"><p>whippet</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>bbmap</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>contextmap</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>crac</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>dart</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>gsnap</p></th>
+<td><p>fastq only</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>hisat</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>mapsplice</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>minimap</p></th>
+<td><p>fastq only</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>segemehl</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>star</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>subjunc</p></th>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>fastq only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mapping.html" class="btn btn-neutral float-right" title="Mapping tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../get-started/advanced/as_parameters.html" class="btn btn-neutral float-left" title="AS detection parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+  <head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+	</head>
+	<style>
+
+
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+	background: #60cdbf;
+}
+
+/* Caption headers for sidebar */
+.caption-text {
+	color: #13736a;
+}
+
+/*headings*/
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+.rst-content .sidebar .sidebar-title {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+/* Warning  */
+div .admonition.warning {
+	background: #ffa8ae;
+}
+	
+.rst-content .warning .admonition-title {
+	background: #8b272e;
+}
+
+/* Note */
+div .admonition.note {
+	background: #b9fff4;
+}
+	
+.rst-content .note .admonition-title {
+	background: #1ca58f;
+}
+
+/* List  */
+.rst-content dl:not(.docutils) dt {
+	color: #13736a;
+	background: #e7f2fa;
+	border-top: solid 2px #13736a;
+}
+
+/* code block */
+
+div .highlight {
+	background: #d6f1e9;
+}
+
+.nv {
+	color: #8b272e;
+}
+
+/* inline (guilabel) */
+
+.rst-content .guilabel {
+border: 1px solid #7fbbe3;
+background: #e7f2fa;
+border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
+}
+
+/* links */
+a {
+  color: #13736a;
+}
+
+
+
+	</style>
+
+
+
+</body>
+</html>

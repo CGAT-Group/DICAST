@@ -1,0 +1,8 @@
+tag	use
+--db	index_base
+--dir	index_dir
+--output-file	out_mapped
+--format	out_format
+--force-xs-dir	xstag
+--nthreads	threads
+reads	fastq_end
