@@ -45,15 +45,15 @@ def find_all_unified(dir):
     ####find compare files
     compare_paths = []
     for dirname,_,z in os.walk(dir):
-        if any("_compare_strict" in filename for filename in z):
+        if any("comparison.txt" in filename for filename in z):
             for filename1 in z:
-                if "_compare_strict" in filename1:
+                if "comparison.txt" in filename1:
                     compare_paths.append(os.path.join(dirname,filename1)) 
 
-    compare_dict = defaultdict(lambda: defaultdict(list))
+    compare_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for path in compare_paths:
-        if "M" in path.split('/')[6]:
-            compare_dict[path.split("/")[4]][path.split('/')[6]].append(path)
+        #if "M" in path.split('/')[6]:
+            compare_dict[path.split("/")[-1].split("_")[0]][path.split('/')[-1].split("_")[1]][path.split('/')[-1].split("_")[2]].append(path)
 
     return compare_dict
 
@@ -63,6 +63,7 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
     "EVENTPOINTER":"RNA-seq-driven",
     "IRFINDER":"Annotation-driven",
     "MAJIQ":"RNA-seq-driven",
+    "SGSEQ":"not specified",
     "SGSEQ_ANNO":"Annotation-driven",
     "SGSEQ_DENOVO":"RNA-seq-driven",
     "SPLADDER":"RNA-seq-driven",
@@ -71,10 +72,10 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
     tools = []
     comparedf = []
     for file in compare_paths:
-        if "compare" in file:
+        if "comparison" in file:
             tmp = pd.read_csv(file, sep="\t")
-            tmp['tool'] = file.split("/")[-1].replace("_compare_strict","")
-            tmp['tooltype'] = tooltype[file.split("/")[-1].replace("_compare_strict","").upper()]
+            tmp['tool'] = list(tooltype.keys())[np.where([True if file.split("/")[-1].upper().count(x) else False for x in tooltype.keys()])[0][0]]
+            tmp['tooltype'] = tooltype[tmp['tool'][0]]
             comparedf.append(tmp)
 
     comparedf = pd.concat(comparedf)
@@ -121,16 +122,19 @@ if __name__=="__main__":
     compare_dict = find_all_unified(args.dir)
     
     for sample, v in compare_dict.items():
-        for depth, paths in v.items():
+        for depth, vv in v.items():
+            for mapper, paths in vv.items():
             
-            print(f"Preparing compare plot for {sample}, {depth}")
+                print(f"Preparing compare plot for {sample}, {depth}, {mapper}")
 
-            if not os.path.exists(os.path.join(args.outputdir,sample)):
-                os.mkdir(os.path.join(args.outputdir,sample))
-            if not os.path.exists(os.path.join(args.outputdir,sample,depth)):
-                os.mkdir(os.path.join(args.outputdir,sample,depth))
+                if not os.path.exists(os.path.join(args.outputdir,sample)):
+                    os.mkdir(os.path.join(args.outputdir,sample))
+                if not os.path.exists(os.path.join(args.outputdir,sample,depth)):
+                    os.mkdir(os.path.join(args.outputdir,sample,depth))
+                if not os.path.exists(os.path.join(args.outputdir,sample,depth, mapper)):
+                    os.mkdir(os.path.join(args.outputdir,sample,depth, mapper))
 
-            save_path = os.path.join(args.outputdir, sample, depth)
-            compare_each_plots(paths, save_path)
+                save_path = os.path.join(args.outputdir, sample, depth, mapper)
+                compare_each_plots(paths, save_path)
 
-            print("done")
+                print("done")
