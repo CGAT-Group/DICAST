@@ -1,1 +1,1 @@
-{"Possible_overwrite_acknowledge": true, "ASimulatoR": false, "Mapping_tools": "bbmap", "Alternative_splicing_detection_tools": ""}
+{"Possible_overwrite_acknowledge": true, "ASimulatoR": true, "Mapping_tools": "star", "Alternative_splicing_detection_tools": "irfinder"}
