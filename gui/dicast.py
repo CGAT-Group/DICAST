@@ -350,7 +350,10 @@ class Ui_main_window(object):
             self.wd_button.setPalette(wd_button_palette)
 
     def set_snake_file(self, label):
-        self.custom_snakefile_full_path = on_button_get_file_path_clicked(label)
+        if self.wd_folder_full_path != "":
+            self.custom_snakefile_full_path = on_button_get_file_path_clicked(label, self.wd_folder_full_path)
+        else:
+            show_popup("Error - Missing working directory", "Please set the working directory before selecting the snakefile.")
 
     def on_button_ok_clicked(self):
         if self.check_runnable(True):
@@ -421,6 +424,7 @@ class Ui_main_window(object):
                         return f"Current status: Instance {_pid} has status: {p_status}"
             except FileNotFoundError:
                 return f"Current status: Missing pid file. No instance running or wrong folder: {log_file}"
+
         self.current_run_label.setText(check_process())
         self.run_all_refresh_log_display()
 
@@ -456,7 +460,7 @@ class Ui_main_window(object):
     def create_command_line_args(self):
         if self.custom_snakefile_full_path != "":
             snakefile_path = self.custom_snakefile_full_path
-            snakefile_config_path = os.path.dirname(self.custom_snakefile_full_path)
+            snakefile_config_path = os.path.join(os.path.dirname(self.custom_snakefile_full_path), 'snakemake_config.json')
         else:
             snakefile_path = os.path.join(self.wd_folder_full_path, 'scripts', 'snakemake', 'Snakefile')
             snakefile_config_path = os.path.join(self.wd_folder_full_path, 'scripts', 'snakemake', 'snakemake_config.json')

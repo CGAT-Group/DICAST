@@ -55,6 +55,7 @@ def dir_changed(path, restriction, dialog):
             return True
         else:
             return False
+
     if not path_is_allowed(restriction, path):
         dialog.setDirectory(restriction)
 
@@ -108,6 +109,11 @@ class ConfigSetter(object):
 
     def __init__(self, window, working_directory):
         self.wd = working_directory
+        self.parse_successful = False
+        if not os.path.exists(os.path.join(self.wd, "input")):
+            show_popup("Error - Missing input directory", f"Couldn't find directory {os.path.join(self.wd, 'input')}."
+                                                          f"\nPlease make sure you have selected the correct working directory and the input directory is called 'input'.")
+            return
         self.main_config_file = ""
         self.as_config_file = ""
         self.main_config_dict = {}
@@ -451,6 +457,7 @@ class ConfigSetter(object):
         self.out_dir_full_path = on_button_get_folder_path_clicked(path, self.wd)
         mount_path = self.out_dir_full_path.replace(self.wd, "$workdir")
         self.out_dir_full_path = os.path.join(mount_path, "${tool:-unspecific}-output")
+
 
 if __name__ == "__main__":
     import sys
