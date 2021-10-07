@@ -358,6 +358,7 @@ class Ui_main_window(object):
     def on_button_ok_clicked(self):
         if self.check_runnable(True):
             self.submit()
+            self.overwrite_cb.setChecked(False)
             self.check_running()
 
     def submit(self):
@@ -384,7 +385,6 @@ class Ui_main_window(object):
             self.wd_button.setPalette(wd_button_palette)
 
         self.overwrite_cb.setPalette(overwrite_cb_palette)
-
         return self.overwrite_cb.isChecked()
 
     def check_running(self):
