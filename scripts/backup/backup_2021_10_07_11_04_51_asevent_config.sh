@@ -11,4 +11,4 @@ fastqpair1suffix="1.fastq"                                             #suffix f
 fastqpair2suffix="2.fastq"                                             #suffix for second file of fastq-pair
 use_bam_input_files=1                                                   #determines what kind of input to use: 1 for bam files, 1 for fastq files
 
-combine_events=1                                                        #For some tools, a unified output format is available. This sets wether or not the unification should combine multiple events into one event type. See documentation for more information.
+combine_events=0                                                        #For some tools, a unified output format is available. This sets wether or not the unification should combine multiple events into one event type. See documentation for more information.
