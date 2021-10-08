@@ -1,0 +1,5 @@
+tag	use
+-i	index_base
+-f	fastq_r1
+-f2	fastq_r2
+-o	out_mapped

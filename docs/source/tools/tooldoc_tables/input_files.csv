@@ -1,0 +1,23 @@
+	fastq	fasta	bowtie_fastadir	gtf	gff	bam
+						
+bbmap	Yes	index				
+contextmap	Yes		Yes			
+crac	Yes	Yes				
+dart	Yes	Yes				
+gsnap	Yes	Yes				
+hisat	Yes	Yes		Yes		
+mapsplice	Yes		Yes	Yes		
+minimap	Yes	Yes				
+segemehl	Yes	Yes				
+star	Yes	Yes		Yes		
+subjunc	Yes	Yes				
+tim	Yes					
+asgal	Yes	Yes		Yes		
+aspli				Yes		Yes
+eventpointer				Yes		Yes
+irfinder	Yes	Yes		Yes		
+kissplice	Yes			Yes		Yes
+majiq					Yes	Yes
+sgseq				Yes		Yes
+spladder				Yes		Yes
+whippet	Yes	Yes		Yes		

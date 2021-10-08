@@ -1,0 +1,7 @@
+tag	use
+-i	index_base
+-r	fastq_r1
+-R	fastq_r2
+-o	out_dir
+-T	threads
+--SAMoutput	sam

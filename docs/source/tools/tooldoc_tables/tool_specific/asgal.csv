@@ -1,0 +1,10 @@
+tag	use
+--multi	multi
+-g	fasta
+-a	gtf
+-t	transcript
+-s	fastq_r1
+-s2	fastq_r2
+-o	out_as_fastq
+-@	threads
+--allevents	allevents

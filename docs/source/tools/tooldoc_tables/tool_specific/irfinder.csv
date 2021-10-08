@@ -1,0 +1,4 @@
+tag	use
+-r	index_dir
+-d	out_as_fastq
+reads	fastq_end
