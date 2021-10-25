@@ -11,3 +11,5 @@ short_input
 src/ASimulatoR/in
 src/ASimulatoR/out/
 test/
+gui/log/
+scripts/backup/backup*.sh
