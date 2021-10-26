@@ -57,7 +57,7 @@ def find_all_unified(dir):
     for path in unified_paths:
         if "unmapped" in path:
             continue
-        sample = "_".join(path.split("/")[-1].split("_")[:2])
+        sample = "_".join(path.split("/")[-1].split("_")[:-5])
         #maptool = path.split("/")[-1].split("_")[3]
         # if len(maptool)==0:
         #     maptool = path.split("/")[-1].split("_")[4]

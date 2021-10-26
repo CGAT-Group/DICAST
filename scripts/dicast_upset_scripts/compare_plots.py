@@ -52,10 +52,10 @@ def find_all_unified(dir):
                 if "comparison.txt" in filename1:
                     compare_paths.append(os.path.join(dirname,filename1)) 
 
-    compare_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    compare_dict = defaultdict(lambda: defaultdict(list))
     for path in compare_paths:
         #if "M" in path.split('/')[6]:
-            compare_dict[path.split("/")[-1].split("_")[0]][path.split('/')[-1].split("_")[1]][path.split('/')[-1].split("_")[2]].append(path)
+            compare_dict["_".join(path.split("/")[-1].split("_")[:-6])][path.split('/')[-1].split("_")[-6]].append(path)
 
     return compare_dict
 
@@ -124,19 +124,16 @@ if __name__=="__main__":
     compare_dict = find_all_unified(args.dir)
     
     for sample, v in compare_dict.items():
-        for depth, vv in v.items():
-            for mapper, paths in vv.items():
+            for mapper, paths in v.items():
             
-                print(f"Preparing compare plot for {sample}, {depth}, {mapper}")
+                print(f"Preparing compare plot for {sample}, {mapper}")
 
                 if not os.path.exists(os.path.join(args.outputdir,sample)):
                     os.mkdir(os.path.join(args.outputdir,sample))
-                if not os.path.exists(os.path.join(args.outputdir,sample,depth)):
-                    os.mkdir(os.path.join(args.outputdir,sample,depth))
-                if not os.path.exists(os.path.join(args.outputdir,sample,depth, mapper)):
-                    os.mkdir(os.path.join(args.outputdir,sample,depth, mapper))
+                if not os.path.exists(os.path.join(args.outputdir,sample, mapper)):
+                    os.mkdir(os.path.join(args.outputdir,sample,mapper))
 
-                save_path = os.path.join(args.outputdir, sample, depth, mapper)
+                save_path = os.path.join(args.outputdir, sample, mapper)
                 compare_each_plots(paths, save_path)
 
                 print("done")
