@@ -15,6 +15,8 @@ matplotlib_axes_logger.setLevel('ERROR')
 import os 
 import argparse
 import matplotlib
+plt.ioff()
+
 
 def arg_parser():
     parser = argparse.ArgumentParser('DICAST plots')
@@ -110,7 +112,7 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
         plt.xlabel("Recall",fontsize=fs)
         plt.ylabel("Precision",fontsize=fs)
         plt.savefig(os.path.join(save_path,f"{typ}_compare.png"), bbox_inches="tight")
-        plt.show()
+        #plt.show()
         plt.close()
 
 if __name__=="__main__":
