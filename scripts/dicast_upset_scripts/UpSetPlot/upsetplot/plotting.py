@@ -483,19 +483,21 @@ class UpSet:
         from random import randint
         
         cols = sns.color_palette("Set2", self._df.shape[1])
+      
         # for i in range(self._df.shape[1]-1):
         #     cols.append('#%06X' % randint(0, 0xFFFFFF))
 
         ax = self._reorient(ax)
         ax.set_autoscalex_on(False)
-        #rects = ax.bar(np.arange(len(self.intersections)), self.intersections,
-                       #.5, color=self._facecolor, zorder=10, align='center')
-            
-        bot = pd.Series([0]*len(self._df))
-        bot.index = self._df.index
-        for e,i in enumerate(self._df.columns[:-1]):
-            ax.bar(np.arange(len(self.intersections)), self._df[i], .5, color=cols[e], zorder=10, align='center', label=i, bottom=bot)
-            bot = bot+self._df[i]
+        if self._df.shape[0]==1:
+            rects = ax.bar(np.arange(len(self.intersections)), self.intersections,
+                       .5, color=self._facecolor, zorder=10, align='center')
+        else:
+            bot = pd.Series([0]*len(self._df))
+            bot.index = self._df.index
+            for e,i in enumerate(self._df.columns[:-1]):
+                ax.bar(np.arange(len(self.intersections)), self._df[i], .5, color=cols[e], zorder=10, align='center', label=i, bottom=bot)
+                bot = bot+self._df[i]
 
         #self._label_sizes(ax, rects, 'top' if self._horizontal else 'right')
 
