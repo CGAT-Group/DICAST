@@ -104,11 +104,12 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
         tmp['tool']=pd.Categorical(tmp['tool'])
         g = sns.scatterplot(data=tmp, x='recall', y='precision', hue="tool", style="tooltype", s=200, legend=leg)
         if leg:
-            plt.legend(bbox_to_anchor=(1.05, 1),
+            plt.legend(bbox_to_anchor=(1, 1),
                 borderaxespad=0, markerscale=2.5, ncol=7, title=None)
         plt.title(typ, y=1, fontsize=fs)
-        plt.xlim(right=1.05)
-        plt.ylim(top=1.05)
+
+        plt.xlim(-0.1,1.1)
+        plt.ylim(-0.1,1.1)
         plt.xlabel("Recall",fontsize=fs)
         plt.ylabel("Precision",fontsize=fs)
         plt.savefig(os.path.join(save_path,f"{typ}_compare.png"), bbox_inches="tight")
