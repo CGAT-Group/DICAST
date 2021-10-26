@@ -60,7 +60,7 @@ def find_all_unified(dir):
     return compare_dict
 
 def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
-    tooltype = {"ASGAL":"RNA-seq-driven", 
+    ToolType = {"ASGAL":"RNA-seq-driven", 
     "ASPLI":"Annotation-driven",
     "EVENTPOINTER":"RNA-seq-driven",
     "IRFINDER":"Annotation-driven",
@@ -76,14 +76,14 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
     for file in compare_paths:
         if "comparison" in file:
             tmp = pd.read_csv(file, sep="\t")
-            tmp['tool'] = list(tooltype.keys())[np.where([True if file.split("/")[-1].upper().count(x) else False for x in tooltype.keys()])[0][0]]
-            tmp['tooltype'] = tooltype[tmp['tool'][0]]
+            tmp['AS Tool:'] = list(ToolType.keys())[np.where([True if file.split("/")[-1].upper().count(x) else False for x in ToolType.keys()])[0][0]]
+            tmp['Tool Type:'] = ToolType[tmp['AS Tool:'][0]]
             comparedf.append(tmp)
 
     comparedf = pd.concat(comparedf)
 
     sns.set_style("whitegrid")
-    sns.relplot(data=comparedf, x='recall', y='precision', hue="tool", style="tooltype", s=200)
+    sns.relplot(data=comparedf, x='recall', y='precision', hue="AS Tool:", style="Tool Type:", s=200)
     plt.xlabel("Recall",fontsize=20)
     plt.ylabel("Precision",fontsize=20)
     plt.xlim(right=1.05)
@@ -94,15 +94,15 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
     matplotlib.rcParams["legend.markerscale"] = 2.5
     markers = ['o','*','X','p','D','P',">"]
     plt.style.use('seaborn-colorblind')
-    color=sns.color_palette("Set2", len(comparedf.tool.unique()))
+    color=sns.color_palette("Set2", len(comparedf["AS Tool:"].unique()))
     color=np.array(color)
 
     for e,typ in enumerate(comparedf.type.unique()):
         plt.figure(figsize=(8,7))
 
         tmp = comparedf[comparedf['type']==typ].reset_index(drop=True)
-        tmp['tool']=pd.Categorical(tmp['tool'])
-        g = sns.scatterplot(data=tmp, x='recall', y='precision', hue="tool", style="tooltype", s=200, legend=leg)
+        tmp['AS Tool:']=pd.Categorical(tmp['AS Tool:'])
+        g = sns.scatterplot(data=tmp, x='recall', y='precision', hue="AS Tool:", style="Tool Type:", s=200, legend=leg)
         if leg:
             plt.legend(bbox_to_anchor=(1, 1),
                 borderaxespad=0, markerscale=2.5, ncol=7, title=None)
