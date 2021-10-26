@@ -1,0 +1,12 @@
+	asgal	aspli	eventpointer	kissplice	irfinder	majiq	sgseq	spladder	whippet
+bbmap	fastq only	Yes	No	fastq only	Yes	No	No	Yes	Yes
+contextmap	fastq only	Yes	Yes	fastq only	Yes	No	No	Yes	Yes
+crac	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes
+dart	fastq only	Yes	No	fastq only	Yes	Yes	No	Yes	Yes
+gsnap	fastq only	No	No	fastq only	Yes	No	No	Yes	Yes
+hisat	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes
+mapsplice	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes
+minimap	fastq only	No	No	fastq only	Yes	Yes	No	Yes	Yes
+segemehl	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes
+star	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes
+subjunc	fastq only	Yes	Yes	fastq only	Yes	Yes	Yes	Yes	Yes

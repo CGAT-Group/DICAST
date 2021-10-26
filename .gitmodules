@@ -1,0 +1,3 @@
+[submodule "MappingStatistics"]
+	path = MappingStatistics
+	url = https://github.com/JohannesKersting/MappingStatistics.git

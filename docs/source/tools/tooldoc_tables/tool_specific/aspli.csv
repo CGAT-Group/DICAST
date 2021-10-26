@@ -1,0 +1,6 @@
+tag	use
+--gtf	gtf
+--cores	threads
+--readLength	readlength
+--out	out_as_bam
+--differential	differential

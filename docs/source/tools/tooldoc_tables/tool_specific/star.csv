@@ -1,0 +1,9 @@
+tag	use
+--sjdbGTFfile	gtf
+--readFilesIn	fastq_space
+--genomeDir	index_base
+--outFileNamePrefix	out_dir
+--runTreadN	threads
+--twopassMode	twopassmode
+--outSAMstrandField	strand
+--outSAMattributes 	xstag

@@ -1,0 +1,7 @@
+tag	use
+--x	index_base
+-1	fastq_r1
+-2	fastq_r2
+-S	out_mapped
+--known-splicesite-infile	splicesites
+-q	quiet

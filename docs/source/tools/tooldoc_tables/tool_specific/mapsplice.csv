@@ -1,0 +1,8 @@
+tag	use
+-c	fasta_chromosomewise
+-x	index_base
+--gene-gtf	gtf
+-o	out_dir
+-p	threads
+-1	fastq_r1
+-2	fastq_r2

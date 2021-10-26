@@ -1,0 +1,7 @@
+tag	use
+-reads	fastq_comma
+-aligner_name	aligner_name
+-aligner_bin	aligner_bin
+-indexer_bin	index_bin
+-indices	index_comma
+-genome	fasta_chromosomewise

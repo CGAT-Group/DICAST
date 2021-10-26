@@ -1,31 +1,33 @@
 
-![DICAST](docs/source/img/icon.png)
+![DICAST](docs/source/img/logo.png )
 
-This is a list of Dockers made for the Benchmarking pipeline that [exbio](https://www.baumbachlab.net/) will build for Sys_Ca_Re. These dockers would also be a valuable resource for all to use, in Bioinformatics. 
+Alternative splicing is a major contributor to transcriptome and proteome diversity in health and disease. A plethora of tools have been developed for studying alternative splicing in RNA-seq data. Previous benchmarking efforts focused on isoform quantification and mapping, neglecting event detection tools which arguably provide the most detailed insights into the alternative splicing process. 
 
-### Prerequisites
+DICAST closes this gap by offering a modular and extensible alternative splicing framework integrating eleven splice-aware mapping and eight event detection tools, which we benchmark extensively on simulated as well as whole blood RNA-seq data. We further propose the first uniform reporting standard to unify existing formats and to guide future tool development. The performance of event detection tools varies widely with no tool outperforming all others. DICAST allows researchers to employ a consensus approach to consider the most successful tools jointly in robust event detection. 
 
-These dockers work on input files in a working directory. 
+### Documentation
+
+https://dicast.readthedocs.io/en/latest/index.html
 
 #### Mapping tools
+1. bb-map
+2. contextmap2
+3. crac
+4. dart
+5. gsnap
+6. hisat2
+7. mapsplice2
+8. minimap2
+9. segemehl
+10. star
+11. subjunc
 
-Input files: fastq files 
-
-
-
-Other required files:  fasta files, unzipped: "*.fa" and annotation files, unzipped: "*.gtf"
-
-### Usage
-These images should all be usable by the command:
-```shell
-cd dockers/*/
-
-docker build ./ -t amit/**TOOLNAME**
-
-cd path/to/fastq/files/
-
-docker run -v "$(pwd)":/myvol1 --user $(id -u):$(id -g)  amit/
-
-```
-
-If you'd like a cheat sheet on using dockers with this repo, it's available [here](https://gitlab.lrz.de/ge46ban/dockers/-/wikis/Docker-commands-CHEAT-SHEET)
+#### Alternative Splicing Event Detection Tools
+1. asgal
+2. aspli
+3. eventpointer
+4. irfinder
+5. majiq
+6. sgseq
+7. spladder
+8. whippet
