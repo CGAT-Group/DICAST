@@ -66,7 +66,7 @@ then
 			if [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				echo python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${dicast_output_for_bam}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${dicast_output_for_bam}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
 		echo "Finished $tool unification for ${bam_specific_out}."

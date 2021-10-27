@@ -39,7 +39,7 @@ if [ $differential = 0 ]; then
 		# run unification
 		echo "Running $tool unificiation..."
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified_comparison.txt"
+		stats_file="${unified_outdir_name}/${outdir_name}_output_${tool}_dicast_unified_comparison.txt"
 
 		mkdir -p $unified_outdir_name
 		if [ $combine_events = 0 ];

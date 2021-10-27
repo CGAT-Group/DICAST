@@ -236,7 +236,8 @@ def make_plots(target_paths):
 
 if __name__=="__main__":
     args=arg_parser().parse_args()
-
+    print('Outputdir: ',(args.outputdir))
+    print('Dir: ', (args.dir))
     if not os.path.exists(args.outputdir):
         os.mkdir(args.outputdir)
 

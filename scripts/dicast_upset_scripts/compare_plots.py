@@ -56,7 +56,7 @@ def find_all_unified(dir):
     for path in compare_paths:
         #if "M" in path.split('/')[6]:
             compare_dict["_".join(path.split("/")[-1].split("_")[:-6])][path.split('/')[-1].split("_")[-6]].append(path)
-
+    
     return compare_dict
 
 def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
@@ -118,7 +118,8 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
 
 if __name__=="__main__":
     args=arg_parser().parse_args()
-
+    print('Outputdir: ',(args.outputdir))
+    print('Dir: ', (args.dir))
     if not os.path.exists(args.outputdir):
         os.mkdir(args.outputdir)
 
