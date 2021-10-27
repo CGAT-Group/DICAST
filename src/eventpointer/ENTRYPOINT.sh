@@ -38,7 +38,7 @@ if [ $differential = 0 ]; then
 		then
 			unified_outdir_name="${outdir}/${outdir_name}_output_${tool}_dicast_unified"
 			echo "Saving unified output to $unified_outdir_name"
-			stats_file="${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified_comparison.txt"
+			stats_file="${unified_outdir_name}/${outdir_name}_output_${tool}_dicast_unified_comparison.txt"
 			mkdir -p $unified_outdir_name
 
 			if [ $combine_events = 0 ];

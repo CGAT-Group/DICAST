@@ -70,7 +70,7 @@ for ((i=0;i<nPartners;++i)); do
 		mkdir -p $unified_outdir_name
 
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${fastqname}_asgal_unmapped__${tool}_dicast_unified_comparison.txt"
+		stats_file="${unified_outdir_name}/${fastqname}_unmapped__${tool}_dicast_unified_comparison.txt"
 
 		if [ $combine_events = 0 ];
 		then

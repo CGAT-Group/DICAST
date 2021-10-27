@@ -104,7 +104,7 @@ def compare_each_plots(compare_paths, save_path, leg=True, fs=20):
         tmp['AS Tool:']=pd.Categorical(tmp['AS Tool:'])
         g = sns.scatterplot(data=tmp, x='recall', y='precision', hue="AS Tool:", style="Tool Type:", s=200, legend=leg)
         if leg:
-            plt.legend(bbox_to_anchor=(1, 1),
+            plt.legend(bbox_to_anchor=(1.3, -0.15),
                 borderaxespad=0, markerscale=2.5, ncol=7, title=None)
         plt.title(typ, y=1, fontsize=fs)
 
