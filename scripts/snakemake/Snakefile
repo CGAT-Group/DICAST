@@ -113,6 +113,7 @@ rule run_contextmap:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -156,6 +157,7 @@ rule run_crac:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -199,6 +201,7 @@ rule run_dart:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -242,6 +245,7 @@ rule run_gsnap:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -285,6 +289,7 @@ rule run_hisat:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -328,6 +333,7 @@ rule run_mapsplice:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -371,6 +377,7 @@ rule run_minimap:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -414,6 +421,7 @@ rule run_segemehl:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -457,6 +465,7 @@ rule run_star:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -501,6 +510,7 @@ rule run_subjunc:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -544,6 +554,7 @@ rule run_bbmap:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
@@ -620,6 +631,7 @@ rule finished_mapping_tools_rule:
 # #                 container_prefix={docker_prefix}
 # #             fi
 
+# #             echo "Running $tool now"
 # #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 # #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -651,7 +663,8 @@ rule finished_mapping_tools_rule:
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
-
+            
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -684,6 +697,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -716,6 +730,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -748,6 +763,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -780,6 +796,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -812,6 +829,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -844,6 +862,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix={docker_prefix}
 #             fi
 
+#             echo "Running $tool now"
 #             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 #             echo "Finished $tool at $(date)" | tee {output}
 
@@ -876,6 +895,7 @@ rule run_majiq:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -908,6 +928,7 @@ rule run_aspli:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -940,6 +961,7 @@ rule run_eventpointer:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -972,6 +994,7 @@ rule run_asgal:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -1004,6 +1027,7 @@ rule run_irfinder:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -1036,6 +1060,7 @@ rule run_sgseq:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -1068,6 +1093,7 @@ rule run_spladder:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -1100,6 +1126,7 @@ rule run_whippet:
                 container_prefix={docker_prefix}
             fi
 
+            echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
