@@ -182,7 +182,7 @@ readfastqs(){
 mk_sample_out(){
 	tmp="${1##*/}"	#get basename of file
 	sample_out="${tmp%%.*}"	#remove all file extensions after first.
-	if [ "$tool" = "asgal" ] || [ "$tool" = "irfinder" ]
+	if [ "$tool" = "asgal" ]
 		then 
 		mkdir -p $outdir/${sample_out}_unmapped
 		chmod -R 777 $outdir/${sample_out}_unmapped
