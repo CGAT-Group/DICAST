@@ -1155,8 +1155,6 @@ rule dicast_plots:
         whippet=rules.run_whippet.output
     output:
        temp("output/snakemake/log_dicast_plots.txt")
-    conda:
-        "dicast-plots.yml"
     shell:
         """
         python scripts/dicast_upset_scripts/upset_plots.py --dir output --outputdir output/plots | tee {output} && echo Upset plots done
