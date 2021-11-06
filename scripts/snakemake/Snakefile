@@ -1157,8 +1157,12 @@ rule dicast_plots:
        temp("output/snakemake/log_dicast_plots.txt")
     shell:
         """
-        python scripts/dicast_upset_scripts/upset_plots.py --dir output --outputdir output/plots | tee {output} && echo Upset plots done
-        python scripts/dicast_upset_scripts/compare_plots.py --dir output --outputdir output/plots | tee {output} && echo Compare plots done
+        echo Plotting events found in common across each alternative splicing event calling tool.
+        python scripts/dicast_upset_scripts/upset_plots.py --dir output --outputdir output/plots | tee {output}
+        set +e
+        echo "Comparing events found to ASimulatoR\'s reference to generate Precision and Recall plots for each mapping tool."
+        python scripts/dicast_upset_scripts/compare_plots.py --dir output --outputdir output/plots | tee {output} && echo Precision and Recall plots for each mapping tool built successfully
+        ls output/plots -R
         """
 
 rule finished_full_run_rule:

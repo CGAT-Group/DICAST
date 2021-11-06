@@ -236,8 +236,7 @@ def make_plots(target_paths):
 
 if __name__=="__main__":
     args=arg_parser().parse_args()
-    print('Outputdir: ',(args.outputdir))
-    print('Dir: ', (args.dir))
+    print('Intersections of events identified are being plotted to: ',(args.outputdir))
     if not os.path.exists(args.outputdir):
         os.mkdir(args.outputdir)
 
@@ -257,7 +256,7 @@ if __name__=="__main__":
       up.plot(plot_this_df, sort_by="cardinality")
       plt.savefig(os.path.join(args.outputdir,sample,"upset_plot.png"), bbox_inches="tight")
       plt.close()
-      print('done')
+      print('Upset plots done')
 
 
     
