@@ -184,9 +184,9 @@ mk_sample_out(){
 	sample_out="${tmp%%.*}"	#remove all file extensions after first.
 	if [ "$tool" = "asgal" ]
 		then 
-		mkdir -p $outdir/${sample_out}_unmapped
-		chmod -R 777 $outdir/${sample_out}_unmapped
-		echo $outdir/${sample_out}_unmapped
+		mkdir -p $outdir/${sample_out}
+		chmod -R 777 $outdir/${sample_out}
+		echo $outdir/${sample_out}
 		 else
 		mkdir -p $outdir/${sample_out}_output
 		chmod -R 777 $outdir/${sample_out}_output
@@ -220,7 +220,7 @@ cleaner(){
 	rm -f $outdir/fastqlist 2>/dev/null
 	rm -rf $outdir/tmp 2>/dev/null
 	echo script is done
-	chmod 777 $outdir -R
+	chmod -R u+rwX,go+rX,o-w $outdir -R
 	#exit
 }
 

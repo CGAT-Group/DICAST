@@ -57,7 +57,7 @@ rule get_dependent_dockers:
     shell:
         """
         mkdir -p output/snakemake/
-        chmod 777 output/snakemake/
+        chmod -R u+rwX,go+rX,o-w output/snakemake/
 
         for img in base conda bowtie star
         do
@@ -118,13 +118,13 @@ rule run_contextmap:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             for i in $(find output/"$tool"-output/controldir/ -name "*.sam"  ); do j=$(basename $(dirname $i)); mv $i input/controldir/bamdir/$j.sam; done ;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -162,13 +162,13 @@ rule run_crac:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -206,13 +206,13 @@ rule run_dart:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -250,13 +250,13 @@ rule run_gsnap:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -294,13 +294,13 @@ rule run_hisat:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -338,13 +338,13 @@ rule run_mapsplice:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             for i in $(find output/"$tool"-output/controldir/ -name "*.sam"  ); do j=$(basename $(dirname $i)); mv $i input/controldir/bamdir/$j.sam; done ;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -382,13 +382,13 @@ rule run_minimap:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -426,13 +426,13 @@ rule run_segemehl:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -470,13 +470,13 @@ rule run_star:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             for i in $(find input/controldir/bamdir/ -type f -name '*starAligned*'); do mv $i $(echo $i | sed 's/starAligned\.out/star/g'); done
             echo "Finished $tool at $(date)" | tee {output}
@@ -515,13 +515,13 @@ rule run_subjunc:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 
@@ -559,13 +559,13 @@ rule run_bbmap:
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
-                find "$casedir" -exec chmod 777 {{}} \;
+                find "$casedir" -exec chmod -R u+rwX,go+rX,o-w {{}} \;
                 find "$casedir" \( -name "*.sam" -o -name "*.bam" \) -exec cp {{}} input/casedir/bamdir/ \;
             else
                     echo "No case directory found, assuming non-differential run"
             fi
 
-            find output/"$tool"-output/controldir/ -exec chmod 777 {{}} \;
+            find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*bbmap.sam" -o -name "*bbmap.bam" \) -exec cp -p {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
 

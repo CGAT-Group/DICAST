@@ -26,7 +26,7 @@ handlesamfiles 0
 #link/move gtf and fasta files into output folder
 echo linking annotation files into reference folder...
 mkdir -p $indexdir
-chmod 777 $indexdir
+chmod -R u+rwX,go+rX,o-w $indexdir
 
 
 
@@ -44,7 +44,7 @@ ln -sf $fasta $indexdir/genome.fa
 #build reference
 echo building reference...
 IRFinder -m BuildRefProcess -r $indexdir
-chmod 777 $indexdir
+chmod -R u+rwX,go+rX,o-w $indexdir
 wait
 echo reference built, moving on...
 

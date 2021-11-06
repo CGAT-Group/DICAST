@@ -65,12 +65,12 @@ for ((i=0;i<nPartners;++i)); do
 
 	if [[ -f "$sample_out/ASGAL/all.events.csv" ]];
 	then
-		unified_outdir_name="${sample_out}_${tool}_dicast_unified"
+		unified_outdir_name="${sample_out}_unmapped_reads_${tool}_dicast_unified"
 		echo "Saving unified output to $unified_outdir_name"
 		mkdir -p $unified_outdir_name
 
 		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
-		stats_file="${unified_outdir_name}/${fastqname}_unmapped_${tool}_dicast_unified_comparison.txt"
+		stats_file="${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified_comparison.txt"
 
 		if [ $combine_events = 0 ];
 		then
@@ -79,7 +79,7 @@ for ((i=0;i<nPartners;++i)); do
 			if  [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 			fi
 		else
 			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL/all.events.csv -out $unified_outdir_name -gtf $gtf -comb
@@ -87,7 +87,7 @@ for ((i=0;i<nPartners;++i)); do
 			if  [[ -f "$anno_file" ]];
 			then
 				echo "Running unified comparison..."
-				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
 	else
