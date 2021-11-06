@@ -21,7 +21,7 @@ then
 		fi
 	done ;	echo older transcript file found at $transcript, renamed to: ${transcript}$i
 fi
-gffread $gff -g $fasta -w $transcript; new transcript file generated at $transcript
+/galig/gffread/gffread $gff -g $fasta -w $transcript && echo new transcript file generated at: ls transcript$ $(ls -lh $transcript)
 
 
 #make output directory
@@ -55,16 +55,57 @@ for ((i=0;i<nPartners;++i)); do
 
 	#run ASGAL
 	/galig/asgal --multi -g $fasta -a $gtf -t $transcript -s $fastq1 -s2 $fastq2 -o $sample_out -@ $ncores --allevents
-	cat $sample_out/ASGAL/*.events.csv | head -n1 > $sample_out/ASGAL/all.events.csv
-	cat $sample_out/ASGAL/*.events.csv | grep -v 'Type,Start' >> $sample_out/ASGAL/all.events.csv
-
-	#run unification
-	echo "Running $tool unificiation..."
-
-	echo "Looking for $tool files in $sample_out/ASGAL/"
-
-	if [[ -f "$sample_out/ASGAL/all.events.csv" ]];
+	
+	#if run is successful:
+	if  [[ -f "$sample_out/ASGAL.csv" ]];
 	then
+		#run unification
+		echo "Running $tool unificiation..."
+		echo "Looking for $tool files in $sample_out/ASGAL/"
+
+		unified_outdir_name="${sample_out}_unmapped_reads_${tool}_dicast_unified"
+		echo "Saving unified output to $unified_outdir_name"
+		mkdir -p $unified_outdir_name
+
+		anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
+		stats_file="${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified_comparison.txt"
+
+		if [ $combine_events = 0 ];
+		then
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL.csv -out $unified_outdir_name -gtf $gtf
+
+			if  [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
+			fi
+		else
+			python3 /MOUNT/scripts/unified_output/output_transformer.py create -a $sample_out/ASGAL.csv -out $unified_outdir_name -gtf $gtf -comb
+
+			if  [[ -f "$anno_file" ]];
+			then
+				echo "Running unified comparison..."
+				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+			fi
+		fi
+	else
+		echo "Check outputs for ASGAL outputs:"
+		echo "$(ls $sample_out)"
+		echo "---"
+		echo "We should have ASGAL.csv if everything went smooth"
+	fi
+	
+	# if run didn't work out.
+	if  [[ ! -f "$sample_out/ASGAL.csv" ]]
+	then
+		echo "!! ASGAL had a memory issue, recovering from an incomplete run.........." | tee $sample_out/warning.txt
+		cat $sample_out/ASGAL/*.events.csv | head -n1 > $sample_out/ASGAL/all.events.csv
+		cat $sample_out/ASGAL/*.events.csv | grep -v 'Type,Start' >> $sample_out/ASGAL/all.events.csv
+		
+		#run unification
+		echo "Looking for $tool files in $sample_out/ASGAL/"
+		echo "Running $tool unificiation..."
+
 		unified_outdir_name="${sample_out}_unmapped_reads_${tool}_dicast_unified"
 		echo "Saving unified output to $unified_outdir_name"
 		mkdir -p $unified_outdir_name
@@ -90,7 +131,5 @@ for ((i=0;i<nPartners;++i)); do
 				python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${fastqname}_unmapped_reads_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 			fi
 		fi
-	else
-		echo "Couldn't find necessary input files for unification: $sample_out/ASGAL/all.events.csv"
 	fi
 done
