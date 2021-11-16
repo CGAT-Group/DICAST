@@ -1,5 +1,5 @@
 FROM openjdk:11.0.5-stretch
-ENV VERSION="38.43"
+ENV VERSION="38.94"
 LABEL description="Image for BBMap "
 LABEL maintainer="Amit Fenn"
 
@@ -10,8 +10,8 @@ ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_
 VOLUME /MOUNT
 
 #Installing tool
-RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download" && \
-    tar xf download
+RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download"  --no-check-certificate
+RUN  mv download BBMap_${VERSION}.tar.gz  && tar xf BBMap_${VERSION}.tar.gz -C /
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh
 RUN chmod 777 /docker_main/ENTRYPOINT.sh
