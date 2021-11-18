@@ -1,6 +1,6 @@
 *asgal.tar
 contextmap2/jre*
-docs/build
+docs/build/*
 index/*
 input/*
 older_runs/*
