@@ -7,70 +7,121 @@ Setup docker
 
 .. .. sectnum:: depth:1
 
-1. Get docker for your system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Get docker-compose  for your system
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Linux
-:::::
+This requires you to have administrative rights on your computer, or talk to your system administrator about getting Docker on your system and giving you rights to use the docker user group.
 
-https://docs.docker.com/engine/install/ubuntu/
+A. Download Docker
+:::::::::::::::::::::
 
-MacOS
-:::::
+Follow the Docker Engine installation manual for getting Docker, your first step. : https://docs.docker.com/engine/install/
 
-https://docs.docker.com/docker-for-mac/install/
+B. Post-install Docker steps
+::::::::::::::::::::::::::::
 
-Windows
-:::::::
+.. _post-install: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
 
-https://docs.docker.com/docker-for-windows/install/
+To run DICAST in user mode entirely, please fulfill this `post-install`_ step to run docker as a non-root user.
 
-2. Build docker images
-^^^^^^^^^^^^^^^^^^^^^^
+C. Install docker-compose
+::::::::::::::::::::::::::
+
+This while closely related, docker-compose is the last of DICAST's docker dependencies. Follow the installation manual from docker-compose.
+https://docs.docker.com/compose/install/#install-compose
+
+
+Basic Docker commands
+::::::::::::::::::::::
+Should you have docker configured on your system, you shouldn't run into a permission error for the following commands.
+
+.. prompt:: bash
+
+  docker images
+
+to list docker images in on your computer.
+
+.. prompt:: bash
+
+  docker ps
+
+to list all running containers only.
+
+.. prompt:: bash
+
+  docker ps -a
+
+to list all running and stopped containers.
+
+.. prompt:: bash
+
+  docker --version
+
+
+We support Docker version 19 and above.
+
+.. prompt:: bash
+
+  docker-compose --version
+
+
+
+2. Build docker images (Optional)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+While the steps described in this section are handled by DICAST's graphical interface, it can also be accessed via command line, for more control.
 
 Build all images
 ::::::::::::::::::
 
 If you intend to use multiple dockers at once you can use our snakemake pipeline, which will take care of building the docker images.
-If you want to build the dockers manually, we provide a ``docker-compose.yml`` file which will let you build them yourself. You can use the command 
+If you want to build the dockers manually, we provide a ``docker-compose.yml`` file which will let you build them yourself. You can use the command the following command to build all images.
 
 .. prompt:: bash
 
-  docker-compose -f path/to/docker-compose.yml build
+  docker-compose -f scripts/Snakemake/docker-compose.yml build
 
-to build all images. For more information, see the  `docker compose documentation <https://docs.docker.com/compose/>`_.
+If you'd like to edit DICAST's docker-compose file, see the  `docker-compose Manual <https://docs.docker.com/compose/gettingstarted/>`_.
 
 Build one image
 :::::::::::::::
 
-If you only want to build one specific docker image, run the following command:
+If you only want to build one specific docker image, run the following command to first build some core essential containers:
 
 .. prompt:: bash
 
-  docker build <directory level path to Dockerfile> --tag=<tool>:<tag>
+  docker-compose -f scripts/Snakemake/docker-compose.yml build base conda bowtie star
 
-  # Examples:
-  # If you are inside of the base directory ("dockers") and want to build gsnap:
-  docker build ./gsnap/ --tag=gsnap:0.1
-
-  # If you are already inside the dockers/gsnap directory::
-  docker build ./ --tag=gsnap:0.1
-
-or use the ``docker-compose.yml`` file and specify which image to build: 
+And if you want to build any of the other tools, use the following command:
 
 .. prompt:: bash
 
-  docker-compose -f path/to/docker-compose.yml build <tool>
+  docker-compose -f scripts/Snakemake/docker-compose.yml build <tool>
 
-3. Other helpful commands
-^^^^^^^^^^^^^^^^^^^^^^^^^
-List docker images (for example to get image ids):
+Where <tool> needs to be replaced with one or more of the following tools:
+
+bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc
+asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
+
+
+3. Pull docker images (Fail safe)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Should the tool you intended to run, not build locally, it's also possible to pull them from DICAST's dockerhub repository at: https://hub.docker.com/repository/docker/dicastproj/dicast
+
 
 .. prompt:: bash $
 
-  docker images
+  docker pull dicastproj/dicast:tagname
 
-Remove an image:
+4. Other helpful commands
+^^^^^^^^^^^^^^^^^^^^^^^^^
+To gracefully stop a running docker container (If perhaps snakemake's process had to be killed):
+
+.. prompt:: bash $
+
+  docker stop <docker-container-name/ID>
+
+Remove an image (to save space, after your analysis):
 
 .. prompt:: bash $
 

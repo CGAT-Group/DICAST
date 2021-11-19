@@ -49,11 +49,11 @@ samdir
    | Default: ``$controlfolder/bamdir``
 
 fastadir
-   | Directory for the fasta file (might vary for certain tools, see mapping or AS-specific config files TODO LINK DOCUMENTATION)
+   | Directory for the reference genome file (might vary for certain tools, see mapping or AS-specific config files TODO LINK DOCUMENTATION)
    | Default: ``$inputdir``
 
 gtfdir
-   | Directory for the gtf file.
+   | Directory for the annotation file file.
    | Default: ``$inputdir``
 
 gffdir
@@ -75,7 +75,7 @@ fastaname
    | Example: ``Homo_sapiens.GRCh38.dna.primary_assembly.fa``
 
 gtfname
-   | Name of gtf reference file inside ``$gffdir``.
+   | Name of annotation reference file inside ``$gffdir``.
    | Example: ``splicing_variants.gtf``
 
 gffname
@@ -86,11 +86,11 @@ gffname
 	There should be no need to edit ``fasta``, ``gtf`` and ``gff`` since they just combine other parameters. 
 
 fasta
-   | Full path to the fasta file.
+   | Full path to the reference genome file.
    | Default: ``${fastadir:-unspecific}/$fastaname``
 
 gtf
-   | Full path to the gtf file.
+   | Full path to the annotation file.
    | Default: ``${gtfdir:-unspecific}/$gtfname``
 
 gff

@@ -21,10 +21,10 @@ How to change your config.sh file
 
 .. note::
 
-	The following explanations assume that you use our directory structure as described in folder structure. If you want to use your own folder structure please look at the information in our advanced section.
+	The following explanations assume that you use our directory structure as described in directory structure. If you want to use your own directory structure please look at the information in our advanced section.
 	
 All config files are in the scripts folder inside of your cloned repository.
-If you are using our folder structure for your input you will have to change the following parameters:
+If you are using our directory structure for your input you will have to change the following parameters:
 
 Basic Parameters
 ^^^^^^^^^^^^^^^^
@@ -47,4 +47,4 @@ gtfname
 gffname
 	| the genome gff3 annotation that you use for mapping and alternative splicing analysis
 
-The fasta, gtf and gff3 files could be downloaded from `Ensembl <http://ftp.ensembl.org/pub/release-104/>`_
+The reference genome, annotation file and gff3 files could be downloaded from `Ensembl <http://ftp.ensembl.org/pub/release-104/>`_

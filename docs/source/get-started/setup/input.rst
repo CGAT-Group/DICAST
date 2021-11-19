@@ -1,17 +1,18 @@
-Folder Structure
-================
+Directory Structure
+===================
 
 .. image:: ../../img/dicast_input_folder_structure.png
 
 .. note::
 
-  Our pipeline allows to run many different tools in the same way. The scripts therefore rely on the folder structure specified here.
+  Our pipeline allows to run many different tools in the same way. The scripts therefore rely on the directory structure specified here.
+  Please don't rename any directories that are listed here within the git. An output directory is created with your first run. This directory may be renamed.
 
 Example Tree Structure
 ^^^^^^^^^^^^^^^^^^^^^^
 
 This is an example for the tree structure when running the pipeline for alternative splicing.
-Please not that **you only need a .fa and a .gtf file** if you start your analysis with ASimulator, since it will create .fastq files for you. However, some tools need specific input files. Please refer to the respective :ref:`tool documentation<Tools>` for further information.
+Please note that **you only need a .fa and a .gtf file** if you start your analysis with ASimulator, since it will create .fastq files for you. However, some tools need specific input files. Please refer to the respective :ref:`tool documentation<Tools>` for further information.
 
 .. code:: bash
 

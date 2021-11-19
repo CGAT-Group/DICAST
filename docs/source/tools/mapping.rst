@@ -41,7 +41,7 @@ fasta
 .. _gtfMapping:
 
 gtf
-  Gtf reference file.
+  annotation reference file.
 
   .. code-block:: bash
 

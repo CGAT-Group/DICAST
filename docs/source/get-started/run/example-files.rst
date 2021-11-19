@@ -21,7 +21,7 @@ Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
    cd /path/to/DICAST/
    mkdir input
 
-4. Create the folder structure as in the `sample_output`:
+4. Create the directory structure as in the `sample_output`:
 
 .. prompt:: bash
 
@@ -104,7 +104,7 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
    cd /path/to/DICAST/
    mkdir input
 
-4. Create the folder structure as in the `sample_output`:
+4. Create the directory structure as in the `sample_output`:
 
 .. prompt:: bash
 
@@ -122,7 +122,7 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
    wget http://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
    gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 
-6. Download or copy the genome gtf annotation into the `input` folder. Dont't forget to uncompress it. E.g.:
+6. Download or copy the genome annotation file into the `input` folder. Dont't forget to uncompress it. E.g.:
 
 .. prompt:: bash
 
