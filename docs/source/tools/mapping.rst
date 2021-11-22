@@ -12,7 +12,7 @@ Mapping Input Files
 
 .. tip::
   The paths assume you are using our suggested :doc:`input structure <../get-started/setup/input>`.
-  Example input files you can find in our :doc:`examples section<../get-started/run/example-files>`.
+  Example input files you can find in our :doc:`examples section <../further-information/example-files>`.
 
 You can find the required input files in the tool-specific documentation.
 

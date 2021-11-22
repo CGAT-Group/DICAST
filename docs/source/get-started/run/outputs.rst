@@ -1,7 +1,9 @@
 DICAST Outputs
 ==================
 
-DICAST provides outputs as you would expect them from each Alternative Splicing tool within :guilabel:`output/<astoolname>-output/<Fastq-filename>_output`. DICAST also provides a dicast_unified output format for each tool. This is a simple tsv file that hosts all the events found from each tool. We used this to unify the outputs needed to build each of the plots outputted by DICAST.
+DICAST provides outputs as you would expect them from each Alternative Splicing tool within :guilabel:`output/<astoolname>-output/<Fastq-filename>_output`.
+
+DICAST also provides a :guilabel:`output/<astoolname>-output/<Fastq-filename>_output_dicast_unified` output format for each tool. This is a simple tsv file that hosts all the events found from each tool. We used this to unify the outputs needed to build each of the plots outputted by DICAST.
 
 
 .. prompt:: bash $
@@ -36,7 +38,7 @@ DICAST provides outputs as you would expect them from each Alternative Splicing 
 
 ------------------------------
 
-DICAST also outputs an upset plot.
+DICAST also outputs an upset plot for each ``Fastq-filename``-``mapping_tool`` combination.
 
 .. figure:: ../../img/upset_plot.png
 
@@ -44,7 +46,7 @@ This plot shows the events that were found in common by tools and shows you whic
 
 ------------------------------
 
-When run with **ASimulatoR**, DICAST also outputs precision and recall plots;
+When run with **ASimulatoR**, DICAST also outputs precision and recall plots for each ``Fastq-filename``-``mapping_tool`` combination.;
 
 for all events
 

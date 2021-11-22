@@ -64,4 +64,5 @@ DICAST is currently hosted on `bioRxiv`_, at this link <notsubmitted-yet>.
 	:hidden:
 	:caption: Further information
 
+	further-information/example-files
 	further-information/faq

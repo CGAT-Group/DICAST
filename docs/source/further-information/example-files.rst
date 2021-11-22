@@ -6,7 +6,7 @@ Here we provide the detailed description of possible workflows. We recommend to 
 Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Make sure you followed the steps described in the :doc:`setup <../setup>` section carefully.
+1. Make sure you followed the steps described in the :doc:`setup <../get-started/setup>` section carefully.
 
 2. Before getting started make sure to activate the snakemake conda environment:
 
@@ -47,7 +47,7 @@ Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
 
 7. Download or copy the fastq files you want to align into the `/path/to/DICAST/input/controldir/fastqdir`. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.
 
-8. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../config/general_parameters>`):
+8. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../get-started//config/general_parameters>`):
 
 .. prompt:: bash
 
@@ -89,7 +89,7 @@ First, the pipeline will build all necessary dockers. Second, in will create a `
 Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whippet)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Make sure you followed the steps described in the :doc:`setup <../setup>` section carefully.
+1. Make sure you followed the steps described in the :doc:`setup <../get-started/setup>` section carefully.
 
 2. Before getting started make sure to activate the snakemake conda environment:
 
@@ -140,7 +140,7 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
 
 9. Download or copy the bam files you want to use into the `/path/to/DICAST/input/controldir/bamdir`.
 
-10. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../config/general_parameters>`):
+10. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../get-started/config/general_parameters>`):
 
 .. prompt:: bash
 

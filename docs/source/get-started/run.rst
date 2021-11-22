@@ -12,7 +12,7 @@ Run your analysis
    run/dicast-cli
    run/one_tool
    run/outputs
-   run/example-files
+
 
 
 Workflow
