@@ -17,7 +17,7 @@ ENV SEGEMEHL_VERSION="0.3.4"
 ENV SEGEMEHL_HOME="/opt/segemehl-0.3.4"
 ENV PATH="$SEGEMEHL_HOME:$PATH"
 
-RUN wget https://www.bioinf.uni-leipzig.de/Software/segemehl/downloads/segemehl-${SEGEMEHL_VERSION}.tar.gz && tar -xzvf ./s*.gz && rm ./s*.gz && \
+RUN wget --no-check-certificate  https://www.bioinf.uni-leipzig.de/Software/segemehl/downloads/segemehl-${SEGEMEHL_VERSION}.tar.gz && tar -xzvf ./s*.gz && rm ./s*.gz && \
     pwd
 
 RUN cd /docker_main/segemehl* && \

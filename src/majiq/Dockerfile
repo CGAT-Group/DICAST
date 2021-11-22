@@ -31,7 +31,7 @@ RUN rm -rf /tmp
 WORKDIR /opt
 
 #download and add script to convert GTF file to GFF3 format
-RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl && wget http://www.sequenceontology.org/resources/gtf2gff3.cfg
+RUN wget --no-check-certificate http://majiq.biociphers.org/download/gtf2gff3.pl && wget --no-check-certificate  http://www.sequenceontology.org/resources/gtf2gff3.cfg
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt:/opt/htslib-1.9
 

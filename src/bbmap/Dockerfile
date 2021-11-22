@@ -10,7 +10,7 @@ ARG refgenlink=ftp://ftp.ensembl.org/pub/release-99/fasta/homo_sapiens/dna/Homo_
 VOLUME /MOUNT
 
 #Installing tool
-RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download" && \
+RUN cd / && wget "https://sourceforge.net/projects/bbmap/files/BBMap_${VERSION}.tar.gz/download" --no-check-certificate && \
     tar xf download
 
 COPY [--chown=nobody:nogroup] ./ENTRYPOINT.sh /docker_main/ENTRYPOINT.sh

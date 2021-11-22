@@ -5,7 +5,7 @@ LABEL maintainer="Amit Fenn"
 WORKDIR /docker_main
 
 # Installing hisat2 v2.2.1
-RUN wget https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download -O hisat2.2.2.1.zip && unzip hisat2.2.2.1.zip && cd /docker_main/hisat2-2.2.1/ && ln -s /docker_main/hisat2-2.2.1/* /usr/local/bin/
+RUN wget https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download --no-check-certificate  -O hisat2.2.2.1.zip && unzip hisat2.2.2.1.zip && cd /docker_main/hisat2-2.2.1/ && ln -s /docker_main/hisat2-2.2.1/* /usr/local/bin/
 
 # Name of mounted folder
 VOLUME /MOUNT
