@@ -19,8 +19,12 @@ Your prompt should show you (dicast-snakemake), to show you your conda environme
 .. figure:: /img/Screenshot_dicast.png
 
 .. warning::
-  the graphical user interface assumes a X11 rendering system. If you're not on a Linux machine, find out how to host an X11 daemon for yourself. If you're using ``ssh``, please use the ``ssh -X`` flag, to allow X11 forwarding. If you're running DICAST on your local machine. the output of ``echo $DISPLAY`` should read ``:0``
 
+  DICAST is set to Run ASimulatoR with default values, however, should you wish to tune simulated dataset to your investigative questions, please modify the file :guilabel:`scripts/ASimulatoR_config.R` ( See :doc:`ASimulatoR Parameters <../config/ASimulatoR_parameters>` )
+
+.. note::
+
+  the graphical user interface assumes a X11 rendering system. If you're not on a Linux machine, find out how to host an X11 daemon for yourself. If you're using ``ssh``, please use the ``ssh -X`` flag, to allow X11 forwarding. If you're running DICAST on your local machine. the output of ``echo $DISPLAY`` should read ``:0``
 
 =======================================  ==========================================================================================
 Options                                  Explanation
@@ -38,9 +42,6 @@ OK                                       Starts a DICAST run.
 Close                                    Shuts down the GUI, leaving a running session of DICAST, you can connect to next time you start the gui.
 =======================================  ==========================================================================================
 
-.. warning::
-
-  Aborting a run: Once the dockers begin, they're not under DICAST's control to abort. If you really want to interrupt DICAST, also check for running containers `docker ps` and stop/ kill running containers with `docker stop <container-name>`. Also use the clean up function to clean up an interrupted run.
 
 
 
@@ -68,3 +69,15 @@ Should different AS events be combined into one   Multiple exon skipping, could 
 
 .. note::
   the close button warns you about losing changes even if you saved them. This is a bug, and will be corrected soon.
+
+
+Troubleshooting
+^^^^^^^^^^^^^^^
+
+- Check Snakemake Output to see which rule failed.
+
+- if the rule that failed was named after a tool, check log files under output/<tool>-output/logs/ to see where the error was.
+
+.. warning::
+
+  Aborting a run: Once the dockers begin, they're not under DICAST's control to abort. If you really want to interrupt DICAST, also check for running containers `docker ps` and stop/ kill running containers with `docker stop <container-name>`. Also use the clean up function to clean up an interrupted run.

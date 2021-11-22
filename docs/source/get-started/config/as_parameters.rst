@@ -1,5 +1,5 @@
-AS detection parameters
-=======================
+Alternative splicing tools parameters
+============================================
 Found in file: :guilabel:`scripts/asevent_config.sh`
 
 This config file sets parameters that are specific to AS event detection tools only.
@@ -34,3 +34,13 @@ use_bam_input_files
 combine_events
     | Events such as Multiple Exon Skipping should be represented as such, instead of individual exon skipping events.
     | Default: ``1``
+
+.. warning::
+
+          Something broke while changing the config file? Make sure there is no space between the variable, the equal sign and the value.
+
+          Since these files are bash scripts, it is important to mind the syntax rules. E.g., there can't be a whitespace before and after "=".
+
+          For example:
+          | Wrong: workdir = "dockers/"
+          | Right: workdir="dockers/"

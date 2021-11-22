@@ -5,13 +5,13 @@ In this section we will explain how to use DICAST to run a whole pipeline.
 
 Make sure you followed the steps described in the :doc:`setup <../setup>` section carefully.
 
-Change config.sh according to your run (see :doc:`How to change your config.sh file <../run/config>`)
+Change config.sh according to your run (see :doc:`How to change your config.sh file <../config>`)
 
 Before getting started make sure to activate the snakemake conda environment:
 
 .. prompt:: bash
 
-  conda activate snakemake
+  conda activate dicast-snakemake
 
 .. note::
 
@@ -28,7 +28,7 @@ To run the snakemake pipeline:
 
   See snakemake -h
   E.g.:
-  $ snakemake -j 2 -d /nfs/proj/AS_dockers/ -s Snakefile --configfile snakemake_config.yaml
+  $ snakemake -j 2 -d /opt/DICAST/dockers -s Snakefile --configfile snakemake_config.yaml
 
 Important arguments:
 
@@ -46,7 +46,7 @@ For more information, see the `Snakemake documentation <https://snakemake.readth
 Troubleshooting
 ^^^^^^^^^^^^^^^
 
-- Check Logger tab if something isn't working
+- Check log files under output/<tool>-output/logs/
 - If a run was canceled/exited unexpectetly and the directory is still locked, try running the same snakemake command again with ``--unlock`` or remove the files from ``working_directory/.snakemake/locks/``
 - Snakemake itself creates some logging files, they can be found in ``working_directory/.snakemake/log/``
 

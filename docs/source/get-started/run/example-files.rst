@@ -12,7 +12,7 @@ Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
 
 .. prompt:: bash
 
-  conda activate snakemake
+  conda activate dicast-snakemake
 
 3. Create the `input` folder:
 
@@ -47,7 +47,7 @@ Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
 
 7. Download or copy the fastq files you want to align into the `/path/to/DICAST/input/controldir/fastqdir`. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.
 
-8. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../run/config>`):
+8. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../config/general_parameters>`):
 
 .. prompt:: bash
 
@@ -95,7 +95,7 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
 
 .. prompt:: bash
 
-  conda activate snakemake
+  conda activate dicast-snakemake
 
 3. Create the `input` folder:
 
@@ -140,7 +140,7 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
 
 9. Download or copy the bam files you want to use into the `/path/to/DICAST/input/controldir/bamdir`.
 
-10. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../run/config>`):
+10. Go to `/path/to/DICAST/scripts` and edit `config.sh` according to your run (see :doc:`How to change your config.sh file <../config/general_parameters>`):
 
 .. prompt:: bash
 

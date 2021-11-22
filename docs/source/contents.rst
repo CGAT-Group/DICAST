@@ -46,7 +46,7 @@ DICAST is currently hosted on `bioRxiv`_, at this link <notsubmitted-yet>.
 
 	get-started/setup
 	get-started/run
-	get-started/advanced
+	get-started/config
 
 
 .. toctree::

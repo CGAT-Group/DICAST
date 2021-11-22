@@ -1,14 +1,14 @@
-General parameters
-==================
+Tool core parameters
+=======================
 Found in file: :guilabel:`scripts/config.sh`
+
+.. note::
+
+  If a parameter is recommended as a default. It's for the snakemake workflow to work smooth. Parameters with this value will be marked with: ``recommended to leave at default``
 
  .. warning::
 
    If a parameter exists in the config files but isn't listed in this reference, please don't change the default on this paramenter.
-
- .. note::
-
-	  If a parameter is recommended as a default. It's for the snakemake workflow to work smooth. Parameters with this value will be marked with: ``recommended to leave at default``
 
 
 Basic parameters
@@ -149,3 +149,14 @@ Basic Mapping Parameters
 outname ``recommended to leave at default``
     | Base name of the output files. They will usually be prefixed with the fastq file name and suffixed with ``.sam``.
     | Default: ``$tool`` (the name of the tool creating the ouput files)
+
+
+.. warning::
+
+      Something broke while changing the config file? Make sure there is no space between the variable, the equal sign and the value.
+
+      Since these files are bash scripts, it is important to mind the syntax rules. E.g., there can't be a whitespace before and after "=".
+
+      For example:
+      | Wrong: workdir = "dockers/"
+      | Right: workdir="dockers/"

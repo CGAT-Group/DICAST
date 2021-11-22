@@ -11,6 +11,7 @@ Run your analysis
    run/gui
    run/dicast-cli
    run/one_tool
+   run/outputs
    run/example-files
 
 

@@ -1,5 +1,5 @@
-ASimulatoR config
-===================
+ASimulatoR parameters
+=======================
 
 Found in file: :guilabel:`scripts/ASimulatoR_config.R`
 
