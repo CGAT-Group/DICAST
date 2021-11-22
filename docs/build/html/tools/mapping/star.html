@@ -1,45 +1,42 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>STAR &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Subjunc" href="subjunc.html" />
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../get-started/run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../get-started/advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,13 +202,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../mapping.html">Mapping tools</a> &raquo;</li>
         
@@ -218,7 +215,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/tools/mapping/star.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -235,42 +232,45 @@
   <div class="section" id="star">
 <h1>STAR<a class="headerlink" href="#star" title="Permalink to this headline">¶</a></h1>
 <div class="sidebar">
-<p class="sidebar-title">STAR Factsheet</p>
-<table class="docutils align-default">
+<p class="first sidebar-title">STAR Factsheet</p>
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 15%" />
-<col style="width: 85%" />
+<col width="15%" />
+<col width="85%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Toolname</strong></p></td>
-<td><p><em>star</em></p></td>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Toolname</strong></td>
+<td><em>star</em></td>
 </tr>
-<tr class="row-even"><td><p><strong>Version</strong></p></td>
-<td><p><em>2.7.3a</em></p></td>
+<tr class="row-even"><td><strong>Version</strong></td>
+<td><em>2.7.3a</em></td>
 </tr>
-<tr class="row-odd"><td><p><strong>License</strong></p></td>
-<td><p><a class="reference external" href="https://github.com/alexdobin/STAR/blob/master/LICENSE">MIT Licence</a></p></td>
+<tr class="row-odd"><td><strong>License</strong></td>
+<td><a class="reference external" href="https://github.com/alexdobin/STAR/blob/master/LICENSE">MIT Licence</a></td>
 </tr>
 </tbody>
 </table>
-<dl class="simple">
-<dt><strong>Required Files</strong></dt><dd><ul class="simple">
-<li><p><em>For mapping:</em> <a class="reference internal" href="../mapping.html#fastqmapping"><span class="std std-ref">fastq</span></a>, <a class="reference internal" href="../mapping.html#fastamapping"><span class="std std-ref">fasta</span></a>, <a class="reference internal" href="../mapping.html#gtfmapping"><span class="std std-ref">gtf</span></a></p></li>
+<dl class="last docutils">
+<dt><strong>Required Files</strong></dt>
+<dd><ul class="first last simple">
+<li><em>For mapping:</em> <a class="reference internal" href="../mapping.html#fastqmapping"><span class="std std-ref">fastq</span></a>, <a class="reference internal" href="../mapping.html#fastamapping"><span class="std std-ref">fasta</span></a>, <a class="reference internal" href="../mapping.html#gtfmapping"><span class="std std-ref">gtf</span></a></li>
 </ul>
 </dd>
-<dt><strong>Compatible splicing tools</strong></dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="../splicing/aspli.html"><span class="doc">Aspli</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/eventpointer.html"><span class="doc">EventPointer</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/irfinder.html"><span class="doc">IRFinder</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/majiq.html"><span class="doc">MAJIQ</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/sgseq.html"><span class="doc">SGSeq</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/spladder.html"><span class="doc">SplAdder</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/whippet.html"><span class="doc">Whippet</span></a></p></li>
+<dt><strong>Compatible splicing tools</strong></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="../splicing/aspli.html"><span class="doc">Aspli</span></a></li>
+<li><a class="reference internal" href="../splicing/eventpointer.html"><span class="doc">EventPointer</span></a></li>
+<li><a class="reference internal" href="../splicing/irfinder.html"><span class="doc">IRFinder</span></a></li>
+<li><a class="reference internal" href="../splicing/majiq.html"><span class="doc">MAJIQ</span></a></li>
+<li><a class="reference internal" href="../splicing/sgseq.html"><span class="doc">SGSeq</span></a></li>
+<li><a class="reference internal" href="../splicing/spladder.html"><span class="doc">SplAdder</span></a></li>
+<li><a class="reference internal" href="../splicing/whippet.html"><span class="doc">Whippet</span></a></li>
 </ul>
 </dd>
-<dt><strong>Links</strong></dt><dd><ul class="simple">
-<li><p>STAR <a class="reference external" href="https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf">manual</a></p></li>
-<li><p>STAR publication: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">STAR: ultrafast universal RNA-seq aligner</a></p></li>
+<dt><strong>Links</strong></dt>
+<dd><ul class="first last simple">
+<li>STAR <a class="reference external" href="https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf">manual</a></li>
+<li>STAR publication: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">STAR: ultrafast universal RNA-seq aligner</a></li>
 </ul>
 </dd>
 </dl>
@@ -278,8 +278,8 @@
 <div class="section" id="indexing">
 <h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Indexing might take some time</strong> but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.</p>
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Indexing might take some time</strong> but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.</p>
 </div>
 <p>DICAST will check if <span class="guilabel">$star_index/$indexname/genomeParameters.txt</span> exists. If there is no index it will be automatically built. If you want to rebuild the index anyway set <code class="docutils literal notranslate"><span class="pre">$recompute_index=true</span></code> in <span class="guilabel">scripts/mapping_config.sh</span>.
 If you want to use your own precomputed index file copy it to <span class="guilabel">index/star-index/</span> and make sure the index is complete and named appropriately and according to the parameters set in the config files.
@@ -289,77 +289,57 @@ We recommend including the name of the fasta file in the index name to avoid ove
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <p>These are the default parameters set in the <span class="guilabel">src/star/ENTRYPOINT.sh</span> script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the STAR <a class="reference external" href="https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf">manual</a>.</p>
 <blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--sjdbGTFfile</span></kbd></dt>
-<dd><p>The path to the gene annotation file in GTF format for annotation of fusion junctions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--sjdbGTFfile $gtf
-</pre></div>
-</div>
-</dd>
-</dl>
-<p class="attribution">—readFilesIn
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--sjdbGTFfile</span></kbd></td>
+<td>The path to the gene annotation file in GTF format for annotation of fusion junctions.</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;readFilesIn
 Space separated list of file paths to reads in fastq format. One pair of fastq files for paired-end mapping</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">readFilesIn</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">1.</span><span class="n">fastq</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">2.</span><span class="n">fastq</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—genomeDir
+<div></div></blockquote>
+<p class="attribution">&mdash;genomeDir
 Base name of the index folder and files.</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--genomeDir $indexdir/$indexname
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—outFileNamePrefix
+<div></div></blockquote>
+<p class="attribution">&mdash;outFileNamePrefix
 The path to the directory for the <strong>mapped</strong> output in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file.</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--outFileNamePrefix $outdir/$controlfolder/*yourFastqFile1_*star
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—runTreadN
+<div></div></blockquote>
+<p class="attribution">&mdash;runTreadN
 Number of threads to be used during the computation</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--runTreadN $ncores
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—twopassMode
+<div></div></blockquote>
+<p class="attribution">&mdash;twopassMode
 Basic 2-pass mapping,  with all 1st pass junctions inserted into the genome indices on the fly</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">twopassMode</span> <span class="n">Basic</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—outSAMstrandField
+<div></div></blockquote>
+<p class="attribution">&mdash;outSAMstrandField
 Add strand derived from the intron motif.</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">outSAMstrandField</span> <span class="n">intronMotif</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p class="attribution">—outSAMattributes
+<div></div></blockquote>
+<p class="attribution">&mdash;outSAMattributes
 Add sam flags to improve compatibility with alternative splicing tools.</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">outSAMattributes</span>  <span class="n">us</span>
-</pre></div>
-</div>
-</div></blockquote>
+<div></div></blockquote>
 </div></blockquote>
 </div>
 </div>
@@ -369,29 +349,29 @@ Add sam flags to improve compatibility with alternative splicing tools.</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="subjunc.html" class="btn btn-neutral float-right" title="Subjunc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="segemehl.html" class="btn btn-neutral float-left" title="segemehl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="subjunc.html" class="btn btn-neutral float-right" title="Subjunc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="segemehl.html" class="btn btn-neutral float-left" title="segemehl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -399,6 +379,7 @@ Add sam flags to improve compatibility with alternative splicing tools.</p>
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

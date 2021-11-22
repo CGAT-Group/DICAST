@@ -1,27 +1,23 @@
-.. _conda: https://docs.conda.io/projects/conda/en/latest/index.html
+
 .. _snakemake: https://snakemake.readthedocs.io/en/stable/
 
 
 Install Snakemake
 =================
 
-.. note::
+Snakemake is the pipe-lining software that enables your DICAST runs. You can set up snakemake in a conda environment.
 
-	If you do not plan on running DICAST as a pipeline but only want to run one tool at a time you do not need snakemake.
+If you have never worked with conda before you might want to get conda first: https://conda.io/projects/conda/en/latest/user-guide/install/index.html
 
-You can set up snakemake in a conda environment.
-If you have never worked with anaconda before you might want to check out their documentation first: `conda`_.
+Mamba is a faster implementation of conda and while optional, is a recommended installation step to support your conda: https://mamba.readthedocs.io/en/latest/installation.html
 
 .. prompt:: bash
 
-	# go to the git Directory
-	cd dockers
+	# create conda environment from .yml file with snakemake in it.
+	mamba env create -f scripts/snakemake/dicast-snakemake.yml
 
-	# create conda environment from .yml file
-	conda env create -f scripts/snakemake/snakemake_conda_env.yml
-	
-	# if you want to use it: activate environment
-	conda activate snakemake
+	# if you want to use DICAST, activate the "dicast-snakemake" environment
+	conda activate dicast-snakemake
 
 If you want to learn more about snakemake, you can check out the snakemake documentation: `snakemake`_.
 

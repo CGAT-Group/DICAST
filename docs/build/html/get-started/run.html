@@ -1,49 +1,46 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Run your analysis &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Run one specific tool" href="run/one_tool.html" />
-    <link rel="prev" title="Folder Structure" href="setup/input.html" /> 
+    <link rel="next" title="Run DICAST with a graphical user interface" href="run/gui.html" />
+    <link rel="prev" title="Install Snakemake" href="setup/snakemake.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../index.html">
+            <a href="../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="setup/git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="setup/docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="setup/snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="setup/input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DICAST</a>
+          <a href="../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,20 +202,18 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../contents.html">Docs</a> &raquo;</li>
         
       <li>Run your analysis</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/get-started/run.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -233,37 +230,37 @@
   <div class="section" id="run-your-analysis">
 <h1>Run your analysis<a class="headerlink" href="#run-your-analysis" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This guide assumes that you have followed all four steps of the <a class="reference internal" href="setup.html"><span class="doc">setup</span></a> carefully.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">This guide assumes that you have followed all four pages of the <a class="reference internal" href="setup.html"><span class="doc">setup</span></a> carefully.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="run/gui.html">Run DICAST with a graphical user interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="run/gui.html#custom-configuration-file">Custom Configuration file:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run/gui.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="run/runscript.html">Use multiple tools at once</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="run/runscript.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/dicast-cli.html">Run DICAST via CLI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="run/dicast-cli.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="run/config.html">Config files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="run/config.html#how-to-change-your-config-sh-file">How to change your config.sh file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run/config.html#basic-parameters">Basic Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run/config.html#input-parameters">Input Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/one_tool.html">Run one specific tool via Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="run/one_tool.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="run/example-files.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="run/example-files.html#running-multiple-mapping-tools-e-g-star-hisat2-and-bbmap">Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run/example-files.html#running-multiple-alternative-splicing-event-detection-tools-e-g-majiq-and-whippet">Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whippet)</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </div>
 <div class="section" id="workflow">
 <h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default">
+<div class="figure">
 <img alt="DICAST pipeline. (1) Simulation (2) Mapping (3) Splicing (4) Unification" src="../_images/pipeline.png" />
 </div>
-<p>To run the entire pipeline, you need a fasta file and a gtf file of your organism. If you do not want to work with simulated data, you can enter each step with your own data. E.g. you can enter step 2 or 3A with fastq files from your own experiment or step 3B with bam files from your own mapping tool. Please note that not all mapping and splicing detection tools are compatible with each other and have different file requirements (e.g. fasta, gtf, gff). For further information, please refer to the tool-specific DICAST documentation.</p>
+<p>To run the entire pipeline, you need a reference genome file and a annotation file file of your organism. If you do not want to work with simulated data, you can enter each step with your own data. E.g. you can enter step 2 or 3A with fastq files from your own experiment or step 3B with bam files from your own mapping tool. Please note that not all mapping and splicing detection tools are compatible with each other and have different file requirements (e.g. reference genome, annotation file, gff). For further information, please refer to the tool-specific DICAST documentation.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">We tried our best to unify the input that is required for all tools. This did not work for all tools. When a tool requires custom input you will see a warning like this on the concerning documentation page.</p>
+</div>
 </div>
 </div>
 
@@ -272,29 +269,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="run/one_tool.html" class="btn btn-neutral float-right" title="Run one specific tool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="setup/input.html" class="btn btn-neutral float-left" title="Folder Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="run/gui.html" class="btn btn-neutral float-right" title="Run DICAST with a graphical user interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup/snakemake.html" class="btn btn-neutral float-left" title="Install Snakemake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -302,6 +299,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

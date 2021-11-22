@@ -1,49 +1,46 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Run one specific tool &mdash; DICAST 1.0 documentation</title>
+  <title>Run one specific tool via Docker &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Use multiple tools at once" href="runscript.html" />
-    <link rel="prev" title="Run your analysis" href="../run.html" /> 
+    <link rel="next" title="DICAST Outputs" href="outputs.html" />
+    <link rel="prev" title="Run DICAST via CLI" href="dicast-cli.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="../setup/git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../setup/docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../setup/snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../setup/input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../run.html">Run your analysis</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,22 +202,20 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../run.html">Run your analysis</a> &raquo;</li>
         
-      <li>Run one specific tool</li>
+      <li>Run one specific tool via Docker</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/get-started/run/one_tool.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -232,11 +229,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="run-one-specific-tool">
-<h1>Run one specific tool<a class="headerlink" href="#run-one-specific-tool" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="run-one-specific-tool-via-docker">
+<h1>Run one specific tool via Docker<a class="headerlink" href="#run-one-specific-tool-via-docker" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>Change config.sh according to your run (see <a class="reference internal" href="config.html"><span class="doc">How to change your config.sh file</span></a>)</p>
+<p>Change config.sh according to your run (see <a class="reference internal" href="../config/general_parameters.html"><span class="doc">How to change your config.sh file</span></a>)</p>
 <p>If you have already built the image with &lt;tool&gt;:&lt;tag&gt; (see the <a class="reference internal" href="../setup/docker.html"><span class="doc">docker setup</span></a>) you can run the following command to run the image and start the tool:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
 span.prompt1:before {
@@ -246,40 +243,48 @@ span.prompt1:before {
 <span class="prompt1"></span>
 <span class="prompt1"><span class="c1"># Examples:</span></span>
 <span class="prompt1"><span class="c1"># If you are using our directory structure for your input and are in the dockers directory:</span></span>
-<span class="prompt1">docker run -v ./:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> gsnap:0.1</span>
+<span class="prompt1"><span class="c1"># Add the --rm flag to remove container, after run.</span></span>
 <span class="prompt1"></span>
-<span class="prompt1"><span class="c1"># Add the --rm flag to clean up after yourself</span></span>
 <span class="prompt1">docker run -v ./:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> --rm gsnap:0.1</span>
-</pre></div></div></div>
+</pre></div></div><div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Check Snakemake Output to see which rule failed.</li>
+<li>if the rule that failed was named after a tool, check log files under output/&lt;tool&gt;-output/logs/ to see where the error was.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="runscript.html" class="btn btn-neutral float-right" title="Use multiple tools at once" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../run.html" class="btn btn-neutral float-left" title="Run your analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="outputs.html" class="btn btn-neutral float-right" title="DICAST Outputs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dicast-cli.html" class="btn btn-neutral float-left" title="Run DICAST via CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -287,6 +292,7 @@ span.prompt1:before {
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {
