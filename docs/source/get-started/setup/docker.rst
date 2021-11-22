@@ -7,10 +7,10 @@ Setup docker
 
 .. .. sectnum:: depth:1
 
-1. Get docker-compose  for your system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Get docker-compose  for your system (sudo required)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This requires you to have administrative rights on your computer, or talk to your system administrator about getting Docker on your system and giving you rights to use the docker user group.
+This requires you to have administrative rights on your computer, or talk to your system administrator about getting Docker & docker-compose on your system and giving you rights to use the docker user group.
 
 A. Download Docker
 :::::::::::::::::::::

@@ -2,18 +2,27 @@ General parameters
 ==================
 Found in file: :guilabel:`scripts/config.sh`
 
+ .. warning::
+
+   If a parameter exists in the config files but isn't listed in this reference, please don't change the default on this paramenter.
+
+ .. note::
+
+	  If a parameter is recommended as a default. It's for the snakemake workflow to work smooth. Parameters with this value will be marked with: ``recommended to leave at default``
+
+
 Basic parameters
 ^^^^^^^^^^^^^^^^
 
 ncores
-   | Number of cores or threads that each tool will use. Note when using a snakemake pipeline: the resulting number of cores used is a result of multiplication of ncores and snakemake -j parameter. 
+   | Number of cores or threads that each tool will use. Note when using a snakemake pipeline: the resulting number of cores used is a result of multiplication of ncores and snakemake -j parameter.
    | Default: ``16``
 
-workdir
-   | Name of the base directory inside the Docker. 
+workdir ``recommended to leave at default``
+   | Name of the base directory inside the Docker.
    | Default: ``/MOUNT``
 
-outdir
+outdir ``recommended to leave at default``
    | Name of the output directory; should be named after the specific tool that was used (use the ``$tool`` variable for that).
    | Default: ``$workdir/output/${tool:-unspecific}-output``
 
@@ -24,32 +33,34 @@ read_length
 Input Directories
 ^^^^^^^^^^^^^^^^^
 
-inputdir
+inputdir ``recommended to leave at default``
    | Base input directory.
    | Default: ``$workdir/input``
-   
-controlfolder
+
+controlfolder ``recommended to leave at default``
    | Directory for all needed input files when no differential comparison. Directory for control sample input files when running differential AS event detection.
    | Default: ``$inputdir/controldir``
 
-casefolder
+casefolder ``recommended to leave at default``
    | Directory only for case sample input files in case of differential AS event detection.
    | Default: ``$inputdir/casedir``
 
-fastqdir
+fastqdir ``recommended to leave at default``
    | Directory for fastq files.
+   | Currently same as 'controlfastq'
    | Default: ``$controlfolder/fastqdir``
 
-bamdir
+bamdir ``recommended to leave at default``
    | Directory for bam files.
+   | Currently same as 'controlbam'
    | Default: ``$controlfolder/bamdir``
 
-samdir
+samdir ``recommended to leave at default``
    | Directory for sam files.
    | Default: ``$controlfolder/bamdir``
 
 fastadir
-   | Directory for the reference genome file (might vary for certain tools, see mapping or AS-specific config files TODO LINK DOCUMENTATION)
+   | Directory for the reference genome file
    | Default: ``$inputdir``
 
 gtfdir
@@ -60,52 +71,81 @@ gffdir
    | Directory for gff file
    | Default: ``$inputdir``
 
-star_index
-   | Folder containing a star index built with the ``$gtf`` and ``$fasta`` files (see below), used by: IRFinder, KisSplice, rMATS
-   | Default: ``$workdir/index/star_index``
+Tool specific parameters
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+bowtie_fastadir
+    | Some tools require chromosome-wise fasta-inputs
+    | Default: ``$inputdir/fasta_chromosomes/``
 
 
-Input Parameters
+
+Index Parameters
 ^^^^^^^^^^^^^^^^
 
-.. _input_parameters:
+recompute_index
+   | Force recompute the index even if the index with $indexname already exists.
+   | Default: ``false``
 
-fastaname
-   | Name of the genome reference file (fasta format) inside ``$fastadir``.
-   | Example: ``Homo_sapiens.GRCh38.dna.primary_assembly.fa``
+indexname
+   | Basename of the index (without eg. .1.bt2 for bowtie index).
+   | Default: ``${fastaname}_index``
 
-gtfname
-   | Name of annotation reference file inside ``$gffdir``.
-   | Example: ``splicing_variants.gtf``
+star_index
+  | Folder containing a star index built with the ``$gtf`` and ``$fasta`` files (see below), used by: IRFinder, KisSplice, rMATS
+  | Default: ``$workdir/index/star_index``
 
-gffname
-   | Name of gff reference file inside ``$gffdir``.
-   | Example: ``splicing_variants.gff3``
+indexdir
+   | Directory of the index.
+   | Default: ``$workdir/index/${tool:-unspecific}_index``
 
-.. note::
-	There should be no need to edit ``fasta``, ``gtf`` and ``gff`` since they just combine other parameters. 
-
-fasta
-   | Full path to the reference genome file.
-   | Default: ``${fastadir:-unspecific}/$fastaname``
-
-gtf
-   | Full path to the annotation file.
-   | Default: ``${gtfdir:-unspecific}/$gtfname``
-
-gff
-   | Full path to the gff file.
-   | Default: ``${gffdir:-unspecific}/$gffname``
 
 
 ASimulatoR Parameters
 ^^^^^^^^^^^^^^^^^^^^^
 
-asimulator_inputdir
-   | Full path to the input directory used by ASimulatoR.
-   | Example: ``/dockers/src/ASimulatoR/in``
+asimulator_gtf
+  | Name of the file in the input directory used by ASimulatoR to generate new transcripts
+  | Example: ``Homo_sapiens.GRCh38.104.gtf``
 
-asimulator_outputdir
-   | Full path to the output directory used by ASimulatoR.
-   | Example: ``/dockers/src/ASimulatoR/out``
 
+Input Parameters
+^^^^^^^^^^^^^^^^
+
+fastaname
+  | Name of the genome reference file (fasta format) inside ``$fastadir``.
+  | Example: ``Homo_sapiens.GRCh38.dna.primary_assembly.fa``
+
+gtfname
+  | Name of annotation reference file inside ``$gffdir``.
+  | Example: ``splicing_variants.gtf``
+
+gffname
+  | Name of gff reference file inside ``$gffdir``.
+  | Example: ``splicing_variants.gff3``
+
+   .. note::
+
+    There should be no need to edit ``fasta``, ``gtf`` and ``gff`` since they just combine other parameters.
+
+fasta
+  | Full path to the reference genome file.
+  | Default: ``${fastadir:-unspecific}/$fastaname``
+
+gtf
+  | Full path to the annotation file.
+  | Default: ``${gtfdir:-unspecific}/$gtfname``
+
+gff
+  | Full path to the gff file.
+  | Default: ``${gffdir:-unspecific}/$gffname``
+
+
+
+
+Basic Mapping Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+outname ``recommended to leave at default``
+    | Base name of the output files. They will usually be prefixed with the fastq file name and suffixed with ``.sam``.
+    | Default: ``$tool`` (the name of the tool creating the ouput files)

@@ -1,4 +1,4 @@
-Running DICAST with a graphical user interface
+Run DICAST with a graphical user interface
 ================================================
 
 .. toctree::

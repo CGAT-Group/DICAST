@@ -9,7 +9,7 @@ Basic Parameters
 
 transcript
     | Fasta file for gene transcripts.
-    | Default: ``$fasta`` (set in ``config.sh``, see the :ref:`documentation<input_parameters>`)
+    | Default: ``$fasta`` (set in ``config.sh``, see the :doc:`General Parameters <general_parameters>`)
 
 star_alignment_files
     | Path to the folder containing star alignment files (\*.SJ.)
@@ -31,37 +31,6 @@ use_bam_input_files
     | Determines what kind of input to use: ``1`` for bam files, ``0`` for fastq files.
     | Default: ``0``
 
-Differential analysis parameters (beta mode)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. note::
-    For any of the parameters to be used, ``$differential`` needs to be set to ``1``.
-
-differential
-    | ``0``: Only AS event detection
-    | ``1``: All tools, which can calculate differential splicing, will do it.
-    | Default: ``0``
-
-casebam
-    | Path to the case BAMs folder used for differential splicing.
-    | Default: ``$casefolder/bamdir``
-
-casefastq
-    | Path to the case fastq folder used for differential splicing.
-    | Default: ``$casefolder/fastqdir``
-
-caseprefix
-    | All files in the ``$casefastq`` folder must have this prefix.
-    | Example: ``sample_01``
-
-controlbam
-    | Path to the control BAMs folder used for differential splicing.
-    | Default: ``$controlfolder/bamdir``
-
-controlfastq
-    | Path to the control fastq folder used for differential splicing.
-    | Default: ``$controlfolder/fastqdir``
-
-controlprefix
-    | Add files in the ``controlfastq`` folder must have this prefix.
-    | Example: ``sample_01``
+combine_events
+    | Events such as Multiple Exon Skipping should be represented as such, instead of individual exon skipping events.
+    | Default: ``1``

@@ -9,9 +9,8 @@ Run your analysis
    :maxdepth: 2
 
    run/gui
+   run/dicast-cli
    run/one_tool
-   run/runscript
-   run/config
    run/example-files
 
 

@@ -1,5 +1,5 @@
-Use multiple tools at once
-==========================
+Run DICAST via CLI
+==================================
 
 In this section we will explain how to use DICAST to run a whole pipeline.
 
@@ -41,7 +41,7 @@ Argument                               Explanation
 ``--configfile <file>``                Set the path to the configuration file which specifies what part of the pipeline to run.
 =====================================  ==========================================================================================
 
-For more information, see the `Snakemake documentation <https://snakemake.readthedocs.io/en/stable/>`_. 
+For more information, see the `Snakemake documentation <https://snakemake.readthedocs.io/en/stable/>`_.
 
 Troubleshooting
 ^^^^^^^^^^^^^^^

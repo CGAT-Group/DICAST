@@ -1,6 +1,9 @@
 Directory Structure
 ===================
 
+.. toctree::
+   :maxdepth: 1
+
 .. image:: ../../img/dicast_input_folder_structure.png
 
 .. note::
@@ -66,6 +69,25 @@ Please note that **you only need a .fa and a .gtf file** if you start your analy
   ├── example.gff
   └── example.gtf
 
+Input files
+^^^^^^^^^^^^
 
-.. toctree::
-   :maxdepth: 1
+The sample_input is a template of what the files should look like. Let's however compare this with a real world example. DICAST is not intended to be limited to any specific organism, but for examples, we go with the assembly you can download at `NCBI`_ homo sapiens.
+
+.. _`NCBI`: https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/
+
+``example.fa`` : refers to a reference genome ``.fna`` or ``fa``.
+
+``example.gff``: refers to a reference annotation ``.gff`` or ``.gff3``.
+
+``example.gtf``: refers to a reference annotation ``.gtf``.
+
+.. warning::
+
+  All files, including references and fastq files must be unzipped, as most of the tools within dicast require them in unzipped form.
+
+.. note::
+
+  casedir, is currently unsupported. DICAST was built originally with a design that included tools for  differential analysis. It maintains the directory structure in order to expand, to cover differential tools in the future.
+
+``example_*.sam``: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory ``bamdir``. If you have already mapped bam/sam files, place them in the bamdir, for DICAST to start from here.
