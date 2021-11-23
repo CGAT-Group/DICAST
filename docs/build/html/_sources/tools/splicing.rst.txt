@@ -5,14 +5,14 @@ Splicing tools
 	Currently **only alternative splicing event detection is supported**. Differential splicing tools are coming soon. The differential splicing function of tools which are able to compute both alternative and differential splicing the differential mode is still in beta.
 
 For splicing tools we differentiate between alternative and differential splicing tools. Some tools are able to compute both.
-Differential splicing tools compute alternative splicing for two conditions (e.g. case and control) and the files should be separated as indicated by our input folder structure. For alternative splicing analysis "control" is the default.
+Differential splicing tools compute alternative splicing for two conditions (e.g. case and control) and the files should be separated as indicated by our input directory structure. For alternative splicing analysis "control" is the default.
 
 Splicing Input Files
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tip::
   The paths assume you are using our suggested :doc:`input structure <../get-started/setup/input>`.
-  Example input files you can find in our :doc:`examples section<../get-started/run/example-files>`.
+  Example input files you can find in our :doc:`examples section<../further-information/example-files>`.
 
 You can find the required input files in the tool-specific documentation.
 

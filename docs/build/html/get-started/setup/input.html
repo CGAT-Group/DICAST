@@ -1,49 +1,46 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Folder Structure &mdash; DICAST 1.0 documentation</title>
+  <title>Directory Structure &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Run your analysis" href="../run.html" />
-    <link rel="prev" title="Install Snakemake" href="snakemake.html" /> 
+    <link rel="next" title="Setup docker" href="docker.html" />
+    <link rel="prev" title="Clone Git Repository" href="git.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,22 +202,20 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../setup.html">Setup</a> &raquo;</li>
         
-      <li>Folder Structure</li>
+      <li>Directory Structure</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/get-started/setup/input.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -232,18 +229,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="folder-structure">
-<h1>Folder Structure<a class="headerlink" href="#folder-structure" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="directory-structure">
+<h1>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
 <img alt="../../_images/dicast_input_folder_structure.png" src="../../_images/dicast_input_folder_structure.png" />
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Our pipeline allows to run many different tools in the same way. The scripts therefore rely on the folder structure specified here.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Our pipeline allows to run many different tools in the same way. The scripts therefore rely on the directory structure specified here.
+Please don’t rename any directories that are listed here within the git. An output directory is created with your first run. This directory may be renamed.</p>
 </div>
 <div class="section" id="example-tree-structure">
 <h2>Example Tree Structure<a class="headerlink" href="#example-tree-structure" title="Permalink to this headline">¶</a></h2>
 <p>This is an example for the tree structure when running the pipeline for alternative splicing.
-Please not that <strong>you only need a .fa and a .gtf file</strong> if you start your analysis with ASimulator, since it will create .fastq files for you. However, some tools need specific input files. Please refer to the respective <a class="reference internal" href="../../tools/tools.html#tools"><span class="std std-ref">tool documentation</span></a> for further information.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>input
+Please note that <strong>you only need a .fa and a .gtf file</strong> if you start your analysis with ASimulator, since it will create .fastq files for you. However, some tools need specific input files. Please refer to the respective <a class="reference internal" href="../../tools/tools.html#tools"><span class="std std-ref">tool documentation</span></a> for further information.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>input
 ├── casedir
 │   ├── bamdir
 │   └── fastqdir
@@ -264,28 +264,28 @@ Please not that <strong>you only need a .fa and a .gtf file</strong> if you star
 │       ├── example_1.fastq
 │       └── example_2.fastq
 ├── bowtie_fastadir
-│   ├── <span class="m">10</span>.fa
-│   ├── <span class="m">11</span>.fa
-│   ├── <span class="m">12</span>.fa
-│   ├── <span class="m">13</span>.fa
-│   ├── <span class="m">14</span>.fa
-│   ├── <span class="m">15</span>.fa
-│   ├── <span class="m">16</span>.fa
-│   ├── <span class="m">17</span>.fa
-│   ├── <span class="m">18</span>.fa
-│   ├── <span class="m">19</span>.fa
-│   ├── <span class="m">1</span>.fa
-│   ├── <span class="m">20</span>.fa
-│   ├── <span class="m">21</span>.fa
-│   ├── <span class="m">22</span>.fa
-│   ├── <span class="m">2</span>.fa
-│   ├── <span class="m">3</span>.fa
-│   ├── <span class="m">4</span>.fa
-│   ├── <span class="m">5</span>.fa
-│   ├── <span class="m">6</span>.fa
-│   ├── <span class="m">7</span>.fa
-│   ├── <span class="m">8</span>.fa
-│   ├── <span class="m">9</span>.fa
+│   ├── 10.fa
+│   ├── 11.fa
+│   ├── 12.fa
+│   ├── 13.fa
+│   ├── 14.fa
+│   ├── 15.fa
+│   ├── 16.fa
+│   ├── 17.fa
+│   ├── 18.fa
+│   ├── 19.fa
+│   ├── 1.fa
+│   ├── 20.fa
+│   ├── 21.fa
+│   ├── 22.fa
+│   ├── 2.fa
+│   ├── 3.fa
+│   ├── 4.fa
+│   ├── 5.fa
+│   ├── 6.fa
+│   ├── 7.fa
+│   ├── 8.fa
+│   ├── 9.fa
 │   ├── MT.fa
 │   ├── X.fa
 │   └── Y.fa
@@ -294,8 +294,22 @@ Please not that <strong>you only need a .fa and a .gtf file</strong> if you star
 └── example.gtf
 </pre></div>
 </div>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="input-files">
+<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<p>The sample_input is a template of what the files should look like. Let’s however compare this with a real world example. DICAST is not intended to be limited to any specific organism, but for examples, we go with the assembly you can download at <a class="reference external" href="https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/">NCBI</a> homo sapiens.</p>
+<p><code class="docutils literal notranslate"><span class="pre">example.fa</span></code> : refers to a reference genome <code class="docutils literal notranslate"><span class="pre">.fna</span></code> or <code class="docutils literal notranslate"><span class="pre">fa</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">example.gff</span></code>: refers to a reference annotation <code class="docutils literal notranslate"><span class="pre">.gff</span></code> or <code class="docutils literal notranslate"><span class="pre">.gff3</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">example.gtf</span></code>: refers to a reference annotation <code class="docutils literal notranslate"><span class="pre">.gtf</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">All files, including references and fastq files must be unzipped, as most of the tools within dicast require them in unzipped form.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">casedir, is currently unsupported. DICAST was built originally with a design that included tools for  differential analysis. It maintains the directory structure in order to expand, to cover differential tools in the future.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">example_*.sam</span></code>: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory <code class="docutils literal notranslate"><span class="pre">bamdir</span></code>. If you have already mapped bam/sam files, place them in the bamdir, for DICAST to start from here.</p>
 </div>
 </div>
 
@@ -304,29 +318,29 @@ Please not that <strong>you only need a .fa and a .gtf file</strong> if you star
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../run.html" class="btn btn-neutral float-right" title="Run your analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="snakemake.html" class="btn btn-neutral float-left" title="Install Snakemake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="docker.html" class="btn btn-neutral float-right" title="Setup docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="git.html" class="btn btn-neutral float-left" title="Clone Git Repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -334,6 +348,7 @@ Please not that <strong>you only need a .fa and a .gtf file</strong> if you star
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

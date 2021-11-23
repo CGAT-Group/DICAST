@@ -1,48 +1,45 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Clone Git Repository &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Setup docker" href="docker.html" />
+    <link rel="next" title="Directory Structure" href="input.html" />
     <link rel="prev" title="Setup" href="../setup.html" /> 
 </head>
 
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,13 +202,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../setup.html">Setup</a> &raquo;</li>
         
@@ -218,7 +215,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/get-started/setup/git.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -236,13 +233,31 @@
 <h1>Clone Git Repository<a class="headerlink" href="#clone-git-repository" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>Clone our <a class="reference external" href="https://github.com/CGAT-Group/DICAST">project repository</a> to a directory of your choice:</p>
+<p>If you don’t have git, please install git with the following <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Install Git</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Where you choose to install this git may be limited by “where can docker mount”.</p>
+<p class="last">Directories that can be mounted as Docker’s mounted volumes have permission based limitations. If you don’t feel confident about this section, please talk to your administrator.</p>
+</div>
+<div class="section" id="docker-permission-limitation">
+<h2>Docker permission limitation:<a class="headerlink" href="#docker-permission-limitation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Docker’s mounted volumes must hold the permissions: <code class="docutils literal notranslate"><span class="pre">drwxrwxr-x</span></code>. If you’re on a linux file system this means that all parent folders of your working directory must be more permissive than <code class="docutils literal notranslate"><span class="pre">drwxrwsr-x</span></code>, except “/”.</p>
+<p>This can be ensured with the command for each of the parent directory until ‘/’.</p>
+</div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
 span.prompt1:before {
   content: "$ ";
 }
-</style><span class="prompt1">git clone https://github.com/CGAT-Group/DICAST.git</span>
-</pre></div></div><p>This will give you access to the necessary scripts and the example <a class="reference internal" href="input.html"><span class="doc">folder structure</span></a> called sample_input.</p>
+</style><span class="prompt1">chmod a+rX,u+w,g+w &lt;directory hosting the DICAST git&gt;</span>
+</pre></div></div><p>If you have sudo, consider <code class="docutils literal notranslate"><span class="pre">/opt/DICAST/</span></code> as your working directory:</p>
+</div>
+<div class="section" id="cloning-dicast-s-git-repository">
+<h2>Cloning DICAST’s git repository:<a class="headerlink" href="#cloning-dicast-s-git-repository" title="Permalink to this headline">¶</a></h2>
+<p>Clone our project repository to a directory of your choice. This directory will be considered the working directory for most of the commands listed in this documentation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git clone https://github.com/CGAT-Group/DICAST.git</span>
+</pre></div></div><p>This will give you access to the necessary scripts and the <a class="reference internal" href="input.html"><span class="doc">directory structure</span></a> hosts an example for the inputs in a directory called “sample_input”. The directory structure within this git is assumed by DICAST, so please don’t modify directory names within this working directory.</p>
+</div>
 </div>
 
 
@@ -250,29 +265,29 @@ span.prompt1:before {
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="docker.html" class="btn btn-neutral float-right" title="Setup docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../setup.html" class="btn btn-neutral float-left" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="input.html" class="btn btn-neutral float-right" title="Directory Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../setup.html" class="btn btn-neutral float-left" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -280,6 +295,7 @@ span.prompt1:before {
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

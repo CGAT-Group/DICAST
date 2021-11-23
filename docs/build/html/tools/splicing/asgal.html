@@ -1,45 +1,42 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>ASGAL &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Aspli" href="aspli.html" />
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../get-started/run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../get-started/advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,13 +202,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../splicing.html">Splicing tools</a> &raquo;</li>
         
@@ -218,7 +215,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/tools/splicing/asgal.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -235,36 +232,38 @@
   <div class="section" id="asgal">
 <h1>ASGAL<a class="headerlink" href="#asgal" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>ASGAL requires the variables <code class="docutils literal notranslate"><span class="pre">$fastqpair1suffix</span></code> and <code class="docutils literal notranslate"><span class="pre">$fastqpair2suffix</span></code> to be set in the <span class="guilabel">scripts/asevent_config.sh</span> file.</p>
+<p class="first admonition-title">Warning</p>
+<p class="last">ASGAL requires the variables <code class="docutils literal notranslate"><span class="pre">$fastqpair1suffix</span></code> and <code class="docutils literal notranslate"><span class="pre">$fastqpair2suffix</span></code> to be set in the <span class="guilabel">scripts/asevent_config.sh</span> file.</p>
 </div>
 <div class="sidebar">
-<p class="sidebar-title">ASGAL Factsheet</p>
-<table class="docutils align-default">
+<p class="first sidebar-title">ASGAL Factsheet</p>
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 11%" />
-<col style="width: 89%" />
+<col width="11%" />
+<col width="89%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Toolname</strong></p></td>
-<td><p><em>asgal</em></p></td>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Toolname</strong></td>
+<td><em>asgal</em></td>
 </tr>
-<tr class="row-even"><td><p><strong>Version</strong></p></td>
-<td><p><em>1.1.1</em></p></td>
+<tr class="row-even"><td><strong>Version</strong></td>
+<td><em>1.1.1</em></td>
 </tr>
-<tr class="row-odd"><td><p><strong>License</strong></p></td>
-<td><p><a class="reference external" href="https://github.com/AlgoLab/galig/blob/master/LICENSE">GNU General Public License version 3</a></p></td>
+<tr class="row-odd"><td><strong>License</strong></td>
+<td><a class="reference external" href="https://github.com/AlgoLab/galig/blob/master/LICENSE">GNU General Public License version 3</a></td>
 </tr>
 </tbody>
 </table>
-<dl class="simple">
-<dt><strong>Required Files</strong></dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="../splicing.html#fastqsplicing"><span class="std std-ref">fastq</span></a> , <a class="reference internal" href="../splicing.html#fastasplicing"><span class="std std-ref">fasta</span></a> , <a class="reference internal" href="../splicing.html#gtfsplicing"><span class="std std-ref">gtf</span></a></p></li>
+<dl class="last docutils">
+<dt><strong>Required Files</strong></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="../splicing.html#fastqsplicing"><span class="std std-ref">fastq</span></a> , <a class="reference internal" href="../splicing.html#fastasplicing"><span class="std std-ref">fasta</span></a> , <a class="reference internal" href="../splicing.html#gtfsplicing"><span class="std std-ref">gtf</span></a></li>
 </ul>
 </dd>
-<dt><strong>Links</strong></dt><dd><ul class="simple">
-<li><p>ASGAL <a class="reference external" href="https://asgal.algolab.eu/documentation">manual</a></p></li>
-<li><p>ASGAL publication: <a class="reference external" href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2436-3">ASGAL: aligning RNA-Seq data to a splicing graph to detect novel alternative splicing events</a></p></li>
+<dt><strong>Links</strong></dt>
+<dd><ul class="first last simple">
+<li>ASGAL <a class="reference external" href="https://asgal.algolab.eu/documentation">manual</a></li>
+<li>ASGAL publication: <a class="reference external" href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2436-3">ASGAL: aligning RNA-Seq data to a splicing graph to detect novel alternative splicing events</a></li>
 </ul>
 </dd>
 </dl>
@@ -273,62 +272,53 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <p>These are the default parameters set in the <span class="guilabel">src/asgal/ENTRYPOINT.sh</span> script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the ASGAL <a class="reference external" href="https://asgal.algolab.eu/documentation">manual</a>.</p>
 <blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--multi</span></kbd></dt>
-<dd><p>Set multi option.</p>
-</dd>
-<dt><kbd><span class="option">-g</span></kbd></dt>
-<dd><p>Reference genome in fasta format.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-g $fasta
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-a</span></kbd></dt>
-<dd><p>The path to the gene annotation file in GTF format for annotation of fusion junctions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-a $gtf
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-t</span></kbd></dt>
-<dd><p>Transcript file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-t $transcript
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-s</span></kbd></dt>
-<dd><p>Fastq filename of paired end read 1.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">1.</span><span class="n">fastq</span>
-</pre></div>
-</div>
-</dd>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--multi</span></kbd></td>
+<td>Set multi option.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-g</span></kbd></td>
+<td>Reference genome in fasta format.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-a</span></kbd></td>
+<td>The path to the gene annotation file in GTF format for annotation of fusion junctions.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-t</span></kbd></td>
+<td>Transcript file.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-s</span></kbd></td>
+<td>Fastq filename of paired end read 1.</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>-s2</dt>
+<dd>Fastq filename of paired end read 2.</dd>
 </dl>
-<dl>
-<dt>-s2</dt><dd><p>Fastq filename of paired end read 2.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s2</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">2.</span><span class="n">fastq</span>
-</pre></div>
-</div>
-</dd>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-o</span></kbd></td>
+<td>Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file.</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>-&#64;</dt>
+<dd>Number of threads to be used during the computation</dd>
 </dl>
-<dl class="option-list">
-<dt><kbd><span class="option">-o</span></kbd></dt>
-<dd><p>Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-o $outdir
-</pre></div>
-</div>
-</dd>
-</dl>
-<dl>
-<dt>-&#64;</dt><dd><p>Number of threads to be used during the computation</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-@ $ncores
-</pre></div>
-</div>
-</dd>
-</dl>
-<dl class="option-list">
-<dt><kbd><span class="option">--allevents</span></kbd></dt>
-<dd><p>Report all events, not only novel ones.</p>
-</dd>
-</dl>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--allevents</span></kbd></td>
+<td>Report all events, not only novel ones.</td></tr>
+</tbody>
+</table>
 </div></blockquote>
 </div>
 </div>
@@ -338,29 +328,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="aspli.html" class="btn btn-neutral float-right" title="Aspli" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../splicing.html" class="btn btn-neutral float-left" title="Splicing tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="aspli.html" class="btn btn-neutral float-right" title="Aspli" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../splicing.html" class="btn btn-neutral float-left" title="Splicing tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -368,6 +358,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,45 +1,42 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>HISAT2 &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="MapSplice 2" href="mapsplice.html" />
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/docker.html">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../get-started/run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../get-started/advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../get-started/advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,13 +202,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../mapping.html">Mapping tools</a> &raquo;</li>
         
@@ -218,7 +215,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/tools/mapping/hisat.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -235,42 +232,45 @@
   <div class="section" id="hisat2">
 <h1>HISAT2<a class="headerlink" href="#hisat2" title="Permalink to this headline">¶</a></h1>
 <div class="sidebar">
-<p class="sidebar-title">HISAT2 Factsheet</p>
-<table class="docutils align-default">
+<p class="first sidebar-title">HISAT2 Factsheet</p>
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 13%" />
-<col style="width: 87%" />
+<col width="13%" />
+<col width="87%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Toolname</strong></p></td>
-<td><p><em>hisat</em></p></td>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Toolname</strong></td>
+<td><em>hisat</em></td>
 </tr>
-<tr class="row-even"><td><p><strong>Version</strong></p></td>
-<td><p><em>2.0.0</em></p></td>
+<tr class="row-even"><td><strong>Version</strong></td>
+<td><em>2.0.0</em></td>
 </tr>
-<tr class="row-odd"><td><p><strong>License</strong></p></td>
-<td><p><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License version 3</a></p></td>
+<tr class="row-odd"><td><strong>License</strong></td>
+<td><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License version 3</a></td>
 </tr>
 </tbody>
 </table>
-<dl class="simple">
-<dt><strong>Required Files</strong></dt><dd><ul class="simple">
-<li><p><em>For mapping:</em> <a class="reference internal" href="../mapping.html#fastqmapping"><span class="std std-ref">fastq</span></a>, <a class="reference internal" href="../mapping.html#fastamapping"><span class="std std-ref">fasta</span></a>, <a class="reference internal" href="../mapping.html#gtfmapping"><span class="std std-ref">gtf</span></a></p></li>
+<dl class="last docutils">
+<dt><strong>Required Files</strong></dt>
+<dd><ul class="first last simple">
+<li><em>For mapping:</em> <a class="reference internal" href="../mapping.html#fastqmapping"><span class="std std-ref">fastq</span></a>, <a class="reference internal" href="../mapping.html#fastamapping"><span class="std std-ref">fasta</span></a>, <a class="reference internal" href="../mapping.html#gtfmapping"><span class="std std-ref">gtf</span></a></li>
 </ul>
 </dd>
-<dt><strong>Compatible splicing tools</strong></dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="../splicing/aspli.html"><span class="doc">Aspli</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/eventpointer.html"><span class="doc">EventPointer</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/irfinder.html"><span class="doc">IRFinder</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/majiq.html"><span class="doc">MAJIQ</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/sgseq.html"><span class="doc">SGSeq</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/spladder.html"><span class="doc">SplAdder</span></a></p></li>
-<li><p><a class="reference internal" href="../splicing/whippet.html"><span class="doc">Whippet</span></a></p></li>
+<dt><strong>Compatible splicing tools</strong></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="../splicing/aspli.html"><span class="doc">Aspli</span></a></li>
+<li><a class="reference internal" href="../splicing/eventpointer.html"><span class="doc">EventPointer</span></a></li>
+<li><a class="reference internal" href="../splicing/irfinder.html"><span class="doc">IRFinder</span></a></li>
+<li><a class="reference internal" href="../splicing/majiq.html"><span class="doc">MAJIQ</span></a></li>
+<li><a class="reference internal" href="../splicing/sgseq.html"><span class="doc">SGSeq</span></a></li>
+<li><a class="reference internal" href="../splicing/spladder.html"><span class="doc">SplAdder</span></a></li>
+<li><a class="reference internal" href="../splicing/whippet.html"><span class="doc">Whippet</span></a></li>
 </ul>
 </dd>
-<dt><strong>Links</strong></dt><dd><ul class="simple">
-<li><p>HISAT2 <a class="reference external" href="http://daehwankimlab.github.io/hisat2/manual/">manual</a></p></li>
-<li><p>HISAT2 publication: <a class="reference external" href="https://www.nature.com/articles/s41587-019-0201-4">Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</a></p></li>
+<dt><strong>Links</strong></dt>
+<dd><ul class="first last simple">
+<li>HISAT2 <a class="reference external" href="http://daehwankimlab.github.io/hisat2/manual/">manual</a></li>
+<li>HISAT2 publication: <a class="reference external" href="https://www.nature.com/articles/s41587-019-0201-4">Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</a></li>
 </ul>
 </dd>
 </dl>
@@ -278,8 +278,8 @@
 <div class="section" id="indexing">
 <h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Indexing might take some time</strong> but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.</p>
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Indexing might take some time</strong> but only has to be run once per fasta file. Make sure to reuse already computed indices if possible.</p>
 </div>
 <p>DICAST will check if <span class="guilabel">$indexdir/${indexname}.4.ht2 and $indexdir/${gtfname}_splicesites.txt</span> exists. If there is no index it will be automatically built. If you want to rebuild the index anyway set <code class="docutils literal notranslate"><span class="pre">$recompute_index=true</span></code> in <span class="guilabel">scripts/mapping_config.sh</span>.
 If you want to use your own precomputed index file copy it to <span class="guilabel">index/hisat-index/</span> and make sure the index is complete and named appropriately and according to the parameters set in the config files.
@@ -289,46 +289,39 @@ We recommend including the name of the fasta file in the index name to avoid ove
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <p>These are the default parameters set in the <span class="guilabel">src/hisat/ENTRYPOINT.sh</span> script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the HISAT2 <a class="reference external" href="http://daehwankimlab.github.io/hisat2/manual/">manual</a>.</p>
 <blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--x</span></kbd></dt>
-<dd><p>Base name of the index folder and files.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--x $indexdir/$indexname
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-1</span></kbd></dt>
-<dd><p>Fastq filename of paired end read 1.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">1.</span><span class="n">fastq</span>
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-2</span></kbd></dt>
-<dd><p>Fastq filename of paired end read 2.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">2.</span><span class="n">fastq</span>
-</pre></div>
-</div>
-</dd>
-<dt><kbd><span class="option">-S</span></kbd></dt>
-<dd><p>The path to the <strong>mapped</strong> output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-S $outdir/$controlfolder/*yourFastqFile1_*hisat.sam
-</pre></div>
-</div>
-</dd>
-</dl>
-<p class="attribution">—known-splicesite-infile
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--x</span></kbd></td>
+<td>Base name of the index folder and files.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-1</span></kbd></td>
+<td>Fastq filename of paired end read 1.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-2</span></kbd></td>
+<td>Fastq filename of paired end read 2.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-S</span></kbd></td>
+<td>The path to the <strong>mapped</strong> output file in sam format. The output will be separated into case and control folder based on the basefolder of the according fastq file.</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;known-splicesite-infile
 Provide a list of known splice sites.</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--known-splicesite-infile $indexdir/$indexname/splicesites.txt
-</pre></div>
-</div>
-</div></blockquote>
-<dl class="option-list">
-<dt><kbd><span class="option">-q</span></kbd></dt>
-<dd><p>Activate quiet mode so only error messages are printed.</p>
-</dd>
-</dl>
+<div></div></blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-q</span></kbd></td>
+<td>Activate quiet mode so only error messages are printed.</td></tr>
+</tbody>
+</table>
 </div></blockquote>
 </div>
 </div>
@@ -338,29 +331,29 @@ Provide a list of known splice sites.</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="mapsplice.html" class="btn btn-neutral float-right" title="MapSplice 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="gsnap.html" class="btn btn-neutral float-left" title="GSNAP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="mapsplice.html" class="btn btn-neutral float-right" title="MapSplice 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gsnap.html" class="btn btn-neutral float-left" title="GSNAP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -368,6 +361,7 @@ Provide a list of known splice sites.</p>
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,49 +1,46 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Setup docker &mdash; DICAST 1.0 documentation</title>
   
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Install Snakemake" href="snakemake.html" />
-    <link rel="prev" title="Clone Git Repository" href="git.html" /> 
+    <link rel="prev" title="Directory Structure" href="input.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../../index.html">
+            <a href="../../contents.html">
           
 
           
@@ -83,7 +80,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,34 +93,35 @@
 <li class="toctree-l2"><a class="reference internal" href="git.html">Clone Git Repository</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Setup docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="snakemake.html">Install Snakemake</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="input.html">Folder Structure</a><ul class="simple">
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/runscript.html">Use multiple tools at once</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via CLI</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/config.html">Config files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../run/example-files.html">Examples</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Config Files (advanced)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/general_parameters.html">General parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/mapping_parameters.html">Mapping parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/as_parameters.html">AS detection parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -160,6 +157,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Further information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a><ul class="simple">
 </ul>
 </li>
@@ -168,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -178,7 +177,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">DICAST</a>
+          <a href="../../contents.html">DICAST</a>
         
       </nav>
 
@@ -203,13 +202,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../contents.html">Docs</a> &raquo;</li>
         
           <li><a href="../setup.html">Setup</a> &raquo;</li>
         
@@ -218,7 +215,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/get-started/setup/docker.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -236,54 +233,71 @@
 <h1>Setup docker<a class="headerlink" href="#setup-docker" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="get-docker-for-your-system">
-<h2>1. Get docker for your system<a class="headerlink" href="#get-docker-for-your-system" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></p>
+<div class="section" id="get-docker-compose-for-your-system-sudo-required">
+<h2>1. Get docker-compose  for your system (sudo required)<a class="headerlink" href="#get-docker-compose-for-your-system-sudo-required" title="Permalink to this headline">¶</a></h2>
+<p>This requires you to have administrative rights on your computer, or talk to your system administrator about getting Docker &amp; docker-compose on your system and giving you rights to use the docker user group.</p>
+<div class="section" id="a-download-docker">
+<h3>A. Download Docker<a class="headerlink" href="#a-download-docker" title="Permalink to this headline">¶</a></h3>
+<p>Follow the Docker Engine installation manual for getting Docker, your first step. : <a class="reference external" href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a></p>
 </div>
-<div class="section" id="macos">
-<h3>MacOS<a class="headerlink" href="#macos" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://docs.docker.com/docker-for-mac/install/">https://docs.docker.com/docker-for-mac/install/</a></p>
+<div class="section" id="b-post-install-docker-steps">
+<h3>B. Post-install Docker steps<a class="headerlink" href="#b-post-install-docker-steps" title="Permalink to this headline">¶</a></h3>
+<p>To run DICAST in user mode entirely, please fulfill this <a class="reference external" href="https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">post-install</a> step to run docker as a non-root user.</p>
 </div>
-<div class="section" id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://docs.docker.com/docker-for-windows/install/">https://docs.docker.com/docker-for-windows/install/</a></p>
+<div class="section" id="c-install-docker-compose">
+<h3>C. Install docker-compose<a class="headerlink" href="#c-install-docker-compose" title="Permalink to this headline">¶</a></h3>
+<p>This while closely related, docker-compose is the last of DICAST’s docker dependencies. Follow the installation manual from docker-compose.
+<a class="reference external" href="https://docs.docker.com/compose/install/#install-compose">https://docs.docker.com/compose/install/#install-compose</a></p>
 </div>
-</div>
-<div class="section" id="build-docker-images">
-<h2>2. Build docker images<a class="headerlink" href="#build-docker-images" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="build-all-images">
-<h3>Build all images<a class="headerlink" href="#build-all-images" title="Permalink to this headline">¶</a></h3>
-<p>If you intend to use multiple dockers at once you can use our snakemake pipeline, which will take care of building the docker images.
-If you want to build the dockers manually, we provide a <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file which will let you build them yourself. You can use the command</p>
+<div class="section" id="basic-docker-commands">
+<h3>Basic Docker commands<a class="headerlink" href="#basic-docker-commands" title="Permalink to this headline">¶</a></h3>
+<p>Should you have docker configured on your system, you shouldn’t run into a permission error for the following commands.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
 span.prompt1:before {
   content: "$ ";
 }
-</style><span class="prompt1">docker-compose -f path/to/docker-compose.yml build</span>
-</pre></div></div><p>to build all images. For more information, see the  <a class="reference external" href="https://docs.docker.com/compose/">docker compose documentation</a>.</p>
+</style><span class="prompt1">docker images</span>
+</pre></div></div><p>to list docker images in on your computer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker ps</span>
+</pre></div></div><p>to list all running containers only.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker ps -a</span>
+</pre></div></div><p>to list all running and stopped containers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker --version</span>
+</pre></div></div><p>We support Docker version 19 and above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose --version</span>
+</pre></div></div></div>
+</div>
+<div class="section" id="build-docker-images-optional">
+<h2>2. Build docker images (Optional)<a class="headerlink" href="#build-docker-images-optional" title="Permalink to this headline">¶</a></h2>
+<p>While the steps described in this section are handled by DICAST’s graphical interface, it can also be accessed via command line, for more control.</p>
+<div class="section" id="build-all-images">
+<h3>Build all images<a class="headerlink" href="#build-all-images" title="Permalink to this headline">¶</a></h3>
+<p>If you intend to use multiple dockers at once you can use our snakemake pipeline, which will take care of building the docker images.
+If you want to build the dockers manually, we provide a <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file which will let you build them yourself. You can use the command the following command to build all images.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose -f scripts/Snakemake/docker-compose.yml build</span>
+</pre></div></div><p>If you’d like to edit DICAST’s docker-compose file, see the  <a class="reference external" href="https://docs.docker.com/compose/gettingstarted/">docker-compose Manual</a>.</p>
 </div>
 <div class="section" id="build-one-image">
 <h3>Build one image<a class="headerlink" href="#build-one-image" title="Permalink to this headline">¶</a></h3>
-<p>If you only want to build one specific docker image, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker build &lt;directory level path to Dockerfile&gt; --tag<span class="o">=</span>&lt;tool&gt;:&lt;tag&gt;</span>
-<span class="prompt1"></span>
-<span class="prompt1"><span class="c1"># Examples:</span></span>
-<span class="prompt1"><span class="c1"># If you are inside of the base directory (&quot;dockers&quot;) and want to build gsnap:</span></span>
-<span class="prompt1">docker build ./gsnap/ --tag<span class="o">=</span>gsnap:0.1</span>
-<span class="prompt1"></span>
-<span class="prompt1"><span class="c1"># If you are already inside the dockers/gsnap directory::</span></span>
-<span class="prompt1">docker build ./ --tag<span class="o">=</span>gsnap:0.1</span>
-</pre></div></div><p>or use the <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file and specify which image to build:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose -f path/to/docker-compose.yml build &lt;tool&gt;</span>
-</pre></div></div></div>
+<p>If you only want to build one specific docker image, run the following command to first build some core essential containers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose -f scripts/Snakemake/docker-compose.yml build base conda bowtie star</span>
+</pre></div></div><p>And if you want to build any of the other tools, use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose -f scripts/Snakemake/docker-compose.yml build &lt;tool&gt;</span>
+</pre></div></div><p>Where &lt;tool&gt; needs to be replaced with one or more of the following tools:</p>
+<p>bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc
+asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet</p>
 </div>
+</div>
+<div class="section" id="pull-docker-images-fail-safe">
+<h2>3. Pull docker images (Fail safe)<a class="headerlink" href="#pull-docker-images-fail-safe" title="Permalink to this headline">¶</a></h2>
+<p>Should the tool you intended to run, not build locally, it’s also possible to pull them from DICAST’s dockerhub repository at: <a class="reference external" href="https://hub.docker.com/repository/docker/dicastproj/dicast">https://hub.docker.com/repository/docker/dicastproj/dicast</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker pull dicastproj/dicast:tagname</span>
+</pre></div></div></div>
 <div class="section" id="other-helpful-commands">
-<h2>3. Other helpful commands<a class="headerlink" href="#other-helpful-commands" title="Permalink to this headline">¶</a></h2>
-<p>List docker images (for example to get image ids):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker images</span>
-</pre></div></div><p>Remove an image:</p>
+<h2>4. Other helpful commands<a class="headerlink" href="#other-helpful-commands" title="Permalink to this headline">¶</a></h2>
+<p>To gracefully stop a running docker container (If perhaps snakemake’s process had to be killed):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker stop &lt;docker-container-name/ID&gt;</span>
+</pre></div></div><p>Remove an image (to save space, after your analysis):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker rmi -f &lt;image id&gt;</span>
 </pre></div></div></div>
 </div>
@@ -293,29 +307,29 @@ span.prompt1:before {
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="snakemake.html" class="btn btn-neutral float-right" title="Install Snakemake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="git.html" class="btn btn-neutral float-left" title="Clone Git Repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="snakemake.html" class="btn btn-neutral float-right" title="Install Snakemake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="input.html" class="btn btn-neutral float-left" title="Directory Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2021
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -323,6 +337,7 @@ span.prompt1:before {
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {
