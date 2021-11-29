@@ -29,8 +29,8 @@ fi
 handlesamfiles 2>/dev/null
 #one asgal run needs a pair of fastq-files; in the config file the user gave the suffixes which correspond to the partnered fastq-files
 #save all partners with same suffix in array
-partner1fastqlist=($(ls -1p $fastqdir*$fastqpair1suffix uniq))
-partner2fastqlist=($(ls -1p $fastqdir*$fastqpair2suffix uniq))
+partner1fastqlist=($(ls -1p $fastqdir/*$fastqpair1suffix | uniq))
+partner2fastqlist=($(ls -1p $fastqdir/*$fastqpair2suffix | uniq))
 
 #check if both arrays are of same size
 if [ ${#partner1fastqlist[@]} != ${#partner2fastqlist[@]} ]
@@ -41,6 +41,7 @@ fi
 
 #get number of partners
 nPartners=${#partner2fastqlist[@]}
+echo fastqlist: ${partner1fastqlist[*]}
 
 #iterate over fastqlists and run asgal for each fastq-pair
 for ((i=0;i<nPartners;++i)); do

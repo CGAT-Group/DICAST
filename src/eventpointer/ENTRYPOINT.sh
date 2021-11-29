@@ -31,8 +31,8 @@ if [ $differential = 0 ]; then
 	echo "Running $tool unificiation..."
 	anno_file="$workdir/src/ASimulatoR/out/event_annotation.tsv"
 	for i in $(cat /tmp/controlbamlist)
-		do outdir_name=$(basename ${i%%.*})
-		echo "Looking for $tool files in $outdir/$outdir_name"
+		do outdir_name=$(basename ${i} .bam)
+		echo "Looking for $tool files in $outdir/${outdir_name}_output/"
 
 		if [[ -f "${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt" ]];
 		then
@@ -42,16 +42,17 @@ if [ $differential = 0 ]; then
 			mkdir -p $unified_outdir_name
 
 			if [ $combine_events = 0 ];
-      then
-        python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
+      		then
+	  			echo "-e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf"
+        		python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf
 
 				if  [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."
 					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_output_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 				fi
-     	else
-        python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
+     		else
+        	python3 /MOUNT/scripts/unified_output/output_transformer.py create -e ${outdir}/${outdir_name}_output/EventsFound_RNASeq.txt -out $unified_outdir_name -gtf $gtf -comb
 				if  [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."

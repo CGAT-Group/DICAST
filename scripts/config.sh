@@ -25,15 +25,6 @@ gtfdir=$inputdir                				#directory for gtffile
 gffdir=$inputdir                				#directory for gfffile
 bowtie_fastadir=$inputdir/fasta_chromosomes/
 
-#################
-#     Index     #
-#################
-
-recompute_index=false						#force index to be computed even if index with $indexname already exists
-indexname=${fastaname}_index					#basename of index (without eg. .1.bt2 for bowtie index)
-star_index=$workdir/index/star_index                            #folder containing a star index built with the $gtf and $fasta files (used by: IRFinder, KisSplice, rMATS)
-indexdir=$workdir/index/${tool:-unspecific}_index 		#directory of index
-
 
 
 ############################
@@ -57,3 +48,12 @@ gff=${gffdir}/$gffname                              #gff full path
 ### used only in mapping tools ###
 
 outname=$tool	# basename of output file (will usually be prefixed with the fastq file name and suffixed with .sam)
+
+#################
+#     Index     #
+#################
+
+recompute_index=false						#force index to be computed even if index with $indexname already exists
+indexname=${fastaname}_index					#basename of index (without eg. .1.bt2 for bowtie index)
+star_index=$workdir/index/star_index                            #folder containing a star index built with the $gtf and $fasta files (used by: IRFinder, KisSplice, rMATS)
+indexdir=$workdir/index/${tool:-unspecific}_index 		#directory of index
