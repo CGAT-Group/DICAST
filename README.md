@@ -7,7 +7,7 @@ DICAST closes this gap by offering a modular and extensible alternative splicing
 
 ### Documentation
 
-https://dicast.readthedocs.io/en/latest/index.html
+https://dicast.readthedocs.io/en/master/contents.html
 
 #### Mapping tools
 1. bb-map
