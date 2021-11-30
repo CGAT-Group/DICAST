@@ -107,7 +107,6 @@ To provide a fair baseline while maintaining easy usability, per default we run 
    splicing/aspli
    splicing/eventpointer
    splicing/irfinder
-   splicing/kissplice
    splicing/majiq
    splicing/sgseq
    splicing/spladder
