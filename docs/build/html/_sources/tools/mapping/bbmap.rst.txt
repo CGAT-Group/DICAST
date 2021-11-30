@@ -114,7 +114,3 @@ These are the default parameters set in the :guilabel:`src/bbmap/ENTRYPOINT.sh` 
 
 Known Issues
 ^^^^^^^^^^^^
-
-* issue
-* another
-* another

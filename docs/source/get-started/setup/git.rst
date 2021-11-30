@@ -4,7 +4,7 @@ Clone Git Repository
 .. toctree::
    :maxdepth: 1
 
-If you don't have git, please install git with the following `Install Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_.
+If you don't have ``git``, please install git with the following `Install Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_.
 
 
 .. warning::

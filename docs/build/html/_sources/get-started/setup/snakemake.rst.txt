@@ -5,11 +5,11 @@
 Install Snakemake
 =================
 
-Snakemake is the pipe-lining software that enables your DICAST runs. You can set up snakemake in a conda environment.
+``snakemake`` is the pipe-lining software that enables your DICAST runs. You can set up snakemake in a conda environment.
 
 If you have never worked with conda before you might want to get conda first: https://conda.io/projects/conda/en/latest/user-guide/install/index.html
 
-Mamba is a faster implementation of conda and while optional, is a recommended installation step to support your conda: https://mamba.readthedocs.io/en/latest/installation.html
+``Mamba`` is a faster implementation of conda and while optional, is a recommended installation step to support your conda: https://mamba.readthedocs.io/en/latest/installation.html
 
 .. prompt:: bash
 

@@ -1,7 +1,7 @@
-Run DICAST via CLI
-==================================
+Run DICAST via Command Line Interface (CLI)
+============================================
 
-In this section we will explain how to use DICAST to run a whole pipeline.
+In this section we will explain how to use DICAST to run a whole pipeline on the terminal alone.
 
 Make sure you followed the steps described in the :doc:`setup <../setup>` section carefully.
 
