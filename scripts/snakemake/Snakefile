@@ -25,7 +25,7 @@ except KeyError:
     sys.exit(1)
 
 working_directory = os.getcwd()
-docker_prefix = "gitlab.lrz.de:5005/ge46ban/dockers/develop/"
+docker_prefix = "dicastproj/dicast"
 container_version = "0.2"
 
 rule all:
@@ -108,7 +108,7 @@ rule run_contextmap:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -152,7 +152,7 @@ rule run_crac:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -196,7 +196,7 @@ rule run_dart:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -240,7 +240,7 @@ rule run_gsnap:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -284,7 +284,7 @@ rule run_hisat:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -328,7 +328,7 @@ rule run_mapsplice:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -372,7 +372,7 @@ rule run_minimap:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -416,7 +416,7 @@ rule run_segemehl:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -460,7 +460,7 @@ rule run_star:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -505,7 +505,7 @@ rule run_subjunc:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -549,7 +549,7 @@ rule run_bbmap:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -626,7 +626,7 @@ rule finished_mapping_tools_rule:
 # #                 container_prefix="dicast/"
 # #             else 
 # #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-# #                 docker pull {docker_prefix}$tool:{container_version}
+# #                 docker pull {docker_prefix}:$tool
 # #                 echo "Done" | tee {output}
 # #                 container_prefix={docker_prefix}
 # #             fi
@@ -659,7 +659,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -692,7 +692,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -725,7 +725,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -758,7 +758,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -791,7 +791,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -824,7 +824,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -857,7 +857,7 @@ rule finished_mapping_tools_rule:
 #                 container_prefix="dicast/"
 #             else 
 #                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-#                 docker pull {docker_prefix}$tool:{container_version}
+#                 docker pull {docker_prefix}:$tool
 #                 echo "Done" | tee {output}
 #                 container_prefix={docker_prefix}
 #             fi
@@ -890,7 +890,7 @@ rule run_majiq:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -923,7 +923,7 @@ rule run_aspli:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -956,7 +956,7 @@ rule run_eventpointer:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -989,7 +989,7 @@ rule run_asgal:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -1022,7 +1022,7 @@ rule run_irfinder:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -1055,7 +1055,7 @@ rule run_sgseq:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -1088,7 +1088,7 @@ rule run_spladder:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
@@ -1121,7 +1121,7 @@ rule run_whippet:
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
-                docker pull {docker_prefix}$tool:{container_version}
+                docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
             fi
