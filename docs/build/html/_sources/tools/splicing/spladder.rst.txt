@@ -14,7 +14,7 @@ SplAdder
  
  ============  ============================================================================
  **Toolname**  *spladder*                                                                  
- **Version**   *2.4.2*                                                                     
+ **Version**   *2.4.3*                                                                     
  **License**   `BSD License <https://github.com/ratschlab/spladder/blob/master/COPYRIGHT>`_
  ============  ============================================================================
  

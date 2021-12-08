@@ -11,7 +11,7 @@ BBMap uses a multi kmer seed and extend strategy for read mapping.
  
  ============  =============================================================================================
  **Toolname**  *bbmap*                                                                                      
- **Version**   *38.43*                                                                                      
+ **Version**   *38.94*                                                                                      
  **License**   `BBTools Copyright (c) 2014 <https://github.com/BioInfoTools/BBMap/blob/master/license.txt>`_
  ============  =============================================================================================
  
@@ -114,3 +114,7 @@ These are the default parameters set in the :guilabel:`src/bbmap/ENTRYPOINT.sh` 
 
 Known Issues
 ^^^^^^^^^^^^
+
+* issue
+* another
+* another

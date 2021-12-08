@@ -9,7 +9,7 @@ IRFinder
  
  ============  ===============================================================================
  **Toolname**  *irfinder*                                                                     
- **Version**   *1.3.0*                                                                        
+ **Version**   *1.3.1*                                                                        
  **License**   `MIT Licence <https://github.com/williamritchie/IRFinder/blob/master/LICENSE>`_
  ============  ===============================================================================
  
