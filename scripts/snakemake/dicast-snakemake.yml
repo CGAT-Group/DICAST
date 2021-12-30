@@ -1,4 +1,4 @@
-name: dicast-snakemake2
+name: dicast-snakemake
 channels:
   - conda-forge
   - bioconda

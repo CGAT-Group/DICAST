@@ -106,15 +106,17 @@ rule run_contextmap:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -150,15 +152,17 @@ rule run_crac:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -194,15 +198,17 @@ rule run_dart:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -238,15 +244,17 @@ rule run_gsnap:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -282,15 +290,17 @@ rule run_hisat:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -326,15 +336,17 @@ rule run_mapsplice:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -370,15 +382,17 @@ rule run_minimap:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -414,15 +428,17 @@ rule run_segemehl:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -457,16 +473,17 @@ rule run_star:
             echo "Started $tool at $(date)" | tee {output}
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
                 container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
-
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -503,15 +520,17 @@ rule run_subjunc:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -547,15 +566,17 @@ rule run_bbmap:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
 
             casedir=output/"$tool"-output/casedir
             if [ -d "$casedir" ]; then
@@ -888,15 +909,17 @@ rule run_majiq:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -921,15 +944,17 @@ rule run_aspli:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -954,15 +979,17 @@ rule run_eventpointer:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -987,15 +1014,17 @@ rule run_asgal:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1020,15 +1049,17 @@ rule run_irfinder:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1053,15 +1084,17 @@ rule run_sgseq:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1086,15 +1119,17 @@ rule run_spladder:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
 
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
@@ -1119,15 +1154,17 @@ rule run_whippet:
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
                 container_prefix="dicast/"
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
             else 
                 echo "\nLocal build failed, pulling image from registry" | tee {output}
                 docker pull {docker_prefix}:$tool
                 echo "Done" | tee {output}
                 container_prefix={docker_prefix}
+                echo "Running $tool now"
+                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}                
             fi
-
-            echo "Running $tool now"
-            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
+            
             echo "Finished $tool at $(date)" | tee {output}
 
         else 
