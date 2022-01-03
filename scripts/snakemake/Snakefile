@@ -473,9 +473,9 @@ rule run_star:
             echo "Started $tool at $(date)" | tee {output}
             if docker-compose -f scripts/snakemake/docker-compose.yml build $tool ; then
                 echo "Build $tool locally" | tee {output}
+                container_prefix="dicast/"
                 echo "Running $tool now"
                 docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix"$tool":{container_version}  | tee {output}
-                container_prefix="dicast/"
             else 
                 echo "\nLocal build failed, pulling image from registry..." | tee {output}
                 docker pull {docker_prefix}:$tool
