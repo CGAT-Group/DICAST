@@ -1,5 +1,5 @@
-Run DICAST via Command Line Interface (CLI)
-============================================
+Run DICAST via Command Line Interface (depreciated)
+===================================================
 
 In this section we will explain how to use DICAST to run a whole pipeline on the terminal alone.
 
@@ -42,6 +42,10 @@ Argument                               Explanation
 =====================================  ==========================================================================================
 
 For more information, see the `Snakemake documentation <https://snakemake.readthedocs.io/en/stable/>`_.
+
+.. warning::
+
+  This feature has been depreciated and needs another Snakefile, without the ``Possible_overwrite_acknowledge`` rule. We keep this documentation here, for future support and to show you how the tool works under the hood.
 
 Troubleshooting
 ^^^^^^^^^^^^^^^

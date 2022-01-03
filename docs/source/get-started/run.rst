@@ -3,7 +3,7 @@ Run your analysis
 
 .. note::
 
-  This guide assumes that you have followed all four pages of the :doc:`setup<setup>` carefully.
+  This guide page assumes that you have followed all four pages of the :doc:`setup<setup>` carefully and that you have :doc:`configred DICAST<setup>`.
 
 .. toctree::
    :maxdepth: 2

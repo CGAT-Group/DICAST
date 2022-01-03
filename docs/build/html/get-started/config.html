@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Snakemake parameters" href="config/snakemake_parameters.html" />
-    <link rel="prev" title="DICAST Outputs" href="run/outputs.html" /> 
+    <link rel="prev" title="Install Snakemake" href="setup/snakemake.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -104,24 +104,24 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/as_parameters.html">Alternative splicing tools parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">Run your analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="run/dicast-cli.html">Run DICAST via Command Line Interface (CLI)</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="run/dicast-cli.html">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="run/outputs.html">DICAST Outputs</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuring DICAST</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="config/snakemake_parameters.html">Snakemake parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/general_parameters.html">Tool core parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -231,10 +231,13 @@
             
   <div class="section" id="configuring-dicast">
 <h1>Configuring DICAST<a class="headerlink" href="#configuring-dicast" title="Permalink to this headline">¶</a></h1>
+<p>Before running DICAST, please take some time to configure it for your first run.</p>
 <p>DICAST is best <a class="reference internal" href="run/gui.html"><span class="doc">run with the GUI</span></a>, which automates the configuration of <span class="guilabel">scripts/snakemake/snakemake_config.yaml</span>, <span class="guilabel">scripts/config.sh</span> &amp; <span class="guilabel">scripts/asevent_config.sh</span>,
-for a quick run of DICAST without simulated data, on your experiments. If you’d like to run DICAST <a class="reference internal" href="run/dicast-cli.html"><span class="doc">via CLI</span></a>, then edit these configuration files manually.</p>
+for a quick run of DICAST without simulated data, on your experiments.</p>
+<p>DICAST can be run <a class="reference internal" href="run/dicast-cli.html"><span class="doc">via CLI</span></a>, however, this feature is currently in development.</p>
 <p>If you’d like to modify the <strong>Simulated dataset</strong>, please modify <span class="guilabel">scripts/ASimulatoR_config.R</span> (See <a class="reference internal" href="config/ASimulatoR_parameters.html"><span class="doc">ASimulatoR Parameters</span></a>)</p>
 <p>If you’d like to run DICAST with just one tool <a class="reference internal" href="run/one_tool.html"><span class="doc">via docker</span></a>, then the files you need to modify are: <span class="guilabel">scripts/config.sh</span>, <span class="guilabel">scripts/asevent_config.sh</span></p>
+<p>It’s recommended to take a closer look at the config files on disk before your first run.</p>
 <dl class="docutils">
 <dt>The following files are all the configuration files found in DICAST:</dt>
 <dd><div class="first last line-block">
@@ -370,7 +373,7 @@ for a quick run of DICAST without simulated data, on your experiments. If you’
         <a href="config/snakemake_parameters.html" class="btn btn-neutral float-right" title="Snakemake parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="run/outputs.html" class="btn btn-neutral float-left" title="DICAST Outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="setup/snakemake.html" class="btn btn-neutral float-left" title="Install Snakemake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

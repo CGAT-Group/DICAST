@@ -1,12 +1,18 @@
 Configuring DICAST
 ====================
 
+Before running DICAST, please take some time to configure it for your first run.  
+
 DICAST is best :doc:`run with the GUI <run/gui>`, which automates the configuration of :guilabel:`scripts/snakemake/snakemake_config.yaml`, :guilabel:`scripts/config.sh` & :guilabel:`scripts/asevent_config.sh`,
-for a quick run of DICAST without simulated data, on your experiments. If you'd like to run DICAST :doc:`via CLI <run/dicast-cli>`, then edit these configuration files manually.
+for a quick run of DICAST without simulated data, on your experiments. 
+
+DICAST can be run :doc:`via CLI <run/dicast-cli>`, however, this feature is currently in development.
 
 If you'd like to modify the **Simulated dataset**, please modify :guilabel:`scripts/ASimulatoR_config.R` (See :doc:`ASimulatoR Parameters <config/ASimulatoR_parameters>`)
 
 If you'd like to run DICAST with just one tool :doc:`via docker <run/one_tool>`, then the files you need to modify are: :guilabel:`scripts/config.sh`, :guilabel:`scripts/asevent_config.sh`
+
+It's recommended to take a closer look at the config files on disk before your first run.
 
 The following files are all the configuration files found in DICAST:
   | :guilabel:`scripts/snakemake/snakemake_config.yaml`,

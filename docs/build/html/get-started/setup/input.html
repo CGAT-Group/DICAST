@@ -104,24 +104,24 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via Command Line Interface (CLI)</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -309,9 +309,13 @@ Please note that <strong>you only need a .fa and a .gtf file</strong> if you sta
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
+<p class="last">If you work with the human genome or would like to just test if DICAST is installed well, check out the script at <code class="docutils literal notranslate"><span class="pre">initializing-dicast.sh</span></code>  and execute it with the command <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">initializing-dicast.sh</span></code>, to populate your input directory with relavent human references.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p class="last">casedir, is currently unsupported. DICAST was built originally with a design that included tools for  differential analysis. It maintains the directory structure in order to expand, to cover differential tools in the future.</p>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">example_*.sam</span></code>: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory <code class="docutils literal notranslate"><span class="pre">bamdir</span></code>. If you have already mapped bam/sam files, place them in the bamdir, for DICAST to start from here.</p>
+<p><code class="docutils literal notranslate"><span class="pre">example_*.sam</span></code>: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory <code class="docutils literal notranslate"><span class="pre">bamdir</span></code>. If you have already mapped bam/sam files, place them in the <code class="docutils literal notranslate"><span class="pre">input/controldir/bamdir</span></code>, for DICAST to start from here.</p>
 </div>
 </div>
 

@@ -88,6 +88,10 @@ The sample_input is a template of what the files should look like. Let's however
 
 .. note::
 
+  If you work with the human genome or would like to just test if DICAST is installed well, check out the script at ``initializing-dicast.sh``  and execute it with the command ``bash initializing-dicast.sh``, to populate your input directory with relavent human references.
+
+.. note::
+
   casedir, is currently unsupported. DICAST was built originally with a design that included tools for  differential analysis. It maintains the directory structure in order to expand, to cover differential tools in the future.
 
-``example_*.sam``: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory ``bamdir``. If you have already mapped bam/sam files, place them in the bamdir, for DICAST to start from here.
+``example_*.sam``: DICAST can map your fastq files for you with a mapper of your choice, the results of such mapping will be found here in this directory ``bamdir``. If you have already mapped bam/sam files, place them in the ``input/controldir/bamdir``, for DICAST to start from here.

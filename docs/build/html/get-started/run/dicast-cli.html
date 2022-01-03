@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Run DICAST via Command Line Interface (CLI) &mdash; DICAST 1.0 documentation</title>
+  <title>Run DICAST via Command Line Interface (depreciated) &mdash; DICAST 1.0 documentation</title>
   
 
   
@@ -104,24 +104,24 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="../run.html">Run your analysis</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Run DICAST via Command Line Interface (CLI)</a><ul class="simple">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="one_tool.html">Run one specific tool via Docker</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="outputs.html">DICAST Outputs</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../config/snakemake_parameters.html">Snakemake parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/general_parameters.html">Tool core parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config/as_parameters.html">Alternative splicing tools parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -212,7 +212,7 @@
         
           <li><a href="../run.html">Run your analysis</a> &raquo;</li>
         
-      <li>Run DICAST via Command Line Interface (CLI)</li>
+      <li>Run DICAST via Command Line Interface (depreciated)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -231,8 +231,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="run-dicast-via-command-line-interface-cli">
-<h1>Run DICAST via Command Line Interface (CLI)<a class="headerlink" href="#run-dicast-via-command-line-interface-cli" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="run-dicast-via-command-line-interface-depreciated">
+<h1>Run DICAST via Command Line Interface (depreciated)<a class="headerlink" href="#run-dicast-via-command-line-interface-depreciated" title="Permalink to this headline">¶</a></h1>
 <p>In this section we will explain how to use DICAST to run a whole pipeline on the terminal alone.</p>
 <p>Make sure you followed the steps described in the <a class="reference internal" href="../setup.html"><span class="doc">setup</span></a> section carefully.</p>
 <p>Change config.sh according to your run (see <a class="reference internal" href="../config.html"><span class="doc">How to change your config.sh file</span></a>)</p>
@@ -289,6 +289,10 @@ E.g.:</span>
 </tbody>
 </table>
 <p>For more information, see the <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake documentation</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature has been depreciated and needs another Snakefile, without the <code class="docutils literal notranslate"><span class="pre">Possible_overwrite_acknowledge</span></code> rule. We keep this documentation here, for future support and to show you how the tool works under the hood.</p>
+</div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
