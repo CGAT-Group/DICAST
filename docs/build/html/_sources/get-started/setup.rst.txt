@@ -11,3 +11,4 @@ Please follow these steps carefully to set up your working environment.
    setup/input
    setup/docker
    setup/snakemake
+   

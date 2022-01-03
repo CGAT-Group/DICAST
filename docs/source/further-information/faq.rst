@@ -10,3 +10,4 @@ Q: How do I contribute to DICAST?
 
 .. toctree::
    :maxdepth: 2
+    further-information/uninstall-dicast
