@@ -39,6 +39,7 @@ docker run --rm --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) -v $a
 
 # Bringing the outputs to inputdir.
 set +e
+mkdir -P src/ASimulatoR/out/ 2>/dev/null
 mv $asimulator_outputdir/*gtf $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gtf
 mv $asimulator_outputdir/*gff3 $( echo $inputdir| sed 's/\/MOUNT\///g')/ASimulatoR.gff3
 for i in $(ls ${asimulator_outputdir}/*fastq)

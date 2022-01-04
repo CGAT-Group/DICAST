@@ -251,7 +251,7 @@ span.prompt1:before {
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">the graphical user interface assumes a X11 rendering system. If you’re not on a Linux machine, find out how to host an X11 daemon for yourself. If you’re using <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, please use the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-X</span></code> flag, to allow X11 forwarding. If you’re running DICAST on your local machine. the output of <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$DISPLAY</span></code> should read <code class="docutils literal notranslate"><span class="pre">:0</span></code></p>
+<p class="last">The graphical user interface assumes a X11 rendering system. If you’re using <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, please use the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-X</span></code> flag, to allow X11 forwarding. If you’re not on a Linux machine, locally, find out how to host an X11 daemon for yourself. If you’re on a Mac, this could mean installing <code class="docutils literal notranslate"><span class="pre">Xquartz</span></code> on your localmachine.  If you’re running DICAST on your local linux machine, the output of <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$DISPLAY</span></code> should read <code class="docutils literal notranslate"><span class="pre">:0</span></code>; this suggests that you have X11 forwarded correctly to your localmachine.</p>
 </div>
 <table border="1" class="docutils">
 <colgroup>
@@ -299,6 +299,7 @@ span.prompt1:before {
 </tr>
 </tbody>
 </table>
+<p>DICAST will continue to run, and you can safely close the GUI. Re-opening the GUI connects you back to a running instance of DICAST, if it isn’t finished already.</p>
 <div class="section" id="custom-configuration-file">
 <h2>Custom Configuration file:<a class="headerlink" href="#custom-configuration-file" title="Permalink to this headline">¶</a></h2>
 <p>With this, custom configure your dicast run</p>
@@ -363,6 +364,10 @@ span.prompt1:before {
 <p class="first admonition-title">Warning</p>
 <p class="last">Aborting a run: Once the dockers begin, they’re not under DICAST’s control to abort. If you really want to interrupt DICAST, also check for running containers <cite>docker ps</cite> and stop/ kill running containers with <cite>docker stop &lt;container-name&gt;</cite>. Also use the clean up function to clean up an interrupted run.</p>
 </div>
+</div>
+<div class="section" id="interrupting-a-dciast-run">
+<h2>Interrupting a DCIAST run<a class="headerlink" href="#interrupting-a-dciast-run" title="Permalink to this headline">¶</a></h2>
+<p>If you want to interrupt a DICAST run. Click on the <code class="docutils literal notranslate"><span class="pre">Abort</span></code> button and then click on the <code class="docutils literal notranslate"><span class="pre">Clean</span> <span class="pre">up</span></code> button. DICAST unfortunately doesn’t show you that this is a required step, so until <code class="docutils literal notranslate"><span class="pre">Clean</span> <span class="pre">up</span></code> is clicked upon, your next run will not start. Your configurations should stay as you set them last. Click on <code class="docutils literal notranslate"><span class="pre">Acknowledge</span> <span class="pre">overwrite</span></code> checkbox and you’re all set for the next run.</p>
 </div>
 </div>
 
