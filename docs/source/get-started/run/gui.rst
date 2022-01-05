@@ -83,7 +83,7 @@ Troubleshooting
   Aborting a run: Once the dockers begin, they're not under DICAST's control to abort. If you really want to interrupt DICAST, also check for running containers `docker ps` and stop/ kill running containers with `docker stop <container-name>`. Also use the clean up function to clean up an interrupted run.
 
 
-Interrupting a DCIAST run
+Interrupting a DICAST run
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you want to interrupt a DICAST run. Click on the ``Abort`` button and then click on the ``Clean up`` button. DICAST unfortunately doesn't show you that this is a required step, so until ``Clean up`` is clicked upon, your next run will not start. Your configurations should stay as you set them last. Click on ``Acknowledge overwrite`` checkbox and you're all set for the next run.
