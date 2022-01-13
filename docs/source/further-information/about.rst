@@ -12,7 +12,8 @@ With contributions from Tim Faro, Fanny Roessler, Johannes Kersting, Alexander D
 Citation
 ########
 
-If you use DICAST please cite:
+If you use DICAST please cite the `preprint <https://doi.org/10.1101/2022.01.05.475067>`_
+   |Fenn, A.M., Tsoy, O., Faro, T., Roessler, F., Dietrich, A., Kersting, J., Louadi, Z., Lio, C.T., Voelker, U., Baumbach, J. and Kacprowski, T., 2022. Alternative splicing analysis benchmark with DICAST. bioRxiv.
  
 
 Acknowledgments

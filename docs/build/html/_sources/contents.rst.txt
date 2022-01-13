@@ -19,7 +19,7 @@ What is DICAST?
 .. _Snakemake: https://snakemake.github.io/
 .. _Docker: https://www.docker.com/
 .. _Dockerhub: https://hub.docker.com/repository/docker/dicastproj/dicast
-.. _bioRxiv: https://www.biorxiv.org/
+.. _bioRxiv: https://doi.org/10.1101/2022.01.05.475067
 
 DICAST is a collection of alternative splicing event detection tools for analyzing RNA-Seq data. DICAST runs on `Snakemake`_ pipelines and relies on `Docker`_ based containerization. For easy installation and maintenance, we provide docker containers for every integrated tool at `Dockerhub`_
 
@@ -35,7 +35,7 @@ When should I use DICAST?
 
 How do I cite DICAST?
 =====================
-DICAST is currently hosted on `bioRxiv`_, at this link <notsubmitted-yet>.
+DICAST is currently hosted on `bioRxiv`_, at this link `<https://doi.org/10.1101/2022.01.05.475067>`_.
 
 
 
