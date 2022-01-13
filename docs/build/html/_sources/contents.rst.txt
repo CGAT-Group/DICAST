@@ -20,12 +20,15 @@ What is DICAST?
 .. _Docker: https://www.docker.com/
 .. _Dockerhub: https://hub.docker.com/repository/docker/dicastproj/dicast
 .. _bioRxiv: https://doi.org/10.1101/2022.01.05.475067
+.. _Github: https://github.com/CGAT-Group/DICAST
 
 DICAST is a collection of alternative splicing event detection tools for analyzing RNA-Seq data. DICAST runs on `Snakemake`_ pipelines and relies on `Docker`_ based containerization. For easy installation and maintenance, we provide docker containers for every integrated tool at `Dockerhub`_
 
 DICAST can be run as a complete pipeline, starting with simulating RNA-Seq data with ASimulator, mapping the reads to a fasta reference, get information about AS with one or multiple tools and finally visualize and compare the results from different tools with DICAST unify.
 
 Alternatively, you can run one of the same tools as a single docker container without snakemake.
+
+DICAST is available for download on `Github`_.
 
 When should I use DICAST?
 =========================
@@ -35,8 +38,11 @@ When should I use DICAST?
 
 How do I cite DICAST?
 =====================
-DICAST is currently hosted on `bioRxiv`_, at this link `<https://doi.org/10.1101/2022.01.05.475067>`_.
 
+The preprint citing DICAST is `Alternative splicing analysis benchmark with DICAST <https://doi.org/10.1101/2022.01.05.475067>`_, is available for review on `bioRxiv`_
+
+If you use DICAST please cite the preprint as:
+   |Fenn, A.M., Tsoy, O., Faro, T., Roessler, F., Dietrich, A., Kersting, J., Louadi, Z., Lio, C.T., Voelker, U., Baumbach, J. and Kacprowski, T., 2022. Alternative splicing analysis benchmark with DICAST. bioRxiv.
 
 
 .. toctree::
