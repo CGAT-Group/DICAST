@@ -52,7 +52,7 @@ cleaner() {
 	# make output accessible
 	chmod -R 777 $outdir/
 	rm /tmp/$tool-fastqlist 2>/dev/null
-	echo "Script is done.";
+	echo "$tool ran succesfully.";
 	exit;
 }
 
