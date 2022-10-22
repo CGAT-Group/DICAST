@@ -113,7 +113,7 @@ makebamfromsam(){
 		fi
 #readbamfiles
 readbamfiles $controlbam controlbamlist
-readbamfiles $casebam casebamlist
+#readbamfiles $casebam casebamlist
 }
 
 #function to handle sam files in either bamdir (for as_tools) or case/control-bamdir (for ds_tools)

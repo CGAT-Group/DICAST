@@ -87,19 +87,19 @@ then
 
 			if [ $combine_events = 0 ];
 			then
-				python3 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf
+				python3.8 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf
 
 				if [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
+					python3.8 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0
 				fi
 			else
-				python3 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf -comb
+				python3.8 /MOUNT/scripts/unified_output/output_transformer.py create -m $uni_tmp -out $unified_outdir_name -gtf $gtf -comb
 				if [[ -f "$anno_file" ]];
 				then
 					echo "Running unified comparison..."
-					python3 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
+					python3.8 /MOUNT/scripts/unified_output/output_transformer.py compare -a $anno_file -c ${unified_outdir_name}/${outdir_name}_${tool}_dicast_unified.out -gtf $gtf -stats $stats_file -s -t 0 -comb
 				fi
 			fi
 		else

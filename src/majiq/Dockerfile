@@ -19,7 +19,7 @@ ENV HTSLIB_LIBRARY_DIR="/usr/local/lib/htslib-1.9/"
 
 #install majiq dependencies
 RUN pip3.8 install --no-cache-dir -U wheel setuptools
-RUN pip3.8 install --no-cache-dir -U numpy cython
+RUN pip3.8 install --no-cache-dir -U numpy cython pandas
 RUN apt-get update -y && apt-get --no-install-recommends --fix-broken install -y git
 
 # Install unification dependencies

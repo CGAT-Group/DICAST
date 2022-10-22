@@ -18,3 +18,6 @@ curl -o input/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz http://ftp.ensembl.
 #Downloading gff files.
 curl -o input/Homo_sapiens.GRCh38.105.gtf.gz http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz
 curl -o input/Homo_sapiens.GRCh38.105.gff3.gz http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz
+
+# unzip all files in input directories.
+pigz -dr input

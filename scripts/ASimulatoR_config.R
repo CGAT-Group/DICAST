@@ -7,7 +7,7 @@ input = args[1]
 output = args[2]
 ###
 
-ncores = 20
+ncores = 4
 multi_events_per_exon = T
 probs_as_freq = F
 error_rate = 0.001

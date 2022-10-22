@@ -11,12 +11,12 @@ echo "ASimulatoR output path: $asimulator_outputdir."
 
 # acknowledging config set for DICAST
 source $config_path/config.sh
-source $config_path/mapping_config.sh
+#source $config_path/mapping_config.sh
 
 # prepping input dir for ASimulator @ src/ASimulator/in.
 bowtie_fastadirname=$(echo $bowtie_fastadir | sed 's/\/MOUNT\///g')
 for i in $(ls $bowtie_fastadirname); do ln $bowtie_fastadirname/$i $asimulator_inputdir/$i ; done
-ln $( echo $fasta | sed 's/\/MOUNT\///g') $asimulator_inputdir/$(basename $fasta)
+#ln $( echo $fasta | sed 's/\/MOUNT\///g')/$asimulator_inputdir/$(basename $fasta)
 ln $( echo $inputdir| sed 's/\/MOUNT\///g')/$asimulator_gtf $asimulator_inputdir/$asimulator_gtf
 cp $config_path/ASimulatoR_config.R $asimulator_inputdir/runASS.R
 
