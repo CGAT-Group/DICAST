@@ -219,7 +219,7 @@ cleaner(){
 	rm -f $outdir/samlist 2>/dev/null
 	rm -f $outdir/fastqlist 2>/dev/null
 	rm -rf $outdir/tmp 2>/dev/null
-	echo script is done
+	echo $tool ran succesfully.
 	chmod -R u+rwX,go+rX,o-w $outdir -R
 	#exit
 }
@@ -247,7 +247,7 @@ combine_case_control(){
 cleaner_diff(){
 	rm -rf $outdir/case_control 2>/dev/null
 	rm -f $outdir/bamlist 2>/dev/null
-       	echo script is done.
+       	echo $tool ran succesfully.
 	exit
 }
 
