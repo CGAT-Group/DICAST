@@ -10,7 +10,7 @@ mkdir -p $(echo $controlbam| sed 's/^\/MOUNT/./g') $(echo $controlfastq| sed 's/
 # Downloading Human references fron Ensemble's ftp.
 link="http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/"
 ## Downloading bowtie genome fastas for each Chromosome.
-for chromosomes in $(curl $link | cut -d ' ' -f2 | cut -d '"' -f3 | grep -v "nonchromosomal\|primary\|toplevel\|dna_\|alt" | grep Homo_sapiens|sed 's/...>//g'| tr -d '>'); do curl -o $(echo $bowtie_fastadir| sed 's/^\/MOUNT/./g')/$(echo $chromosomes | cut -d '.' -f 5-) $link$chromosomes; done
+for chromosomes in $( curl http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/ | cut -d '"' -f8 | grep -v "nonchromosomal\|primary\|toplevel\|dna_\|alt" | grep Homo_sapiens|sed 's/...>//g'| tr -d '>'); do curl -o $(echo $bowtie_fastadir| sed 's/^\/MOUNT/./g')/$(echo $chromosomes | cut -d '.' -f 5-) $link$chromosomes; done
 
 ## Downloading full genome as 1 fasta.
 curl -o input/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz

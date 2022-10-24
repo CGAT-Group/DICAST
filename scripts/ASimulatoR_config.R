@@ -13,7 +13,7 @@ probs_as_freq = F
 error_rate = 0.001
 readlen = 76
 max_genes = 100 # NULL 
-seq_depth = 10000 # 2e08
+seq_depth = 2e07 # 2e08
 num_reps = c(1,1)
 as_events = c('es', 'mes', 'ir', 'a3', 'a5', 'afe', 'ale', 'mee')
 

@@ -1,74 +1,40 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Run DICAST via Command Line Interface (depreciated) &mdash; DICAST 1.0 documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Run one specific tool via Docker" href="one_tool.html" />
     <link rel="prev" title="Run DICAST with a graphical user interface" href="gui.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../contents.html">
-          
-
-          
-            
             <img src="../../_static/dicast_logo.svg" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +42,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../setup/git.html">Clone Git Repository</a><ul class="simple">
@@ -125,7 +81,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Tools</span></p>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/tools.html">General Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/mapping.html">Mapping tools</a><ul>
@@ -154,7 +110,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Further information</span></p>
+<p class="caption" role="heading"><span class="caption-text">Further information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
 </ul>
@@ -166,72 +122,33 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../contents.html">DICAST</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../contents.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../run.html">Run your analysis</a> &raquo;</li>
-        
       <li>Run DICAST via Command Line Interface (depreciated)</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../../_sources/get-started/run/dicast-cli.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="run-dicast-via-command-line-interface-depreciated">
-<h1>Run DICAST via Command Line Interface (depreciated)<a class="headerlink" href="#run-dicast-via-command-line-interface-depreciated" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="run-dicast-via-command-line-interface-depreciated">
+<h1>Run DICAST via Command Line Interface (depreciated)<a class="headerlink" href="#run-dicast-via-command-line-interface-depreciated" title="Permalink to this heading"></a></h1>
 <p>In this section we will explain how to use DICAST to run a whole pipeline on the terminal alone.</p>
 <p>Make sure you followed the steps described in the <a class="reference internal" href="../setup.html"><span class="doc">setup</span></a> section carefully.</p>
 <p>Change config.sh according to your run (see <a class="reference internal" href="../config.html"><span class="doc">How to change your config.sh file</span></a>)</p>
@@ -242,15 +159,14 @@ span.prompt1:before {
 }
 </style><span class="prompt1">conda activate dicast-snakemake</span>
 </pre></div></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Snakemake is set up to run all tools in parallel, meaning if the pipeline is run unrestricted, it will use all available cores. Be sure to set the number of cores to limit the resources available to Snakemake (explained below).</p>
+<p class="admonition-title">Note</p>
+<p>Snakemake is set up to run all tools in parallel, meaning if the pipeline is run unrestricted, it will use all available cores. Be sure to set the number of cores to limit the resources available to Snakemake (explained below).</p>
 </div>
-<dl class="docutils">
-<dt>To run the snakemake pipeline:</dt>
-<dd><ul class="first last simple">
-<li>Go to /path/to/DICAST/scripts/snakemake</li>
-<li>Edit snakemake_config.yaml to list the tools you want to run in the corresponding lines.</li>
-<li>Use a snakemake command. For example:</li>
+<dl class="simple">
+<dt>To run the snakemake pipeline:</dt><dd><ul class="simple">
+<li><p>Go to /path/to/DICAST/scripts/snakemake</p></li>
+<li><p>Edit snakemake_config.yaml to list the tools you want to run in the corresponding lines.</p></li>
+<li><p>Use a snakemake command. For example:</p></li>
 </ul>
 </dd>
 </dl>
@@ -262,95 +178,77 @@ span.prompt2:before {
 E.g.:</span>
 <span class="prompt1">snakemake -j <span class="m">2</span> -d /opt/DICAST/dockers -s Snakefile --configfile snakemake_config.yaml</span>
 </pre></div></div><p>Important arguments:</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="29%" />
-<col width="71%" />
+<col style="width: 29%" />
+<col style="width: 71%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Argument</th>
-<th class="head">Explanation</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Explanation</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">-j</span></code>, <code class="docutils literal notranslate"><span class="pre">--cores</span> <span class="pre">&lt;n&gt;</span></code></td>
-<td>Set the number of cores used by the pipeline.</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-j</span></code>, <code class="docutils literal notranslate"><span class="pre">--cores</span> <span class="pre">&lt;n&gt;</span></code></p></td>
+<td><p>Set the number of cores used by the pipeline.</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--snakefile</span> <span class="pre">&lt;file&gt;</span></code></td>
-<td>Set the path to the Snakemake file.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--snakefile</span> <span class="pre">&lt;file&gt;</span></code></p></td>
+<td><p>Set the path to the Snakemake file.</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--directory</span> <span class="pre">&lt;path&gt;</span></code></td>
-<td>Set the path to the working directory (containing the input, scripts folder etc.)</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--directory</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p>Set the path to the working directory (containing the input, scripts folder etc.)</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">--configfile</span> <span class="pre">&lt;file&gt;</span></code></td>
-<td>Set the path to the configuration file which specifies what part of the pipeline to run.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--configfile</span> <span class="pre">&lt;file&gt;</span></code></p></td>
+<td><p>Set the path to the configuration file which specifies what part of the pipeline to run.</p></td>
 </tr>
 </tbody>
 </table>
 <p>For more information, see the <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake documentation</a>.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This feature has been depreciated and needs another Snakefile, without the <code class="docutils literal notranslate"><span class="pre">Possible_overwrite_acknowledge</span></code> rule. We keep this documentation here, for future support and to show you how the tool works under the hood.</p>
+<p class="admonition-title">Warning</p>
+<p>This feature has been depreciated and needs another Snakefile, without the <code class="docutils literal notranslate"><span class="pre">Possible_overwrite_acknowledge</span></code> rule. We keep this documentation here, for future support and to show you how the tool works under the hood.</p>
 </div>
-<div class="section" id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li>Check log files under output/&lt;tool&gt;-output/logs/</li>
-<li>If a run was canceled/exited unexpectetly and the directory is still locked, try running the same snakemake command again with <code class="docutils literal notranslate"><span class="pre">--unlock</span></code> or remove the files from <code class="docutils literal notranslate"><span class="pre">working_directory/.snakemake/locks/</span></code></li>
-<li>Snakemake itself creates some logging files, they can be found in <code class="docutils literal notranslate"><span class="pre">working_directory/.snakemake/log/</span></code></li>
+<li><p>Check log files under output/&lt;tool&gt;-output/logs/</p></li>
+<li><p>If a run was canceled/exited unexpectetly and the directory is still locked, try running the same snakemake command again with <code class="docutils literal notranslate"><span class="pre">--unlock</span></code> or remove the files from <code class="docutils literal notranslate"><span class="pre">working_directory/.snakemake/locks/</span></code></p></li>
+<li><p>Snakemake itself creates some logging files, they can be found in <code class="docutils literal notranslate"><span class="pre">working_directory/.snakemake/log/</span></code></p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="one_tool.html" class="btn btn-neutral float-right" title="Run one specific tool via Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="gui.html" class="btn btn-neutral float-left" title="Run DICAST with a graphical user interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gui.html" class="btn btn-neutral float-left" title="Run DICAST with a graphical user interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="one_tool.html" class="btn btn-neutral float-right" title="Run one specific tool via Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021
-
-    </p>
+    <p>&#169; Copyright 2021.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
   <head>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
 	</head>

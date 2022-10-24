@@ -99,8 +99,7 @@ And if you want to build any of the other tools, use the following command:
 
 Where <tool> needs to be replaced with one or more of the following tools:
 
-bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc
-asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
+bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc, asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
 
 
 3. Pull docker images (Fail safe)
