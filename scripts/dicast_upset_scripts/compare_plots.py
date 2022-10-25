@@ -15,6 +15,7 @@ matplotlib_axes_logger.setLevel('ERROR')
 import os 
 import argparse
 import matplotlib
+plt.switch_backend('Agg')
 plt.ioff()
 
 
