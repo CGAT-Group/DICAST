@@ -578,14 +578,6 @@ rule run_whippet:
 
 rule dicast_plots:
     input:
-        # kissplice=rules.run_kissplice.output,
-        # cash=rules.run_cash.output,
-        # dexseq=rules.run_dexseq.output,
-        # dsplicetype=rules.run_dsplicetype.output,
-        # edger=rules.run_edger.output,
-        # leafcutter=rules.run_leafcutter.output,
-        # psisigma=rules.run_psisigma.output,
-        # rmats=rules.run_rmats.output,
         majiq=rules.run_majiq.output,
         aspli=rules.run_aspli.output,
         eventpointer=rules.run_eventpointer.output,
@@ -608,14 +600,6 @@ rule dicast_plots:
 
 rule finished_full_run_rule:
     input:
-        #kissplice=rules.run_kissplice.output,
-        #cash=rules.run_cash.output,
-        #dexseq=rules.run_dexseq.output,
-        #dsplicetype=rules.run_dsplicetype.output,
-        #edger=rules.run_edger.output,
-        #leafcutter=rules.run_leafcutter.output,
-        #psisigma=rules.run_psisigma.output,
-        #rmats=rules.run_rmats.output,
         majiq=rules.run_majiq.output,
         aspli=rules.run_aspli.output,
         eventpointer=rules.run_eventpointer.output,
