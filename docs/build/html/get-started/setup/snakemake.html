@@ -151,13 +151,12 @@
 <h1>Install Snakemake<a class="headerlink" href="#install-snakemake" title="Permalink to this heading"></a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">snakemake</span></code> is the pipe-lining software that enables your DICAST runs. You can set up snakemake in a conda environment.</p>
 <p>If you have never worked with conda before you might want to get conda first: <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">https://conda.io/projects/conda/en/latest/user-guide/install/index.html</a></p>
-<p><code class="docutils literal notranslate"><span class="pre">Mamba</span></code> is a faster implementation of conda and while optional, is a recommended installation step to support your conda: <a class="reference external" href="https://mamba.readthedocs.io/en/latest/installation.html">https://mamba.readthedocs.io/en/latest/installation.html</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
 span.prompt1:before {
   content: "$ ";
 }
 </style><span class="prompt1"><span class="c1"># create conda environment from .yml file with snakemake in it.</span></span>
-<span class="prompt1">mamba env create -f scripts/snakemake/dicast-snakemake.yml</span>
+<span class="prompt1">conda env create -f scripts/snakemake/dicast-snakemake.yml</span>
 <span class="prompt1"></span>
 <span class="prompt1"><span class="c1"># if you want to use DICAST, activate the &quot;dicast-snakemake&quot; environment</span></span>
 <span class="prompt1">conda activate dicast-snakemake</span>
