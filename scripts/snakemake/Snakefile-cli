@@ -83,6 +83,7 @@ rule run_contextmap:
             container_prefix={docker_prefix}
             echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
+            for i in $(find output/${tool}-output/ -name "*sam"); do mv $i $(dirname ${i})/$(echo $(basename $(dirname $i).sam)); done
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
@@ -213,6 +214,7 @@ rule run_mapsplice:
             container_prefix={docker_prefix}
             echo "Running $tool now"
             docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee {output}
+            for i in $(find output/${tool}-output/ -name "*sam"); do mv $i $(dirname ${i})/$(echo $(basename $(dirname $i).sam)); done
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee {output}
