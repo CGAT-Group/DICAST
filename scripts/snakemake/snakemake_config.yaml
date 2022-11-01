@@ -17,7 +17,7 @@ ASimulatoR:
 # Enter the name of the mapping tools you want to run as a space separated list.
 #
 # Currently we support bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc
-#
+#   to use them all, write it so ( order is not imporatant): 'bbmap contextmap crac dart gsnap hisat mapsplice minimap segemehl star subjunc'
 Mapping_tools:
     What_tools_to_run: 'bbmap contextmap crac dart gsnap hisat mapsplice minimap segemehl star subjunc'
 
@@ -25,9 +25,10 @@ Mapping_tools:
 # Enter the name of the alternative splicing detection tools you want to run as a space separated list.
 #
 # Currently we support asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
+# to use them all write it so: 'asgal aspli eventpointer irfinder majiq sgseq spladder whippet' 
 #
 Alternative_splicing_detection_tools:
-    What_tools_to_run: 'asgal aspli eventpointer irfinder majiq sgseq spladder whippet'
+    What_tools_to_run: 'asgal aspli eventpointer irfinder sgseq spladder whippet'
 
 #########################################
 # Snakemake creates a run report after finishing successfully. Here, you can set the file name (must end in .html!)
