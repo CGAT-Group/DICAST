@@ -176,13 +176,13 @@ span.prompt1:before {
 <li><p>Download or copy the genome fasta file into the <cite>input</cite> folder. Dont’t forget to uncompress it. E.g.:</p></li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nb">cd</span> /path/to/DICAST/input</span>
-<span class="prompt1">wget http://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
+<span class="prompt1">wget http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
 <span class="prompt1">gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
 </pre></div></div><ol class="arabic simple" start="6">
 <li><p>Download or copy the genome gtf annotation into the <cite>input</cite> folder. Dont’t forget to uncompress it. E.g.:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf.gz</span>
-<span class="prompt1">gunzip Homo_sapiens.GRCh38.104.gtf.gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz</span>
+<span class="prompt1">gunzip Homo_sapiens.GRCh38.105.gtf.gz</span>
 </pre></div></div><ol class="arabic simple" start="7">
 <li><p>Download or copy the fastq files you want to align into the <cite>/path/to/DICAST/input/controldir/fastqdir</cite>. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.</p></li>
 <li><p>Go to <cite>/path/to/DICAST/scripts</cite> and edit <cite>config.sh</cite> according to your run (see <a class="reference internal" href="../get-started/config/general_parameters.html"><span class="doc">How to change your config.sh file</span></a>):</p></li>
@@ -196,7 +196,7 @@ span.prompt2:before {
 }
 </style><span class="prompt2">read_length=76</span>
 <span class="prompt2">fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa</span>
-<span class="prompt2">gtfname=Homo_sapiens.GRCh38.104.gtf</span>
+<span class="prompt2">gtfname=Homo_sapiens.GRCh38.105.gtf</span>
 </pre></div></div><ol class="arabic simple" start="9">
 <li><p>List the mapping tools you want to run:</p></li>
 </ol>
@@ -236,18 +236,18 @@ span.prompt2:before {
 <li><p>Download or copy the genome fasta file into the <cite>input</cite> folder. Dont’t forget to uncompress it. E.g.:</p></li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nb">cd</span> /path/to/DICAST/input</span>
-<span class="prompt1">wget http://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
+<span class="prompt1">wget http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
 <span class="prompt1">gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</span>
 </pre></div></div><ol class="arabic simple" start="6">
 <li><p>Download or copy the genome annotation file into the <cite>input</cite> folder. Dont’t forget to uncompress it. E.g.:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf.gz</span>
-<span class="prompt1">gunzip Homo_sapiens.GRCh38.104.gtf.gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz</span>
+<span class="prompt1">gunzip Homo_sapiens.GRCh38.105.gtf.gz</span>
 </pre></div></div><ol class="arabic simple" start="7">
 <li><p>Download or copy the genome gff3 annotation into the <cite>input</cite> folder (for MAJIQ). Dont’t forget to uncompress it. E.g.:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-104/gff3/homo_sapiens/Homo_sapiens.GRCh38.104.gff3.gz</span>
-<span class="prompt1">gunzip Homo_sapiens.GRCh38.104.gff3.gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">wget http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz</span>
+<span class="prompt1">gunzip Homo_sapiens.GRCh38.105.gff3.gz</span>
 </pre></div></div><ol class="arabic simple" start="8">
 <li><p>Download or copy the fastq files you want to use into the <cite>/path/to/DICAST/input/controldir/fastqdir</cite>. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.</p></li>
 <li><p>Download or copy the bam files you want to use into the <cite>/path/to/DICAST/input/controldir/bamdir</cite>.</p></li>
@@ -258,8 +258,8 @@ span.prompt2:before {
 </pre></div></div><p>In the <cite>config.sh</cite> file edit the following lines:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nv">read_length</span><span class="o">=</span><span class="m">76</span></span>
 <span class="prompt1"><span class="nv">fastaname</span><span class="o">=</span>Homo_sapiens.GRCh38.dna.primary_assembly.fa</span>
-<span class="prompt1"><span class="nv">gtfname</span><span class="o">=</span>Homo_sapiens.GRCh38.104.gtf</span>
-<span class="prompt1"><span class="nv">gffname</span><span class="o">=</span>Homo_sapiens.GRCh38.104.gff3</span>
+<span class="prompt1"><span class="nv">gtfname</span><span class="o">=</span>Homo_sapiens.GRCh38.105.gtf</span>
+<span class="prompt1"><span class="nv">gffname</span><span class="o">=</span>Homo_sapiens.GRCh38.105.gff3</span>
 </pre></div></div><ol class="arabic simple" start="11">
 <li><p>List the mapping tools you want to run:</p></li>
 </ol>

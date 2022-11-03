@@ -35,15 +35,15 @@ Running multiple mapping tools (E.g., STAR, HISAT2 and bbmap)
 .. prompt:: bash
 
    cd /path/to/DICAST/input
-   wget http://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+   wget http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
    gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 
 6. Download or copy the genome gtf annotation into the `input` folder. Dont't forget to uncompress it. E.g.:
 
 .. prompt:: bash
 
-   wget http://ftp.ensembl.org/pub/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf.gz
-   gunzip Homo_sapiens.GRCh38.104.gtf.gz
+   wget http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz
+   gunzip Homo_sapiens.GRCh38.105.gtf.gz
 
 7. Download or copy the fastq files you want to align into the `/path/to/DICAST/input/controldir/fastqdir`. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.
 
@@ -60,7 +60,7 @@ In the `config.sh` file edit the following lines:
 
    read_length=76
    fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa
-   gtfname=Homo_sapiens.GRCh38.104.gtf
+   gtfname=Homo_sapiens.GRCh38.105.gtf
 
 9. List the mapping tools you want to run:
 
@@ -119,22 +119,22 @@ Running multiple alternative splicing event detection tools (E.g., MAJIQ and Whi
 .. prompt:: bash
 
    cd /path/to/DICAST/input
-   wget http://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+   wget http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
    gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 
 6. Download or copy the genome annotation file into the `input` folder. Dont't forget to uncompress it. E.g.:
 
 .. prompt:: bash
 
-   wget http://ftp.ensembl.org/pub/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf.gz
-   gunzip Homo_sapiens.GRCh38.104.gtf.gz
+   wget http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz
+   gunzip Homo_sapiens.GRCh38.105.gtf.gz
 
 7. Download or copy the genome gff3 annotation into the `input` folder (for MAJIQ). Dont't forget to uncompress it. E.g.:
 
 .. prompt:: bash
 
-   wget http://ftp.ensembl.org/pub/release-104/gff3/homo_sapiens/Homo_sapiens.GRCh38.104.gff3.gz
-   gunzip Homo_sapiens.GRCh38.104.gff3.gz
+   wget http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz
+   gunzip Homo_sapiens.GRCh38.105.gff3.gz
 
 8. Download or copy the fastq files you want to use into the `/path/to/DICAST/input/controldir/fastqdir`. Note: we support only paired-end RNA-Seq - fastq files have to be in pairs.
 
@@ -153,8 +153,8 @@ In the `config.sh` file edit the following lines:
 
    read_length=76
    fastaname=Homo_sapiens.GRCh38.dna.primary_assembly.fa
-   gtfname=Homo_sapiens.GRCh38.104.gtf
-   gffname=Homo_sapiens.GRCh38.104.gff3
+   gtfname=Homo_sapiens.GRCh38.105.gtf
+   gffname=Homo_sapiens.GRCh38.105.gff3
 
 11. List the mapping tools you want to run:
 
