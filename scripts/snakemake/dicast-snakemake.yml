@@ -5,7 +5,6 @@ channels:
 dependencies:
   - snakemake
   - samtools
-  - mamba
   - seaborn
   - matplotlib>=3.3.4
   - pyranges

@@ -3,21 +3,19 @@ import traceback
 import os
 import subprocess
 
+#configfile: "scripts/snakemake/snakemake_config.yaml"
+
 if len(config) == 0:
     print("Empty or no config file was specified! Use --configfile snakemake_config.json")
     sys.exit(1)
 
 try:
     final_out = "output/snakemake/final_out.txt"
-    mapping_tools = config["Mapping_tools"]
-    as_tools = config["Alternative_splicing_detection_tools"]
-    #asimulator_config_folder = config["ASimulatoR"]['ASimulatoR_config_directory']
-    overwrite_acknowledged = config["Possible_overwrite_acknowledge"]
-    run_asimulator = config["ASimulatoR"]
-#    if asimulator_config_folder is '' and run_asimulator is True:
-#        raise KeyError("ASimulatoR config folder has to be specified.")
-#    if (unification_gtf is '' or unification_input is '' or unification_output is '' or unification_output is '') and unification_tools is not "":
-#        raise KeyError("Unification GTF file, Unification input folder and Unification output folder have to be specified.")
+    run_asimulator = config["ASimulatoR"]["do"]
+    mapping_tools = config["Mapping_tools"]["What_tools_to_run"]
+    as_tools = config["Alternative_splicing_detection_tools"]["What_tools_to_run"]
+    overwrite_acknowledged = config["Possible_overwrite_acknowledge"]["do"]
+
 
 except KeyError:
     print("One or more configuration parameters could not be found! Wrong config file specified?\n")
@@ -62,9 +60,9 @@ rule run_asimulator_rule:
         if [[ "{params.run_asim}" == "True" ]]
         then
             echo "Running ASimulatoR"
-            ./src/ASimulatoR/run_asimulator.sh | tee -a {output}
+            ./src/ASimulatoR/run_asimulator.sh | tee {output}
         else
-            echo "Didn't run ASimulatoR." | tee -a {output}
+            echo "Didn't run ASimulatoR." | tee {output}
         fi
         """
 
@@ -82,9 +80,9 @@ rule run_contextmap:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             for i in $(find output/$tool-output/ -name "*sam"); do mv $i $(dirname $i)/$(echo $(basename $(dirname $i).sam)); done
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
@@ -109,9 +107,9 @@ rule run_crac:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -135,9 +133,9 @@ rule run_dart:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -161,9 +159,9 @@ rule run_gsnap:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -187,9 +185,9 @@ rule run_hisat:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -213,9 +211,9 @@ rule run_mapsplice:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             for i in $(find output/$tool-output/ -name "*sam"); do mv $i $(dirname $i)/$(echo $(basename $(dirname $i).sam)); done
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
@@ -240,9 +238,9 @@ rule run_minimap:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -266,9 +264,9 @@ rule run_segemehl:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -292,9 +290,9 @@ rule run_star:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
@@ -318,15 +316,15 @@ rule run_subjunc:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else
-                echo "Didn't run $tool." | tee {output}
+            echo "Didn't run $tool." | tee {output}
         fi
         """
 
@@ -344,15 +342,15 @@ rule run_bbmap:
         if [[ "${{map_arr[@]}}" =~ $tool ]]; 
         then
             echo "Started $tool at $(date)" | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}
             find output/"$tool"-output/controldir/ -exec chmod -R u+rwX,go+rX,o-w {{}} \;
             find output/"$tool"-output/controldir/ \( -name "*.sam" -o -name "*.bam" \) -exec ln {{}} input/controldir/bamdir/ \;
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else
-                echo "Didn't run $tool." | tee {output}
+            echo "Didn't run $tool." | tee {output}
         fi
         """
 
@@ -402,9 +400,9 @@ rule run_majiq:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
@@ -426,14 +424,14 @@ rule run_aspli:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_eventpointer:
@@ -450,14 +448,14 @@ rule run_eventpointer:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_asgal:
@@ -474,14 +472,14 @@ rule run_asgal:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_irfinder:
@@ -498,14 +496,14 @@ rule run_irfinder:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_sgseq:
@@ -522,14 +520,14 @@ rule run_sgseq:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_spladder:
@@ -546,14 +544,14 @@ rule run_spladder:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule run_whippet:
@@ -570,14 +568,14 @@ rule run_whippet:
         if [[ "${{as_arr[@]}}" =~ $tool ]]; 
         then
             echo "Running $tool." | tee {output}
-                container_prefix={docker_prefix}
-                echo "Running $tool now"
-                docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
+            container_prefix={docker_prefix}
+            echo "Running $tool now"
+            docker run -v {working_directory}:/MOUNT --name $USER-$RANDOM-dicast-$tool --user $(id -u):$(id -g) --rm $container_prefix:"$tool"| tee -a {output}                
             echo "Finished $tool at $(date)" | tee -a {output}
 
         else 
             echo "Didnt run $tool." | tee {output}
-        fi
+        fi                     
         """
 
 rule dicast_plots:
