@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASGAL &mdash; DICAST 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Aspli" href="aspli.html" />
+    <link rel="prev" title="Splicing tools" href="../splicing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../contents.html">
+            <img src="../../_static/dicast_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/git.html">Clone Git Repository</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/docker.html">Setup docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/setup/snakemake.html">Install Snakemake</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/config.html">Configuring DICAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/ASimulatoR_parameters.html">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/config/as_parameters.html">Alternative splicing tools parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/run.html">Run your analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/dicast-cli.html">Run DICAST via Command Line Interface</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/gui.html">Run DICAST with a graphical user interface (depreciated)</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../get-started/run/outputs.html">DICAST Outputs</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">General Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/bbmap.html">BBMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/contextmap.html">ContextMap 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/crac.html">CRAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/dart.html">Dart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/gsnap.html">GSNAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/hisat.html">HISAT2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/mapsplice.html">MapSplice 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/minimap.html">Minimap2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/segemehl.html">segemehl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/star.html">STAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping/subjunc.html">Subjunc</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../splicing.html">Splicing tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ASGAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aspli.html">Aspli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eventpointer.html">EventPointer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="irfinder.html">IRFinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="majiq.html">MAJIQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgseq.html">SGSeq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spladder.html">SplAdder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whippet.html">Whippet</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/uninstall-dicast.html">Uninstalling DICAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/about.html">About</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../contents.html">DICAST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../contents.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../splicing.html">Splicing tools</a></li>
+      <li class="breadcrumb-item active">ASGAL</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tools/splicing/asgal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asgal">
+<h1>ASGAL<a class="headerlink" href="#asgal" title="Permalink to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ASGAL requires the variables <code class="docutils literal notranslate"><span class="pre">$fastqpair1suffix</span></code> and <code class="docutils literal notranslate"><span class="pre">$fastqpair2suffix</span></code> to be set in the <span class="guilabel">scripts/asevent_config.sh</span> file.</p>
+</div>
+<aside class="sidebar">
+<p class="sidebar-title">ASGAL Factsheet</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 89%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Toolname</strong></p></td>
+<td><p><em>asgal</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Version</strong></p></td>
+<td><p><em>1.1.6</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong></p></td>
+<td><p><a class="reference external" href="https://github.com/AlgoLab/galig/blob/master/LICENSE">GNU General Public License version 3</a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt><strong>Required Files</strong></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="../splicing.html#fastqsplicing"><span class="std std-ref">fastq</span></a> , <a class="reference internal" href="../splicing.html#fastasplicing"><span class="std std-ref">fasta</span></a> , <a class="reference internal" href="../splicing.html#gtfsplicing"><span class="std std-ref">gtf</span></a></p></li>
+</ul>
+</dd>
+<dt><strong>Links</strong></dt><dd><ul class="simple">
+<li><p>ASGAL <a class="reference external" href="https://asgal.algolab.eu/documentation">manual</a></p></li>
+<li><p>ASGAL publication: <a class="reference external" href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2436-3">ASGAL: aligning RNA-Seq data to a splicing graph to detect novel alternative splicing events</a></p></li>
+</ul>
+</dd>
+</dl>
+</aside>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<p>These are the default parameters set in the <span class="guilabel">src/asgal/ENTRYPOINT.sh</span> script. If you want to change it you can do this in the ENTRYPOINT script directly. Please refer to the ASGAL <a class="reference external" href="https://asgal.algolab.eu/documentation">manual</a>.</p>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">--multi</span></kbd></dt>
+<dd><p>Set multi option.</p>
+</dd>
+<dt><kbd><span class="option">-g</span></kbd></dt>
+<dd><p>Reference genome in fasta format.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-g $fasta
+</pre></div>
+</div>
+</dd>
+<dt><kbd><span class="option">-a</span></kbd></dt>
+<dd><p>The path to the gene annotation file in GTF format for annotation of fusion junctions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-a $gtf
+</pre></div>
+</div>
+</dd>
+<dt><kbd><span class="option">-t</span></kbd></dt>
+<dd><p>Transcript file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-t $transcript
+</pre></div>
+</div>
+</dd>
+<dt><kbd><span class="option">-s</span></kbd></dt>
+<dd><p>Fastq filename of paired end read 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">1.</span><span class="n">fastq</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl>
+<dt>-s2</dt><dd><p>Fastq filename of paired end read 2.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s2</span> <span class="o">*</span><span class="n">yourFastqFile1_</span><span class="o">*</span><span class="mf">2.</span><span class="n">fastq</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">-o</span></kbd></dt>
+<dd><p>Output directory. The output will be separated into case and control folder based on the basefolder of the according fastq file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-o $outdir
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl>
+<dt>-&#64;</dt><dd><p>Number of threads to be used during the computation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-@ $ncores
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--allevents</span></kbd></dt>
+<dd><p>Report all events, not only novel ones.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../splicing.html" class="btn btn-neutral float-left" title="Splicing tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="aspli.html" class="btn btn-neutral float-right" title="Aspli" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+	</head>
+	<style>
+
+
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+	background: #60cdbf;
+}
+
+/* Caption headers for sidebar */
+.caption-text {
+	color: #13736a;
+}
+
+/*headings*/
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+.rst-content .sidebar .sidebar-title {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+/* Warning  */
+div .admonition.warning {
+	background: #ffa8ae;
+}
+	
+.rst-content .warning .admonition-title {
+	background: #8b272e;
+}
+
+/* Note */
+div .admonition.note {
+	background: #b9fff4;
+}
+	
+.rst-content .note .admonition-title {
+	background: #1ca58f;
+}
+
+/* List  */
+.rst-content dl:not(.docutils) dt {
+	color: #13736a;
+	background: #e7f2fa;
+	border-top: solid 2px #13736a;
+}
+
+/* code block */
+
+div .highlight {
+	background: #d6f1e9;
+}
+
+.nv {
+	color: #8b272e;
+}
+
+/* inline (guilabel) */
+
+.rst-content .guilabel {
+border: 1px solid #7fbbe3;
+background: #e7f2fa;
+border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
+}
+
+/* links */
+a {
+  color: #13736a;
+}
+
+
+
+	</style>
+
+
+
+</body>
+</html>
