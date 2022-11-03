@@ -16,7 +16,7 @@ If you have already built the image with <tool>:<tag> (see the :doc:`docker setu
   # If you are using our directory structure for your input and are in the dockers directory:
   # Add the --rm flag to remove container, after run.
   
-  docker run -v ./:/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
+  docker run -v $(pwd):/MOUNT --user $(id -u):$(id -g) --rm gsnap:0.1
 
 
 Troubleshooting

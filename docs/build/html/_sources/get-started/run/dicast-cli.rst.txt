@@ -1,5 +1,5 @@
-Run DICAST via Command Line Interface (depreciated)
-===================================================
+Run DICAST via Command Line Interface 
+======================================
 
 In this section we will explain how to use DICAST to run a whole pipeline on the terminal alone.
 

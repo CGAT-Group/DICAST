@@ -11,7 +11,7 @@ To provide a fair baseline while maintaining easy usability, per default we run 
 The tools included here are the most widely used and well maintained among AS event detection tools. If you would like to include your tool in the pipeline please let us know.
 We hope this collection can be a starting point for future benchmarking approaches and quality control.
 
-.. figure:: /img/Screenshot_dicast.png
+.. figure:: /img/pipeline.png
 
 
 What is DICAST?

@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="DICAST Outputs" href="outputs.html" />
-    <link rel="prev" title="Run DICAST via Command Line Interface (depreciated)" href="dicast-cli.html" /> 
+    <link rel="next" title="Run DICAST with a graphical user interface (depreciated)" href="gui.html" />
+    <link rel="prev" title="Run DICAST via Command Line Interface" href="dicast-cli.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -68,13 +68,13 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../run.html">Run your analysis</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="dicast-cli.html">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="dicast-cli.html">Run DICAST via Command Line Interface</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Run one specific tool via Docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Run DICAST with a graphical user interface (depreciated)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="outputs.html">DICAST Outputs</a></li>
@@ -135,9 +135,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../run.html">Run your analysis</a> &raquo;</li>
-      <li>Run one specific tool via Docker</li>
+      <li><a href="../../contents.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../run.html">Run your analysis</a></li>
+      <li class="breadcrumb-item active">Run one specific tool via Docker</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/get-started/run/one_tool.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -163,7 +163,7 @@ span.prompt1:before {
 <span class="prompt1"><span class="c1"># If you are using our directory structure for your input and are in the dockers directory:</span></span>
 <span class="prompt1"><span class="c1"># Add the --rm flag to remove container, after run.</span></span>
 <span class="prompt1"></span>
-<span class="prompt1">docker run -v ./:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> --rm gsnap:0.1</span>
+<span class="prompt1">docker run -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/MOUNT --user <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> --rm gsnap:0.1</span>
 </pre></div></div><section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <blockquote>
@@ -179,8 +179,8 @@ span.prompt1:before {
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dicast-cli.html" class="btn btn-neutral float-left" title="Run DICAST via Command Line Interface (depreciated)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="outputs.html" class="btn btn-neutral float-right" title="DICAST Outputs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dicast-cli.html" class="btn btn-neutral float-left" title="Run DICAST via Command Line Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gui.html" class="btn btn-neutral float-right" title="Run DICAST with a graphical user interface (depreciated)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

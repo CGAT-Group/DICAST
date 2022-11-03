@@ -64,9 +64,18 @@ We support Docker version 19 and above.
 
   docker-compose --version
 
+2. Pull docker images (Not needed with snakemake)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Should the tool you intended to run, not build locally, it's also possible to pull them from DICAST's dockerhub repository at: https://hub.docker.com/repository/docker/dicastproj/dicast
 
 
-2. Build docker images (Optional)
+.. prompt:: bash $
+
+  docker pull dicastproj/dicast:tagname
+
+
+3. Build docker images (For Developers)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 While the steps described in this section are handled by DICAST's graphical interface, it can also be accessed via command line, for more control.
 
@@ -100,17 +109,6 @@ And if you want to build any of the other tools, use the following command:
 Where <tool> needs to be replaced with one or more of the following tools:
 
 bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc, asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet
-
-
-3. Pull docker images (Fail safe)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Should the tool you intended to run, not build locally, it's also possible to pull them from DICAST's dockerhub repository at: https://hub.docker.com/repository/docker/dicastproj/dicast
-
-
-.. prompt:: bash $
-
-  docker pull dicastproj/dicast:tagname
 
 4. Other helpful commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^

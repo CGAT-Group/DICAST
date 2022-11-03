@@ -1,5 +1,5 @@
-Run DICAST with a graphical user interface
-================================================
+Run DICAST with a graphical user interface (depreciated)
+========================================================
 
 .. toctree::
    :maxdepth: 1
