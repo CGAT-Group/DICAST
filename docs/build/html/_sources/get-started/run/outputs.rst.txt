@@ -40,7 +40,7 @@ DICAST also provides a :guilabel:`output/<astoolname>-output/<Fastq-filename>_ou
 
 DICAST also outputs an UpSet plot for each ``Fastq-filename``-``mapping_tool`` combination.
 
-.. figure:: ../../img/UpSet_plot.png
+.. figure:: ../../img/upset_plot.png
 
 This plot shows the events that were found in common by tools and shows you which tools found these events as well.
 
