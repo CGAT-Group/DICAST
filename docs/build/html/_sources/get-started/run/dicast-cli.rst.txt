@@ -28,7 +28,7 @@ To run the snakemake pipeline:
 
   See snakemake -h
   E.g.:
-  $ snakemake -j 2 -d /opt/DICAST/dockers -s Snakefile --configfile snakemake_config.yaml
+  $ snakemake -j 2 -d /opt/DICAST/ -s /path/to/DICAST/scripts/snakemake/Snakefile-cli --configfile /path/to/DICAST/scripts/snakemake/snakemake-cli_config.yaml
 
 Important arguments:
 

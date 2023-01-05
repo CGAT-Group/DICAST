@@ -8,7 +8,7 @@ output*/
 **__pycache__
 .snakemake
 short_input
-src/ASimulatoR/in
-src/ASimulatoR/out/
+src/ASimulatoR/in/*
+src/ASimulatoR/out/*
 scripts/backup/backup*.sh
 test/

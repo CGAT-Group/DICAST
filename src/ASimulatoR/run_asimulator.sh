@@ -9,6 +9,17 @@ echo "ASimulatoR input path: $asimulator_inputdir."
 asimulator_outputdir=$(pwd)/src/ASimulatoR/out
 echo "ASimulatoR output path: $asimulator_outputdir."
 
+# Ensuring mountdirs exist.
+if [ ! -e $asimulator_inputdir ] ; then
+  mkdir -p $asimulator_inputdir ; fi
+
+if [ ! -e $asimulator_outputdir ] ; then
+  mkdir -p $asimulator_outputdir ; fi
+
+#clearing output dir for ASimulator @ src/ASimulator/out
+echo creating old ASimulatoR runs from $asimulator_outputdir
+rm $asimulator_outputdir/* -R
+
 # acknowledging config set for DICAST
 source $config_path/config.sh
 #source $config_path/mapping_config.sh
@@ -20,12 +31,6 @@ for i in $(ls $bowtie_fastadirname); do ln $bowtie_fastadirname/$i $asimulator_i
 ln $( echo $inputdir| sed 's/\/MOUNT\///g')/$asimulator_gtf $asimulator_inputdir/$asimulator_gtf
 cp $config_path/ASimulatoR_config.R $asimulator_inputdir/runASS.R
 
-#clearing output dir for ASimulator @ src/ASimulator/out
-echo Removing old ASimulatoR runs from $asimulator_outputdir
-if [ ! -z "$asimulator_outputdir" ]
-    then rm $asimulator_outputdir/* -R
-    else echo asimulator_outputdir variable unset. Please correct src/run_asimulator.sh . && exit 1
-fi
 
 # checking if ASimulatoR docker exists.
 if [[ "$(docker inspect --type=image biomedbigdata/asimulator 2>/dev/null)" == "[]" ]]; then
