@@ -68,13 +68,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via Command Line Interface</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface (depreciated)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
@@ -185,8 +185,13 @@ span.prompt1:before {
 <div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker-compose --version</span>
 </pre></div></div></section>
 </section>
-<section id="build-docker-images-optional">
-<h2>2. Build docker images (Optional)<a class="headerlink" href="#build-docker-images-optional" title="Permalink to this heading"></a></h2>
+<section id="pull-docker-images-not-needed-with-snakemake">
+<h2>2. Pull docker images (Not needed with snakemake)<a class="headerlink" href="#pull-docker-images-not-needed-with-snakemake" title="Permalink to this heading"></a></h2>
+<p>Should the tool you intended to run, not build locally, it’s also possible to pull them from DICAST’s dockerhub repository at: <a class="reference external" href="https://hub.docker.com/repository/docker/dicastproj/dicast">https://hub.docker.com/repository/docker/dicastproj/dicast</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker pull dicastproj/dicast:tagname</span>
+</pre></div></div></section>
+<section id="build-docker-images-for-developers">
+<h2>3. Build docker images (For Developers)<a class="headerlink" href="#build-docker-images-for-developers" title="Permalink to this heading"></a></h2>
 <p>While the steps described in this section are handled by DICAST’s graphical interface, it can also be accessed via command line, for more control.</p>
 <section id="build-all-images">
 <h3>Build all images<a class="headerlink" href="#build-all-images" title="Permalink to this heading"></a></h3>
@@ -205,11 +210,6 @@ If you want to build the dockers manually, we provide a <code class="docutils li
 <p>bbmap, contextmap, crac, dart, gsnap, hisat, mapsplice, minimap, segemehl, star, subjunc, asgal, aspli, eventpointer, irfinder, majiq, sgseq, spladder, whippet</p>
 </section>
 </section>
-<section id="pull-docker-images-fail-safe">
-<h2>3. Pull docker images (Fail safe)<a class="headerlink" href="#pull-docker-images-fail-safe" title="Permalink to this heading"></a></h2>
-<p>Should the tool you intended to run, not build locally, it’s also possible to pull them from DICAST’s dockerhub repository at: <a class="reference external" href="https://hub.docker.com/repository/docker/dicastproj/dicast">https://hub.docker.com/repository/docker/dicastproj/dicast</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">docker pull dicastproj/dicast:tagname</span>
-</pre></div></div></section>
 <section id="other-helpful-commands">
 <h2>4. Other helpful commands<a class="headerlink" href="#other-helpful-commands" title="Permalink to this heading"></a></h2>
 <p>To gracefully stop a running docker container (If perhaps snakemake’s process had to be killed):</p>
