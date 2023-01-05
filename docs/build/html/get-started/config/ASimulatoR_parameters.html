@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASimulatoR parameters &mdash; DICAST 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_templates/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tool core parameters" href="general_parameters.html" />
+    <link rel="prev" title="Snakemake parameters" href="snakemake_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../contents.html">
+            <img src="../../_static/dicast_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup/git.html">Clone Git Repository</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup/input.html">Directory Structure</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup/docker.html">Setup docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup/snakemake.html">Install Snakemake</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Configuring DICAST</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="snakemake_parameters.html">Snakemake parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ASimulatoR parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_parameters.html">Tool core parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="as_parameters.html">Alternative splicing tools parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Run your analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../run/gui.html">Run DICAST with a graphical user interface</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../run/dicast-cli.html">Run DICAST via Command Line Interface (depreciated)</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../run/one_tool.html">Run one specific tool via Docker</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../run/outputs.html">DICAST Outputs</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/tools.html">General Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/mapping.html">Mapping tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/bbmap.html">BBMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/contextmap.html">ContextMap 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/crac.html">CRAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/dart.html">Dart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/gsnap.html">GSNAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/hisat.html">HISAT2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/mapsplice.html">MapSplice 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/minimap.html">Minimap2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/segemehl.html">segemehl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/star.html">STAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/mapping/subjunc.html">Subjunc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/splicing.html">Splicing tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/asgal.html">ASGAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/aspli.html">Aspli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/eventpointer.html">EventPointer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/irfinder.html">IRFinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/majiq.html">MAJIQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/sgseq.html">SGSeq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/spladder.html">SplAdder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/splicing/whippet.html">Whippet</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/example-files.html">Examples</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/uninstall-dicast.html">Uninstalling DICAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../further-information/about.html">About</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../contents.html">DICAST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../config.html">Configuring DICAST</a> &raquo;</li>
+      <li>ASimulatoR parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/get-started/config/ASimulatoR_parameters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asimulator-parameters">
+<h1>ASimulatoR parameters<a class="headerlink" href="#asimulator-parameters" title="Permalink to this heading"></a></h1>
+<p>Found in file: <span class="guilabel">scripts/ASimulatoR_config.R</span></p>
+<p>Parameters are also explained in the following git <a class="reference external" href="https://github.com/biomedbigdata/ASimulatoR">github/biomedbigdata/ASimulatoR</a></p>
+<dl>
+<dt>ncores</dt><dd><div class="line-block">
+<div class="line">Number of cores used by ASimulatoR</div>
+<div class="line">Within dicast, the max number of cores supplied to Snakemake, is as much is used within DICAST’s pipeline. ( See <a class="reference internal" href="snakemake_parameters.html"><span class="doc">Snakemake parameters</span></a>)</div>
+</div>
+</dd>
+<dt>multi_events_per_exon</dt><dd><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">F</span></code></div>
+<div class="line">Should each exon be treated as a target for only one Alternative Splicing event or would you like to see events like Multiple Exon Skipping events, Alternative Last/First Exon + Exon Skipping events?</div>
+</div>
+</dd>
+<dt>probs_as_freq</dt><dd><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">F</span></code></div>
+<div class="line">Default:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">F</span></code>: if probs_as_freq was FALSE, a random number would be drawn for each event-superset combination and only if it was smaller than 1/9 the AS event would be created</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">T</span></code>: The exon supersets are partitioned corresponding to the event_prob parameter.</div>
+</div>
+</dd>
+<dt>error_rate</dt><dd><div class="line-block">
+<div class="line">Default: 0.001</div>
+<div class="line">In the uniform error model, probability that the sequencer records the wrong nucleotide at any given base.</div>
+</div>
+</dd>
+<dt>readlen</dt><dd><div class="line-block">
+<div class="line">Read Length</div>
+<div class="line">Default is 76</div>
+</div>
+</dd>
+<dt>max_genes</dt><dd><div class="line-block">
+<div class="line">define the number of genes you want to work with. If you want all exons, do not specify this parameter or set it to NULL</div>
+</div>
+</dd>
+<dt>seq_depth</dt><dd><div class="line-block">
+<div class="line">Sequencing depth of simulated experiment</div>
+</div>
+</dd>
+<dt>num_reps</dt><dd><div class="line-block">
+<div class="line">define, how many groups and samples per group you analyze. Here we create a small experiment with two groups with one sample per group:</div>
+</div>
+</dd>
+<dt>as_events</dt><dd><div class="line-block">
+<div class="line">make a list in R with the following set or a subset of the following:</div>
+<div class="line">c(‘es’, ‘mes’, ‘ir’, ‘a3’, ‘a5’, ‘afe’, ‘ale’, ‘mee’)</div>
+</div>
+</dd>
+<dt>as_combs</dt><dd><div class="line-block">
+<div class="line">Combinations of AS events desired in the simulated dataset.</div>
+</div>
+</dd>
+<dt>event_probs</dt><dd><div class="line-block">
+<div class="line">Event probabilities of AS events within the simulated dataset</div>
+</div>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="snakemake_parameters.html" class="btn btn-neutral float-left" title="Snakemake parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="general_parameters.html" class="btn btn-neutral float-right" title="Tool core parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+	</head>
+	<style>
+
+
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+	background: #60cdbf;
+}
+
+/* Caption headers for sidebar */
+.caption-text {
+	color: #13736a;
+}
+
+/*headings*/
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+.rst-content .sidebar .sidebar-title {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+/* Warning  */
+div .admonition.warning {
+	background: #ffa8ae;
+}
+	
+.rst-content .warning .admonition-title {
+	background: #8b272e;
+}
+
+/* Note */
+div .admonition.note {
+	background: #b9fff4;
+}
+	
+.rst-content .note .admonition-title {
+	background: #1ca58f;
+}
+
+/* List  */
+.rst-content dl:not(.docutils) dt {
+	color: #13736a;
+	background: #e7f2fa;
+	border-top: solid 2px #13736a;
+}
+
+/* code block */
+
+div .highlight {
+	background: #d6f1e9;
+}
+
+.nv {
+	color: #8b272e;
+}
+
+/* inline (guilabel) */
+
+.rst-content .guilabel {
+border: 1px solid #7fbbe3;
+background: #e7f2fa;
+border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
+}
+
+/* links */
+a {
+  color: #13736a;
+}
+
+
+
+	</style>
+
+
+
+</body>
+</html>

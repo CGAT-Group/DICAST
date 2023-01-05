@@ -1,0 +1,86 @@
+{% extends "!layout.html" %}
+  {% block footer %} {{ super() }}
+  <head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+	</head>
+	<style>
+
+
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+	background: #60cdbf;
+}
+
+/* Caption headers for sidebar */
+.caption-text {
+	color: #13736a;
+}
+
+/*headings*/
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+.rst-content .sidebar .sidebar-title {
+	font-family: "Roboto Condensed","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+/* Warning  */
+div .admonition.warning {
+	background: #ffa8ae;
+}
+	
+.rst-content .warning .admonition-title {
+	background: #8b272e;
+}
+
+/* Note */
+div .admonition.note {
+	background: #b9fff4;
+}
+	
+.rst-content .note .admonition-title {
+	background: #1ca58f;
+}
+
+/* List  */
+.rst-content dl:not(.docutils) dt {
+	color: #13736a;
+	background: #e7f2fa;
+	border-top: solid 2px #13736a;
+}
+
+/* code block */
+
+div .highlight {
+	background: #d6f1e9;
+}
+
+.nv {
+	color: #8b272e;
+}
+
+/* inline (guilabel) */
+
+.rst-content .guilabel {
+border: 1px solid #7fbbe3;
+background: #e7f2fa;
+border-radius: 1px;
+}
+
+/*inline code*/
+
+.rst-content code.literal {
+color: #13736a;	
+}
+
+/* links */
+a {
+  color: #13736a;
+}
+
+
+
+	</style>
+
+{% endblock %}
