@@ -8,9 +8,9 @@ Run your analysis
 .. toctree::
    :maxdepth: 2
 
+   run/gui
    run/dicast-cli
    run/one_tool
-   run/gui
    run/outputs
 
 

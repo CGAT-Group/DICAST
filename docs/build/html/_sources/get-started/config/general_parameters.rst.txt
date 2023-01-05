@@ -106,7 +106,7 @@ ASimulatoR Parameters
 
 asimulator_gtf
   | Name of the file in the input directory used by ASimulatoR to generate new transcripts
-  | Example: ``Homo_sapiens.GRCh38.105.gtf``
+  | Example: ``Homo_sapiens.GRCh38.104.gtf``
 
 
 Input Parameters

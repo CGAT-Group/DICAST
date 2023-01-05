@@ -85,7 +85,7 @@ ncores
 Input Parameters
 ^^^^^^^^^^^^^^^^
 asimulator_gtf
-	| the genome gtf annotation that you use to simulate the data. Default: 'Homo_sapiens.GRCh38.105.gtf'.
+	| the genome gtf annotation that you use to simulate the data. Default: 'Homo_sapiens.GRCh38.104.gtf'.
 fastaname
 	| the genome reference file. Default: 'Homo_sapiens.GRCh38.dna.primary_assembly.fa'.
 gtfname
@@ -93,4 +93,4 @@ gtfname
 gffname
 	| the genome gff3 annotation that you use for mapping and alternative splicing analysis. If you’re using ASimulatoR, leave this as ASimulatoR.gff3.
 
-The reference genome, annotation file and gff3 files could be downloaded from `Ensembl <http://ftp.ensembl.org/pub/release-105/>`_.
+The reference genome, annotation file and gff3 files could be downloaded from `Ensembl <http://ftp.ensembl.org/pub/release-104/>`_.

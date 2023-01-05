@@ -3,14 +3,14 @@
 #
 # Overwrite_acknowledge_choice__ = ["True", "true","false","False"]
 Possible_overwrite_acknowledge:
-    true
+    do: true
 
 #########################################
 # Do you want to run the ASimulatoR?    
 #
 # Start_ASimulatoR_with_run_choice__ = ["True", "true","false","False"]
 ASimulatoR:
-    False
+    do: True
 #    ASimulatoR_config_directory: ../../scripts
 
 #########################################
